@@ -40,6 +40,8 @@ CYR = re.compile(r"[А-Яа-яЁё]")
 WORD = re.compile(r"-?[А-Яа-яЁё́]+(?:-[А-Яа-яЁё́]+)*-?")
 HOMOGLYPH = re.compile(r"[А-Яа-яЁё][́]?[aeopcxyAEOPCXYKMTBH]|[aeopcxyAEOPCXYKMTBH][А-Яа-яЁё]")
 # 单音节前置词、语气词在 не́ был、на́ пол、за́ город 一类组合里可以带重音
+# 不带重音的多音节虚词：обо мне́、изо всех сил 这类前置词变体
+UNSTRESSED_POLY = {"обо", "изо", "подо", "ото", "передо", "нибудь"}
 STRESSABLE_MONO = {"не", "ни", "на", "за", "по", "под", "из", "от", "без", "до", "про", "над"}
 BOOK_SIZE = {1: 108, 2: 72, 3: 60, 4: 40}
 # 检查词汇的节；其余各节（生词表、注释、俄罗斯知识、作者简介、译文）只查书写
@@ -147,10 +149,16 @@ def ru_segments(text):
 
 def tokens(s):
     """俄语词。以连字符开头或结尾的是词素（-ович、за-），返回时标出。"""
+    prev = ""
     for m in WORD.finditer(nfc(s)):
         w = m.group(0)
         morpheme = w.startswith("-") or w.endswith("-")
-        yield w.strip("-"), morpheme
+        bare = w.strip("-")
+        # не́ было、не́ были：重音移到 не 上，后面的词不再标重音
+        if prev == "не" + ACUTE and norm(bare) in ("было", "были") and ACUTE not in bare:
+            bare = bare[:2] + ACUTE + bare[2:]
+        prev = bare.lower()
+        yield bare, morpheme
 
 
 # ---------- 读课文 ----------
@@ -337,7 +345,7 @@ def check_word(w, morpheme, need_stress):
     if not need_stress:
         return probs
     has_yo = any(ch in "ёЁ" for ch in low)
-    if vowels >= 2 and acutes == 0 and not has_yo:
+    if vowels >= 2 and acutes == 0 and not has_yo and norm(w) not in UNSTRESSED_POLY:
         probs.append(("重音", f"{w}：多音节词没有标重音"))
     if vowels == 1 and acutes and norm(w) not in STRESSABLE_MONO:
         probs.append(("重音", f"{w}：单音节词不标重音"))
@@ -455,8 +463,8 @@ def check_exercise_yaml(stem, path):
             if t in ("translate", "rewrite", "picture_qa"):
                 for k in ("accept", "answer"):
                     for x in it.get(k) or []:
-                        if isinstance(x, str) and not re.search(r"[.!?…»)]$", x.strip()):
-                            probs.append(("练习", f"{iw}：{k} 里的 {x!r} 不以标点结尾，可能是 YAML 没加引号被逗号拆开了"))
+                        if isinstance(x, str) and re.match(r"[а-яё]", x.strip()):
+                            probs.append(("练习", f"{iw}：{k} 里的 {x!r} 以小写字母开头，可能是 YAML 没加引号被逗号拆开了"))
             for k in EX_ZH & set(it):
                 for s in ru_strings(it[k]):
                     zh.append((f"{iw}.{k}", s))
