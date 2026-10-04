@@ -27,6 +27,12 @@ from pathlib import Path
 
 import yaml
 
+YAML_LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)   # C 版解析器快得多
+
+
+def load_yaml(text):
+    return yaml.load(text, Loader=YAML_LOADER)
+
 try:
     import pymorphy3
     MORPH = pymorphy3.MorphAnalyzer()
@@ -190,7 +196,7 @@ class Lesson:
         self.front, self.body, self.body_line = {}, raw, 1
         if raw.startswith("---\n"):
             end = raw.index("\n---\n", 4)
-            self.front = yaml.safe_load(raw[4:end]) or {}
+            self.front = load_yaml(raw[4:end]) or {}
             self.body = raw[end + 5:]
             self.body_line = raw[:end + 5].count("\n") + 1
         self.lines = self.body.split("\n")
@@ -376,7 +382,7 @@ def check_exercise_yaml(stem, path):
     """返回 (问题列表, [(位置, 俄语字符串)], [(位置, 中文字符串)])。"""
     probs, ru, zh = [], [], []
     try:
-        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        data = load_yaml(path.read_text(encoding="utf-8"))
     except yaml.YAMLError as e:
         return [("练习", f"YAML 解析失败：{e}")], ru, zh
     if not isinstance(data, dict):
@@ -579,7 +585,7 @@ class Checker:
         if where not in agg[key][2]:
             agg[key][2].append(where)
 
-    def check_lesson(self, k, known):
+    def check_lesson(self, k, known, full=True):
         les = self.lessons[k]
         out = []
         stem = les.path.stem
@@ -594,6 +600,8 @@ class Checker:
                 out.append((les.lineno(i), "重复", f"{w}：{self.first[key]} 已列为新词"))
             else:
                 self.first.setdefault(key, stem)
+        if not full:                 # 只登记词表，供后面的课判断重复
+            return out
 
         used, agg = set(), {}
         for i, sec, segs, rest in les.ru_lines():
@@ -701,9 +709,10 @@ def main(argv):
     total = 0
     for k, les in enumerate(lessons):
         known.update(checker.own[k])
-        probs = checker.check_lesson(k, known)
         if wanted and (les.book, les.id) not in wanted:
+            checker.check_lesson(k, known, full=False)
             continue
+        probs = checker.check_lesson(k, known)
         missing = [lid for b, lid in all_ids()
                    if order_key(b, lid) < order_key(les.book, les.id) and (b, lid) not in have]
         print(f"== {les.path.stem}（新词 {len(les.vocab)} 个，{len(probs)} 个问题）")
