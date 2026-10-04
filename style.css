@@ -148,3 +148,18 @@ li .why { display: inline; margin: 0; }
 .unit-vocab td:nth-child(2) { font-size: 11pt; font-weight: 700; width: 32%; }
 .unit-vocab td:nth-child(3) { color: var(--muted); width: 24%; }
 .unit-vocab td:nth-child(4) { width: auto; }
+
+/* ===== 整册（tools/book.py） ===== */
+.book .lesson, .book .toc, .book .answers, .book .index { break-before: page; }
+.book-cover { height: 240mm; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.cover-ru { font: 400 20pt "PT Serif", serif; color: var(--accent); letter-spacing: .04em; }
+.cover-title { font: 700 36pt "PT Sans", "CJK Sans"; margin: 10pt 0 8pt; }
+.cover-sub { font: 13pt "PT Sans", "CJK Sans"; color: var(--muted); }
+.toc-title, .part-title { font: 700 20pt "PT Sans", "CJK Sans"; color: var(--accent); border: none; padding: 0; margin: 0 0 12pt; }
+.toc-unit { font: 700 10.5pt "PT Sans", "CJK Sans"; margin: 10pt 0 3pt; break-after: avoid; }
+.toc-item { display: block; color: inherit; text-decoration: none; font-size: 9.5pt; line-height: 1.55; }
+.toc-no { display: inline-block; width: 22mm; color: var(--muted); }
+.toc-name { }
+.toc-item::after { content: leader(".") target-counter(attr(href), page); color: var(--muted); }
+.key-title { margin-top: 14pt; }
+.book-index td:last-child { width: 8%; text-align: right; color: var(--muted); }
