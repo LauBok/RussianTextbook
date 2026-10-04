@@ -2,9 +2,9 @@
 <path d="M14 12 H50 V48 H14 Z" stroke-width="2.5"/>
 <circle cx="32" cy="30" r="10" stroke-width="2"/>
 <path d="M29 26.5 H35 L37 32 L32 35.5 L27 32 Z M29 26.5 L27 21.5 M35 26.5 L37 21.5 M37 32 L42 32 M27 32 L22 32 M32 35.5 V40" stroke-width="1.5"/>
-<path d="M140 8 H186 V44 H140 Z"/>
-<path d="M163 8 V44 M140 26 H186" stroke-width="2"/>
-<path d="M176 13 A5 5 0 1 0 179 22 A4 4 0 1 1 176 13 Z" stroke-width="1.5"/>
+<path d="M118 8 H164 V44 H118 Z"/>
+<path d="M141 8 V44 M118 26 H164" stroke-width="2"/>
+<path d="M154 13 A5 5 0 1 0 157 22 A4 4 0 1 1 154 13 Z" stroke-width="1.5"/>
 <g clip-path="url(#L38-c1)"><use href="#misha-noarms" x="70" y="42" width="40" height="100"/></g>
 <path d="M81.6 91.4 L81.9 101.8"/>
 <circle cx="82" cy="104" r="1.9" stroke-width="2"/>

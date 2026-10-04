@@ -13,20 +13,24 @@
 <g clip-path="url(#s99c)">
 <use href="#wang-noarms" x="95" y="56" width="40" height="100"/>
 </g>
-<path d="M98 119 H132" stroke-width="2.5"/>
-<path d="M106 119 V146 M124 119 V146"/>
-<path d="M101 149.6 V147 Q101 145 103.6 145 H110 V149.6 Z M129 149.6 V147 Q129 145 126.4 145 H120 V149.6 Z" stroke-width="2"/>
-<path d="M115 121 V146" stroke-width="1.5"/>
+<path d="M99 118 Q98 128 104 128 H126 Q132 128 131 118" stroke-width="2.5"/>
+<path d="M92 128 H99 M131 128 H138" stroke-width="2"/>
+<path d="M102 128 L102.6 145 H109.4 L110 128 M120 128 L120.6 145 H127.4 L128 128"/>
+<path d="M101 149.6 V147.4 Q101 145.4 103.4 145.4 H110 V149.6 Z M129 149.6 V147.4 Q129 145.4 126.6 145.4 H120 V149.6 Z" stroke-width="2"/>
 <path d="M105 86 L95.6 107"/>
 <circle cx="94.8" cy="109" r="1.9" stroke-width="2"/>
 <path d="M125 86 L140 95 L146.4 88"/>
 <circle cx="147.8" cy="86.6" r="1.9" stroke-width="2"/>
 <path d="M146 64 H182 V92 H146 Z" stroke-width="2.5"/>
-<path d="M156 70 L150 82 H162 Z M156 82 V86" stroke-width="1.5"/>
-<circle cx="171" cy="80" r="4" stroke-width="1.5"/>
-<path d="M167.6 77.8 L167.4 73.6 L170 76.2 M172 76.2 L174.6 73.6 L174.4 77.8" stroke-width="1.2"/>
-<path d="M164 84 H178 M171 84 V89" stroke-width="1.2"/>
-<circle cx="176" cy="69.5" r="2.4" stroke-width="1.2"/>
+<path d="M155 68 L149 82 H161 Z M155 82 V86" stroke-width="1.5"/>
+<circle cx="171" cy="80" r="5" stroke-width="1.5"/>
+<path d="M166.8 77.4 L166.4 71.8 L169.6 75.4 M172.4 75.4 L175.6 71.8 L175.2 77.4" stroke-width="1.5"/>
+<circle cx="169.2" cy="79.6" r="0.6" fill="#2b2b2b" stroke="none"/><circle cx="172.8" cy="79.6" r="0.6" fill="#2b2b2b" stroke="none"/>
+<path d="M163.6 81.6 L167 82 M178.4 81.6 L175 82" stroke-width="1"/>
+<circle cx="177.6" cy="68.6" r="2.4" stroke-width="1.2"/>
 <path d="M2 150 H238"/>
-<path d="M150 150 V100 Q150 92 158 92 H184 Q192 92 192 100 V150 M196 150 V100 Q196 92 204 92 H230 Q238 92 238 100 V150" stroke-width="2"/>
+<path d="M208 30 H222 Q232 30 232 42 V74 Q232 86 222 86 H208 Q198 86 198 74 V42 Q198 30 208 30 Z" stroke-width="2.5"/>
+<path d="M210 36 H220 Q226 36 226 44 V72 Q226 80 220 80 H210 Q204 80 204 72 V44 Q204 36 210 36 Z" stroke-width="1.5"/>
+<path d="M207 50 Q209 47 212 48 Q214 45 217 48 Q220 48 219 51 Z" stroke-width="1.5"/>
+<path d="M204 68 Q215 63 226 67" stroke-width="1.5"/>
 </g></svg>
