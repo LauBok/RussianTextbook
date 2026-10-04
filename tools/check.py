@@ -143,8 +143,8 @@ def ru_segments(text):
     segs, cut = [], []
     for s, e, cs, ce, attrs in spans(text):
         cls = re.findall(r"\.([\w-]+)", attrs)
-        if "syl" in cls:
-            cut.append((s, e))          # 语音课的音节练习，不是词
+        if "syl" in cls or "hand" in cls:
+            cut.append((s, e))          # 语音课的音节练习、手写体字样（不标重音），不查
         elif "ru" in cls or 'lang="ru"' in attrs:
             if not any(a <= s and e <= b for a, b in cut):
                 segs.append(strip_markup(text[cs:ce]))
