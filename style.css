@@ -163,3 +163,6 @@ li .why { display: inline; margin: 0; }
 .toc-item::after { content: leader(".") target-counter(attr(href), page); color: var(--muted); }
 .key-title { margin-top: 14pt; }
 .book-index td:last-child { width: 8%; text-align: right; color: var(--muted); }
+.book-index table { font-size: 8.5pt; line-height: 1.3; }
+.book-index td, .book-index th { padding: 1.2pt 4pt; }
+.book-index td:first-child { font-size: 9pt; }
