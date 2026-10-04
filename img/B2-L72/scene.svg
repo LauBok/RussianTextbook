@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M8 6 H232 V44 H8 Z M83 6 V44 M158 6 V44" stroke-width="2.5"/>
+<path d="M22 34 Q20 26 29 27 Q33 19 42 24 Q50 21 51 29 Q55 30 54 34 Z M104 24 Q103 18 110 19 Q114 13 121 17 Q127 15 128 21 Q131 22 130 24 Z" stroke-width="1.5"/>
+<path d="M170 38 L214 16 Q222 13 220 19 L176 40 Z" stroke-width="1.8"/>
+<path d="M194 28 L187 39 H193 L203 24 M177 36 L172 27 H177 L182 34" stroke-width="1.5"/>
+<path d="M208 20 H210 M202 23 H204 M196 26 H198" stroke-width="1.2"/>
+<use href="#ivan-noarms" x="10" y="50" width="40" height="100"/>
+<path d="M18.4 83 L14 106 M41.6 83 L50 62"/>
+<path d="M48 56 L50 52 M52 57 L55 53 M53 62 L57 60" stroke-width="1.5"/>
+<use href="#anna-noarms" x="56" y="54" width="38" height="96"/>
+<path d="M64 85.7 L60 108 M86 85.7 L94 65"/>
+<use href="#misha-noarms" x="100" y="64" width="34" height="86"/>
+<path d="M107.1 92.4 L104 112 M126.9 92.4 L135 75"/>
+<path d="M133 69 L134 65 M138 71 L141 68" stroke-width="1.5"/>
+<use href="#wang-noarms" x="158" y="50" width="40" height="100"/>
+<path d="M166.4 83 L156 64 M189.6 83 L200 104"/>
+<path d="M196 106 H224 V144 H196 Z M204 106 V100 H216 V106 M196 118 H224" stroke-width="2"/>
+<circle cx="201" cy="147" r="2" stroke-width="1.5"/>
+<circle cx="219" cy="147" r="2" stroke-width="1.5"/>
+</g></svg>

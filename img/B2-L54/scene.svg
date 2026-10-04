@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M30 56 V10 H168 V56" stroke-width="2"/>
+<path d="M26 10 H172" stroke-width="2"/>
+<path d="M40 18 H54 V40 H40 Z M64 18 H78 V40 H64 Z M88 18 H102 V40 H88 Z M112 18 H126 V40 H112 Z M136 18 H150 V40 H136 Z" stroke-width="1.5"/>
+<path d="M47 18 V40 M71 18 V40 M95 18 V40 M119 18 V40 M143 18 V40 M38 44 H56 M62 44 H80 M86 44 H104 M110 44 H128 M134 44 H152" stroke-width="1.5"/>
+<path d="M2 126 H238" stroke-width="1.5"/>
+<path d="M2 150 H238"/>
+<path d="M14 150 V42"/>
+<path d="M8 150 H20" stroke-width="2"/>
+<path d="M14 42 Q14 34 22 34"/>
+<path d="M18 34 H28 L26 46 H20 Z" stroke-width="2"/>
+<path d="M21 50 L19 54 M25 50 L27 54" stroke-width="1.5"/>
+<path d="M200 150 L210 92 L220 150 M210 92 V150" stroke-width="2"/>
+<path d="M192 62 H228 V102 H192 Z" stroke-width="2.5"/>
+<circle cx="210" cy="78" r="9" stroke-width="1.5"/>
+<path d="M205 76 H208 M212 76 H215 M207 82 Q210 84 213 82 M201 78 Q202 66 210 67 Q218 66 219 78 M204 98 Q210 88 216 98" stroke-width="1.5"/>
+<path d="M190 102 H230" stroke-width="2"/>
+<use href="#anna-noarms" x="30" y="60" width="36" height="90"/>
+<path d="M39 87 L33 74 L31 64"/><circle cx="30.8" cy="62" r="1.7" stroke-width="2"/>
+<path d="M57 87 L59 105"/><circle cx="59.2" cy="107" r="1.7" stroke-width="2"/>
+<use href="#wang-noarms" x="76" y="60" width="36" height="90"/>
+<path d="M85 87 L83 105"/><circle cx="82.8" cy="107" r="1.7" stroke-width="2"/>
+<path d="M103 87 L112 98"/><circle cx="113.3" cy="99.5" r="1.7" stroke-width="2"/>
+<path d="M115 86 H139 V112 H115 Z" stroke-width="2.5"/>
+<circle cx="127" cy="96" r="5" stroke-width="1.5"/>
+<path d="M119 110 Q127 102 135 110" stroke-width="1.5"/>
+<use href="#dima-noarms" x="148" y="60" width="36" height="90"/>
+<path d="M157 87 L155 105"/><circle cx="154.8" cy="107" r="1.7" stroke-width="2"/>
+<path d="M175 87 L177 105"/><circle cx="177.2" cy="107" r="1.7" stroke-width="2"/>
+</g></svg>
