@@ -179,8 +179,58 @@ def scene(lesson):
     return f'<div class="scene" aria-hidden="true">{svg}</div>\n\n'
 
 
+SP_FONTS = {
+    "dialogue": ("/usr/share/fonts/truetype/paratype/PTF75F.ttf", 0, ":"),        # PT Serif Bold
+    "translation": ("/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc", 2, "："),  # Noto Serif CJK SC Bold
+}
+SP_MIN = {"dialogue": 3.5, "translation": 3.0}
+
+
+def _text_em(text, kind):
+    """按实际字体量出文字宽度（单位 em）；量不了时按字符数估算。"""
+    path, index, _ = SP_FONTS[kind]
+    try:
+        from PIL import ImageFont
+        font = ImageFont.truetype(path, 100, index=index)
+        return font.getlength(text) / 100
+    except Exception:
+        return sum(1.0 if ord(c) > 0x2E80 else 0.62 for c in text)
+
+
+def speaker_widths(md):
+    """对话块、参考译文块按本块最长的说话人名设定说话人栏宽度（CSS 变量 --sp），名字永远一行。"""
+    lines = md.split("\n")
+    i = 0
+    while i < len(lines):
+        m = re.match(r"^:::\s*(\{[^}]*\}|\S+)\s*$", lines[i])
+        kind = None
+        if m:
+            head = m.group(1)
+            kind = "dialogue" if ".dialogue" in head else "translation" if re.fullmatch(r"\{?\.?translation\}?|\{\.translation[^}]*\}", head) else None
+        if not kind:
+            i += 1
+            continue
+        j = i + 1
+        names = []
+        while j < len(lines) and not re.match(r"^:::\s*$", lines[j]):
+            for n in re.findall(r"\[([^\[\]]+)\]\{\.sp\}", lines[j]):
+                names.append(re.sub(r"[\u0301]", "", n))
+            j += 1
+        if names:
+            colon = SP_FONTS[kind][2]
+            width = max(_text_em(n + colon, kind) for n in names) + 0.6
+            width = max(round(width + 0.05, 1), SP_MIN[kind])
+            if kind == "dialogue":
+                lines[i] = re.sub(r"\}\s*$", f' style="--sp: {width}em"}}', lines[i])
+            else:
+                lines[i] = f'::: {{.translation style="--sp: {width}em"}}'
+        i = j + 1
+    return "\n".join(lines)
+
+
 def expand(md, lesson=None):
     md = re.sub(r"<!-- UNIT_VOCAB (L\d+)-(L\d+) -->", lambda m: unit_vocab(m.group(1), m.group(2)), md)
+    md = speaker_widths(md)
     pic = scene(lesson)
     if pic:
         md = re.sub(r"^## 课文[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + pic, md, count=1, flags=re.M)

@@ -54,8 +54,8 @@ h3 { font: 700 15px var(--sans); margin: 16px 0 6px; }
 .question .ru { font-size: 17px; font-weight: 700; }
 
 /* 课文对话 */
-.dialogue p { padding-left: 7.4em; text-indent: -7.4em; margin: 0 0 3px; font-size: 18px; line-height: 1.55; }
-.dialogue .sp { display: inline-block; width: 7.4em; text-indent: 0; vertical-align: top; font-weight: 700; color: var(--accent); }
+.dialogue p { padding-left: var(--sp, 7.4em); text-indent: calc(-1 * var(--sp, 7.4em)); margin: 0 0 3px; font-size: 18px; line-height: 1.55; }
+.dialogue .sp { display: inline-block; width: var(--sp, 7.4em); text-indent: 0; white-space: nowrap; vertical-align: top; font-weight: 700; color: var(--accent); }
 .dialogue .sp::after { content: ":"; }
 
 /* 表格 */
@@ -78,8 +78,8 @@ td { border-bottom: 1px solid var(--rule); padding: 6px 8px; vertical-align: top
 .ic::after { content: attr(data-n); font: 700 10px var(--sans); color: var(--accent); vertical-align: super; margin-left: 1px; }
 
 /* 参考译文 */
-.translation p { padding-left: 3.8em; text-indent: -3.8em; margin: 0 0 2px; }
-.translation .sp { display: inline-block; width: 3.8em; text-indent: 0; vertical-align: top; font-weight: 700; }
+.translation p { padding-left: var(--sp, 3.8em); text-indent: calc(-1 * var(--sp, 3.8em)); margin: 0 0 2px; }
+.translation .sp { display: inline-block; width: var(--sp, 3.8em); text-indent: 0; white-space: nowrap; vertical-align: top; font-weight: 700; }
 .translation .sp::after { content: "："; }
 
 /* 练习：沿用印刷版的题目样式，作答控件做成书上的横线和小按钮 */
@@ -148,8 +148,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .unit-vocab td:nth-child(2) { font-size: 16px; font-weight: 700; width: 34%; }
 @media (max-width: 480px) {
   h1 { font-size: 32px; }
-  .dialogue p { padding-left: 88px; text-indent: -88px; font-size: 17px; margin-bottom: 4px; }
-  .dialogue .sp { width: 88px; font-size: 15px; }
+  .dialogue p { font-size: 17px; margin-bottom: 4px; }
   .pics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scene { padding: 8px; }
 }

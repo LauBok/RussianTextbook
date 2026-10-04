@@ -59,8 +59,8 @@ h3 { font: 700 10.5pt "PT Sans", "CJK Sans"; margin: 11pt 0 4pt; break-after: av
 h2 { clear: both; }
 
 /* 课文：对话 */
-.dialogue p { padding-left: 26mm; text-indent: -26mm; margin: 0 0 2pt; font-size: 12pt; line-height: 1.55; }
-.dialogue .sp { display: inline-block; width: 26mm; text-indent: 0; vertical-align: top; font-weight: 700; color: var(--accent); }
+.dialogue p { padding-left: var(--sp, 6.1em); text-indent: calc(-1 * var(--sp, 6.1em)); margin: 0 0 2pt; font-size: 12pt; line-height: 1.55; }
+.dialogue .sp { display: inline-block; width: var(--sp, 6.1em); text-indent: 0; white-space: nowrap; vertical-align: top; font-weight: 700; color: var(--accent); }
 .dialogue .sp::after { content: ":"; }
 
 /* 表格 */
@@ -105,8 +105,8 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 .pictures figcaption { font: 9pt "PT Sans", "CJK Sans"; color: var(--muted); }
 
 /* 参考译文 */
-.translation p { padding-left: 22mm; text-indent: -22mm; margin: 0 0 1pt; }
-.translation .sp { display: inline-block; width: 22mm; text-indent: 0; vertical-align: top; font-weight: 700; }
+.translation p { padding-left: var(--sp, 5.9em); text-indent: calc(-1 * var(--sp, 5.9em)); margin: 0 0 1pt; }
+.translation .sp { display: inline-block; width: var(--sp, 5.9em); text-indent: 0; white-space: nowrap; vertical-align: top; font-weight: 700; }
 .translation .sp::after { content: "："; }
 
 /* 叙述体课文 */
