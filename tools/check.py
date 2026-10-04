@@ -684,6 +684,10 @@ class Checker:
         # 本课新词是否用到
         for w, _, i, _ in les.vocab:
             parts = [norm(t) for t, m in tokens(w) if not m]
+            # 词类栏里写出的形式（如 pl. [та́почки]{.ru}）用到也算
+            cells = les.lines[i].split("|")
+            for span in re.findall(r"\[([^\]]+)\]\{\.ru\}", cells[2] if len(cells) > 3 else ""):
+                parts += [norm(t) for t, m in tokens(span) if not m]
             if parts and not any(word_used(p, used) for p in parts):
                 out.append((les.lineno(i), "词表", f"{w}：课文、例句和练习里都没有用到"))
         return out
