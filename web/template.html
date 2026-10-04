@@ -1,7 +1,7 @@
 <title>{{TITLE}}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Marck+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Marck+Script&family=Charis+SIL&display=swap">
 <style>
 /* 布局：与印刷版同一版式的单栏课本页，A4 正文宽度约 680px，手机全宽 */
 :root {
@@ -129,7 +129,8 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .ai-note { font: 13px var(--sans); color: var(--muted); margin-top: 18px; }
 /* 语音课与复习课 */
 .hand, .ru.hand { font-family: "Marck Script", "PT Serif", serif; font-weight: 400; }
-.ipa { color: var(--muted); }
+.ipa { font-family: "Charis SIL", "Doulos SIL", serif; color: var(--muted); }
+.item .ipa { color: inherit; }
 .letters td:first-child { font-size: 26px; font-weight: 700; width: 18%; }
 .letters td:nth-child(2) .hand { font-size: 28px; }
 .drill p { font-size: 18px; word-spacing: .5em; margin: 0 0 4px; }
@@ -172,15 +173,23 @@ const NUM = "一二三四五六七八九十";
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const ru = (tag, cls, text) => { const e = el(tag, cls, text); e.lang = "ru"; return e; };
+/* 练习里的 [音标] 用 IPA 字体 */
+const IPA = /\[[^\[\]\u0400-\u04ff]+\]/g;
+const isIpa = (t) => /^\[[^\[\]\u0400-\u04ff]+\]$/.test(t);
+const withIpa = (text) => {
+  const f = document.createDocumentFragment(); let last = 0;
+  for (const m of text.matchAll(IPA)) { f.append(text.slice(last, m.index), el("span", "ipa", m[0])); last = m.index + m[0].length; }
+  f.append(text.slice(last)); return f;
+};
 /* 中文说明里的 [俄语]{.ru} 渲染成 lang="ru" 的 span */
 const RU_SPAN = /\[([^\[\]]*)\]\{\.ru\}/g;
 const rich = (tag, cls, text) => {
   const e = el(tag, cls); let last = 0;
   for (const m of text.matchAll(RU_SPAN)) {
-    e.append(text.slice(last, m.index), ru("span", "ru", m[1]));
+    e.append(withIpa(text.slice(last, m.index)), ru("span", "ru", m[1]));
     last = m.index + m[0].length;
   }
-  e.append(text.slice(last)); return e;
+  e.append(withIpa(text.slice(last))); return e;
 };
 const plain = (text) => text.replace(RU_SPAN, "$1");
 let saved = {};
@@ -232,7 +241,7 @@ function feedback(box, ok, correctText, extra) {
   box.textContent = "";
   box.className = "fb " + (ok ? "ok" : "no");
   box.append(ok ? "正确。" : "不对。");
-  if (!ok && correctText) { box.append(" 正确答案："); box.append(ru("span", "ru", correctText)); }
+  if (!ok && correctText) { box.append(" 正确答案："); box.append(ru("span", isIpa(correctText) ? "ipa" : "ru", correctText)); }
   if (extra) { box.append(el("br")); box.append(extra); }
 }
 function latinWarn(v) { return LATIN.test(v) ? "答案里有拉丁字母，请切换到俄语键盘再输入。" : null; }
@@ -286,16 +295,16 @@ DATA.exercises.forEach((ex, n) => {
       stem.append(el("span", "num", String(i + 1)));
       const parts = it.stem.split("___");
       const gap = el("span", "gap", "\u00a0");
-      stem.append(parts[0]);
-      if (parts.length > 1) stem.append(gap, parts[1]);
+      stem.append(withIpa(parts[0]));
+      if (parts.length > 1) stem.append(gap, withIpa(parts[1]));
       const opts = el("div", "opts");
       const fb = el("div", "fb");
       it.options.forEach((o) => {
-        const b = ru("button", "opt", o);
+        const b = ru("button", isIpa(o) ? "opt ipa" : "opt", o);
         b.onclick = () => {
           if (id in results) return;
           const ok = o === it.answer;
-          if (gap.isConnected) gap.textContent = o;
+          if (gap.isConnected) { gap.textContent = o; gap.classList.toggle("ipa", isIpa(o)); }
           b.classList.add(ok ? "right" : "wrong");
           if (!ok) opts.querySelectorAll(".opt").forEach((x) => { if (x.textContent === it.answer) x.classList.add("right"); });
           card.classList.add(ok ? "ok" : "no");
@@ -314,7 +323,7 @@ DATA.exercises.forEach((ex, n) => {
       const id = ex.id + "-" + i; itemIds.push(id); total++;
       const card = el("div", "item");
       const stem = ru("div", "stem"); stem.append(el("span", "num", String(i + 1)));
-      stem.append(it.stem.replace("___", "…"));
+      stem.append(withIpa(it.stem.replace("___", "…")));
       if (it.hint) stem.append(" (" + it.hint + ")");
       const row = el("div", "answer-row");
       const inp = ru("input"); inp.id = "in-" + id;

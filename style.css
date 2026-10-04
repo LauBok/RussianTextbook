@@ -122,7 +122,8 @@ li .why { display: inline; margin: 0; }
 /* 手写体（Marck Script，OFL 授权，见 fonts/） */
 @font-face { font-family: "Hand"; src: url("fonts/MarckScript-Regular.ttf"); }
 .hand, .ru.hand { font-family: "Hand", "PT Serif", serif; font-weight: 400; }
-.ipa { font-family: "PT Serif", "DejaVu Serif", serif; color: var(--muted); }
+@font-face { font-family: "IPA"; src: url("fonts/CharisSIL-Regular.ttf"); }
+.ipa { font-family: "IPA", serif; color: var(--muted); }
 
 /* 字母表 */
 .letters td:first-child { font-size: 20pt; font-weight: 700; width: 18%; }

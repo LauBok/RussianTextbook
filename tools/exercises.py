@@ -16,8 +16,16 @@ ROOT = Path(__file__).resolve().parent.parent
 NUM = "一二三四五六七八九十"
 
 
+IPA = re.compile(r"\[[^\[\]\u0400-\u04ff]+\]")
+
+
+def ipa(s):
+    return IPA.sub(lambda m: f"[\\{m.group(0)[:-1]}\\]]{{.ipa}}", s)
+
+
 def ru(s):
-    return f"[{s}]{{.ru}}"
+    """俄语 span；其中的 [音标] 改用 IPA 字体。"""
+    return f"[{ipa(s)}]{{.ru}}"
 
 
 def blank(stem):
@@ -91,7 +99,7 @@ def key_markdown(data):
                     line += "　也可：" + "；".join(ru(a) for a in alt)
                 out.append(line)
         if ex.get("why"):
-            out += ["", f"[解析：{ex['why']}]{{.why}}", ""]
+            out += ["", f"[解析：{ipa(ex['why'])}]{{.why}}", ""]
     return "\n".join(out)
 
 
