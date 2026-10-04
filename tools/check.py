@@ -662,7 +662,7 @@ class Checker:
                 out.append((None, "漏列", f"{w}：没有列入任何一课的词表（{locs}）"))
 
         # 不按读音规则读的词：生词表里要有 [[…]]{.tr} 注音
-        if les.book <= 2:
+        if les.book <= 2 and not les.id.startswith("P"):      # 语音课用 IPA
             for w, _, i, _ in les.vocab:
                 if "{.tr}" in les.lines[i]:
                     continue
