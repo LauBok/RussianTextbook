@@ -20,14 +20,14 @@
   size: A4;
   margin: 22mm 20mm 22mm 20mm;
   @top-left { content: string(running); font: 8.5pt "PT Sans", "CJK Sans"; color: #8c8c8c; }
-  @bottom-center { content: counter(page); font: 9pt "PT Sans"; color: #8c8c8c; }
+  @bottom-center { content: counter(page); font: 9pt "PT Sans", "CJK Sans"; color: #8c8c8c; }
 }
 @page :first { @top-left { content: none; } }
 
-html { font-family: "PT Serif", "CJK Serif", serif; font-size: 10.5pt; line-height: 1.6; color: var(--ink); }
+html { font-family: "PT Serif", "IPA", "CJK Serif", serif; font-size: 10.5pt; line-height: 1.6; color: var(--ink); }
 body { margin: 0; }
 p { margin: 0 0 .5em; }
-[lang="ru"], .ru { font-family: "PT Serif", serif; }
+[lang="ru"], .ru { font-family: "PT Serif", "IPA", "CJK Serif", serif; }
 .zhp { font-family: "CJK Serif"; }  /* 汉语引号、破折号、省略号 */
 
 /* 课头 */
@@ -59,8 +59,8 @@ h3 { font: 700 10.5pt "PT Sans", "CJK Sans"; margin: 11pt 0 4pt; break-after: av
 h2 { clear: both; }
 
 /* 课文：对话 */
-.dialogue p { display: flex; margin: 0 0 2pt; font-size: 12pt; line-height: 1.55; }
-.dialogue .sp { flex: 0 0 26mm; font-weight: 700; color: var(--accent); }
+.dialogue p { padding-left: 26mm; text-indent: -26mm; margin: 0 0 2pt; font-size: 12pt; line-height: 1.55; }
+.dialogue .sp { display: inline-block; width: 26mm; text-indent: 0; vertical-align: top; font-weight: 700; color: var(--accent); }
 .dialogue .sp::after { content: ":"; }
 
 /* 表格 */
@@ -71,7 +71,7 @@ th { font: 700 9pt "PT Sans", "CJK Sans"; text-align: left; color: var(--muted);
 td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: top; }
 .vocab td:first-child { font-size: 11pt; font-weight: 700; width: 32%; }
 .vocab td:nth-child(2) { color: var(--muted); width: 26%; }
-.tr { font-family: "PT Serif", "DejaVu Serif", serif; font-weight: 400; font-size: 9.5pt; color: var(--muted); }
+.tr { font-family: "PT Serif", "IPA", "CJK Serif", serif; font-weight: 400; font-size: 9.5pt; color: var(--muted); }
 .names { font-size: 10pt; color: var(--muted); margin-top: 4pt; }
 .names .ru { color: var(--ink); }
 
@@ -88,7 +88,7 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 
 /* 语调调心 */
 .ic { font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 2pt; }
-.ic::after { content: attr(data-n); font: 700 7pt "PT Sans"; color: var(--accent); vertical-align: super; margin-left: 1pt; text-decoration: none; }
+.ic::after { content: attr(data-n); font: 700 7pt "PT Sans", "CJK Sans"; color: var(--accent); vertical-align: super; margin-left: 1pt; text-decoration: none; }
 
 /* 练习 */
 .exercise { break-inside: avoid; }
@@ -102,11 +102,11 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 .pictures { display: flex; flex-wrap: wrap; gap: 6pt 0; margin: 4pt 0 8pt; }
 .pictures figure { width: 33.33%; margin: 0; text-align: center; }
 .pictures img { width: 26mm; height: 26mm; }
-.pictures figcaption { font: 9pt "PT Sans"; color: var(--muted); }
+.pictures figcaption { font: 9pt "PT Sans", "CJK Sans"; color: var(--muted); }
 
 /* 参考译文 */
-.translation p { display: flex; margin: 0 0 1pt; }
-.translation .sp { flex: 0 0 14mm; font-weight: 700; }
+.translation p { padding-left: 22mm; text-indent: -22mm; margin: 0 0 1pt; }
+.translation .sp { display: inline-block; width: 22mm; text-indent: 0; vertical-align: top; font-weight: 700; }
 .translation .sp::after { content: "："; }
 
 /* 叙述体课文 */
@@ -115,7 +115,7 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 
 /* 诗歌 */
 .poem { margin: 4pt 0 8pt 14mm; }
-.poem .author { display: block; font: 700 10pt "PT Sans"; color: var(--muted); margin-bottom: 8pt; }
+.poem .author { display: block; font: 700 10pt "PT Sans", "CJK Sans"; color: var(--muted); margin-bottom: 8pt; }
 .poem .line-block { font-size: 13pt; line-height: 1.75; margin-bottom: 10pt; }
 .poem .year { display: block; font-size: 9.5pt; color: var(--muted); }
 .prose-zh .line-block { margin: 0 0 8pt 2em; line-height: 1.8; }
@@ -126,9 +126,9 @@ li .why { display: inline; margin: 0; }
 
 /* 手写体（Marck Script，OFL 授权，见 fonts/） */
 @font-face { font-family: "Hand"; src: url("fonts/MarckScript-Regular.ttf"); }
-.hand, .ru.hand { font-family: "Hand", "PT Serif", serif; font-weight: 400; }
+.hand, .ru.hand { font-family: "Hand", "PT Serif", "IPA", "CJK Serif", serif; font-weight: 400; }
 @font-face { font-family: "IPA"; src: url("fonts/CharisSIL-Regular.ttf"); }
-.ipa { font-family: "IPA", serif; color: var(--muted); }
+.ipa { font-family: "IPA", "CJK Serif", serif; color: var(--muted); }
 
 /* 字母表 */
 .letters td:first-child { font-size: 20pt; font-weight: 700; width: 18%; }
@@ -152,7 +152,7 @@ li .why { display: inline; margin: 0; }
 /* ===== 整册（tools/book.py） ===== */
 .book .lesson, .book .toc, .book .answers, .book .index { break-before: page; }
 .book-cover { height: 240mm; display: flex; flex-direction: column; justify-content: center; text-align: center; }
-.cover-ru { font: 400 20pt "PT Serif", serif; color: var(--accent); letter-spacing: .04em; }
+.cover-ru { font: 400 20pt "PT Serif", "CJK Serif", serif; color: var(--accent); letter-spacing: .04em; }
 .cover-title { font: 700 36pt "PT Sans", "CJK Sans"; margin: 10pt 0 8pt; }
 .cover-sub { font: 13pt "PT Sans", "CJK Sans"; color: var(--muted); }
 .toc-title, .part-title { font: 700 20pt "PT Sans", "CJK Sans"; color: var(--accent); border: none; padding: 0; margin: 0 0 12pt; }
@@ -166,3 +166,6 @@ li .why { display: inline; margin: 0; }
 .book-index table { font-size: 8.5pt; line-height: 1.3; }
 .book-index td, .book-index th { padding: 1.2pt 4pt; }
 .book-index td:first-child { font-size: 9pt; }
+
+/* 整册里每课首页的页眉已由 @top-left 显示，正文里的 .running 行不再印出（仍提供 string-set） */
+.book .lesson-head .running { font-size: 0; line-height: 0; height: 0; margin: 0; overflow: hidden; }
