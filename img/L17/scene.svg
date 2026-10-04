@@ -12,11 +12,11 @@
 <path d="M80 150 Q90 144 100 150 M104 150 Q114 144 124 150" stroke-width="2"/>
 <path d="M86 146 L84 140 M90 145 L92 139 M110 146 L108 140 M114 145 L116 139" stroke-width="1.5"/>
 <use href="#ivan-noarms" x="6" y="50" width="40" height="100"/>
-<path d="M46 96 L56 150 M50 150 H62 L60 158 H54" stroke-width="2.5"/>
-<path d="M14 77 L12 94 L46 98"/>
-<circle cx="48.18" cy="98.26" r="1.9" stroke-width="2"/>
-<path d="M38 77 L44 88 L46 102"/>
-<circle cx="46.31" cy="104.18" r="1.9" stroke-width="2"/>
+<path d="M52 90 L60 142 M54 142 H66 L65 152 Q61 156 56 152 Z" stroke-width="2.5"/>
+<path d="M14 77 L11 105"/>
+<circle cx="10.77" cy="107.19" r="1.9" stroke-width="2"/>
+<path d="M38 77 L42 92 L53 95"/>
+<circle cx="55.12" cy="95.58" r="1.9" stroke-width="2"/>
 <use href="#misha-noarms" x="112" y="50" width="40" height="100"/>
 <path d="M140.4 99.4 L143 119"/>
 <circle cx="143.29" cy="121.18" r="1.9" stroke-width="2"/>

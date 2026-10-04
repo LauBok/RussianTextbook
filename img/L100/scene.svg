@@ -3,25 +3,25 @@
 <path d="M20 30 H74 V72 H20 Z"/>
 <path d="M28 66 V53 L37 45 L46 53 V66 Z M34 66 V58 H40 V66" stroke-width="1.5"/>
 <path d="M62 38 L55 48 H69 Z M62 44 L53 57 H71 Z M62 57 V62" stroke-width="1.5"/>
-<path d="M51 66 Q49 61 53 59 L52 55 L55 57.5 Q57 57 59 57.5 L62 55 L61 59 Q65 61 63 66 Z" stroke-width="1.5"/>
+<circle cx="52" cy="56" r="3.5" stroke-width="1.5"/>
+<path d="M49.3 53.8 L49.6 50.2 L51.6 52.6 M52.4 52.6 L54.4 50.2 L54.7 53.8 M48 66 Q47 59.5 52 59.5 Q57 59.5 56 66 Z" stroke-width="1.5"/>
 <path d="M170 0 V12" stroke-width="2"/>
 <path d="M163 13 H177 M163 43 H177" stroke-width="2.5"/>
 <ellipse cx="170" cy="28" rx="14" ry="14"/>
 <path d="M170 14 V42 M170 14 Q160 28 170 42 M170 14 Q180 28 170 42" stroke-width="1.5"/>
 <path d="M168 45 V56 M170 45 V58 M172 45 V56" stroke-width="1.5"/>
 <use href="#wang-noarms" x="98" y="50" width="40" height="100"/>
-<path d="M108 80 L108 96"/>
-<circle cx="107.6" cy="98.2" r="1.9" stroke-width="2"/>
-<path d="M128 80 L132 96"/>
-<circle cx="132.4" cy="98.2" r="1.9" stroke-width="2"/>
-<path d="M109 86 H131 V108 H109 Z" stroke-width="2"/>
-<path d="M113 91 H127 M113 95 H127 M113 99 H127 M113 103 H122" stroke-width="1.5"/>
+<path d="M108 80 L105 104"/>
+<circle cx="104.8" cy="106.2" r="1.9" stroke-width="2"/>
+<path d="M128 80 L141 71"/>
+<circle cx="142.8" cy="69.8" r="1.9" stroke-width="2"/>
+<path d="M141 52 H160 V68 H141 Z" stroke-width="2"/>
+<path d="M144.5 56 H156.5 M144.5 59.5 H156.5 M144.5 63 H152" stroke-width="1.5"/>
 <path d="M156 108 H228"/>
 <path d="M162 108 V150 M222 108 V150"/>
-<circle cx="178" cy="87" r="5.5" stroke-width="2.5"/>
-<path d="M171 108 Q169.5 96 178 93 Q186.5 96 185 108 Z" stroke-width="2.5"/>
-<circle cx="178" cy="87.5" r="2.8" stroke-width="1.5"/>
-<path d="M174 101 Q178 98 182 101" stroke-width="1.5"/>
+<path d="M178 108 H172 Q168 98 173 92 Q170 82 178 80 Q186 82 183 92 Q188 98 184 108 Z" stroke-width="2.5"/>
+<circle cx="178" cy="87" r="3.5" stroke-width="1.5"/>
+<path d="M172.8 92.5 Q178 95.5 183.2 92.5" stroke-width="1.5"/>
 <ellipse cx="206" cy="100" rx="10" ry="8"/>
 <path d="M200 93 Q206 88 212 93 M206 89 V87" stroke-width="2"/>
 <path d="M196 100 L189 93" stroke-width="2.5"/>

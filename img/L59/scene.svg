@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M24 150 L20 157 M96 150 L94 157 M150 150 L152 157 M222 150 L226 157" stroke-width="1.5"/>
+<path d="M8 12 H52 V44 H8 Z" stroke-width="2"/>
+<path d="M13 16 H25 V30 H13 Z M30 18 L44 16 L45 28 L31 30 Z M16 33 H30 V41 H16 Z M35 33 H47 V40 H35 Z" stroke-width="1.5"/>
+<path d="M17 20 H22 M17 23 H22 M34 21 L41 20 M34 24 L41 23" stroke-width="1"/>
+<circle cx="80" cy="34" r="11"/>
+<path d="M80 34 V25.6 M80 34 L85.6 37.2" stroke-width="2"/>
+<path d="M80 24 V25.4 M90 34 H88.6 M80 44 V42.6 M70 34 H71.4" stroke-width="1.5"/>
+<path d="M126 10 H164 V48 H126 Z" stroke-width="2.5"/>
+<path d="M145 10 V48 M126 29 H164" stroke-width="1.5"/>
+<path d="M126 44 Q135 40 145 44 Q154 40 164 44" stroke-width="1.5"/>
+<circle cx="133" cy="17" r="1.1" stroke-width="1.5"/><circle cx="153" cy="20" r="1.1" stroke-width="1.5"/><circle cx="138" cy="36" r="1.1" stroke-width="1.5"/><circle cx="158" cy="35" r="1.1" stroke-width="1.5"/>
+<path d="M170 150 V40 H226 V150"/>
+<path d="M226 40 L236 45 V145 L226 150" stroke-width="2"/>
+<circle cx="233" cy="96" r="1.2" stroke-width="1.5"/>
+<path d="M190 30 H206 V36 H190 Z" stroke-width="2"/>
+<use href="#anna-noarms" x="24" y="52" width="40" height="100"/>
+<path d="M36 86 L29 107"/>
+<circle cx="28.4" cy="109.2" r="1.9" stroke-width="2"/>
+<path d="M25 113 L27 110 M31.8 113 L29.8 110" stroke-width="1.5"/>
+<path d="M20 113 H34 L33 127 H21 Z" stroke-width="2"/>
+<path d="M52 86 L60 77 L66 66"/>
+<circle cx="67" cy="64" r="1.9" stroke-width="2"/>
+<use href="#wang-noarms" x="108" y="52" width="40" height="100"/>
+<path d="M118 82 L106 74 L102 62"/>
+<circle cx="101.4" cy="59.8" r="1.9" stroke-width="2"/>
+<path d="M138 82 L141 106"/>
+<circle cx="141.2" cy="108.2" r="1.9" stroke-width="2"/>
+<path d="M144.4 102 L152 104 L149 120 L141.4 118 Z" stroke-width="2"/>
+<use href="#olga-noarms" x="178" y="52" width="40" height="100"/>
+<path d="M190 86 L181 80 L182 67"/>
+<circle cx="182.2" cy="64.8" r="1.9" stroke-width="2"/>
+<path d="M206 86 L209.6 107"/>
+<circle cx="210" cy="109.2" r="1.9" stroke-width="2"/>
+</g></svg>

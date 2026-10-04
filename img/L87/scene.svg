@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M24 150 L20 157 M90 150 L88 157 M150 150 L152 157 M216 150 L220 157" stroke-width="1.5"/>
+<path d="M8 18 H52 V56 H8 Z" stroke-width="2.5"/>
+<path d="M30 18 V56" stroke-width="2"/>
+<path d="M26 34 V40 M34 34 V40" stroke-width="1.5"/>
+<path d="M8 150 V104 H52 V150"/>
+<path d="M14 116 H46 V142 H14 Z" stroke-width="2"/>
+<path d="M19 121 H41" stroke-width="1.5"/>
+<circle cx="15" cy="110" r="1.4" stroke-width="1.5"/><circle cx="21" cy="110" r="1.4" stroke-width="1.5"/><circle cx="39" cy="110" r="1.4" stroke-width="1.5"/><circle cx="45" cy="110" r="1.4" stroke-width="1.5"/>
+<path d="M18 92 H38 V101.5 Q38 104 35.5 104 H20.5 Q18 104 18 101.5 Z" stroke-width="2"/>
+<path d="M18 95 H15 M38 95 H41 M17 92 Q28 87 39 92 M28 88.5 V87" stroke-width="1.5"/>
+<path d="M24 84 Q22 81 24 78 M31 84 Q29 81 31 78" stroke-width="1.2"/>
+<path d="M66 16 H118 V62 H66 Z" stroke-width="2.5"/>
+<path d="M92 16 V62 M66 40 H118" stroke-width="2"/>
+<path d="M78 22 A6 6 0 1 0 84 31 A4.6 4.6 0 1 1 78 22 Z" stroke-width="1.5"/>
+<path d="M105 25 V29 M103 27 H107 M76 50 V54 M74 52 H78 M108 48 V52 M106 50 H110" stroke-width="1.2"/>
+<path d="M63 65 H121" stroke-width="2"/>
+<path d="M56 110 H130 V115 H56 Z" stroke-width="2.5"/>
+<path d="M62 115 V150 M124 115 V150" stroke-width="2.5"/>
+<use href="#murka" x="62" y="80" width="40" height="30"/>
+<path d="M106.5 94 H113.5 Q115 94 115 95.5 V109 H105 V95.5 Q105 94 106.5 94 Z" stroke-width="2"/>
+<path d="M107.2 97 H112.8 V105 H107.2 Z" stroke-width="1.2"/>
+<use href="#wang-noarms" x="128" y="50" width="40" height="100"/>
+<path d="M138 80 L121.4 91.6"/>
+<circle cx="119.6" cy="92.8" r="1.9" stroke-width="2"/>
+<path d="M117.8 94.2 L115.6 96" stroke-width="2"/>
+<path d="M158 80 L161 105"/>
+<circle cx="161.2" cy="107.2" r="1.9" stroke-width="2"/>
+<use href="#misha-noarms" x="184" y="50" width="40" height="100"/>
+<path d="M195.6 99.4 L187 89 L187.6 79.4"/>
+<circle cx="187.8" cy="77.3" r="1.9" stroke-width="2"/>
+<path d="M212.4 99.4 L221 89 L220.4 79.4"/>
+<circle cx="220.2" cy="77.3" r="1.9" stroke-width="2"/>
+<circle cx="204" cy="32" r="11" stroke-width="2.5"/>
+<path d="M204 32 V24.5 M204 32 L209 35" stroke-width="2"/>
+<path d="M204 22.5 V23.6 M204 40.4 V41.5 M194.5 32 H195.6 M212.4 32 H213.5" stroke-width="1.5"/>
+</g></svg>
