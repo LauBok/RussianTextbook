@@ -164,7 +164,8 @@ def with_characters(svg):
     if not ids:
         return svg
     lib = character_symbols()
-    defs = "".join(lib[i] for i in ids if i in lib)
+    # 人物用 currentColor，跟随 .scene 的 color：网页深色模式下才能变成浅色（<use> 里的元素不受页面 CSS 影响）
+    defs = "".join(lib[i] for i in ids if i in lib).replace('"#2b2b2b"', '"currentColor"')
     return re.sub(r"(<svg\b[^>]*>)", lambda m: m.group(1) + f"<defs>{defs}</defs>", svg, count=1)
 
 
