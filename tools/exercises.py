@@ -215,6 +215,8 @@ def speaker_widths(md):
         while j < len(lines) and not re.match(r"^:::\s*$", lines[j]):
             for n in re.findall(r"\[([^\[\]]+)\]\{\.sp\}", lines[j]):
                 names.append(re.sub(r"[\u0301]", "", n))
+            # \u540d\u5b57\u540e\u7684\u7a7a\u683c\u4f1a\u8ba9\u9996\u884c\u6bd4\u7eed\u884c\u591a\u7f29\u8fdb\u4e00\u683c
+            lines[j] = re.sub(r"(\]\{\.sp\})[ \t]+", r"\1", lines[j])
             j += 1
         if names:
             colon = SP_FONTS[kind][2]
