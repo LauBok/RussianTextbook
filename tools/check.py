@@ -658,7 +658,7 @@ class Checker:
             else:
                 out.append((None, "练习", f"缺少 exercises/{stem}.yaml"))
         out += [(None, "插图", m) for m in check_scene(stem)]
-        if les.book == 1 and not les.id.startswith("P") and any(sec == "课文" for sec, _, _ in les.meta) \
+        if les.book <= 2 and not les.id.startswith("P") and any(sec == "课文" for sec, _, _ in les.meta) \
                 and not (ROOT / "img" / stem / "scene.svg").exists():
             out.append((None, "插图", f"缺少课文插图 img/{stem}/scene.svg"))
         answer_md = les.path.with_name(f"{stem}-答案.md")

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M8 10 H232 V44 H8 Z" stroke-width="2"/>
+<path d="M30 30 L60 22 L64 26 L46 31 L52 40 L47 40 L38 33 L30 35 Z" stroke-width="2"/>
+<path d="M150 18 H220 M150 26 H205 M150 34 H214" stroke-width="1.5"/>
+<use href="#misha" x="20" y="70" width="32" height="80"/>
+<use href="#anna" x="58" y="56" width="38" height="94"/>
+<use href="#wang-noarms" x="120" y="54" width="40" height="96"/>
+<path d="M128 86 L124 112"/>
+<path d="M152 86 L160 110"/>
+<path d="M162 110 H196 V146 H162 Z M172 110 V104 H186 V110"/>
+<path d="M166 146 v3 M192 146 v3" stroke-width="2"/>
+<path d="M200 122 H228 V146 H200 Z M208 122 V117 H220 V122" stroke-width="2.5"/>
+<path d="M12 150 L8 158 M120 150 L118 158 M230 150 L234 158" stroke-width="1.5"/>
+</g></svg>

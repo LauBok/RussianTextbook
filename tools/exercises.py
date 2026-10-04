@@ -137,11 +137,12 @@ def lesson_vocab(code):
 
 
 def unit_vocab(first, last):
-    """单元词汇总表：<!-- UNIT_VOCAB L01-L09 --> 展开为按课排列的表格。"""
-    a, b = int(first[1:]), int(last[1:])
+    """单元词汇总表：<!-- UNIT_VOCAB L01-L09 -->、<!-- UNIT_VOCAB B2-L01-B2-L08 --> 展开为按课排列的表格。"""
+    prefix = first.rsplit("L", 1)[0]                     # "" 或 "B2-"
+    a, b = int(first.rsplit("L", 1)[1]), int(last.rsplit("L", 1)[1])
     rows = []
     for n in range(a, b + 1):
-        code = f"L{n:02d}"
+        code = f"{prefix}L{n:02d}"
         for word, pos, gloss in lesson_vocab(code):
             rows.append(f"| {n} | {word} | {pos} | {gloss} |")
     head = ["::: {.vocab .unit-vocab}", "| 课 | 词 | 词性 | 释义 |", "|---|---|---|---|"]
@@ -248,7 +249,7 @@ def speaker_widths(md):
 
 
 def expand(md, lesson=None):
-    md = re.sub(r"<!-- UNIT_VOCAB (L\d+)-(L\d+) -->", lambda m: unit_vocab(m.group(1), m.group(2)), md)
+    md = re.sub(r"<!-- UNIT_VOCAB ((?:B\d-)?L\d+)-((?:B\d-)?L\d+) -->", lambda m: unit_vocab(m.group(1), m.group(2)), md)
     md = speaker_widths(md)
     pic = scene(lesson)
     if pic:

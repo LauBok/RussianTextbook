@@ -7,6 +7,7 @@
 """
 import os
 import re
+import shutil
 import subprocess
 import sys
 import unicodedata
@@ -20,7 +21,14 @@ import exercises  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOK_NAME = {1: "第一册", 2: "第二册", 3: "第三册", 4: "第四册"}
+LEVEL = {1: "从零起步到 A2", 2: "从 A2 到 B1", 3: "从 B1 到 B2", 4: "从 B2 到 C1"}
+COVER_SUB = {1: "从零起步 · 自学用", 2: "A2 → B1 · 自学用", 3: "B1 → B2 · 自学用", 4: "B2 → C1 · 自学用"}
 RU_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+
+
+def index_name(book):
+    """网页目录：第一册 web/index.html，其余 web/B2-index.html 等。"""
+    return "index.html" if book == 1 else f"B{book}-index.html"
 
 
 def lesson_codes(book):
@@ -229,10 +237,10 @@ li a {{ display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(-
 li a:hover {{ color: var(--accent); }}
 .no {{ flex: 0 0 76px; color: var(--muted); font-size: 14px; }} .sub {{ color: var(--muted); }}
 </style></head>
-<body><main><h1>{name}</h1><p class="lead">从零起步到 A2 · {len(codes)} 课</p>
+<body><main><h1>{name}</h1><p class="lead">{LEVEL.get(book, "")} · {len(codes)} 课</p>
 {"".join(items)}
 </main></body></html>"""
-    (ROOT / "web" / "index.html").write_text(page, encoding="utf-8")
+    (ROOT / "web" / index_name(book)).write_text(page, encoding="utf-8")
 
 
 def main(argv):
@@ -248,7 +256,7 @@ def main(argv):
     index, n_words = vocab_index(codes, fms)
     name = f"俄语教程 {BOOK_NAME[book]}"
     cover = (f'<section class="book-cover"><div class="cover-ru" lang="ru">Ру́сский язы́к</div>'
-             f'<h1 class="cover-title">{name}</h1><div class="cover-sub">从零起步 · 自学用</div></section>')
+             f'<h1 class="cover-title">{name}</h1><div class="cover-sub">{COVER_SUB.get(book, "自学用")}</div></section>')
     answers = (f'<section class="answers" id="answers"><div class="running">{name} · 练习答案与解析</div>'
                f'<h1 class="part-title">练习答案与解析</h1>{"".join(keys)}</section>')
     index_sec = (f'<section class="index" id="index"><div class="running">{name} · 总词汇表</div>'
@@ -264,7 +272,7 @@ def main(argv):
     html_path.write_text(page, encoding="utf-8")
     web_index(book, codes, fms)
     print(html_path)
-    print(ROOT / "web" / "index.html")
+    print(ROOT / "web" / index_name(book))
     if not html_only:
         pdf = out / f"{BOOK_NAME[book]}.pdf"
         if "--single" in argv:
@@ -287,6 +295,10 @@ def main(argv):
             blocks += [(["answers"], answers), (["index"], index_sec)]
             n = parallel_pdf(head, blocks, lambda pg: cover + toc_html(codes, fms, pg), pdf, html_path, workers)
             print(f"{pdf}（{n} 页）")
+        dist = ROOT / "dist"
+        dist.mkdir(exist_ok=True)
+        shutil.copyfile(pdf, dist / pdf.name)
+        print(dist / pdf.name)
 
 
 if __name__ == "__main__":
