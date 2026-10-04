@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M20 150 L16 157 M120 150 L118 157 M220 150 L224 157" stroke-width="1.5"/>
+<path d="M150 12 H200 V48 H150 Z M175 12 V48 M150 30 H200" stroke-width="2"/>
+<path d="M30 14 H60 V40 H30 Z" stroke-width="1.8"/>
+<path d="M34 36 L42 24 L48 32 L52 28 L57 36" stroke-width="1.2"/>
+<use href="#maria" x="2" y="64" width="32" height="86"/>
+<use href="#ivan" x="32" y="58" width="34" height="92"/>
+<path d="M70 114 H150 M76 114 V150 M144 114 V150"/>
+<path d="M78 112 Q84 109 90 112 M96 112 Q102 109 108 112 M114 112 Q120 109 126 112 M132 112 Q138 109 144 112" stroke-width="1.8"/>
+<path d="M92 112 V104 M93.5 104 V107 M90.5 104 V107 M110 112 V104 M111.5 104 V107 M108.5 104 V107 M128 112 V104 M129.5 104 V107 M126.5 104 V107" stroke-width="1.2"/>
+<path d="M84 106 Q86 100 88 106 M118 104 L120 98 H124 L126 104" stroke-width="1.5"/>
+<use href="#misha-noarms" x="150" y="70" width="30" height="80"/>
+<path d="M157 98 L154 114 L162 116 M173 98 L176 114 L168 116"/>
+<path d="M154 116 Q165 113 176 116 M154 113 Q165 110 176 113 M154 110 Q165 107 176 110 M154 107 Q165 104 176 107" stroke-width="1.6"/>
+<use href="#anna" x="180" y="62" width="30" height="88"/>
+<use href="#wang" x="206" y="58" width="32" height="92"/>
+</g></svg>
