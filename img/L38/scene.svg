@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="L38-c1"><path d="M60 0 H120 V112 H60 Z M80 96 H100 V106 H80 Z" clip-rule="evenodd"/></clipPath></defs><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M14 12 H50 V48 H14 Z" stroke-width="2.5"/>
+<circle cx="32" cy="30" r="10" stroke-width="2"/>
+<path d="M28 26 L32 30 L37 27 M32 30 V36 M24 32 L28 26 M37 27 L40 33" stroke-width="1.5"/>
+<path d="M140 8 H186 V44 H140 Z"/>
+<path d="M163 8 V44 M140 26 H186" stroke-width="2"/>
+<path d="M176 13 A5 5 0 1 0 179 22 A4 4 0 1 1 176 13 Z" stroke-width="1.5"/>
+<g clip-path="url(#L38-c1)"><use href="#misha-noarms" x="70" y="42" width="40" height="100"/></g>
+<path d="M81.6 91.4 L81.9 101.8"/>
+<circle cx="82" cy="104" r="1.9" stroke-width="2"/>
+<path d="M98.4 91.4 L98.1 101.8"/>
+<circle cx="98" cy="104" r="1.9" stroke-width="2"/>
+<path d="M80 98 Q80 95 84 95 H96 Q100 95 100 98 L101 104 Q101 107 98 106 L94 103 H86 L82 106 Q79 107 79 104 Z" stroke-width="2"/>
+<circle cx="85" cy="99" r="0.9" fill="#2b2b2b" stroke="none"/>
+<circle cx="95" cy="99" r="0.9" fill="#2b2b2b" stroke="none"/>
+<path d="M116 112 H136 M126 112 V104 M110 104 H142 V74 H110 Z" stroke-width="2.5"/>
+<path d="M114 78 H138 V100 H114 Z" stroke-width="1.5"/>
+<path d="M120 94 L126 84 L132 94 M119 90 H133" stroke-width="1.2"/>
+<path d="M36 112 H154"/>
+<path d="M40 112 V150 M150 112 V150"/>
+<path d="M40 120 H150" stroke-width="2"/>
+<path d="M44 111 H66 V108 H44 Z M46 108 V105 H64 V108" stroke-width="1.8"/>
+<path d="M56 150 V132 Q56 126 62 126 H78 Q84 126 84 132 V150" stroke-width="2.5"/>
+<path d="M62 126 Q70 118 78 126 M56 138 H84" stroke-width="2"/>
+<path d="M182 150 V30 H238" stroke-width="2.5"/>
+<use href="#wang-noarms" x="190" y="50" width="40" height="100"/>
+<path d="M200 80 L186 76 L184.3 64.2"/>
+<circle cx="184" cy="62" r="1.9" stroke-width="2"/>
+<path d="M220 80 L221.8 103.8"/>
+<circle cx="222" cy="106" r="1.9" stroke-width="2"/>
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+</g></svg>

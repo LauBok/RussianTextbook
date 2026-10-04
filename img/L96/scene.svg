@@ -2,8 +2,8 @@
 <path d="M2 150 H238"/>
 <path d="M30 150 L26 157 M110 150 L108 157 M170 150 L172 157 M226 150 L230 157" stroke-width="1.5"/>
 <path d="M18 42 Q5 43 7 32 Q2 22 14 18 Q16 6 32 10 Q42 2 56 8 Q70 2 82 10 Q98 8 97 20 Q106 28 97 36 Q95 47 80 44 Q70 50 56 45 Q44 50 34 45 Q25 48 18 42 Z" stroke-width="2.5"/>
-<circle cx="66" cy="50" r="2.6" stroke-width="2"/>
-<circle cx="71.5" cy="54" r="1.6" stroke-width="1.8"/>
+<circle cx="62" cy="49.5" r="2.6" stroke-width="2"/>
+<circle cx="67" cy="55" r="1.6" stroke-width="1.8"/>
 <path d="M18 19 L33 12 L48 19 Z M18 19 H48 V22 H18 Z" stroke-width="1.8"/>
 <path d="M21 22 V35 M26.4 22 V35 M31.8 22 V35 M37.2 22 V35 M42.6 22 V35" stroke-width="1.5"/>
 <path d="M16 35 H50 M14 38 H52" stroke-width="1.8"/>

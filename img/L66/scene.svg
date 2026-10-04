@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M24 150 L20 157 M86 150 L84 157 M126 150 L128 157" stroke-width="1.5"/>
+<path d="M8 10 H44 V56 H8 Z"/>
+<path d="M26 10 V56 M8 33 H44" stroke-width="2"/>
+<path d="M4 59 H48" stroke-width="2.5"/>
+<circle cx="15" cy="17" r="1.1" stroke-width="1.5"/><circle cx="36" cy="22" r="1.1" stroke-width="1.5"/><circle cx="17" cy="40" r="1.1" stroke-width="1.5"/><circle cx="37" cy="45" r="1.1" stroke-width="1.5"/><circle cx="31" cy="15" r="1.1" stroke-width="1.5"/>
+<path d="M8 52 Q17 48 26 52 Q35 48 44 52" stroke-width="1.5"/>
+<path d="M94 108 H124 V140 H94 Z" stroke-width="2.5"/>
+<path d="M100 108 V140 M106 108 V140 M112 108 V140 M118 108 V140" stroke-width="1.5"/>
+<path d="M98 142 V146 M120 142 V146" stroke-width="2"/>
+<path d="M101 102 Q99 98 101 94 Q103 90 101 86 M109 102 Q107 98 109 94 Q111 90 109 86 M117 102 Q115 98 117 94 Q119 90 117 86" stroke-width="1.5"/>
+<path d="M132 150 V8 H236 V150"/>
+<path d="M132 46 H236 M132 82 H236 M132 116 H236" stroke-width="2.5"/>
+<path d="M137 46 V16 H150 V46 M140 22 H147 M140 40 H147" stroke-width="2"/>
+<path d="M140 28 H147 M140 31 H147" stroke-width="1.2"/>
+<use href="#murka" x="154" y="16" width="40" height="30"/>
+<path d="M200 46 L208 14 L232 20 L226 46 Z" stroke-width="2"/>
+<path d="M204 46 L211.6 15" stroke-width="1.5"/>
+<path d="M212 30 Q218 26 222 32 Q226 36 220 38" stroke-width="1.2"/>
+<path d="M138 82 V56 H144 V82 M146 82 V60 H152 V82 M154 82 V54 H162 V82 M166 82 L172 58 L178 59.6 L172 82 M188 82 V58 H196 V82 M198 82 V56 H204 V82 M206 82 V60 H212 V82" stroke-width="1.8"/>
+<path d="M216 82 V74 H232 V82 Z M218 74 V68 H230 V74" stroke-width="1.8"/>
+<path d="M138 116 V92 H146 V116 M148 116 V90 H154 V116 M156 116 V94 H164 V116 M178 116 V92 H186 V116 M188 116 V90 H194 V116 M196 116 V94 H202 V116 M204 116 V90 H210 V116" stroke-width="1.8"/>
+<path d="M160 150 V124 H208 V150 M184 124 V150" stroke-width="2"/>
+<circle cx="180" cy="137" r="1.2" stroke-width="1.5"/><circle cx="188" cy="137" r="1.2" stroke-width="1.5"/>
+<use href="#misha-noarms" x="2" y="52" width="40" height="100"/>
+<path d="M13.6 101.4 L7 116"/>
+<circle cx="6.2" cy="118" r="1.9" stroke-width="2"/>
+<path d="M30.4 101.4 L37 116"/>
+<circle cx="37.8" cy="118" r="1.9" stroke-width="2"/>
+<use href="#wang-noarms" x="46" y="52" width="40" height="100"/>
+<path d="M56 82 L53 107"/>
+<circle cx="52.8" cy="109.2" r="1.9" stroke-width="2"/>
+<path d="M76 82 L88 70 L100 56"/>
+<circle cx="101.4" cy="54.4" r="1.9" stroke-width="2"/>
+</g></svg>
