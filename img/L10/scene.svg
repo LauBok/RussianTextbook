@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M14 26 H62 V68 H14 Z"/>
+<path d="M18 30 H58 V64 H18 Z" stroke-width="1.5"/>
+<path d="M27 64 V52 H35 V64 M41 64 V50 H49 V64" stroke-width="1.5"/>
+<path d="M27 52 Q27 46 31 43 Q35 46 35 52 M41 50 Q41 43 45 39 Q49 43 49 50 M31 43 V40 M45 39 V35" stroke-width="1.5"/>
+<path d="M22 64 V56 H27 M49 56 H54 V64" stroke-width="1.5"/>
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+<use href="#wang-noarms" x="96" y="50" width="40" height="100"/>
+<path d="M106 80 L102 105"/>
+<circle cx="101.8" cy="107.2" r="1.9" stroke-width="2"/>
+<path d="M126 80 L142 70"/>
+<circle cx="143.6" cy="69" r="1.9" stroke-width="2"/>
+<g transform="rotate(-6 162 58)">
+<path d="M144 44 H180 V72 H144 Z" stroke-width="2.5"/>
+<path d="M156 70 V58 H168 V70 M156 63 H168" stroke-width="1.5"/>
+<path d="M157 58 L162 48 L167 58 M162 48 V46" stroke-width="1.5"/>
+<path d="M147 70 V64 H156 M168 64 H177 V70" stroke-width="1.5"/>
+</g>
+<path d="M184 112 H232"/>
+<path d="M188 112 V150 M228 112 V150"/>
+<path d="M195 112 Q191 102 197 97 Q194 91 200 87 Q206 91 203 97 Q209 102 205 112" stroke-width="2"/>
+<circle cx="200" cy="92.5" r="2.4" stroke-width="1.5"/>
+<path d="M196 104 Q200 107 204 104" stroke-width="1.5"/>
+<path d="M212 104 H229 V112 H212 Z M214 96 H227 V104 H214 Z" stroke-width="2"/>
+</g></svg>

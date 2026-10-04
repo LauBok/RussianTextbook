@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M6 40 H52 M6 64 H52" stroke-width="2"/>
+<path d="M92 40 H130 M92 64 H130" stroke-width="2"/>
+<path d="M10 39 Q10 31 18 31 Q26 31 26 39 M30 39 Q30 31 38 31 Q46 31 46 39" stroke-width="2"/>
+<path d="M12 63 Q8 57 16 56 H44 Q50 57 46 63 M20 57 L18 62 M28 57 L26 62 M36 57 L34 62" stroke-width="2"/>
+<path d="M96 39 V32 Q96 29 100 29 H110 Q114 29 114 32 V39 M116 39 V32 Q116 29 120 29 H124 Q128 29 128 32 V39" stroke-width="2"/>
+<path d="M96 63 Q92 57 100 56 H122 Q128 57 124 63 M104 57 L102 62 M112 57 L110 62 M120 57 L118 62" stroke-width="2"/>
+<circle cx="72" cy="73" r="8.4"/>
+<circle cx="68.8" cy="73.6" r="0.9" fill="#2b2b2b" stroke="none"/>
+<circle cx="75.2" cy="73.6" r="0.9" fill="#2b2b2b" stroke="none"/>
+<path d="M69.8 77.4 Q72 79 74.2 77.4" stroke-width="1.8"/>
+<path d="M64 70 H80 L80.8 60.6 H63.2 Z" stroke-width="2"/>
+<path d="M70.4 81.4 V84.4 M73.6 81.4 V84.4" stroke-width="2"/>
+<path d="M62.4 112 L62 88 Q63 84.6 72 84.6 Q81 84.6 82 88 L81.7 112"/>
+<path d="M62 88 L60 108 L70 104"/>
+<circle cx="72" cy="103.2" r="1.9" stroke-width="2"/>
+<path d="M82 88 L90 104 L100 98"/>
+<circle cx="101.9" cy="96.9" r="1.9" stroke-width="2"/>
+<path d="M14 112 H134 V150 M14 112 V150" stroke-width="3"/>
+<path d="M14 117 H134" stroke-width="1.5"/>
+<path d="M40 124 H108 V142 H40 Z" stroke-width="1.5"/>
+<path d="M108 111 V102 H130 V111 M108 106 H130" stroke-width="2"/>
+<path d="M106 102 Q119 97 132 102" stroke-width="2"/>
+<path d="M113 99 V94 M119 98 V93 M125 99 V94" stroke-width="1.5"/>
+<use href="#wang-noarms" x="150" y="52" width="40" height="100"/>
+<path d="M160 82 L140 86 L128 80"/>
+<circle cx="126" cy="79" r="1.9" stroke-width="2"/>
+<path d="M180 82 L194 100"/>
+<circle cx="195.4" cy="101.7" r="1.9" stroke-width="2"/>
+<path d="M192 78 Q192 74 196 74 Q200 74 200 78 V118 Q200 122 196 122 Q192 122 192 118 Z M192 86 L200 89 M192 96 L200 99 M192 106 L200 109" stroke-width="2"/>
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+</g></svg>

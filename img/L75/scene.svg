@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="s75c1"><rect x="35" y="63.56" width="50" height="40"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M14 150 L10 157 M74 150 L72 157 M134 150 L136 157 M194 150 L198 157" stroke-width="1.5"/>
+<path d="M4 48 V12 H70 V48" stroke-width="2"/>
+<path d="M16 20 H40 V36 H16 Z M16 20 L28 30 L40 20" stroke-width="1.5"/>
+<path d="M48 18 H62 V30 H48 Z M48 36 H62 V46 H48 Z" stroke-width="1.5"/>
+<path d="M152 48 V8 H236 V48" stroke-width="2"/>
+<path d="M196 16 H208 V22 H214 V34 H208 V40 H196 V34 H190 V22 H196 Z" stroke-width="2"/>
+<path d="M160 16 H176 V30 H160 Z M160 36 H176 V46 H160 Z M222 16 H230 V30 H222 Z" stroke-width="1.5"/>
+<path d="M98 150 V42" stroke-width="2.5"/>
+<path d="M92 14 H104 V42 H92 Z" stroke-width="2.5"/>
+<circle cx="98" cy="20" r="3" stroke-width="1.8"/>
+<circle cx="98" cy="28" r="3" stroke-width="1.8"/>
+<circle cx="98" cy="36" r="3" stroke-width="1.8"/>
+<path d="M92 150 H104" stroke-width="2.5"/>
+<g clip-path="url(#s75c1)"><use href="#wang-head" x="45" y="49.32" width="30" height="30"/></g>
+<path d="M51 60.36 C50 47.76 70 47.76 69 60.36"/>
+<path d="M50.4 60.36 H69.6 V63.56 H50.4 Z" stroke-width="2.5"/>
+<circle cx="60" cy="49.36" r="2.2" stroke-width="2"/>
+<path d="M54 60.96 V62.96 M58 60.96 V62.96 M62 60.96 V62.96 M66 60.96 V62.96" stroke-width="1.5"/>
+<path d="M50 81 Q50.8 77.6 60 77.6 Q69.2 77.6 70 81 L71.5 125 H48.5 Z"/>
+<path d="M60 78.6 V125" stroke-width="1.5"/>
+<path d="M52.6 111 H56.8 M63.2 111 H67.4" stroke-width="1.5"/>
+<path d="M54 125 V144 M66 125 V144"/>
+<path d="M50 149.6 V146.6 Q50 144 52.6 144 H57 V149.6 Z M70 149.6 V146.6 Q70 144 67.4 144 H63 V149.6 Z" stroke-width="2"/>
+<path d="M54.6 74.8 Q60 77.8 65.4 74.8 M53.8 77.8 Q60 81.2 66.2 77.8 M54.6 74.8 Q52.8 76.2 53.8 77.8 M65.4 74.8 Q67.2 76.2 66.2 77.8" stroke-width="2"/>
+<path d="M62.6 80.2 L63.6 90.6 H66.8 L65.4 79.4" stroke-width="2"/>
+<path d="M50 81 L47 102"/>
+<circle cx="46.69" cy="104.18" r="1.9" stroke-width="2"/>
+<path d="M70 81 L77 91 L82 87"/>
+<circle cx="83.72" cy="85.63" r="1.9" stroke-width="2"/>
+<circle cx="150" cy="64" r="8.2"/>
+<path d="M140.3 63 V53.8 Q150 49.8 159.7 53.8 V63"/>
+<path d="M140.3 62 H159.7" stroke-width="2.5"/>
+<path d="M140.3 63 V69 H143.3 V63 M159.7 63 V69 H156.7 V63" stroke-width="2"/>
+<circle cx="147" cy="64.8" r="0.95" fill="#2b2b2b" stroke="none"/>
+<circle cx="153" cy="64.8" r="0.95" fill="#2b2b2b" stroke="none"/>
+<path d="M148 68.2 Q150 69.8 152 68.2" stroke-width="1.8"/>
+<path d="M148.4 72 V76 M151.6 72 V76" stroke-width="2"/>
+<path d="M139 79.4 Q139.8 76 150 76 Q160.2 76 161 79.4 L161.5 124 H138.5 Z"/>
+<path d="M150 77 V124" stroke-width="1.5"/>
+<path d="M143 110 H147 M153 110 H157" stroke-width="1.5"/>
+<path d="M144 124 V145 M156 124 V145"/>
+<path d="M139 149.6 V147 Q139 144.4 142 144.4 H147.4 V149.6 Z M161 149.6 V147 Q161 144.4 158 144.4 H152.6 V149.6 Z" stroke-width="2"/>
+<path d="M140 72 Q150 78 160 72" stroke-width="2"/>
+<path d="M139 79.4 L125 81.4 L113 77.4"/>
+<circle cx="110.91" cy="76.7" r="1.9" stroke-width="2"/>
+<path d="M161 79.4 L164 101.4"/>
+<circle cx="164.3" cy="103.58" r="1.9" stroke-width="2"/>
+<path d="M108 76 L102 78 M108 82 L102 82" stroke-width="1.2"/>
+<circle cx="80" cy="10" r="1.1" stroke-width="1.5"/>
+<circle cx="120" cy="20" r="1.1" stroke-width="1.5"/>
+<circle cx="140" cy="54" r="1.1" stroke-width="1.5"/>
+<circle cx="180" cy="60" r="1.1" stroke-width="1.5"/>
+<circle cx="210" cy="58" r="1.1" stroke-width="1.5"/>
+<circle cx="20" cy="60" r="1.1" stroke-width="1.5"/>
+<circle cx="230" cy="80" r="1.1" stroke-width="1.5"/>
+<circle cx="16" cy="110" r="1.1" stroke-width="1.5"/>
+<circle cx="120" cy="120" r="1.1" stroke-width="1.5"/>
+<circle cx="226" cy="120" r="1.1" stroke-width="1.5"/>
+<circle cx="86" cy="60" r="1.1" stroke-width="1.5"/>
+</g></svg>
