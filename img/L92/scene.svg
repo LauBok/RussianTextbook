@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M26 150 L22 157 M110 150 L108 157 M168 150 L170 157 M226 150 L230 157" stroke-width="1.5"/>
+<path d="M58 18 L44 42 H51 L36 70 H44 L29 102 H87 L72 70 H80 L65 42 H72 Z" stroke-width="2.5"/>
+<path d="M58 6 L59.5 9.9 L63.7 10.1 L60.5 12.8 L61.5 16.9 L58 14.6 L54.5 16.9 L55.5 12.8 L52.3 10.1 L56.5 9.9 Z" stroke-width="1.8"/>
+<path d="M53 102 V116 M63 102 V116" stroke-width="2.5"/>
+<path d="M43 116 H73 L69 150 H47 Z" stroke-width="2.5"/>
+<path d="M45 126 H71" stroke-width="1.5"/>
+<path d="M49 38 Q58 43 67 36 M43 62 Q59 70 74 59 M36 92 Q57 100 81 88" stroke-width="1.5"/>
+<circle cx="58" cy="28" r="2.4" stroke-width="1.8"/>
+<circle cx="52" cy="51" r="2.6" stroke-width="1.8"/>
+<circle cx="66" cy="49" r="2.6" stroke-width="1.8"/>
+<circle cx="58" cy="78" r="2.8" stroke-width="1.8"/>
+<circle cx="70" cy="83" r="2.8" stroke-width="1.8"/>
+<circle cx="45" cy="84" r="2.8" stroke-width="1.8"/>
+<use href="#murka" x="3" y="121" width="40" height="30"/>
+<path d="M78 150 V132 H98 V150" stroke-width="2.5"/>
+<path d="M88 132 V150 M78 140 H98" stroke-width="1.5"/>
+<path d="M84 132 Q80 126 88 129 Q96 126 92 132" stroke-width="1.5"/>
+<use href="#misha-noarms" x="92" y="50" width="40" height="100"/>
+<path d="M103.6 99.4 L96 86 L100.6 69"/>
+<circle cx="101" cy="66.9" r="1.9" stroke-width="2"/>
+<path d="M120.4 99.4 L128 86 L123.4 69"/>
+<circle cx="123" cy="66.9" r="1.9" stroke-width="2"/>
+<path d="M102 52 H122 V66 H102 Z" stroke-width="2.5"/>
+<path d="M107 55.6 H117 Q120.6 55.6 120.6 60 Q120.6 63.4 118.2 62.6 L115.8 60.8 H108.2 L105.8 62.6 Q103.4 63.4 103.4 60 Q103.4 55.6 107 55.6 Z" stroke-width="1.5"/>
+<path d="M108.4 57 V59.6 M107.1 58.3 H109.7" stroke-width="1.2"/>
+<circle cx="115.8" cy="58.3" r="0.7" fill="#2b2b2b" stroke="none"/>
+<use href="#wang-noarms" x="142" y="50" width="40" height="100"/>
+<path d="M152 80 L149 105"/>
+<circle cx="148.8" cy="107.2" r="1.9" stroke-width="2"/>
+<path d="M172 80 L180.4 92.2"/>
+<circle cx="181.6" cy="93.8" r="1.9" stroke-width="2"/>
+<use href="#maria-noarms" x="190" y="50" width="40" height="100"/>
+<path d="M201 80 L193.4 92.2"/>
+<circle cx="192.2" cy="93.8" r="1.9" stroke-width="2"/>
+<path d="M219 80 L222 104"/>
+<circle cx="222.4" cy="106.2" r="1.9" stroke-width="2"/>
+<path d="M178.5 80 H195.5 V91.5 H178.5 Z" stroke-width="2.5"/>
+<path d="M187 80 V91.5" stroke-width="1.5"/>
+<path d="M187 80 Q182 74 185 73 Q187 73 187 80 Q192 74 189 73 Q187 73 187 80" stroke-width="1.5"/>
+<path d="M150 12 H186 V44 H150 Z" stroke-width="2.5"/>
+<path d="M168 12 V44 M150 28 H186" stroke-width="2"/>
+<path d="M150 40 Q159 36 168 39 Q177 36 186 39" stroke-width="1.5"/>
+<path d="M156 18 V22 M154 20 H158 M178 32 V35 M176.5 33.5 H179.5" stroke-width="1.2"/>
+</g></svg>

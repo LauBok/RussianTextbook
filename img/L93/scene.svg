@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="s93c"><rect x="0" y="0" width="240" height="111"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M8 10 H50 V48 H8 Z" stroke-width="2.5"/>
+<path d="M29 10 V48 M8 29 H50" stroke-width="2"/>
+<path d="M15 16 A5 5 0 1 0 20 23 A3.8 3.8 0 1 1 15 16 Z" stroke-width="1.5"/>
+<path d="M42 36 V40 M40 38 H44 M38 17 V20 M36.5 18.5 H39.5" stroke-width="1.2"/>
+<path d="M120 0 V26" stroke-width="2"/>
+<path d="M108 38 L114 26 H126 L132 38 Z" stroke-width="2.5"/>
+<path d="M117 41 Q120 44 123 41" stroke-width="1.5"/>
+<g clip-path="url(#s93c)">
+<use href="#ivan-noarms" x="10" y="60" width="40" height="100"/>
+<use href="#maria-noarms" x="52" y="62" width="40" height="100"/>
+<use href="#misha-noarms" x="96" y="46" width="40" height="100"/>
+<use href="#anna-noarms" x="140" y="58" width="40" height="100"/>
+<use href="#wang-noarms" x="184" y="60" width="40" height="100"/>
+</g>
+<path d="M18 87 L14 106"/>
+<circle cx="13.6" cy="108" r="1.9" stroke-width="2"/>
+<path d="M42 87 L50.5 78 L51 68"/>
+<circle cx="51.1" cy="65.9" r="1.9" stroke-width="2"/>
+<path d="M63 92 L60 106"/>
+<circle cx="59.6" cy="108" r="1.9" stroke-width="2"/>
+<path d="M81 92 L84 106"/>
+<circle cx="84.4" cy="108" r="1.9" stroke-width="2"/>
+<path d="M107.6 95.4 L104.6 106"/>
+<circle cx="104.2" cy="108" r="1.9" stroke-width="2"/>
+<path d="M124.4 95.4 L127.4 106"/>
+<circle cx="127.8" cy="108" r="1.9" stroke-width="2"/>
+<path d="M152 92 L149 106"/>
+<circle cx="148.6" cy="108" r="1.9" stroke-width="2"/>
+<path d="M168 92 L171 106"/>
+<circle cx="171.4" cy="108" r="1.9" stroke-width="2"/>
+<path d="M194 90 L191 106"/>
+<circle cx="190.6" cy="108" r="1.9" stroke-width="2"/>
+<path d="M214 90 L217 106"/>
+<circle cx="217.4" cy="108" r="1.9" stroke-width="2"/>
+<path d="M6 112 H234"/>
+<path d="M8 112 L10 126 Q20 130 30 126 Q40 130 50 126 Q60 130 70 126 Q80 130 90 126 Q100 130 110 126 Q120 130 130 126 Q140 130 150 126 Q160 130 170 126 Q180 130 190 126 Q200 130 210 126 Q220 130 230 126 L232 112" stroke-width="2"/>
+<path d="M18 129 V150 M222 129 V150" stroke-width="2.5"/>
+<path d="M89.5 100 H99.5 V108 Q99.5 111 96.5 111 H92.5 Q89.5 111 89.5 108 Z" stroke-width="2"/>
+<path d="M89.5 102.5 L86.5 99.5 M99.5 102.5 Q102.5 103 102 106.5 L99.5 107.5 M92 100 Q94.5 97 97 100" stroke-width="1.5"/>
+<path d="M132 104 H146 Q145 111 139 111 Q133 111 132 104 Z" stroke-width="2"/>
+<path d="M134.5 104 Q136 101 138 103 Q140 100.5 142 103 Q144 101 144.5 104" stroke-width="1.5"/>
+<path d="M176 102 H188 V111 H176 Z M176 106 H188" stroke-width="2"/>
+<path d="M182 102 V98.5" stroke-width="1.5"/>
+<path d="M54 104 H61 V111 H54 Z" stroke-width="1.8" transform="translate(-10 0)"/>
+<path d="M51 106 Q49 107.5 51 109" stroke-width="1.5" transform="translate(-6.5 0)"/>
+<path d="M223 104 H230 V111 H223 Z" stroke-width="1.8"/>
+</g></svg>
