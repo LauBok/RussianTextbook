@@ -1,0 +1,395 @@
+<title>{{TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap">
+<style>
+/* 布局：与印刷版同一版式的单栏课本页，A4 正文宽度约 680px，手机全宽 */
+:root {
+  --paper: #ffffff;
+  --ink: #1f1f1f;
+  --muted: #6b6b6b;
+  --accent: #8a2b2b;
+  --rule: #d9cfc4;
+  --tint: #f6f1ea;
+  --good: #2e6f4c;
+  --bad: #a8332a;
+  --serif: "PT Serif", "Noto Serif SC", "Songti SC", serif;
+  --sans: "PT Sans", "Noto Sans SC", "PingFang SC", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #18181a; --ink: #e9e6e1; --muted: #a29d96; --accent: #e09088;
+    --rule: #3a3633; --tint: #24211f; --good: #7fc49c; --bad: #ee8b80; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #18181a; --ink: #e9e6e1; --muted: #a29d96; --accent: #e09088;
+  --rule: #3a3633; --tint: #24211f; --good: #7fc49c; --bad: #ee8b80; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.65; padding-inline: 18px; padding-block: 0 56px; }
+em, i { font-style: normal; }   /* 汉字不用斜体 */
+.page { max-width: 680px; margin: 0 auto; }
+p { margin: 0 0 .55em; }
+
+/* 课头 */
+.lesson-head { padding-block: 26px 12px; }
+.tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; background: var(--paper); border-bottom: 2px solid var(--accent); margin-bottom: 4px; }
+.tabs button { flex: 1; font: 700 16px var(--sans); padding: 10px 0 8px; border: 0; background: transparent; color: var(--muted); cursor: pointer; border-bottom: 4px solid transparent; margin-bottom: -2px; }
+.tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+#pane-ex .score { margin-top: 18px; }
+.running { font: 13px var(--sans); color: var(--muted); }
+.lesson-no { margin-top: 14px; font: 700 15px var(--sans); color: var(--accent); }
+h1 { font-size: 36px; line-height: 1.15; margin: 2px 0; font-weight: 700; text-wrap: balance; }
+.subtitle { font: 15px var(--sans); color: var(--muted); }
+
+/* 部分标题 */
+h2 { font: 700 17px var(--sans); color: var(--accent); margin: 30px 0 10px; padding-left: 10px; border-left: 5px solid var(--accent); scroll-margin-top: 12px; }
+h3 { font: 700 15px var(--sans); margin: 16px 0 6px; }
+
+/* 课前问题 */
+.question { background: var(--tint); padding: 10px 14px; border-radius: 4px; }
+.question p { margin: 0; }
+.question .ru { font-size: 17px; font-weight: 700; }
+
+/* 课文对话 */
+.dialogue p { padding-left: 7.4em; text-indent: -7.4em; margin: 0 0 3px; font-size: 18px; line-height: 1.55; }
+.dialogue .sp { display: inline-block; width: 7.4em; text-indent: 0; font-weight: 700; color: var(--accent); }
+.dialogue .sp::after { content: ":"; }
+
+/* 表格 */
+table { border-collapse: collapse; width: 100%; margin: 4px 0 10px; font-size: 15px; }
+th { font: 700 13px var(--sans); text-align: left; color: var(--muted); border-bottom: 1.5px solid var(--ink); padding: 5px 8px; }
+td { border-bottom: 1px solid var(--rule); padding: 6px 8px; vertical-align: top; }
+.vocab td:first-child { font-size: 17px; font-weight: 700; width: 36%; }
+.vocab td:nth-child(2) { color: var(--muted); width: 26%; }
+.tr { font-weight: 400; font-size: 14px; color: var(--muted); }
+.names { font-size: 14px; color: var(--muted); margin-top: 6px; }
+.names .ru { color: var(--ink); }
+
+/* 注释、例句 */
+.notes ol { padding-left: 22px; margin: 0; }
+.notes li { margin-bottom: 6px; }
+.ex { margin: 4px 0 10px 16px; }
+.ex p { margin: 0 0 2px; font-size: 17px; }
+.gloss { color: var(--muted); margin-left: 10px; font-size: 15px; }
+.ic { font-weight: 700; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.ic::after { content: attr(data-n); font: 700 10px var(--sans); color: var(--accent); vertical-align: super; margin-left: 1px; }
+
+/* 参考译文 */
+.translation p { padding-left: 3.8em; text-indent: -3.8em; margin: 0 0 2px; }
+.translation .sp { display: inline-block; width: 3.8em; text-indent: 0; font-weight: 700; }
+.translation .sp::after { content: "："; }
+
+/* 练习：沿用印刷版的题目样式，作答控件做成书上的横线和小按钮 */
+.score { display: flex; align-items: baseline; gap: 18px; font: 14px var(--sans); color: var(--muted); padding: 2px 0 6px; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+.score b { color: var(--ink); }
+.score .reset { margin-left: auto; }
+.task { font-weight: 700; margin: 18px 0 6px; }
+.item { padding: 10px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+.num { font: 15px var(--serif); color: var(--muted); font-variant-numeric: tabular-nums; margin-right: 8px; }
+.stem, .cue { font-size: 18px; }
+.zhq { font-size: 16px; }
+.gap { display: inline-block; min-width: 3.4em; border-bottom: 1px solid var(--ink); text-align: center; color: var(--accent); font-weight: 700; }
+.opts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.opt, .btn { font: 15px var(--serif); padding: 3px 12px; border: 1px solid var(--rule); border-radius: 3px; background: transparent; color: var(--ink); cursor: pointer; }
+.btn { font: 700 13px var(--sans); color: var(--accent); border-color: var(--accent); padding: 4px 12px; }
+.btn:disabled { opacity: .5; cursor: default; }
+.opt[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.opt.right { border-color: var(--good); color: var(--good); font-weight: 700; }
+.opt.wrong { border-color: var(--bad); color: var(--bad); text-decoration: line-through; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.answer-row { display: flex; align-items: flex-end; gap: 10px; margin-top: 6px; }
+.answer-row input, .item textarea { flex: 1; min-width: 0; font: 17px var(--serif); padding: 4px 2px; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; background: transparent; color: var(--ink); }
+.item textarea { display: block; min-height: 2.2em; resize: vertical; margin: 0; }
+.answer-row .btn { flex: 0 0 auto; }
+.item.ok .num { color: var(--good); font-weight: 700; }
+.item.no .num { color: var(--bad); font-weight: 700; }
+.fb { font: 14px var(--sans); margin-top: 5px; line-height: 1.55; }
+.fb.ok { color: var(--good); }
+.fb.no { color: var(--bad); }
+.fb .ru { font: 16px var(--serif); color: var(--ink); }
+.fb ul { margin: 4px 0 0; padding-left: 18px; color: var(--ink); }
+.why { font-size: 14px; color: var(--muted); margin: 8px 0 4px; }
+.example { color: var(--muted); margin: 0 0 4px; }
+.pics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 12px; }
+.pics .item { text-align: center; border-bottom: 0; padding: 6px 0 14px; }
+.pics .num { display: block; margin: 0; }
+.pic svg { width: 76px; height: 76px; display: block; margin: 0 auto 4px; }
+.pic svg g { stroke: var(--ink); }
+.pic svg [fill="#2b2b2b"] { fill: var(--ink); }
+.pic .opts { justify-content: center; }
+.pic .opt { font-size: 14px; padding: 2px 6px; }
+.pic .answer-row { gap: 6px; }
+.pic .answer-row input { font-size: 16px; }
+.pic .btn { padding: 4px 8px; }
+.pic .fb { text-align: left; }
+.ai-note { font: 13px var(--sans); color: var(--muted); margin-top: 18px; }
+@media (max-width: 480px) {
+  h1 { font-size: 32px; }
+  .dialogue p { padding-left: 88px; text-indent: -88px; font-size: 17px; margin-bottom: 4px; }
+  .dialogue .sp { width: 88px; font-size: 15px; }
+  .pics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+</style>
+
+<div class="page">
+  <header class="lesson-head">
+    <div class="running" id="running"></div>
+    <div class="lesson-no" id="lno"></div>
+    <h1 lang="ru" id="title"></h1>
+    <div class="subtitle" id="sub"></div>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="本课内容">
+    <button id="tab-text" role="tab" aria-selected="true" aria-controls="pane-text">教材</button>
+    <button id="tab-ex" role="tab" aria-selected="false" aria-controls="pane-ex">练习</button>
+  </nav>
+  <section id="pane-text" role="tabpanel" aria-labelledby="tab-text">
+<!--TEXT_HTML-->
+  </section>
+  <section id="pane-ex" role="tabpanel" aria-labelledby="tab-ex" hidden>
+<!--EX_HTML-->
+  </section>
+</div>
+
+<script>
+const DATA = /*LESSON_DATA*/null;
+const NUM = "一二三四五六七八九十";
+const $ = (id) => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const ru = (tag, cls, text) => { const e = el(tag, cls, text); e.lang = "ru"; return e; };
+let saved = {};
+function save() {}
+
+/* ---------- 答案比对：忽略重音、ё/е、大小写和标点 ---------- */
+const LATIN = /[a-z]/i;
+function norm(s) {
+  return s.normalize("NFD").replace(/\u0301/g, "").normalize("NFC")
+    .toLowerCase().replace(/ё/g, "е")
+    .replace(/[.,!?;:—–\-«»"„“”()…]/g, " ").replace(/\s+/g, " ").trim();
+}
+const same = (a, list) => list.some((x) => norm(x) === norm(a));
+
+/* ---------- 课头与目录 ---------- */
+$("running").textContent = DATA.book + " · " + DATA.unit;
+$("lno").textContent = "第 " + DATA.lesson + " 课";
+$("title").textContent = DATA.title;
+$("sub").textContent = DATA.subtitle;
+
+/* ---------- 教材 / 练习 两个标签 ---------- */
+function show(which) {
+  const ex = which === "ex";
+  $("tab-text").setAttribute("aria-selected", String(!ex));
+  $("tab-ex").setAttribute("aria-selected", String(ex));
+  $("pane-text").hidden = ex;
+  $("pane-ex").hidden = !ex;
+  window.scrollTo(0, 0);
+}
+$("tab-text").onclick = () => show("text");
+$("tab-ex").onclick = () => show("ex");
+if (location.hash === "#ex") show("ex");
+
+/* ---------- 练习 ---------- */
+let total = 0;
+const results = saved.results || {};
+function mark(id, ok) { results[id] = ok; saved.results = results; save(); updateScore(); }
+function updateScore() {
+  const done = Object.keys(results).length;
+  const right = Object.values(results).filter((v) => v === true).length;
+  const s = $("score"); s.textContent = "";
+  const a = el("span"); a.append("已做 ", el("b", null, done + " / " + total));
+  const b = el("span"); b.append("答对 ", el("b", null, String(right)));
+  const reset = el("button", "btn reset", "重做");
+  reset.onclick = () => location.reload();
+  s.append(a, b, reset);
+}
+function feedback(box, ok, correctText, extra) {
+  box.textContent = "";
+  box.className = "fb " + (ok ? "ok" : "no");
+  box.append(ok ? "正确。" : "不对。");
+  if (!ok && correctText) { box.append(" 正确答案："); box.append(ru("span", "ru", correctText)); }
+  if (extra) { box.append(el("br")); box.append(extra); }
+}
+function latinWarn(v) { return LATIN.test(v) ? "答案里有拉丁字母，请切换到俄语键盘再输入。" : null; }
+
+const exWrap = $("exercises");
+DATA.exercises.forEach((ex, n) => {
+  const sec = el("div", "exset");
+  sec.append(el("p", "task", NUM[n] + "、" + ex.task));
+  const why = el("div", "why", "解析：" + ex.why); why.hidden = true;
+  const itemIds = [];
+  const maybeWhy = () => { if (itemIds.every((id) => id in results)) why.hidden = false; };
+
+  if (ex.type === "picture_qa") {
+    const grid = el("div", "pics");
+    ex.items.forEach((it, i) => {
+      const id = ex.id + "-" + i; itemIds.push(id); total++;
+      const card = el("div", "item pic");
+      card.innerHTML = it.svg;
+      card.prepend(el("span", "num", String(i + 1)));
+      let q = null;
+      const opts = el("div", "opts");
+      ["Кто э́то?", "Что э́то?"].forEach((label) => {
+        const b = ru("button", "opt", label);
+        b.onclick = () => { q = label.split(" ")[0]; opts.querySelectorAll(".opt").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); };
+        opts.append(b);
+      });
+      const row = el("div", "answer-row");
+      const inp = ru("input"); inp.id = "in-" + id; inp.placeholder = "Э́то …"; inp.autocapitalize = "sentences";
+      const go = el("button", "btn", "检查");
+      row.append(inp, go);
+      const fb = el("div", "fb");
+      go.onclick = () => {
+        const warn = latinWarn(inp.value); if (warn) { fb.className = "fb no"; fb.textContent = warn; return; }
+        if (!q) { fb.className = "fb no"; fb.textContent = "先选择问句：Кто э́то? 还是 Что э́то?"; return; }
+        const ok = norm(q) === norm(it.qword) && same(inp.value, it.answer);
+        card.classList.toggle("ok", ok); card.classList.toggle("no", !ok);
+        feedback(fb, ok, "— " + it.qword + " э́то? — " + it.answer[0]);
+        mark(id, ok); maybeWhy();
+      };
+      card.append(opts, row, fb);
+      grid.append(card);
+    });
+    sec.append(grid);
+  }
+
+  if (ex.type === "choice") {
+    ex.items.forEach((it, i) => {
+      const id = ex.id + "-" + i; itemIds.push(id); total++;
+      const card = el("div", "item");
+      const stem = ru("div", "stem");
+      stem.append(el("span", "num", String(i + 1)));
+      const [pre, post] = it.stem.split("___");
+      const gap = el("span", "gap", " ");
+      stem.append(pre, gap, post);
+      const opts = el("div", "opts");
+      const fb = el("div", "fb");
+      it.options.forEach((o) => {
+        const b = ru("button", "opt", o);
+        b.onclick = () => {
+          if (id in results) return;
+          const ok = o === it.answer;
+          gap.textContent = o;
+          b.classList.add(ok ? "right" : "wrong");
+          if (!ok) opts.querySelectorAll(".opt").forEach((x) => { if (x.textContent === it.answer) x.classList.add("right"); });
+          card.classList.add(ok ? "ok" : "no");
+          feedback(fb, ok, it.answer);
+          mark(id, ok); maybeWhy();
+        };
+        opts.append(b);
+      });
+      card.append(stem, opts, fb);
+      sec.append(card);
+    });
+  }
+
+  if (ex.type === "rewrite") {
+    if (ex.example) {
+      const e = el("div", "example"); e.append("例：", ru("span", "ru", ex.example.cue + " → " + ex.example.answer));
+      sec.append(e);
+    }
+    ex.items.forEach((it, i) => {
+      const id = ex.id + "-" + i; itemIds.push(id); total++;
+      const card = el("div", "item");
+      const cue = ru("div", "cue"); cue.append(el("span", "num", String(i + 1)), it.cue);
+      const row = el("div", "answer-row");
+      const inp = ru("input"); inp.id = "in-" + id; inp.placeholder = "Э́то не … Э́то …";
+      const go = el("button", "btn", "检查");
+      row.append(inp, go);
+      const fb = el("div", "fb");
+      go.onclick = () => {
+        const warn = latinWarn(inp.value); if (warn) { fb.className = "fb no"; fb.textContent = warn; return; }
+        const ok = same(inp.value, it.accept);
+        card.classList.toggle("ok", ok); card.classList.toggle("no", !ok);
+        feedback(fb, ok, it.accept[0]);
+        mark(id, ok); maybeWhy();
+      };
+      card.append(cue, row, fb);
+      sec.append(card);
+    });
+  }
+
+  if (ex.type === "translate") {
+    ex.items.forEach((it, i) => {
+      const id = ex.id + "-" + i; itemIds.push(id); total++;
+      const card = el("div", "item");
+      const q = el("div", "zhq"); q.append(el("span", "num", String(i + 1)), it.zh);
+      const ta = ru("textarea"); ta.id = "in-" + id; ta.placeholder = "用俄语写出译文";
+      const go = el("button", "btn", "批改");
+      const row = el("div", "answer-row"); row.append(ta, go);
+      const fb = el("div", "fb");
+      go.onclick = () => grade(it, ta, go, fb, card, id, maybeWhy);
+      card.append(q, row, fb);
+      sec.append(card);
+    });
+  }
+
+  sec.append(why);
+  exWrap.append(sec);
+  maybeWhy();
+});
+updateScore();
+
+/* ---------- 翻译题：先比对参考译文，不一致再交给 Claude ---------- */
+let samplePromise = (window.claude && window.claude.use) ? window.claude.use("sample") : Promise.resolve(null);
+let sampleOff = false;
+function showRefs(fb, it, lead) {
+  fb.className = "fb no"; fb.textContent = lead;
+  const ul = el("ul");
+  it.accept.forEach((a) => ul.append(ru("li", "ru", a)));
+  fb.append(ul);
+}
+async function grade(it, ta, go, fb, card, id, maybeWhy) {
+  const ans = ta.value.trim();
+  if (!ans) { fb.className = "fb no"; fb.textContent = "先写出译文。"; return; }
+  const warn = latinWarn(ans); if (warn) { fb.className = "fb no"; fb.textContent = warn; return; }
+  if (same(ans, it.accept)) {
+    card.classList.add("ok"); card.classList.remove("no");
+    feedback(fb, true, null, it.accept.length > 1 ? "其他正确译法：" + it.accept.filter((a) => norm(a) !== norm(ans)).join("　") : null);
+    mark(id, true); maybeWhy(); return;
+  }
+  const sample = await samplePromise;
+  if (!sample || sampleOff) { showRefs(fb, it, "和参考译文不一致，请对照："); mark(id, false); maybeWhy(); return; }
+  go.disabled = true; fb.className = "fb"; fb.textContent = "批改中……";
+  const prompt = [
+    "你是俄语老师，正在批改零基础中国学生的第一课翻译作业。只依据下面的信息判断，用简体中文回答。",
+    "本课学过的语法：э́то 句型（这是……）；кто 问人和动物，что 问事物；否定词 не；连词 а。",
+    "原句：" + it.zh,
+    "参考译文（任何一个都完全正确）：" + it.accept.join(" | "),
+    "判卷要点：" + it.rubric.join("；"),
+    "学生译文：" + ans,
+    "判断时忽略重音符号、ё/е、大小写、标点和破折号的差别。意思和语法都对，只是说法与参考译文不同，也算正确。",
+    '只回复一个 JSON 对象：{"verdict": "correct" 或 "wrong", "issues": [{"wrong": 学生写错的那部分原文, "fix": 改正后的写法, "reason": 一句话说明原因}], "corrected": 改正后的完整译文（正确时为空字符串）}。没有错误时 issues 为空数组。',
+  ].join("\n");
+  try {
+    const r = await sample.json(prompt);
+    const ok = r && r.verdict === "correct";
+    card.classList.toggle("ok", ok); card.classList.toggle("no", !ok);
+    fb.textContent = ""; fb.className = "fb " + (ok ? "ok" : "no");
+    fb.append(ok ? "正确。" : "有错误。");
+    if (Array.isArray(r.issues) && r.issues.length) {
+      const ul = el("ul");
+      r.issues.forEach((x) => {
+        const li = el("li");
+        li.append(ru("span", "ru", String(x.wrong || "")), " → ", ru("span", "ru", String(x.fix || "")), "：" + String(x.reason || ""));
+        ul.append(li);
+      });
+      fb.append(ul);
+    }
+    if (!ok && r.corrected) { fb.append("改正后："); fb.append(ru("span", "ru", String(r.corrected))); }
+    fb.append(el("br"), "参考译文：" + it.accept[0]);
+    mark(id, ok); maybeWhy();
+  } catch (e) {
+    if (e && (e.code === "not_granted" || e.code === "sampling_disabled" || e.code === "not_declared" || e.code === "capability_disabled")) {
+      sampleOff = true;
+      showRefs(fb, it, "没有使用 Claude 批改。请对照参考译文：");
+      mark(id, false); maybeWhy();
+    } else if (e && e.code === "rate_limited") {
+      fb.className = "fb no"; fb.textContent = "批改请求太频繁，请稍后再点“批改”。";
+    } else {
+      fb.className = "fb no"; fb.textContent = "批改没有完成，请再点一次“批改”。";
+    }
+  } finally { go.disabled = false; }
+}
+</script>

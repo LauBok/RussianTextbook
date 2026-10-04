@@ -1,0 +1,4 @@
+build/
+audio/
+web/L*.html
+__pycache__/
