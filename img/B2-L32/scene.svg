@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M30 150 L26 157 M90 150 L88 157 M150 150 L152 157 M210 150 L214 157" stroke-width="1.5"/>
+<use href="#anna" x="4" y="50" width="40" height="100"/>
+<use href="#wang-noarms" x="46" y="50" width="40" height="100"/>
+<path d="M56 80 L60 92 L68 86"/>
+<path d="M76 80 L78 90 L72 86"/>
+<path d="M64 80 H80 V90 H64 Z" stroke-width="2.5"/>
+<circle cx="72" cy="85" r="3" stroke-width="2"/>
+<path d="M66 80 V78 H70 V80" stroke-width="1.5"/>
+<use href="#misha-noarms" x="104" y="58" width="36" height="92"/>
+<path d="M113 85 L110 104"/>
+<circle cx="109.7" cy="106" r="1.9" stroke-width="2"/>
+<path d="M131 85 L142 92 L150 88"/>
+<path d="M149 89 L160 80" stroke-width="2"/>
+<path d="M160 80 L163 77" stroke-width="3"/>
+<path d="M184 52 V62 M174 112 L168 150 M194 112 L200 150 M184 112 V150" stroke-width="2.5"/>
+<path d="M166 112 H202" stroke-width="2.5"/>
+<path d="M168 112 V62 H200 V112 Z" stroke-width="2.5"/>
+<path d="M176 92 V78 Q184 66 192 78 V92" stroke-width="2"/>
+<circle cx="184" cy="78" r="5" stroke-width="1.5"/>
+<path d="M180 92 V106 M188 92 V106" stroke-width="1.5"/>
+<path d="M206 70 H238" stroke-width="2.5"/>
+<path d="M210 70 V62 H218 V70 M222 70 V60 H230 V70" stroke-width="2"/>
+<ellipse cx="214" cy="104" rx="4" ry="5" stroke-width="2"/>
+<ellipse cx="224" cy="104" rx="4" ry="5" stroke-width="2"/>
+<path d="M206 110 H238" stroke-width="2.5"/>
+<path d="M232 110 V100 L236 96" stroke-width="1.5"/>
+</g></svg>
