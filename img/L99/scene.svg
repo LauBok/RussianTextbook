@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="s99c"><rect x="0" y="0" width="240" height="119"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 14 H238" stroke-width="2.5"/>
+<path d="M2 20 H238" stroke-width="1.5"/>
+<path d="M60 20 V14 M120 20 V14 M180 20 V14" stroke-width="1.5"/>
+<path d="M30 30 H62 Q76 30 76 46 V90 Q76 106 62 106 H30 Q16 106 16 90 V46 Q16 30 30 30 Z" stroke-width="2.5"/>
+<path d="M33 36 H59 Q70 36 70 48 V88 Q70 100 59 100 H33 Q22 100 22 88 V48 Q22 36 33 36 Z" stroke-width="1.5"/>
+<path d="M28 50 Q31 45 36 47 Q39 43 44 46 Q48 46 47 50 Z M50 62 Q53 58 57 60 Q60 57 63 60 Q66 60 65 64 Z" stroke-width="1.5"/>
+<path d="M22 78 Q34 72 46 76 Q58 72 70 76" stroke-width="1.5"/>
+<path d="M27 88 L30 82 L33 88 M38 90 L41 84 L44 90 M53 87 L56 81 L59 87" stroke-width="1.5"/>
+<path d="M80 150 V118 H92" stroke-width="2.5"/>
+<path d="M92 150 V60 Q92 50 102 50 H128 Q138 50 138 60 V150" stroke-width="2.5"/>
+<g clip-path="url(#s99c)">
+<use href="#wang-noarms" x="95" y="56" width="40" height="100"/>
+</g>
+<path d="M98 119 H132" stroke-width="2.5"/>
+<path d="M106 119 V146 M124 119 V146"/>
+<path d="M101 149.6 V147 Q101 145 103.6 145 H110 V149.6 Z M129 149.6 V147 Q129 145 126.4 145 H120 V149.6 Z" stroke-width="2"/>
+<path d="M115 121 V146" stroke-width="1.5"/>
+<path d="M105 86 L95.6 107"/>
+<circle cx="94.8" cy="109" r="1.9" stroke-width="2"/>
+<path d="M125 86 L140 95 L146.4 88"/>
+<circle cx="147.8" cy="86.6" r="1.9" stroke-width="2"/>
+<path d="M146 64 H182 V92 H146 Z" stroke-width="2.5"/>
+<path d="M156 70 L150 82 H162 Z M156 82 V86" stroke-width="1.5"/>
+<circle cx="171" cy="80" r="4" stroke-width="1.5"/>
+<path d="M167.6 77.8 L167.4 73.6 L170 76.2 M172 76.2 L174.6 73.6 L174.4 77.8" stroke-width="1.2"/>
+<path d="M164 84 H178 M171 84 V89" stroke-width="1.2"/>
+<circle cx="176" cy="69.5" r="2.4" stroke-width="1.2"/>
+<path d="M2 150 H238"/>
+<path d="M150 150 V100 Q150 92 158 92 H184 Q192 92 192 100 V150 M196 150 V100 Q196 92 204 92 H230 Q238 92 238 100 V150" stroke-width="2"/>
+</g></svg>

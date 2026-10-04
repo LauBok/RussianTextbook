@@ -22,9 +22,9 @@
 <path d="M140 96 Q139 94 140 92 M143 96 Q142 94 143 92" stroke-width="1.2"/>
 <path d="M101 88 L95 101 L88 103"/>
 <circle cx="86" cy="103.2" r="1.9" stroke-width="2"/>
-<path d="M72 111 H90" stroke-width="1.5"/>
-<path d="M74 109.4 H90 V105.6 H74 Z" stroke-width="1.8"/>
-<circle cx="78" cy="103.2" r="2.4" stroke-width="1.5"/><circle cx="85.4" cy="103.2" r="2.4" stroke-width="1.5"/>
+<path d="M66 111 H86" stroke-width="1.5"/>
+<path d="M68 109.4 H84 V105.6 H68 Z" stroke-width="1.8"/>
+<circle cx="72" cy="103.2" r="2.4" stroke-width="1.5"/><circle cx="79.4" cy="103.2" r="2.4" stroke-width="1.5"/>
 <path d="M150 111 L156 104 H170 L164 111 Z M152 108.4 H166" stroke-width="1.8"/>
 <path d="M66 112 H178"/>
 <path d="M70 112 V150 M174 112 V150"/>
