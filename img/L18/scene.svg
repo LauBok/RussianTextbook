@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="L18-k1"><path d="M-60 -60 L300 -60 L300 118 L-60 118 Z"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+<path d="M160 10 H230 V70 H160 Z" stroke-width="2.5"/>
+<path d="M195 10 V70 M160 34 H230" stroke-width="2"/>
+<path d="M157 72 H233" stroke-width="2.5"/>
+<path d="M166 70 V40 H184 V70 M188 70 V28 H210 V70 M214 70 V46 H226 V70" stroke-width="1.5"/>
+<path d="M170 46 H174 M178 46 H180 M170 56 H174 M192 34 H196 M202 34 H206 M192 46 H196 M202 46 H206 M192 58 H196" stroke-width="1.5"/>
+<path d="M195 10 V70 M160 34 H230" stroke-width="2"/>
+<path d="M18 14 H52 V42 H18 Z" stroke-width="2"/>
+<path d="M24 38 Q24 30 29 30 Q34 30 34 38 M36 38 Q36 30 41 30 Q46 30 46 38" stroke-width="1.5"/>
+<circle cx="29" cy="25" r="3.2" stroke-width="1.5"/>
+<circle cx="41" cy="25" r="3.2" stroke-width="1.5"/>
+<g clip-path="url(#L18-k1)"><use href="#wang-noarms" x="80" y="58" width="40" height="100"/></g>
+<path d="M84 115 L88 105 L112 107 L110 115" stroke-width="2"/>
+<path d="M92 109 H104 M92 112 H106" stroke-width="1"/>
+<path d="M90 88 L86 108 L94 112"/>
+<circle cx="95.97" cy="112.98" r="1.9" stroke-width="2"/>
+<path d="M110 88 L114 106 L106 110"/>
+<circle cx="104.03" cy="110.98" r="1.9" stroke-width="2"/>
+<path d="M107 113 L113 104" stroke-width="1.5"/>
+<path d="M128 115 H150 V102 H128 Z M128 102 L139 109 L150 102" stroke-width="1.8"/>
+<path d="M144 104 H148 V108 H144" stroke-width="1.2"/>
+<path d="M60 116 H72 M66 116 V98 L74 90 M70 88 L84 86 L80 98 Z" stroke-width="2"/>
+<path d="M50 116 H170" stroke-width="3"/>
+<path d="M54 116 V150 M166 116 V150" stroke-width="2.5"/>
+<path d="M54 120 V142 H84 V120 M54 131 H84 M66 125.5 H72 M66 136.5 H72" stroke-width="2"/>
+<path d="M210 128 H230 V150 M210 128 V150 M210 139 H230" stroke-width="2"/>
+</g></svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="L17-k1"><path d="M-60 -60 L300 -60 L300 220 L-60 220 Z M172 50 L210 50 L210 150 L172 150 Z" clip-rule="evenodd"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M110 156 L112 152 L114 156 M118 157 L120 153" stroke-width="1.5"/>
+<g clip-path="url(#L17-k1)"><path d="M158 150 V84 H236 V150" stroke-width="2.5"/>
+<path d="M152 86 L197 52 L240 86" stroke-width="2.5"/>
+<path d="M187 68 H207 V80 H187 Z M197 68 V80" stroke-width="2"/>
+<path d="M158 100 H236 M158 116 H236 M158 132 H236" stroke-width="1.2"/>
+<path d="M214 150 V104 H232 V150" stroke-width="2"/></g>
+<use href="#babushka" x="172" y="50" width="40" height="100"/>
+<path d="M152 150 H240 M156 146 H236" stroke-width="2"/>
+<path d="M80 150 Q90 144 100 150 M104 150 Q114 144 124 150" stroke-width="2"/>
+<path d="M86 146 L84 140 M90 145 L92 139 M110 146 L108 140 M114 145 L116 139" stroke-width="1.5"/>
+<use href="#ivan-noarms" x="6" y="50" width="40" height="100"/>
+<path d="M46 96 L56 150 M50 150 H62 L60 158 H54" stroke-width="2.5"/>
+<path d="M14 77 L12 94 L46 98"/>
+<circle cx="48.18" cy="98.26" r="1.9" stroke-width="2"/>
+<path d="M38 77 L44 88 L46 102"/>
+<circle cx="46.31" cy="104.18" r="1.9" stroke-width="2"/>
+<use href="#misha-noarms" x="112" y="50" width="40" height="100"/>
+<path d="M140.4 99.4 L143 119"/>
+<circle cx="143.29" cy="121.18" r="1.9" stroke-width="2"/>
+<path d="M123.6 99.4 L116 112 L110 118"/>
+<circle cx="109" cy="120" r="1.9" stroke-width="2"/>
+<path d="M100 130 H116 L115 146 H101 Z M100 130 Q108 118 116 130 M100 136 L88 126 M85 124 L90 128" stroke-width="2"/>
+<path d="M85 130 L84 136 M88 131 L88 138 M91 132 L92 138" stroke-width="1.2"/>
+<path d="M60 20 Q62.4 14 68.4 15.2 Q72 10.4 78 14 Q84 12.8 84 18.8 Z" stroke-width="1.5"/>
+<path d="M120 18 A7 7 0 1 0 120.1 18" stroke-width="2"/>
+<path d="M120 6 V3 M132 18 H135 M128.5 9.5 L130.5 7.5 M108 18 H105" stroke-width="1.5"/>
+</g></svg>
