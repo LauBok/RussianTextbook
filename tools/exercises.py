@@ -13,7 +13,23 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-NUM = "一二三四五六七八九十"
+DIGITS = "零一二三四五六七八九"
+
+
+def zh_num(n):
+    """1 → 一，10 → 十，12 → 十二，20 → 二十（练习序号用）。"""
+    if n < 10:
+        return DIGITS[n]
+    tens, ones = divmod(n, 10)
+    return ("" if tens == 1 else DIGITS[tens]) + "十" + (DIGITS[ones] if ones else "")
+
+
+class _Num:
+    def __getitem__(self, i):      # NUM[0] → 一（练习从 0 开始编号）
+        return zh_num(i + 1)
+
+
+NUM = _Num()
 
 
 IPA = re.compile(r"\[[^\[\]\u0400-\u04ff\d]+\](?!\{)")
