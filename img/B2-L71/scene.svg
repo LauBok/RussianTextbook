@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M136 40 H234 M136 76 H234" stroke-width="2.5"/>
+<path d="M144 40 Q140 32 144 26 Q141 20 146 16 Q151 20 148 26 Q152 32 148 40 Z M156 40 Q153 34 156 29 Q154 25 158 22 Q162 25 160 29 Q163 34 160 40 Z M167 40 Q165 36 167 33 Q166 30 169 28 Q172 30 171 33 Q173 36 171 40 Z" stroke-width="1.5"/>
+<path d="M144 24 Q146 26 148 24 M156 27 Q158 29 160 27" stroke-width="1.2"/>
+<path d="M186 40 V28 H200 V40 M200 31 Q206 31 206 34 Q206 38 200 37 M212 40 V28 H226 V40 M226 31 Q232 31 232 34 Q232 38 226 37" stroke-width="1.5"/>
+<path d="M190 34 Q193 31 196 34 M216 34 Q219 31 222 34" stroke-width="1.2"/>
+<path d="M146 76 L152 56 M152 56 Q156 50 158 56 Q156 60 152 56 M162 76 L168 56 M168 56 Q172 50 174 56 Q172 60 168 56 M178 76 L184 56 M184 56 Q188 50 190 56 Q188 60 184 56" stroke-width="1.5"/>
+<path d="M204 76 Q204 62 218 62 Q232 62 232 76" stroke-width="1.5"/>
+<path d="M210 70 Q214 66 218 70 Q222 66 226 70" stroke-width="1.2"/>
+<circle cx="190" cy="94" r="8"/>
+<path d="M183 90 Q190 80 197 90 M196 86 Q202 86 200 92" stroke-width="2"/>
+<path d="M187 96 Q190 98 193 96" stroke-width="1.5"/>
+<circle cx="187" cy="93" r="0.8" fill="#2b2b2b" stroke="none"/>
+<circle cx="193" cy="93" r="0.8" fill="#2b2b2b" stroke="none"/>
+<path d="M190 102 V106 M178 118 Q178 108 190 106 Q202 108 202 118"/>
+<path d="M180 112 L170 118 M200 112 L206 118" stroke-width="2.5"/>
+<path d="M140 118 H236 M146 118 V150 M230 118 V150"/>
+<path d="M160 118 V110 H170 V118 M162 112 Q165 114 168 112" stroke-width="1.5"/>
+<use href="#anna-noarms" x="40" y="56" width="38" height="94"/>
+<path d="M48.4 87 L44 108 M69.6 87 L74 106"/>
+<path d="M36 108 H50 L48 128 H38 Z M38 108 Q43 100 48 108" stroke-width="2"/>
+<use href="#wang-noarms" x="88" y="54" width="40" height="96"/>
+<path d="M96 86 L90 110 M120 86 L132 110"/>
+<path d="M84 110 H98 L96 132 H86 Z M86 110 Q91 102 96 110 M128 110 H142 L140 130 H130 Z M130 110 Q135 102 140 110" stroke-width="2"/>
+</g></svg>

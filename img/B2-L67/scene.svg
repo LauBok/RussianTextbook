@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M4 150 V96 H54 V150" stroke-width="2.5"/>
+<path d="M0 98 L29 72 L58 98" stroke-width="2.5"/>
+<path d="M14 108 H30 V124 H14 Z M22 108 V124 M14 116 H30" stroke-width="1.5"/>
+<path d="M38 150 V112 H50 V150" stroke-width="2"/>
+<use href="#babushka" x="58" y="52" width="40" height="98"/>
+<use href="#misha-noarms" x="104" y="70" width="32" height="80"/>
+<path d="M113.3 109.5 L118 122 M126.7 109.5 L134 104"/>
+<path d="M130 96 L146 92 L148 106 L134 110 Z M131 97 Q136 86 146 92" stroke-width="2"/>
+<path d="M148 96 Q160 84 172 88 M149 102 Q162 94 176 98 M150 106 Q164 104 174 110" stroke-width="1.5"/>
+<path d="M164 80 l1 3 M178 84 l1 3 M182 94 l1 3 M180 106 l1 3 M170 116 l1 3" stroke-width="1.5"/>
+<use href="#wang-noarms" x="180" y="54" width="40" height="96"/>
+<path d="M188 86 L178 72 M212 86 L222 72"/>
+<path d="M194 64 l-2 4 M206 62 l2 4 M200 60 v4" stroke-width="1.2"/>
+<path d="M150 20 A8 8 0 1 0 150.1 20" stroke-width="2"/>
+<path d="M150 6 V3 M164 20 H167 M160 10 L162 8 M136 20 H133 M140 10 L138 8" stroke-width="1.5"/>
+</g></svg>
