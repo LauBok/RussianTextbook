@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M20 150 L16 156 M90 150 L88 156 M160 150 L162 156 M220 150 L224 156" stroke-width="1.5"/>
+<path d="M150 150 V36 H226 V150"/>
+<path d="M150 92 H226" stroke-width="2.5"/>
+<path d="M188 36 V150" stroke-width="2"/>
+<path d="M156 42 H182 V86 H156 Z" stroke-width="1.5"/>
+<path d="M194 42 H220 V86 H194 Z" stroke-width="1.5"/>
+<path d="M200 46 L210 58 L198 64 L212 72 L204 82" stroke-width="1.5"/>
+<path d="M196 50 L202 54 M214 48 L208 60 M216 66 L210 70" stroke-width="1.5"/>
+<path d="M156 98 H182 V144 H156 Z M194 98 H220 V144 H194 Z" stroke-width="1.5"/>
+<path d="M159 104 V140 M164 104 V140 M170 104 V140 M176 104 V140 M197 106 V140 M202 106 V140 M209 104 V140 M215 108 V140" stroke-width="1.5"/>
+<path d="M159 104 H162 V140 M168 110 H172 V140 M212 108 H216 V140" stroke-width="1.5"/>
+<circle cx="132" cy="70" r="8" stroke-width="2.5"/>
+<path d="M126 66 Q132 70 138 66 M126 74 Q132 70 138 74" stroke-width="1.5"/>
+<path d="M140 64 L146 60 M141 72 L147 74 M138 78 L142 83" stroke-width="1.5"/>
+<path d="M14 116 H70 V122 H14 Z" stroke-width="2.5"/>
+<path d="M16 122 V140 M68 122 V140" stroke-width="2"/>
+<path d="M14 116 Q12 100 20 98 H66 Q72 100 70 116" stroke-width="2.5"/>
+<use href="#misha" x="22" y="50" width="40" height="100"/>
+<use href="#murka" x="80" y="120" width="40" height="30"/>
+</g></svg>

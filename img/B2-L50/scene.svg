@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M150 150 V24 M150 24 H162" stroke-width="2.5"/>
+<path d="M8 150 V96 M8 118 H132 M132 150 V108" />
+<path d="M8 96 Q8 90 14 90 Q20 90 20 96 V118" stroke-width="2"/>
+<path d="M20 106 Q28 100 40 104 Q44 110 38 114 H20" stroke-width="2"/>
+<use href="#wang-head" x="20" y="82" width="30" height="30"/>
+<path d="M46 104 Q80 94 120 104 Q130 108 132 118 H46 Z"/>
+<path d="M60 108 Q76 104 92 108 M98 110 Q110 106 122 112" stroke-width="1.5"/>
+<path d="M54 76 Q58 72 62 76 M64 66 Q68 62 72 66 M74 56 Q78 52 82 56" stroke-width="1.5"/>
+<path d="M64 76 H70 L64 82 H70" stroke-width="1.5"/>
+<path d="M76 62 H84 L76 70 H84" stroke-width="1.5"/>
+<use href="#murka" x="94" y="76" width="40" height="30"/>
+<path d="M100 40 H134 V70 H100 Z" stroke-width="2"/>
+<path d="M117 40 V70 M100 55 H134" stroke-width="1.5"/>
+<path d="M150 30 H190 V150" stroke-width="2.5"/>
+<circle cx="184" cy="92" r="2" stroke-width="2"/>
+<use href="#anna-noarms" x="194" y="50" width="40" height="100"/>
+<path d="M206 84 L198 96 L192 90" />
+<circle cx="191" cy="88" r="1.9" stroke-width="2"/>
+<path d="M222 84 L226 106"/>
+<circle cx="226.3" cy="108.2" r="1.9" stroke-width="2"/>
+<path d="M186 82 L182 78 M186 90 L180 90 M186 98 L182 102" stroke-width="1.5"/>
+</g></svg>

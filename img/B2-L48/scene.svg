@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M50 20 H170 V84 H50 Z" stroke-width="2.5"/>
+<path d="M50 88 H170" stroke-width="2"/>
+<path d="M150 88 V84 M158 88 V84" stroke-width="1.5"/>
+<circle cx="76" cy="44" r="9" stroke-width="2"/>
+<path d="M76 29 V25 M76 59 V63 M61 44 H57 M91 44 H95 M65 33 L62 30 M87 55 L90 58 M87 33 L90 30 M65 55 L62 58" stroke-width="1.5"/>
+<path d="M108 58 L150 36 L128 70 L124 56 Z M124 56 L150 36" stroke-width="2"/>
+<path d="M100 74 Q112 66 124 74 Q136 66 148 74 M124 74 V64" stroke-width="1.5"/>
+<path d="M100 74 V64 Q112 58 124 64 Q136 58 148 64 V74" stroke-width="1.5"/>
+<use href="#olga" x="6" y="50" width="40" height="100"/>
+<path d="M42 88 L52 72" stroke-width="2"/>
+<path d="M150 112 H226 M156 112 V150 M220 112 V150" stroke-width="2.5"/>
+<path d="M164 112 L170 106 H186 L180 112" stroke-width="1.5"/>
+<path d="M190 112 V104 H210 V112 M190 104 Q200 100 210 104" stroke-width="1.5"/>
+<use href="#wang" x="182" y="50" width="40" height="100"/>
+<path d="M212 30 H232 V50 H212 Z M222 30 V50 M212 40 H232" stroke-width="1.5"/>
+</g></svg>
