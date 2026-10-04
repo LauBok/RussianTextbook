@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+<defs><clipPath id="b2l60c1"><rect x="0" y="0" width="240" height="108"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M150 14 H220 V72 H150 Z" stroke-width="2"/>
+<path d="M185 14 V72 M150 43 H220" stroke-width="1.5"/>
+<circle cx="204" cy="28" r="6" stroke-width="1.5"/>
+<path d="M204 18 V16 M204 40 V38 M214 28 H216 M192 28 H194" stroke-width="1.2"/>
+<path d="M14 30 H44 V78 H14 Z" stroke-width="2"/>
+<path d="M20 40 H38 M20 48 H38 M20 56 H32" stroke-width="1.2"/>
+<g clip-path="url(#b2l60c1)"><use href="#wang-noarms" x="58" y="40" width="44" height="110"/></g>
+<path d="M70 74 L78 92 L92 88"/>
+<path d="M90 74 L96 90 L94 88"/>
+<path d="M86 84 L96 92 L108 84 L108 98 L96 104 L86 98 Z" stroke-width="2"/>
+<path d="M96 92 V104" stroke-width="1.5"/>
+<path d="M86 108 H178"/>
+<path d="M92 108 V150 M172 108 V150" stroke-width="2.5"/>
+<use href="#murka" x="124" y="80" width="40" height="30"/>
+<path d="M150 74 q4 -6 8 0 M156 66 q4 -6 8 0" stroke-width="1.5"/>
+<path d="M200 150 V120 H226 V150 M200 132 H226" stroke-width="2"/>
+<path d="M206 120 V104 Q213 98 220 104 V120" stroke-width="2"/>
+<path d="M210 112 H216" stroke-width="1.5"/>
+</g></svg>

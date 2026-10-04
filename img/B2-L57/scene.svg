@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+<defs><clipPath id="b2l57c1"><rect x="0" y="0" width="240" height="104"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M14 14 H74 V70 H14 Z" stroke-width="2"/>
+<path d="M44 14 V70 M14 42 H74" stroke-width="1.5"/>
+<path d="M60 24 A7 7 0 1 0 66 34 A5.5 5.5 0 1 1 60 24 Z" stroke-width="1.5"/>
+<circle cx="24" cy="54" r="1" stroke-width="1.5"/><circle cx="34" cy="22" r="1" stroke-width="1.5"/>
+<circle cx="200" cy="28" r="14" stroke-width="2"/>
+<path d="M200 28 V18 M200 28 L194 26" stroke-width="2"/>
+<path d="M168 52 H232 V84 H168 Z" stroke-width="2"/>
+<path d="M168 60 H232 M184 52 V84 M200 52 V84 M216 52 V84 M168 68 H232 M168 76 H232" stroke-width="1"/>
+<path d="M171 63 L181 73 M181 63 L171 73 M187 63 L197 73 M197 63 L187 73" stroke-width="1.5"/>
+<g clip-path="url(#b2l57c1)"><use href="#wang" x="96" y="38" width="44" height="110"/></g>
+<path d="M60 104 H220"/>
+<path d="M70 104 V150 M210 104 V150" stroke-width="2.5"/>
+<path d="M160 104 V100 H196 V104 M162 100 V96 H194 V100 M158 96 V92 H190 V96" stroke-width="2"/>
+<path d="M200 104 L206 82 M196 82 H216 L210 72 H202 Z" stroke-width="2"/>
+<path d="M76 98 H100 L104 104 H72 Z" stroke-width="2"/>
+<path d="M80 98 L88 92 L96 98" stroke-width="1.5"/>
+<path d="M120 100 H130 V104 H120 Z" stroke-width="1.5"/>
+<path d="M116 94 q-2 2 0 4 M134 94 q2 2 0 4 M112 92 q-3 4 0 8 M138 92 q3 4 0 8" stroke-width="1.5"/>
+</g></svg>

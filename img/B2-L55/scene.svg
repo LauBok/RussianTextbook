@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M150 14 H226 V64 H150 Z" stroke-width="2"/>
+<path d="M156 40 Q170 30 182 38 T206 34 Q214 30 220 36" stroke-width="1.5"/>
+<path d="M160 24 Q166 20 172 26 M196 50 Q204 46 212 52" stroke-width="1.5"/>
+<circle cx="208" cy="42" r="2.5" stroke-width="1.5"/>
+<path d="M64 6 V22 M56 30 Q64 18 72 30 Z" stroke-width="2"/>
+<path d="M54 106 H186" />
+<path d="M66 106 V150 M174 106 V150" stroke-width="2.5"/>
+<path d="M104 96 L128 92 L132 104 L108 108 Z" stroke-width="2"/>
+<path d="M106 98 L128 94" stroke-width="1.5"/>
+<path d="M118 84 L136 80 L138 88 L120 92 Z M121 87 H133" stroke-width="1.5"/>
+<path d="M136 86 L152 88 L151 96 L135 94 Z M139 91 H148" stroke-width="1.5"/>
+<path d="M74 104 Q74 96 82 96 Q90 96 90 104" stroke-width="1.5"/>
+<path d="M150 104 Q152 98 158 98 Q164 98 164 104" stroke-width="1.5"/>
+<use href="#ivan" x="12" y="44" width="42" height="106"/>
+<use href="#maria" x="188" y="48" width="40" height="102"/>
+<path d="M126 74 q2 -4 4 0 M140 72 q2 -4 4 0" stroke-width="1.5"/>
+</g></svg>

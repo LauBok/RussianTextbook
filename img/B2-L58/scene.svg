@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M204 8 H236 V44 H204 Z" stroke-width="2"/>
+<path d="M220 8 V44 M204 26 H236" stroke-width="1.5"/>
+<path d="M226 42 V32 L230 24 L234 32 V42" stroke-width="1.2"/>
+<path d="M8 20 H70 M8 44 H70 M10 20 V44 M68 20 V44" stroke-width="2"/>
+<path d="M14 20 V8 H20 V20 M22 20 V10 H28 V20 M30 20 V6 H35 V20 M38 20 V12 H46 V20 M50 44 V30 H56 V44 M58 44 V32 H64 V44 M14 44 V34 H22 V44" stroke-width="1.5"/>
+<path d="M4 112 H70 V150 M4 112 V150" stroke-width="2.5"/>
+<path d="M4 120 H70" stroke-width="1.5"/>
+<path d="M12 112 Q12 102 22 102 H52 Q60 102 60 112" stroke-width="2"/>
+<use href="#dima" x="78" y="44" width="42" height="106"/>
+<use href="#wang" x="160" y="46" width="40" height="104"/>
+<path d="M118 104 H162"/>
+<path d="M124 104 V150 M156 104 V150" stroke-width="2.5"/>
+<path d="M128 104 L132 96 H146 L150 104" stroke-width="2"/>
+<path d="M139 96 V104" stroke-width="1.5"/>
+<path d="M134 92 Q136 88 134 84 M144 92 Q146 88 144 84" stroke-width="1.5"/>
+</g></svg>
