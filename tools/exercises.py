@@ -27,7 +27,9 @@ def blank(stem):
 # ---------- 1. PDF 练习节 ----------
 
 def pdf_exercises(data, img_dir):
-    out = ["## 练习", ""]
+    out = [f"## {data.get('heading', '练习')}", ""]
+    if data.get("intro"):
+        out += [data["intro"], ""]
     for n, ex in enumerate(data["exercises"]):
         head = f"[{NUM[n]}、{ex['task']}]{{.task}}"
         out += ["::: exercise", head, ""]
@@ -43,7 +45,8 @@ def pdf_exercises(data, img_dir):
             out += [":::"]
         elif t == "choice":
             for i, it in enumerate(ex["items"], 1):
-                out.append(f"{i}. {ru(blank(it['stem']))}")
+                opts = " / ".join(it["options"])
+                out.append(f"{i}. {ru(blank(it['stem']))}　（{ru(opts)}）")
         elif t == "rewrite":
             e = ex.get("example")
             if e:
@@ -52,7 +55,8 @@ def pdf_exercises(data, img_dir):
                 out.append(f"{i}. {ru(it['cue'])}")
         elif t == "fill":
             for i, it in enumerate(ex["items"], 1):
-                out.append(f"{i}. {ru(blank(it['stem']) + ' (' + it['hint'] + ')')}")
+                hint = f" ({it['hint']})" if it.get("hint") else ""
+                out.append(f"{i}. {ru(blank(it['stem']) + hint)}")
         elif t == "translate":
             for i, it in enumerate(ex["items"], 1):
                 out += [f"{i}. {it['zh']}", "   []{.line}"]
@@ -102,7 +106,41 @@ def web_json(data, img_dir):
                 svg = (ROOT / img_dir / it["image"]).read_text(encoding="utf-8")
                 it["svg"] = svg
         exs.append(e)
-    return {"lesson": data["lesson"], "exercises": exs}
+    return {"lesson": data["lesson"], "grammar": data.get("grammar", ""),
+            "heading": data.get("heading", "练习"), "intro": data.get("intro", ""), "exercises": exs}
+
+
+# ---------- 4. 课文中的自动内容 ----------
+
+VOCAB_ROW = re.compile(r"^\|\s*(\[.+?\]\{\.ru\}(?:\s*\[\[.+?\]\]\{\.tr\})?)\s*\|\s*(.+?)\s*\|\s*(.+?)\s*\|\s*$")
+
+
+def lesson_vocab(code):
+    """取出某课生词表的各行：(词, 词性, 释义)。"""
+    path = ROOT / "lessons" / f"{code}.md"
+    if not path.exists():
+        return []
+    md = path.read_text(encoding="utf-8")
+    m = re.search(r"^::: vocab\s*\n(.*?)^:::\s*$", md, re.S | re.M)
+    if not m:
+        return []
+    return [r.groups() for r in (VOCAB_ROW.match(ln) for ln in m.group(1).splitlines()) if r]
+
+
+def unit_vocab(first, last):
+    """单元词汇总表：<!-- UNIT_VOCAB L01-L09 --> 展开为按课排列的表格。"""
+    a, b = int(first[1:]), int(last[1:])
+    rows = []
+    for n in range(a, b + 1):
+        code = f"L{n:02d}"
+        for word, pos, gloss in lesson_vocab(code):
+            rows.append(f"| {n} | {word} | {pos} | {gloss} |")
+    head = ["::: {.vocab .unit-vocab}", "| 课 | 词 | 词性 | 释义 |", "|---|---|---|---|"]
+    return "\n".join(head + rows + [":::"])
+
+
+def expand(md):
+    return re.sub(r"<!-- UNIT_VOCAB (L\d+)-(L\d+) -->", lambda m: unit_vocab(m.group(1), m.group(2)), md)
 
 
 def main(lesson):
@@ -111,7 +149,7 @@ def main(lesson):
     gen = ROOT / "build" / "gen"
     gen.mkdir(parents=True, exist_ok=True)
 
-    src = (ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8")
+    src = expand((ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8"))
     assert "<!-- EXERCISES -->" in src, f"{lesson}.md 缺少 <!-- EXERCISES --> 标记"
     (gen / f"{lesson}.md").write_text(src.replace("<!-- EXERCISES -->", pdf_exercises(data, img_dir)), encoding="utf-8")
 

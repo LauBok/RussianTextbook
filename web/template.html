@@ -1,7 +1,7 @@
 <title>{{TITLE}}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Marck+Script&display=swap">
 <style>
 /* 布局：与印刷版同一版式的单栏课本页，A4 正文宽度约 680px，手机全宽 */
 :root {
@@ -125,7 +125,20 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .pic .answer-row input { font-size: 16px; }
 .pic .btn { padding: 4px 8px; }
 .pic .fb { text-align: left; }
+.ex-intro { font: 14px var(--sans); color: var(--muted); margin: 14px 0 0; }
 .ai-note { font: 13px var(--sans); color: var(--muted); margin-top: 18px; }
+/* 语音课与复习课 */
+.hand, .ru.hand { font-family: "Marck Script", "PT Serif", serif; font-weight: 400; }
+.ipa { color: var(--muted); }
+.letters td:first-child { font-size: 26px; font-weight: 700; width: 18%; }
+.letters td:nth-child(2) .hand { font-size: 28px; }
+.drill p { font-size: 18px; word-spacing: .5em; margin: 0 0 4px; }
+.handwriting p { display: flex; align-items: flex-end; gap: 10px; margin: 0 0 10px; }
+.handwriting .hand { font-size: 32px; line-height: 1; min-width: 70px; }
+.handwriting .write { flex: 1; height: 34px; border-bottom: 1px solid var(--ink);
+  background-image: linear-gradient(to bottom, transparent 48%, var(--rule) 48%, var(--rule) 52%, transparent 52%); }
+.unit-vocab td:first-child { width: 8%; color: var(--muted); font-size: 13px; font-weight: 400; }
+.unit-vocab td:nth-child(2) { font-size: 16px; font-weight: 700; width: 34%; }
 @media (max-width: 480px) {
   h1 { font-size: 32px; }
   .dialogue p { padding-left: 88px; text-indent: -88px; font-size: 17px; margin-bottom: 4px; }
@@ -184,7 +197,7 @@ const same = (a, list) => list.some((x) => norm(x) === norm(a));
 
 /* ---------- 课头与目录 ---------- */
 $("running").textContent = DATA.book + " · " + DATA.unit;
-$("lno").textContent = "第 " + DATA.lesson + " 课";
+$("lno").textContent = DATA.label || ("第 " + DATA.lesson + " 课");
 $("title").textContent = DATA.title;
 $("sub").textContent = DATA.subtitle;
 
@@ -271,9 +284,10 @@ DATA.exercises.forEach((ex, n) => {
       const card = el("div", "item");
       const stem = ru("div", "stem");
       stem.append(el("span", "num", String(i + 1)));
-      const [pre, post] = it.stem.split("___");
-      const gap = el("span", "gap", " ");
-      stem.append(pre, gap, post);
+      const parts = it.stem.split("___");
+      const gap = el("span", "gap", "\u00a0");
+      stem.append(parts[0]);
+      if (parts.length > 1) stem.append(gap, parts[1]);
       const opts = el("div", "opts");
       const fb = el("div", "fb");
       it.options.forEach((o) => {
@@ -281,7 +295,7 @@ DATA.exercises.forEach((ex, n) => {
         b.onclick = () => {
           if (id in results) return;
           const ok = o === it.answer;
-          gap.textContent = o;
+          if (gap.isConnected) gap.textContent = o;
           b.classList.add(ok ? "right" : "wrong");
           if (!ok) opts.querySelectorAll(".opt").forEach((x) => { if (x.textContent === it.answer) x.classList.add("right"); });
           card.classList.add(ok ? "ok" : "no");
@@ -291,6 +305,30 @@ DATA.exercises.forEach((ex, n) => {
         opts.append(b);
       });
       card.append(stem, opts, fb);
+      sec.append(card);
+    });
+  }
+
+  if (ex.type === "fill") {
+    ex.items.forEach((it, i) => {
+      const id = ex.id + "-" + i; itemIds.push(id); total++;
+      const card = el("div", "item");
+      const stem = ru("div", "stem"); stem.append(el("span", "num", String(i + 1)));
+      stem.append(it.stem.replace("___", "…"));
+      if (it.hint) stem.append(" (" + it.hint + ")");
+      const row = el("div", "answer-row");
+      const inp = ru("input"); inp.id = "in-" + id;
+      const go = el("button", "btn", "检查");
+      row.append(inp, go);
+      const fb = el("div", "fb");
+      go.onclick = () => {
+        const warn = latinWarn(inp.value); if (warn) { fb.className = "fb no"; fb.textContent = warn; return; }
+        const ok = same(inp.value, it.accept);
+        card.classList.toggle("ok", ok); card.classList.toggle("no", !ok);
+        feedback(fb, ok, it.accept[0]);
+        mark(id, ok); maybeWhy();
+      };
+      card.append(stem, row, fb);
       sec.append(card);
     });
   }
@@ -305,7 +343,7 @@ DATA.exercises.forEach((ex, n) => {
       const card = el("div", "item");
       const cue = ru("div", "cue"); cue.append(el("span", "num", String(i + 1)), it.cue);
       const row = el("div", "answer-row");
-      const inp = ru("input"); inp.id = "in-" + id; inp.placeholder = "Э́то не … Э́то …";
+      const inp = ru("input"); inp.id = "in-" + id; inp.placeholder = ex.placeholder || "";
       const go = el("button", "btn", "检查");
       row.append(inp, go);
       const fb = el("div", "fb");
@@ -365,7 +403,7 @@ async function grade(it, ta, go, fb, card, id, maybeWhy) {
   go.disabled = true; fb.className = "fb"; fb.textContent = "批改中……";
   const prompt = [
     "你是俄语老师，正在批改零基础中国学生的第一课翻译作业。只依据下面的信息判断，用简体中文回答。",
-    "本课学过的语法：э́то 句型（这是……）；кто 问人和动物，что 问事物；否定词 не；连词 а。",
+    "本课和此前学过的语法：" + plain(DATA.grammar || "（未注明）"),
     "原句：" + it.zh,
     "参考译文（任何一个都完全正确）：" + it.accept.join(" | "),
     "判卷要点：" + it.rubric.map(plain).join("；"),

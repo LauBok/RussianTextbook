@@ -47,7 +47,7 @@ VOCAB_SECTIONS = ("课前问题", "课文", "选文", "语法", "语音", "练�
 EX_TYPES = {
     "picture_qa": {"req": ["image", "qword", "answer"], "ru": ["qword", "answer"]},
     "choice": {"req": ["stem", "options", "answer"], "ru": ["stem", "options", "answer"]},
-    "fill": {"req": ["stem", "hint", "accept"], "ru": ["stem", "hint", "accept"]},
+    "fill": {"req": ["stem", "accept"], "opt": ["hint"], "ru": ["stem", "hint", "accept"]},
     "rewrite": {"req": ["cue", "accept"], "ru": ["cue", "accept"]},
     "translate": {"req": ["zh", "accept", "rubric"], "ru": ["accept"]},
     "open": {"req": ["prompt", "length", "model", "rubric", "notes"], "ru": ["model"]},
@@ -130,7 +130,9 @@ def ru_segments(text):
     segs, cut = [], []
     for s, e, cs, ce, attrs in spans(text):
         cls = re.findall(r"\.([\w-]+)", attrs)
-        if "ru" in cls or 'lang="ru"' in attrs:
+        if "syl" in cls:
+            cut.append((s, e))          # 语音课的音节练习，不是词
+        elif "ru" in cls or 'lang="ru"' in attrs:
             if not any(a <= s and e <= b for a, b in cut):
                 segs.append(strip_markup(text[cs:ce]))
                 cut.append((s, e))
@@ -356,8 +358,11 @@ def check_exercise_yaml(stem, path):
     exs = data.get("exercises")
     if not isinstance(exs, list) or not exs:
         return probs + [("练习", "缺少 exercises 列表")], ru, zh
-    for k in set(data) - {"lesson", "exercises"}:
+    for k in set(data) - {"lesson", "exercises", "grammar", "heading", "intro"}:
         probs.append(("练习", f"顶层多出字段 {k}"))
+    for k in ("grammar", "heading", "intro"):
+        if isinstance(data.get(k), str):
+            zh.append((k, data[k]))
     seen = set()
     img_dir = ROOT / "img" / stem
     for n, ex in enumerate(exs, 1):
@@ -381,7 +386,7 @@ def check_exercise_yaml(stem, path):
             probs.append(("练习", f"{where}：缺少 task"))
         if t in WHY_REQUIRED and not ex.get("why"):
             probs.append(("练习", f"{where}：封闭题缺少解析 why"))
-        allowed = {"id", "type", "task", "why", "items", "example"}
+        allowed = {"id", "type", "task", "why", "items", "example", "placeholder"}
         for k in set(ex) - allowed:
             probs.append(("练习", f"{where}：多出字段 {k}"))
         for k in ("task", "why"):
@@ -411,7 +416,7 @@ def check_exercise_yaml(stem, path):
             for k in spec["req"]:
                 if it.get(k) in (None, "", []):
                     probs.append(("练习", f"{iw}：缺少 {k}"))
-            for k in set(it) - set(spec["req"]):
+            for k in set(it) - set(spec["req"]) - set(spec.get("opt", [])):
                 probs.append(("练习", f"{iw}：多出字段 {k}"))
             for k in ("answer", "accept", "rubric", "options"):
                 if k in it and k in spec["req"] and not (t == "choice" and k == "answer"):

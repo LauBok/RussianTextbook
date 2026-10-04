@@ -49,26 +49,33 @@ def vocab(md):
 
 
 def main(lesson):
-    md = (ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8")
+    md = exercises.expand((ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8"))
     front = yaml.safe_load(md.split("\n---\n", 1)[0].lstrip("-\n"))
     ex = yaml.safe_load((ROOT / "exercises" / f"{lesson}.yaml").read_text(encoding="utf-8"))
     data = {
         "book": front["book"], "unit": front["unit"], "lesson": front["lesson"],
         "title": front["title"], "subtitle": front["subtitle"],
+        "label": front.get("label", ""),
+        "grammar": ex.get("grammar", ""),
         "exercises": exercises.web_json(ex, f"img/{lesson}")["exercises"],
     }
-    root = ('<div id="ex-root"><div class="score" id="score"></div>'
+    heading = ex.get("heading", "练习")
+    intro = f'<p class="ex-intro">{ex["intro"]}</p>' if ex.get("intro") else ""
+    root = ('<div id="ex-root">' + intro + '<div class="score" id="score"></div>'
             '<div id="exercises"></div></div>')
-    body_md = md.replace("<!-- EXERCISES -->", "## 练习\n\n" + root)
+    body_md = md.replace("<!-- EXERCISES -->", f"## {heading}\n\n" + root)
     html = subprocess.run(
         ["pandoc", "-f", "markdown", "-t", "html5", "--lua-filter", str(ROOT / "zh-punct.lua")],
         input=body_md, capture_output=True, text=True, check=True, cwd=ROOT).stdout
     tpl = (ROOT / "web" / "template.html").read_text(encoding="utf-8")
     page = tpl.replace("/*LESSON_DATA*/null", json.dumps(data, ensure_ascii=False))
-    i = html.index('<h2 id="练习">')
-    j = html.index('<h2 id="参考译文">')
+    i = html.index(f'<h2 id="{heading}">')
+    j = html.find('<h2 id="参考译文">')
+    if j < 0:
+        j = len(html)
     ex_html = html[i:j].split("</h2>", 1)[1]
     page = page.replace("<!--TEXT_HTML-->", html[:i] + html[j:])
+    page = page.replace(">练习</button>", f">{heading}</button>", 1)
     page = page.replace("<!--EX_HTML-->", ex_html)
     page = page.replace("{{TITLE}}", f"俄语教程 第{front['lesson']}课")
     out = ROOT / "web" / f"{lesson}.html"

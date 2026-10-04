@@ -1,4 +1,5 @@
 lesson: L01
+grammar: "[э́то]{.ru} 句型（这是……）；[кто]{.ru} 问人和动物，[что]{.ru} 问事物；否定词 [не]{.ru}；连词 [а]{.ru}。"
 exercises:
 
   - id: e1
@@ -53,6 +54,7 @@ exercises:
   - id: e3
     type: rewrite
     task: 按例句说一说。
+    placeholder: Э́то не … Э́то …
     example:
       cue: дом / ко́шка
       answer: Э́то не дом. Э́то ко́шка.

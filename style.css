@@ -118,3 +118,27 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 /* 答案解析 */
 .why { display: block; font-size: 9.5pt; line-height: 1.6; color: var(--muted); margin: 3pt 0 6pt; }
 li .why { display: inline; margin: 0; }
+
+/* 手写体（Marck Script，OFL 授权，见 fonts/） */
+@font-face { font-family: "Hand"; src: url("fonts/MarckScript-Regular.ttf"); }
+.hand, .ru.hand { font-family: "Hand", "PT Serif", serif; font-weight: 400; }
+.ipa { font-family: "PT Serif", "DejaVu Serif", serif; color: var(--muted); }
+
+/* 字母表 */
+.letters td:first-child { font-size: 20pt; font-weight: 700; width: 18%; }
+.letters td:nth-child(2) .hand { font-size: 22pt; }
+
+/* 读音练习：按行排列的音节和词 */
+.drill p { font-size: 13pt; letter-spacing: .02em; word-spacing: .6em; margin: 0 0 4pt; }
+
+/* 手写练习：左侧字样，右侧带中线的书写格 */
+.handwriting p { display: flex; align-items: flex-end; gap: 8pt; margin: 0 0 8pt; }
+.handwriting .hand { font-size: 26pt; line-height: 1; min-width: 22mm; }
+.handwriting .write { flex: 1; height: 26pt; border-bottom: .8pt solid var(--ink);
+  background-image: linear-gradient(to bottom, transparent 48%, var(--rule) 48%, var(--rule) 52%, transparent 52%); }
+
+/* 单元词汇总表 */
+.unit-vocab td:first-child { width: 8%; color: var(--muted); font-size: 9.5pt; font-weight: 400; }
+.unit-vocab td:nth-child(2) { font-size: 11pt; font-weight: 700; width: 32%; }
+.unit-vocab td:nth-child(3) { color: var(--muted); width: 24%; }
+.unit-vocab td:nth-child(4) { width: auto; }

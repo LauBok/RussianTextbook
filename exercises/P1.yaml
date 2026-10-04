@@ -1,0 +1,53 @@
+lesson: P1
+grammar: "字母 [А]{.ru}、[К]{.ru}、[М]{.ru}、[О]{.ru}、[Т]{.ru} 的读音和写法；重音的概念。"
+exercises:
+
+  - id: e1
+    type: choice
+    task: 选出字母的读音。
+    why: "[т]{.ru}、[к]{.ru}、[м]{.ru} 的形状和拉丁字母 t、k、m 相同，读音也对应。注意 [м]{.ru} 小写和拉丁字母 m 不同形，手写的 [т]{.ru} 反而像 m，不要混淆。"
+    items:
+      - stem: т — ___
+        options: ["[t]", "[m]", "[k]"]
+        answer: "[t]"
+      - stem: к — ___
+        options: ["[k]", "[t]", "[a]"]
+        answer: "[k]"
+      - stem: м — ___
+        options: ["[t]", "[m]", "[o]"]
+        answer: "[m]"
+      - stem: о — ___
+        options: ["[a]", "[o]", "[u]"]
+        answer: "[o]"
+
+  - id: e2
+    type: fill
+    task: 用俄语键盘写出对应的小写字母。
+    why: 俄语的 [а]{.ru}、[о]{.ru}、[т]{.ru} 和拉丁字母形状相同，但在电脑里是不同的字符。必须切换到俄语键盘输入，否则搜索、拼写检查都会出错。
+    items:
+      - stem: А → ___
+        accept: [а]
+      - stem: К → ___
+        accept: [к]
+      - stem: М → ___
+        accept: [м]
+      - stem: О → ___
+        accept: [о]
+      - stem: Т → ___
+        accept: [т]
+
+  - id: e3
+    type: fill
+    task: 根据读音写出单词。
+    why: 本课的字母读音和写法一一对应，听到什么就写什么。[ма́ма]{.ru} 的第二个元音虽然弱读成 [ə]，写的时候仍然是 [а]{.ru}。
+    items:
+      - stem: "[kot] → ___"
+        accept: [кот]
+      - stem: "[kto] → ___"
+        accept: [кто]
+      - stem: "[tam] → ___"
+        accept: [там]
+      - stem: "[kak] → ___"
+        accept: [как]
+      - stem: "[ˈmamə] → ___"
+        accept: [ма́ма]
