@@ -1,14 +1,14 @@
 /* 汉字字体：汉字不倾斜，“斜体”一律映射到楷体 */
 @font-face { font-family: "CJK Serif"; src: local("NotoSerifCJKsc-Regular"); font-style: normal; font-weight: 400; }
-@font-face { font-family: "CJK Serif"; src: local("LXGWWenKai-Regular"), local("LXGW WenKai"); font-style: italic; font-weight: 400; }
+@font-face { font-family: "CJK Serif"; src: local("FandolKai-Regular"), local("FandolKai"); font-style: italic; font-weight: 400; }
 @font-face { font-family: "CJK Serif"; src: local("NotoSerifCJKsc-Bold"); font-style: normal; font-weight: 700; }
-@font-face { font-family: "CJK Serif"; src: local("LXGWWenKai-Bold"), local("LXGW WenKai"); font-style: italic; font-weight: 700; }
+@font-face { font-family: "CJK Serif"; src: local("FandolKai-Regular"), local("FandolKai"); font-style: italic; font-weight: 700; }
 @font-face { font-family: "CJK Sans"; src: local("NotoSansCJKsc-Regular"); font-style: normal; font-weight: 400; }
-@font-face { font-family: "CJK Sans"; src: local("LXGWWenKai-Regular"), local("LXGW WenKai"); font-style: italic; font-weight: 400; }
+@font-face { font-family: "CJK Sans"; src: local("FandolKai-Regular"), local("FandolKai"); font-style: italic; font-weight: 400; }
 @font-face { font-family: "CJK Sans"; src: local("NotoSansCJKsc-Bold"); font-style: normal; font-weight: 700; }
-@font-face { font-family: "CJK Sans"; src: local("LXGWWenKai-Bold"), local("LXGW WenKai"); font-style: italic; font-weight: 700; }
-@font-face { font-family: "Kai"; src: local("LXGWWenKai-Regular"), local("LXGW WenKai"); font-weight: 400; }
-@font-face { font-family: "Kai"; src: local("LXGWWenKai-Bold"), local("LXGW WenKai"); font-weight: 700; }
+@font-face { font-family: "CJK Sans"; src: local("FandolKai-Regular"), local("FandolKai"); font-style: italic; font-weight: 700; }
+@font-face { font-family: "Kai"; src: local("FandolKai-Regular"), local("FandolKai"); font-weight: 400; }
+@font-face { font-family: "Kai"; src: local("FandolKai-Regular"), local("FandolKai"); font-weight: 700; }
 
 :root {
   --ink: #1f1f1f;
