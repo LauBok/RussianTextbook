@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160">
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M16 150 V72 H56 V150"/>
+<path d="M27 150 V122 Q27 112 36 112 Q45 112 45 122 V150" stroke-width="2.5"/>
+<path d="M14 72 H58 M14 72 V66 H20 V72 M26 72 V66 H32 V72 M38 72 V66 H44 V72 M50 72 V66 H58 V72" stroke-width="2"/>
+<path d="M21 66 V48 H51 V66" stroke-width="2.5"/>
+<path d="M33 56 H39 V62 H33 Z" stroke-width="1.5"/>
+<path d="M26 48 V36 H46 V48" stroke-width="2"/>
+<path d="M26 36 L36 14 L46 36" stroke-width="2"/>
+<path d="M36 14 V8" stroke-width="1.5"/>
+<path d="M22 84 H28 V94 H22 Z M44 84 H50 V94 H44 Z" stroke-width="1.5"/>
+<path d="M56 112 H238" stroke-width="2"/>
+<path d="M56 112 V106 H64 V112 M72 112 V106 H80 V112 M178 112 V106 H186 V112 M194 112 V106 H202 V112 M210 112 V106 H218 V112 M226 112 V106 H234 V112" stroke-width="1.5"/>
+<path d="M150 106 V72 H200 V106" stroke-width="2"/>
+<path d="M156 72 Q156 50 175 44 Q194 50 194 72" stroke-width="2.5"/>
+<path d="M175 44 V36" stroke-width="1.5"/>
+<path d="M171.5 29 A4 4 0 1 0 178.5 29 A3.2 3.2 0 1 1 171.5 29 Z" stroke-width="1.5"/>
+<path d="M160 96 V84 Q160 80 164 80 Q168 80 168 84 V96 M182 96 V84 Q182 80 186 80 Q190 80 190 84 V96" stroke-width="1.5"/>
+<path d="M136 106 V36 M144 106 V36 M134 36 H146 M135 36 L140 16 L145 36 M134 60 H146 M134 84 H146" stroke-width="2"/>
+<path d="M140 16 V10" stroke-width="1.5"/>
+<path d="M206 106 V36 M214 106 V36 M204 36 H216 M205 36 L210 16 L215 36 M204 60 H216 M204 84 H216" stroke-width="2"/>
+<path d="M210 16 V10" stroke-width="1.5"/>
+<path d="M96 22 Q98 17 103 18 Q106 14 111 17 Q116 16 116 21 Z" stroke-width="1.5"/>
+<use href="#wang-noarms" x="72" y="50" width="40" height="100"/>
+<path d="M82 80 L80 62 L88 46"/>
+<path d="M102 80 L104 62 L96 46"/>
+<path d="M86 34 H98 V47 H86 Z" stroke-width="2"/>
+<circle cx="92" cy="40.5" r="2.5" stroke-width="1.5"/>
+<use href="#dima-noarms" x="110" y="50" width="40" height="100"/>
+<path d="M120 80 L117 101"/>
+<circle cx="116.8" cy="103.2" r="1.9" stroke-width="2"/>
+<path d="M140 80 L150 70 L156 60"/>
+<circle cx="157" cy="58" r="1.9" stroke-width="2"/>
+</g></svg>
