@@ -34,6 +34,9 @@ exercises:
       - stem: Вы ___ ка́ждый день?
         hint: занима́ться
         accept: [занима́етесь]
+      - stem: А́нна ___ в Москве́.
+        hint: роди́ться，过去时
+        accept: [родила́сь]
 
   - id: e2
     type: choice

@@ -31,6 +31,12 @@ exercises:
       - stem: Ка́тя идёт ___.
         hint: институ́т
         accept: [из институ́та]
+      - stem: Мой знако́мый ___.
+        hint: Коре́я
+        accept: [из Коре́и]
+      - stem: Э́тот па́рень ___.
+        hint: Ку́ба
+        accept: [с Ку́бы]
 
   - id: e2
     type: rewrite

@@ -50,6 +50,12 @@ exercises:
       - stem: Что у вас ___?
         options: [боли́т, боля́т]
         answer: боли́т
+      - stem: У Ван Лэ́я ___ спина́.
+        options: [боли́т, боля́т]
+        answer: боли́т
+      - stem: У де́душки ча́сто ___ се́рдце.
+        options: [боли́т, боля́т]
+        answer: боли́т
 
   - id: e3
     type: fill
