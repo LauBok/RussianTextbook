@@ -159,6 +159,17 @@ const NUM = "一二三四五六七八九十";
 const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const ru = (tag, cls, text) => { const e = el(tag, cls, text); e.lang = "ru"; return e; };
+/* 中文说明里的 [俄语]{.ru} 渲染成 lang="ru" 的 span */
+const RU_SPAN = /\[([^\[\]]*)\]\{\.ru\}/g;
+const rich = (tag, cls, text) => {
+  const e = el(tag, cls); let last = 0;
+  for (const m of text.matchAll(RU_SPAN)) {
+    e.append(text.slice(last, m.index), ru("span", "ru", m[1]));
+    last = m.index + m[0].length;
+  }
+  e.append(text.slice(last)); return e;
+};
+const plain = (text) => text.replace(RU_SPAN, "$1");
 let saved = {};
 function save() {}
 
@@ -216,8 +227,8 @@ function latinWarn(v) { return LATIN.test(v) ? "答案里有拉丁字母，请�
 const exWrap = $("exercises");
 DATA.exercises.forEach((ex, n) => {
   const sec = el("div", "exset");
-  sec.append(el("p", "task", NUM[n] + "、" + ex.task));
-  const why = el("div", "why", "解析：" + ex.why); why.hidden = true;
+  sec.append(rich("p", "task", NUM[n] + "、" + ex.task));
+  const why = rich("div", "why", "解析：" + (ex.why || "")); why.hidden = true;
   const itemIds = [];
   const maybeWhy = () => { if (itemIds.every((id) => id in results)) why.hidden = false; };
 
@@ -357,7 +368,7 @@ async function grade(it, ta, go, fb, card, id, maybeWhy) {
     "本课学过的语法：э́то 句型（这是……）；кто 问人和动物，что 问事物；否定词 не；连词 а。",
     "原句：" + it.zh,
     "参考译文（任何一个都完全正确）：" + it.accept.join(" | "),
-    "判卷要点：" + it.rubric.join("；"),
+    "判卷要点：" + it.rubric.map(plain).join("；"),
     "学生译文：" + ans,
     "判断时忽略重音符号、ё/е、大小写、标点和破折号的差别。意思和语法都对，只是说法与参考译文不同，也算正确。",
     '只回复一个 JSON 对象：{"verdict": "correct" 或 "wrong", "issues": [{"wrong": 学生写错的那部分原文, "fix": 改正后的写法, "reason": 一句话说明原因}], "corrected": 改正后的完整译文（正确时为空字符串）}。没有错误时 issues 为空数组。',
