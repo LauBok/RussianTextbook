@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="s95c"><rect x="0" y="0" width="240" height="104"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M160 12 H216 V62 H160 Z" stroke-width="2.5"/>
+<path d="M188 12 V62 M160 37 H216" stroke-width="2"/>
+<path d="M157 65 H219" stroke-width="2"/>
+<path d="M170 18 V26 M166 22 H174 M167.2 19.2 L172.8 24.8 M172.8 19.2 L167.2 24.8" stroke-width="1.5"/>
+<path d="M204 24 V30 M201 27 H207" stroke-width="1.5"/>
+<path d="M200 42 V50 M196 46 H204 M197.2 43.2 L202.8 48.8 M202.8 43.2 L197.2 48.8" stroke-width="1.5"/>
+<path d="M172 46 V52 M169 49 H175" stroke-width="1.5"/>
+<path d="M160 58 Q174 52 188 57 Q202 52 216 56" stroke-width="1.5"/>
+<path d="M148 120 V90 Q148 84 154 84 H220 Q226 84 226 90 V120" stroke-width="2.5"/>
+<path d="M138 140 V106 Q138 100 143 100 Q148 100 148 106 V140 M226 140 V106 Q226 100 231 100 Q236 100 236 106 V140" stroke-width="2.5"/>
+<path d="M148 120 H226 M138 140 H236" stroke-width="2.5"/>
+<path d="M187 120 V140" stroke-width="1.5"/>
+<path d="M142 140 V148 M232 140 V148" stroke-width="2.5"/>
+<use href="#murka" x="170" y="91" width="40" height="30"/>
+<path d="M14 40 H44 V64 H14 Z" stroke-width="2"/>
+<path d="M18 60 L27 48 L34 56 L38 52 L42 58" stroke-width="1.5"/>
+<g clip-path="url(#s95c)">
+<use href="#wang-noarms" x="40" y="52" width="40" height="100"/>
+</g>
+<path d="M14 104 H106 L112 112 H8 Z" stroke-width="2.5"/>
+<path d="M12 112 V150 M108 112 V150" stroke-width="2.5"/>
+<path d="M12 122 H50 V140 H12" stroke-width="2"/>
+<path d="M27 131 H35" stroke-width="2"/>
+<path d="M50 82 L44 103 L57 108"/>
+<circle cx="59" cy="108.6" r="1.9" stroke-width="2"/>
+<path d="M70 82 L79 104"/>
+<circle cx="80.2" cy="105.8" r="1.9" stroke-width="2"/>
+<path d="M81.4 104.2 L86 97.6" stroke-width="2"/>
+<path d="M68 110.6 L72 105.8 H94 L92 110.6 Z" stroke-width="1.5"/>
+<path d="M84 107.4 H90 M76 109 H86" stroke-width="1.2"/>
+<path d="M17 110.6 L20 106 H38 L36 110.6 Z" stroke-width="1.5"/>
+<path d="M20 106 L28 109 L38 106" stroke-width="1.2"/>
+<path d="M98 106.5 H108 M103 106.5 L98 92 L104 84" stroke-width="2"/>
+<path d="M101 80.5 L112 84 L108 90 Z" stroke-width="2"/>
+</g></svg>
