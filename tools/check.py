@@ -46,6 +46,11 @@ STRESSABLE_MONO = {"не", "ни", "на", "за", "по", "под", "из", "о
 BOOK_SIZE = {1: 108, 2: 72, 3: 60, 4: 40}
 # 检查词汇的节；其余各节（生词表、注释、俄罗斯知识、作者简介、译文）只查书写
 VOCAB_SECTIONS = ("课前问题", "课文", "选文", "语法", "语音", "练习")
+
+
+def is_vocab_section(sec):
+    """课文、例句、练习所在的节；“课文注释”“生词”等不算。"""
+    return any(sec.startswith(s) for s in VOCAB_SECTIONS) and "注释" not in sec
 EX_TYPES = {
     "picture_qa": {"req": ["image", "qword", "answer"], "ru": ["qword", "answer"]},
     "choice": {"req": ["stem", "options", "answer"], "ru": ["stem", "options", "answer"]},
@@ -576,7 +581,7 @@ class Checker:
                 bare = sorted(set(WORD.findall(nfc(rest))))
                 out.append((ln, "标记", f"俄语没有放在 {{.ru}} 里：{'、'.join(bare)}"))
             stress = need_stress_text or sec.startswith("生词")
-            vocab_sec = any(sec.startswith(s) for s in VOCAB_SECTIONS)
+            vocab_sec = is_vocab_section(sec)
             for seg in segs:
                 for w, morpheme in tokens(seg):
                     for cat, msg in check_word(w, morpheme, stress):
