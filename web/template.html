@@ -199,8 +199,15 @@ const rich = (tag, cls, text) => {
   e.append(withIpa(text.slice(last))); return e;
 };
 const plain = (text) => text.replace(RU_SPAN, "$1");
-let saved = {};
-function save() {}
+/* ---------- 答题记录：存在本人账号下，跨设备同步 ---------- */
+const items = {};          /* id → { card, fb, get(), put(entry) } */
+const state = {};          /* id → { ok, fb, v, q } */
+let store = null, saveTimer = null;
+function persist() {
+  if (!store) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { store.set({ items: state, at: Date.now() }).catch(() => {}); }, 600);
+}
 
 /* ---------- 答案比对：忽略重音、ё/е、大小写和标点 ---------- */
 const LATIN = /[a-z]/i;
@@ -232,8 +239,14 @@ if (location.hash === "#ex") show("ex");
 
 /* ---------- 练习 ---------- */
 let total = 0;
-const results = saved.results || {};
-function mark(id, ok) { results[id] = ok; saved.results = results; save(); updateScore(); }
+const results = {};
+const whyChecks = [];
+function mark(id, ok) {
+  results[id] = ok;
+  const it = items[id];
+  if (it) { state[id] = Object.assign({ ok, fb: it.fb.innerHTML }, it.get()); persist(); }
+  updateScore();
+}
 function updateScore() {
   const done = Object.keys(results).length;
   const right = Object.values(results).filter((v) => v === true).length;
@@ -241,7 +254,11 @@ function updateScore() {
   const a = el("span"); a.append("已做 ", el("b", null, done + " / " + total));
   const b = el("span"); b.append("答对 ", el("b", null, String(right)));
   const reset = el("button", "btn reset", "重做");
-  reset.onclick = () => location.reload();
+  reset.onclick = async () => {
+    reset.disabled = true;
+    if (store) { clearTimeout(saveTimer); try { await store.delete(); } catch (e) {} }
+    location.reload();
+  };
   s.append(a, b, reset);
 }
 function feedback(box, ok, correctText, extra) {
@@ -260,6 +277,7 @@ DATA.exercises.forEach((ex, n) => {
   const why = rich("div", "why", "解析：" + (ex.why || "")); why.hidden = true;
   const itemIds = [];
   const maybeWhy = () => { if (itemIds.every((id) => id in results)) why.hidden = false; };
+  whyChecks.push(maybeWhy);
 
   if (ex.type === "picture_qa") {
     const grid = el("div", "pics");
@@ -288,6 +306,10 @@ DATA.exercises.forEach((ex, n) => {
         feedback(fb, ok, "— " + it.qword + " э́то? — " + it.answer[0]);
         mark(id, ok); maybeWhy();
       };
+      items[id] = { card, fb,
+        get: () => ({ v: inp.value, q }),
+        put: (e) => { inp.value = e.v || ""; q = e.q || null;
+          opts.querySelectorAll(".opt").forEach((x) => x.setAttribute("aria-pressed", String(!!q && x.textContent.startsWith(q)))); } };
       card.append(opts, row, fb);
       grid.append(card);
     });
@@ -320,6 +342,14 @@ DATA.exercises.forEach((ex, n) => {
         };
         opts.append(b);
       });
+      items[id] = { card, fb,
+        get: () => ({ v: gap.isConnected ? gap.textContent : (opts.querySelector(".wrong") || opts.querySelector(".right") || {}).textContent }),
+        put: (e) => {
+          const pick = [...opts.querySelectorAll(".opt")].find((x) => x.textContent === e.v);
+          if (pick) pick.classList.add(e.ok ? "right" : "wrong");
+          if (!e.ok) opts.querySelectorAll(".opt").forEach((x) => { if (x.textContent === it.answer) x.classList.add("right"); });
+          if (gap.isConnected && e.v) { gap.textContent = e.v; gap.classList.toggle("ipa", isIpa(e.v)); }
+        } };
       card.append(stem, opts, fb);
       sec.append(card);
     });
@@ -344,6 +374,7 @@ DATA.exercises.forEach((ex, n) => {
         feedback(fb, ok, it.accept[0]);
         mark(id, ok); maybeWhy();
       };
+      items[id] = { card, fb, get: () => ({ v: inp.value }), put: (e) => { inp.value = e.v || ""; } };
       card.append(stem, row, fb);
       sec.append(card);
     });
@@ -370,6 +401,7 @@ DATA.exercises.forEach((ex, n) => {
         feedback(fb, ok, it.accept[0]);
         mark(id, ok); maybeWhy();
       };
+      items[id] = { card, fb, get: () => ({ v: inp.value }), put: (e) => { inp.value = e.v || ""; } };
       card.append(cue, row, fb);
       sec.append(card);
     });
@@ -385,6 +417,7 @@ DATA.exercises.forEach((ex, n) => {
       const row = el("div", "answer-row"); row.append(ta, go);
       const fb = el("div", "fb");
       go.onclick = () => grade(it, ta, go, fb, card, id, maybeWhy);
+      items[id] = { card, fb, get: () => ({ v: ta.value }), put: (e) => { ta.value = e.v || ""; } };
       card.append(q, row, fb);
       sec.append(card);
     });
@@ -395,6 +428,37 @@ DATA.exercises.forEach((ex, n) => {
   maybeWhy();
 });
 updateScore();
+
+function restore(saved) {
+  Object.entries(saved || {}).forEach(([id, e]) => {
+    const it = items[id];
+    if (!it || !e || typeof e.ok !== "boolean") return;
+    it.put(e);
+    it.card.classList.toggle("ok", e.ok); it.card.classList.toggle("no", !e.ok);
+    it.fb.className = "fb " + (e.ok ? "ok" : "no");
+    it.fb.innerHTML = e.fb || "";
+    results[id] = e.ok; state[id] = e;
+  });
+  whyChecks.forEach((f) => f());
+  updateScore();
+}
+(async () => {
+  if (!(window.claude && window.claude.use)) return;
+  const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+  if (!db || !user) return;
+  const uid = await user.id();
+  if (!uid) return;
+  const ref = db.collection("data/users/" + uid).doc("progress");
+  try {
+    const snap = await ref.get();
+    if (snap.exists) restore((snap.data() || {}).items);
+    store = ref;
+    if (Object.keys(state).length < Object.keys(results).length) {
+      Object.keys(results).forEach((id) => { if (!(id in state) && items[id]) state[id] = Object.assign({ ok: results[id], fb: items[id].fb.innerHTML }, items[id].get()); });
+      persist();
+    }
+  } catch (e) {}
+})();
 
 /* ---------- 翻译题：先比对参考译文，不一致再交给 Claude ---------- */
 let samplePromise = (window.claude && window.claude.use) ? window.claude.use("sample") : Promise.resolve(null);
