@@ -49,7 +49,7 @@ def vocab(md):
 
 
 def main(lesson):
-    md = exercises.expand((ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8"))
+    md = exercises.expand((ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8"), lesson)
     front = yaml.safe_load(md.split("\n---\n", 1)[0].lstrip("-\n"))
     ex = yaml.safe_load((ROOT / "exercises" / f"{lesson}.yaml").read_text(encoding="utf-8"))
     data = {

@@ -119,6 +119,12 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .pic svg { width: 76px; height: 76px; display: block; margin: 0 auto 4px; }
 .pic svg g { stroke: var(--ink); }
 .pic svg [fill="#2b2b2b"] { fill: var(--ink); }
+/* 课文缩略图：课文右上角，每课同尺寸 */
+.scene { margin: 4px 0 18px; padding: 12px; border: 1px solid var(--rule); border-radius: 8px; }
+.scene svg { display: block; width: 100%; height: auto; }
+.scene svg * { vector-effect: non-scaling-stroke; }
+.scene svg g { stroke: var(--ink); }
+.scene svg [fill="#2b2b2b"] { fill: var(--ink); }
 .pic .opts { justify-content: center; }
 .pic .opt { font-size: 14px; padding: 2px 6px; }
 .pic .answer-row { gap: 6px; }
@@ -145,6 +151,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
   .dialogue p { padding-left: 88px; text-indent: -88px; font-size: 17px; margin-bottom: 4px; }
   .dialogue .sp { width: 88px; font-size: 15px; }
   .pics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scene { padding: 8px; }
 }
 </style>
 

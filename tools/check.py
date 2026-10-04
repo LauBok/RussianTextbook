@@ -451,10 +451,41 @@ def check_exercise_yaml(stem, path):
             for k in spec["ru"]:
                 for s in ru_strings(it.get(k)):
                     ru.append((iw, s))
+            # 不加引号的流式列表会在逗号处把一句话拆开：整句答案都应以标点结尾
+            if t in ("translate", "rewrite", "picture_qa"):
+                for k in ("accept", "answer"):
+                    for x in it.get(k) or []:
+                        if isinstance(x, str) and not re.search(r"[.!?…»)]$", x.strip()):
+                            probs.append(("练习", f"{iw}：{k} 里的 {x!r} 不以标点结尾，可能是 YAML 没加引号被逗号拆开了"))
             for k in EX_ZH & set(it):
                 for s in ru_strings(it[k]):
                     zh.append((f"{iw}.{k}", s))
     return probs, ru, zh
+
+
+# ---------- 课文缩略图 ----------
+
+def check_scene(stem):
+    """img/<课>/scene.svg：240×160 横幅、线条风格（#2b2b2b，线宽 3），图里不放文字。"""
+    path = ROOT / "img" / stem / "scene.svg"
+    if not path.exists():
+        return []
+    svg = path.read_text(encoding="utf-8")
+    probs = []
+    if 'viewBox="0 0 240 160"' not in svg:
+        probs.append("scene.svg 的 viewBox 应为 0 0 240 160")
+    if re.search(r"<text\b", svg):
+        probs.append("scene.svg 里不放文字")
+    if 'stroke="#2b2b2b"' not in svg or 'stroke-width="3"' not in svg:
+        probs.append("scene.svg 应与其他插图同一线条风格：stroke=\"#2b2b2b\"、stroke-width=\"3\"")
+    if re.search(r'(fill|stroke)="(?!none|#2b2b2b)[^"]*"', svg):
+        probs.append("scene.svg 只用 #2b2b2b 一种颜色")
+    lib_path = ROOT / "img" / "characters.svg"
+    lib = set(re.findall(r'<symbol\b[^>]*\bid="([^"]+)"', lib_path.read_text(encoding="utf-8"))) if lib_path.exists() else set()
+    for ref in re.findall(r'<use\b[^>]*\bhref="#([^"]+)"', svg):
+        if ref not in lib:
+            probs.append(f"scene.svg 引用的人物 #{ref} 不在 img/characters.svg 里")
+    return probs
 
 
 # ---------- 主流程 ----------
@@ -584,6 +615,7 @@ class Checker:
                 out.append((None, "练习", "没有练习：缺少 exercises 数据和 <!-- EXERCISES --> 标记"))
             else:
                 out.append((None, "练习", f"缺少 exercises/{stem}.yaml"))
+        out += [(None, "插图", m) for m in check_scene(stem)]
         answer_md = les.path.with_name(f"{stem}-答案.md")
         if answer_md.exists():
             out.append((None, "练习", f"{answer_md.name} 应由 exercises/{stem}.yaml 生成，不手写"))

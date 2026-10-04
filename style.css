@@ -53,6 +53,11 @@ h3 { font: 700 10.5pt "PT Sans", "CJK Sans"; margin: 11pt 0 4pt; break-after: av
 .question p { margin: 0; }
 .question .ru { font-size: 12pt; font-weight: 700; }
 
+/* 课文缩略图：每课同一位置（课文右上角）、同一尺寸 */
+.scene { float: right; width: 66mm; height: 44mm; margin: 0 0 3mm 6mm; padding: 2mm; box-sizing: border-box; border: .6pt solid var(--rule); border-radius: 3pt; }
+.scene svg { display: block; width: 100%; height: 100%; }
+h2 { clear: both; }
+
 /* 课文：对话 */
 .dialogue p { display: flex; margin: 0 0 2pt; font-size: 12pt; line-height: 1.55; }
 .dialogue .sp { flex: 0 0 26mm; font-weight: 700; color: var(--accent); }

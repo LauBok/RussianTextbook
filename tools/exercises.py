@@ -147,8 +147,42 @@ def unit_vocab(first, last):
     return "\n".join(head + rows + [":::"])
 
 
-def expand(md):
-    return re.sub(r"<!-- UNIT_VOCAB (L\d+)-(L\d+) -->", lambda m: unit_vocab(m.group(1), m.group(2)), md)
+CHARACTERS = ROOT / "img" / "characters.svg"
+
+
+def character_symbols():
+    """img/characters.svg 里的人物：id → <symbol>…</symbol>。"""
+    if not CHARACTERS.exists():
+        return {}
+    text = CHARACTERS.read_text(encoding="utf-8")
+    return {m.group(1): m.group(0) for m in re.finditer(r'<symbol\b[^>]*\bid="([^"]+)"[^>]*>.*?</symbol>', text, re.S)}
+
+
+def with_characters(svg):
+    """插图里的 <use href="#人物"> 引用人物库，把用到的 <symbol> 内嵌进 <defs>，让每处人物画法一致。"""
+    ids = list(dict.fromkeys(re.findall(r'<use\b[^>]*\bhref="#([^"]+)"', svg)))
+    if not ids:
+        return svg
+    lib = character_symbols()
+    defs = "".join(lib[i] for i in ids if i in lib)
+    return re.sub(r"(<svg\b[^>]*>)", lambda m: m.group(1) + f"<defs>{defs}</defs>", svg, count=1)
+
+
+def scene(lesson):
+    """课文缩略图 img/<课>/scene.svg，内嵌为 <div class="scene">；没有图时返回空串。"""
+    path = ROOT / "img" / lesson / "scene.svg"
+    if not lesson or not path.exists():
+        return ""
+    svg = with_characters(re.sub(r"<\?xml[^>]*\?>\s*", "", path.read_text(encoding="utf-8")).strip())
+    return f'<div class="scene" aria-hidden="true">{svg}</div>\n\n'
+
+
+def expand(md, lesson=None):
+    md = re.sub(r"<!-- UNIT_VOCAB (L\d+)-(L\d+) -->", lambda m: unit_vocab(m.group(1), m.group(2)), md)
+    pic = scene(lesson)
+    if pic:
+        md = re.sub(r"^## 课文[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + pic, md, count=1, flags=re.M)
+    return md
 
 
 def main(lesson):
@@ -157,7 +191,7 @@ def main(lesson):
     gen = ROOT / "build" / "gen"
     gen.mkdir(parents=True, exist_ok=True)
 
-    src = expand((ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8"))
+    src = expand((ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8"), lesson)
     assert "<!-- EXERCISES -->" in src, f"{lesson}.md 缺少 <!-- EXERCISES --> 标记"
     (gen / f"{lesson}.md").write_text(src.replace("<!-- EXERCISES -->", pdf_exercises(data, img_dir)), encoding="utf-8")
 

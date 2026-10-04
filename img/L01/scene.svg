@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M6 148 H234"/>
+<path d="M10 14 H230 M10 14 V98 M230 14 V98 M10 98 H230"/>
+<path d="M65 14 V98 M120 14 V98 M175 14 V98" stroke-width="2"/>
+<path d="M136 52 C150 47 172 45 196 46 C204 46 208 49 204 52 C196 55 168 56 140 56 Z" stroke-width="2"/>
+<path d="M170 46 L160 34 H166 L182 46 M170 55 L162 64 H168 L182 55 M140 52 L134 44 H138 L146 49" stroke-width="2"/>
+<path d="M190 49 H198" stroke-width="1.5"/>
+<path d="M22 26 H54 V44 H22 Z" stroke-width="2"/>
+<path d="M26 32 H38 M42 32 H50 M26 38 H36 M42 38 H50" stroke-width="1.5"/>
+<path d="M38 14 V26" stroke-width="1.5"/>
+<path d="M78 88 L84 80 L90 88 M200 88 L206 80 L212 88" stroke-width="1.5"/>
+<circle cx="72" cy="78" r="10"/>
+<path d="M62 76 C60 62 84 60 83 74 C88 78 90 88 86 94"/>
+<path d="M68 79 H69 M76 79 H77" stroke-width="2.5"/>
+<path d="M70 84 C72 86 74 86 76 84" stroke-width="1.5"/>
+<path d="M66 88 C70 92 76 92 80 88" stroke-width="2"/>
+<path d="M60 146 L64 104 C65 94 81 94 82 104 L88 146 Z"/>
+<path d="M69 98 L66 118 M75 98 L78 118" stroke-width="1.5"/>
+<path d="M80 106 L98 98"/>
+<path d="M95 86 H117 V104 H95 Z" stroke-width="2.5"/>
+<path d="M99 100 L104 93 L108 97 L112 91 L115 100" stroke-width="1.5"/>
+<circle cx="102" cy="91" r="1.5" stroke-width="1.5"/>
+<path d="M68 146 V152 M80 146 V152" stroke-width="2"/>
+<circle cx="150" cy="76" r="10"/>
+<path d="M140 74 C140 64 160 64 160 72"/>
+<circle cx="145.5" cy="77" r="3.2" stroke-width="1.8"/>
+<circle cx="154.5" cy="77" r="3.2" stroke-width="1.8"/>
+<path d="M148.7 77 H151.3" stroke-width="1.8"/>
+<path d="M146 83 C148 84.5 152 84.5 154 83" stroke-width="1.5"/>
+<path d="M137 146 L140 100 C141 92 159 92 160 100 L163 146"/>
+<path d="M143 100 L126 102"/>
+<path d="M160 98 C172 98 175 112 172 128 H160"/>
+<path d="M162 104 C168 108 168 118 166 124" stroke-width="1.5"/>
+<path d="M146 146 V118 M154 146 V118" stroke-width="2"/>
+<path d="M146 152 V146 M154 152 V146" stroke-width="2"/>
+<path d="M180 108 H206 V146 H180 Z"/>
+<path d="M186 108 V96 H200 V108" stroke-width="2.5"/>
+<path d="M186 120 H200 M186 132 H200" stroke-width="1.5"/>
+<circle cx="184" cy="150" r="2.5" stroke-width="2"/>
+<circle cx="202" cy="150" r="2.5" stroke-width="2"/>
+<path d="M163 112 L181 108" stroke-width="2.5"/>
+</g></svg>
