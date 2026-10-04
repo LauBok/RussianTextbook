@@ -41,6 +41,7 @@ p { margin: 0 0 .55em; }
 .tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
 #pane-ex .score { margin-top: 18px; }
 .running { font: 13px var(--sans); color: var(--muted); }
+.running .toc { color: var(--accent); text-decoration: none; }
 .lesson-no { margin-top: 14px; font: 700 15px var(--sans); color: var(--accent); }
 h1 { font-size: 36px; line-height: 1.15; margin: 2px 0; font-weight: 700; text-wrap: balance; }
 .subtitle { font: 15px var(--sans); color: var(--muted); }
@@ -160,7 +161,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 
 <div class="page">
   <header class="lesson-head">
-    <div class="running" id="running"></div>
+    <div class="running"><a class="toc" href="index.html">目录</a> · <span id="running"></span></div>
     <div class="lesson-no" id="lno"></div>
     <h1 lang="ru" id="title"></h1>
     <div class="subtitle" id="sub"></div>
@@ -451,7 +452,7 @@ function restore(saved) {
   if (!db || !user) return;
   const uid = await user.id();
   if (!uid) return;
-  const ref = db.collection("data/users/" + uid).doc("progress");
+  const ref = db.collection("data/users/" + uid).doc("progress-" + DATA.lesson);
   try {
     const snap = await ref.get();
     if (snap.exists) restore((snap.data() || {}).items);
