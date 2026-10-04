@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M20 150 L17 157 M130 150 L131 157 M216 150 L219 157" stroke-width="1.5"/>
+<path d="M118 10 H234 V60 H118 Z"/>
+<path d="M114 64 H238" stroke-width="2.5"/>
+<path d="M126 20 Q130 16 134 20 Q138 24 142 20 M148 20 H166 M172 18 Q176 24 180 18 M188 20 H206 M126 32 H150 M156 30 Q160 36 164 30 Q168 26 172 30 M180 32 H214 M126 44 Q131 40 136 44 M142 44 H170 M178 42 Q182 48 186 42 M194 44 H210 M216 44 H226" stroke-width="1.5"/>
+<path d="M216 64 V60 M222 64 H230 V61 H222 Z" stroke-width="1.5"/>
+<path d="M64 108 H114" stroke-width="3"/>
+<path d="M68 108 V150 M110 108 V150" stroke-width="2.5"/>
+<path d="M72 108 V96 L84 92 V104 Z M84 92 L96 96 V108" stroke-width="2"/>
+<path d="M78 100 L80 98 L82 100 M88 99 L90 97 L92 99" stroke-width="1.2"/>
+<path d="M98 108 V100 H112 V108 M102 100 V108 M106 100 V108 M98 104 H112" stroke-width="1.5"/>
+<use href="#wang-noarms" x="26" y="50" width="40" height="100"/>
+<path d="M36 80 L33 105"/>
+<circle cx="32.8" cy="107.2" r="1.9" stroke-width="2"/>
+<path d="M56 80 L64 94"/>
+<circle cx="65" cy="95.8" r="1.9" stroke-width="2"/>
+<use href="#olga-noarms" x="150" y="50" width="40" height="100"/>
+<path d="M162 84 L152 70"/>
+<circle cx="150.8" cy="68.2" r="1.9" stroke-width="2"/>
+<path d="M149.6 66.4 L141 54" stroke-width="2"/>
+<path d="M178 84 L181.6 105"/>
+<circle cx="182" cy="107.2" r="1.9" stroke-width="2"/>
+</g></svg>

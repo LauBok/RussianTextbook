@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M50 150 L47 157 M140 150 L141 157 M226 150 L229 157" stroke-width="1.5"/>
+<path d="M150 0 V10" stroke-width="2"/>
+<path d="M140 20 L144 10 H156 L160 20 Z" stroke-width="2"/>
+<path d="M14 10 H44 V44 H14 Z" stroke-width="2.5"/>
+<path d="M14 18 H44 M20 6 V13 M38 6 V13" stroke-width="1.5"/>
+<path d="M19 24 H23 M27 24 H31 M35 24 H39 M19 30 H23 M27 30 H31 M35 30 H39 M19 36 H23 M27 36 H31" stroke-width="1.2"/>
+<use href="#misha-noarms" x="48" y="50" width="40" height="100"/>
+<path d="M59.6 99.4 L52 86 L50 72"/>
+<circle cx="49.8" cy="69.8" r="1.9" stroke-width="2"/>
+<path d="M76.4 99.4 L84 86 L86 72"/>
+<circle cx="86.2" cy="69.8" r="1.9" stroke-width="2"/>
+<path d="M44 66 L41 62 M90 66 L93 62 M47 60 L46 56 M88 60 L89 56" stroke-width="1.5"/>
+<use href="#wang-noarms" x="92" y="50" width="40" height="100"/>
+<path d="M102 80 L99 105"/>
+<circle cx="98.8" cy="107.2" r="1.9" stroke-width="2"/>
+<path d="M122 80 L132.6 88.6"/>
+<circle cx="134" cy="90" r="1.9" stroke-width="2"/>
+<circle cx="147" cy="84" r="13" stroke-width="2.5"/>
+<circle cx="147" cy="84" r="4" stroke-width="1.5"/>
+<path d="M151.0 84.0 L160.0 84.0 M150.5 86.0 L158.3 90.5 M149.0 87.5 L153.5 95.3 M147.0 88.0 L147.0 97.0 M145.0 87.5 L140.5 95.3 M143.5 86.0 L135.7 90.5 M143.0 84.0 L134.0 84.0 M143.5 82.0 L135.7 77.5 M145.0 80.5 L140.5 72.7 M147.0 80.0 L147.0 71.0 M149.0 80.5 L153.5 72.7 M150.5 82.0 L158.3 77.5" stroke-width="1.2"/>
+<circle cx="156.2" cy="86.5" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="153.7" cy="90.7" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="149.5" cy="93.2" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="144.5" cy="93.2" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="140.3" cy="90.7" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="137.8" cy="86.5" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="137.8" cy="81.5" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="140.3" cy="77.3" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="144.5" cy="74.8" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="149.5" cy="74.8" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="153.7" cy="77.3" r="0.9" fill="#2b2b2b" stroke="none"/><circle cx="156.2" cy="81.5" r="0.9" fill="#2b2b2b" stroke="none"/>
+<use href="#anna" x="162" y="50" width="40" height="100"/>
+<use href="#ivan" x="198" y="50" width="40" height="100"/>
+</g></svg>

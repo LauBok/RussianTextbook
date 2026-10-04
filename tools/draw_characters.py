@@ -1,5 +1,5 @@
 """python3 tools/draw_characters.py：生成 img/characters.svg：头部用局部坐标（脸圆心 0,0、半径 10）画一次，再缩放到头像和全身里，保证两处画法一致。"""
-import re, sys
+import math, re, sys
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else str(__import__("pathlib").Path(__file__).resolve().parent.parent / "img" / "characters.svg")
 NARG = {"M": 2, "L": 2, "T": 2, "H": 1, "V": 1, "C": 6, "S": 4, "Q": 4, "A": 7, "Z": 0}
@@ -66,6 +66,18 @@ W25 = {"stroke_width": "2.5"}
 
 EYES = [("dot", -3.6, 0.5, 1.25), ("dot", 3.6, 0.5, 1.25)]
 SMILE = [("p", "M-3 5.2 Q0 7.6 3 5.2", W18)]
+
+def _curls(n=9, r=11.2, a0=196, a1=-16, bump=2.5):
+    """迪马的卷发外缘：沿头顶一串向外凸的小弧。"""
+    pts = [(r * math.cos(math.radians(a0 + (a1 - a0) * i / n)), -r * math.sin(math.radians(a0 + (a1 - a0) * i / n))) for i in range(n + 1)]
+    pts[0], pts[-1] = (-9.6, -2.8), (9.6, -2.8)
+    d = f"M{fmt(pts[0][0])} {fmt(pts[0][1])}"
+    for x, y in pts[1:]:
+        d += f" A{bump} {bump} 0 0 1 {fmt(x)} {fmt(y)}"
+    return d
+
+
+DIMA_CURLS = _curls()
 
 HEADS = {
     # 王磊：短直发、额前一撮，圆框眼镜
@@ -142,6 +154,15 @@ HEADS = {
         ("p", "M-5.2 0.6 Q-3.6 -0.8 -2 0.6 M5.2 0.6 Q3.6 -0.8 2 0.6", W18),
         ("p", "M-3 5.2 Q0 7.8 3 5.2", W18),
         ("p", "M-6.2 3.2 L-7 4.2 M6.2 3.2 L7 4.2", W15),
+    ],
+    # 迪马：浅色短卷发（只勾轮廓不涂色），咧嘴笑
+    "dima": [
+        ("p", "M-9.6 -2.8 A10 10 0 1 0 9.6 -2.8"),
+        ("p", DIMA_CURLS, W25),
+        ("p", "M-9.6 -2.8 Q-8 -6.8 -5 -4.8 Q-2.6 -8 0.2 -5.2 Q3 -8 5.6 -4.9 Q8.2 -6.8 9.6 -2.8", W2),
+        ("p", "M-5.6 -2 Q-3.8 -3.2 -2 -2 M5.6 -2 Q3.8 -3.2 2 -2", W15),
+        ("dot", -3.7, 0.7, 1.2), ("dot", 3.7, 0.7, 1.2),
+        ("p", "M-4 4.4 Q0 9.2 4 4.4 Q0 5.8 -4 4.4 Z", W18),
     ],
     # 穆尔卡：猫头，额头条纹
     "murka": [
@@ -235,6 +256,18 @@ BODIES = {
         ("p", "M35 62.4 Q35.2 58.6 31.4 58.6 M35 62.4 V98", W25),
         ("p", "M13.4 97.6 H18 M21.6 97.6 H26.2", W25),
     ]),
+    "dima": ((0.84, 20, 14.8), [
+        ("p", "M18.4 23 V26.4 M21.6 23 V26.4", W2),
+        ("p", "M9.6 30.5 Q10.4 26.8 20 26.8 Q29.6 26.8 30.4 30.5 L30.8 58.4 Q30.8 61 28.4 61 H11.6 Q9.2 61 9.2 58.4 Z"),
+        ("p", "M13 29.4 Q13.6 24.4 18.4 25.8 M27 29.4 Q26.4 24.4 21.6 25.8", W2),
+        ("p", "M17.6 28.8 V36.4 M22.4 28.8 V35.6", W15),
+        ("dot", 17.6, 37.4, 0.8), ("dot", 22.4, 36.6, 0.8),
+        ("p", "M9.4 57 H30.6 M13.6 57 L14.8 47.4 H25.2 L26.4 57", W15),
+        ("p", "M11.6 29.6 L30.4 53.6 M10 32 L28.8 56", W2),
+        ("arm", "M9.6 30.5 L6.6 55"), ("armc", 6.4, 57.2), ("arm", "M30.4 30.5 L33.4 55"), ("armc", 33.6, 57.2),
+        ("p", "M11.6 61 L12 96 H18.4 L20 67 L21.6 96 H28 L28.4 61"),
+        ("p", "M10.2 98.6 Q9.8 95.8 12.4 95.8 H18.6 V98.6 Z M29.8 98.6 Q30.2 95.8 27.6 95.8 H21.4 V98.6 Z", W2),
+    ]),
 }
 
 
@@ -261,10 +294,10 @@ MURKA_BODY = [
 
 G = '<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'
 NAMES = {"wang": "王磊", "anna": "安娜", "misha": "米沙", "ivan": "伊万·谢尔盖耶维奇", "maria": "玛丽亚·尼古拉耶夫娜",
-         "olga": "奥尔加·维克托罗夫娜", "babushka": "奶奶", "murka": "猫穆尔卡"}
+         "olga": "奥尔加·维克托罗夫娜", "babushka": "奶奶", "dima": "迪马", "murka": "猫穆尔卡"}
 
 parts = ['<svg xmlns="http://www.w3.org/2000/svg">\n<!-- 人物造型库：<id>-head 头像 30×30，<id> 全身 40×100（猫 40×30），<id>-noarms 不带手臂、供插图自画姿势。按 1:1 用 <use href="#id" x y width height>。 -->\n']
-for cid in ["wang", "anna", "misha", "ivan", "maria", "olga", "babushka", "murka"]:
+for cid in ["wang", "anna", "misha", "ivan", "maria", "olga", "babushka", "dima", "murka"]:
     s, cx, cy = HEAD_POS.get(cid, HEAD_DEFAULT)
     parts.append(f'<!-- {NAMES[cid]} -->\n')
     parts.append(f'<symbol id="{cid}-head" viewBox="0 0 30 30">{G}{render(HEADS[cid], s, cx, cy)}</g></symbol>\n')
