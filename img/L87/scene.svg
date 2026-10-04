@@ -21,6 +21,7 @@
 <use href="#murka" x="62" y="80" width="40" height="30"/>
 <path d="M106.5 94 H113.5 Q115 94 115 95.5 V109 H105 V95.5 Q105 94 106.5 94 Z" stroke-width="2"/>
 <path d="M107.2 97 H112.8 V105 H107.2 Z" stroke-width="1.2"/>
+<circle cx="110" cy="107" r="0.7" fill="#2b2b2b" stroke="none"/>
 <use href="#wang-noarms" x="128" y="50" width="40" height="100"/>
 <path d="M138 80 L121.4 91.6"/>
 <circle cx="119.6" cy="92.8" r="1.9" stroke-width="2"/>
