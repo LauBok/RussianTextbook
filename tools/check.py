@@ -198,7 +198,7 @@ class Lesson:
                 m = re.match(r"\s*\[(.+?)\]\{\.ru\}", cell[0])
                 if m:
                     segs, _ = ru_segments(ln)
-                    pos = strip_markup(cell[1]).split(",")[0].strip() if len(cell) > 1 else ""
+                    pos = re.split(r"[\s,(]", strip_markup(cell[1]).strip())[0] if len(cell) > 1 else ""
                     self.vocab.append((m.group(1).strip(), " ".join(segs), i, pos))
             if fence and fence[-1].startswith("names"):
                 segs, _ = ru_segments(ln)
