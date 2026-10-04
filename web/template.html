@@ -181,8 +181,8 @@ const $ = (id) => document.getElementById(id);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const ru = (tag, cls, text) => { const e = el(tag, cls, text); e.lang = "ru"; return e; };
 /* 练习里的 [音标] 用 IPA 字体 */
-const IPA = /\[[^\[\]\u0400-\u04ff]+\]/g;
-const isIpa = (t) => /^\[[^\[\]\u0400-\u04ff]+\]$/.test(t);
+const IPA = /\[[^\[\]\u0400-\u04ff\d]+\](?!\{)/g;
+const isIpa = (t) => /^\[[^\[\]\u0400-\u04ff\d]+\]$/.test(t);
 const withIpa = (text) => {
   const f = document.createDocumentFragment(); let last = 0;
   for (const m of text.matchAll(IPA)) { f.append(text.slice(last, m.index), el("span", "ipa", m[0])); last = m.index + m[0].length; }

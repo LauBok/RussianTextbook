@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parent.parent
 NUM = "一二三四五六七八九十"
 
 
-IPA = re.compile(r"\[[^\[\]\u0400-\u04ff]+\]")
+IPA = re.compile(r"\[[^\[\]\u0400-\u04ff\d]+\](?!\{)")
 
 
 def ipa(s):
@@ -99,7 +99,8 @@ def key_markdown(data):
                     line += "　也可：" + "；".join(ru(a) for a in alt)
                 out.append(line)
         if ex.get("why"):
-            out += ["", f"[解析：{ipa(ex['why'])}]{{.why}}", ""]
+            out += ["", f"[解析：{ipa(ex['why'])}]{{.why}}"]
+        out.append("")
     return "\n".join(out)
 
 
