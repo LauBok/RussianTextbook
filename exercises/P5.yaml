@@ -1,0 +1,72 @@
+lesson: P5
+grammar: "元音字母 [И]{.ru}、[Ы]{.ru}、[Э]{.ru}、[Ю]{.ru}、[Я]{.ru}、[Ё]{.ru} 和半元音字母 [Й]{.ru} 的读音和写法；硬元音字母和软元音字母；元音 [ы]{.ru}。"
+exercises:
+
+  - id: e1
+    type: choice
+    task: 选出与硬元音字母相对的软元音字母。
+    why: "两套字母一一对应：[а]{.ru}—[я]{.ru}、[э]{.ru}—[е]{.ru}、[ы]{.ru}—[и]{.ru}、[о]{.ru}—[ё]{.ru}、[у]{.ru}—[ю]{.ru}。容易错的是 [э]{.ru} 和 [е]{.ru}：[е]{.ru} 是软元音字母，[э]{.ru} 才是硬的；还有 [о]{.ru} 的软元音字母是 [ё]{.ru}，不是 [е]{.ru}。"
+    items:
+      - stem: а — ___
+        options: [я, е, ю]
+        answer: я
+      - stem: у — ___
+        options: [и, ю, ё]
+        answer: ю
+      - stem: о — ___
+        options: [е, ё, ю]
+        answer: ё
+      - stem: ы — ___
+        options: [и, й, е]
+        answer: и
+      - stem: э — ___
+        options: [я, и, е]
+        answer: е
+
+  - id: e2
+    type: choice
+    task: 选出正确的音标。
+    why: "[ы]{.ru} 读 [ɨ]，[и]{.ru} 在辅音后读 [i] 并使辅音变软，所以 [мы]{.ru} 是 [mɨ]，[кино́]{.ru} 里的 [к]{.ru} 是软的 [kʲ]。[ю]{.ru}、[ё]{.ru} 在词首读 [ju]、[jo]，前面的 [j] 不能丢。[э]{.ru} 在词首就是 [ɛ]，前面没有 [j]。[й]{.ru} 和前面的元音合成一个音节。"
+    items:
+      - stem: мы — ___
+        options: ["[mi]", "[mɨ]"]
+        answer: "[mɨ]"
+      - stem: кино́ — ___
+        options: ["[kʲɪˈno]", "[kɨˈno]"]
+        answer: "[kʲɪˈno]"
+      - stem: юг — ___
+        options: ["[uk]", "[juk]"]
+        answer: "[juk]"
+      - stem: ёлка — ___
+        options: ["[ˈjoɫkə]", "[ˈoɫkə]"]
+        answer: "[ˈjoɫkə]"
+      - stem: э́то — ___
+        options: ["[ˈjetə]", "[ˈɛtə]"]
+        answer: "[ˈɛtə]"
+      - stem: мой — ___
+        options: ["[moj]", "[ˈmoi]"]
+        answer: "[moj]"
+
+  - id: e3
+    type: fill
+    task: 根据读音写出单词。
+    why: "[ɨ] 写作 [ы]{.ru}；词首的 [ja]、[ju]、[jo] 分别写作 [я]{.ru}、[ю]{.ru}、[ё]{.ru}，不写成 [й]{.ru} 加元音；元音后的 [j] 写作 [й]{.ru}。[ё]{.ru} 一律写出两个点。[juk] 末尾听到的是 [k]，写作 [г]{.ru}，和第 3 课的 [флаг]{.ru} 一样。"
+    items:
+      - stem: "[mɨ] → ___"
+        accept: [мы]
+      - stem: "[tɨ] → ___"
+        accept: [ты]
+      - stem: "[vɨ] → ___"
+        accept: [вы]
+      - stem: "[ja] → ___"
+        accept: [я]
+      - stem: "[moj] → ___"
+        accept: [мой]
+      - stem: "[ˈɛtə] → ___"
+        accept: [э́то]
+      - stem: "[juk] → ___"
+        accept: [юг]
+      - stem: "[ˈjoɫkə] → ___"
+        accept: [ёлка]
+      - stem: "[kʲɪˈno] → ___"
+        accept: [кино́]

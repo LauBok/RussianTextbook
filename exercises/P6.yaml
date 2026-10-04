@@ -1,0 +1,66 @@
+lesson: P6
+grammar: "软音符号 [ь]{.ru} 和硬音符号 [ъ]{.ru}；软硬辅音的对立；分隔符号。"
+exercises:
+
+  - id: e1
+    type: choice
+    task: 选出词中所给辅音的读音。
+    why: "辅音后面写 [ь]{.ru} 或软元音字母，读软音；什么都不写或写硬元音字母，读硬音。[мат]{.ru} 和 [мать]{.ru}、[брат]{.ru} 和 [брать]{.ru} 只差词末辅音的硬软，词义完全不同。[письмо́]{.ru} 里的 [ь]{.ru} 在另一个辅音前，同样表示 [с]{.ru} 是软的。"
+    items:
+      - stem: "мат: т = ___"
+        options: ["[t]", "[tʲ]"]
+        answer: "[t]"
+      - stem: "мать: т = ___"
+        options: ["[t]", "[tʲ]"]
+        answer: "[tʲ]"
+      - stem: "брат: т = ___"
+        options: ["[tʲ]", "[t]"]
+        answer: "[t]"
+      - stem: "день: н = ___"
+        options: ["[n]", "[nʲ]"]
+        answer: "[nʲ]"
+      - stem: "письмо́: с = ___"
+        options: ["[s]", "[sʲ]"]
+        answer: "[sʲ]"
+
+  - id: e2
+    type: choice
+    task: 选出正确的音标。
+    why: "分隔符号 [ь]{.ru}、[ъ]{.ru} 后面的 [я]{.ru}、[е]{.ru} 要读出 [j]：[семья́]{.ru} 是 [mʲja]，不是 [mʲa]；[съел]{.ru} 是 [sje]，[с]{.ru} 保持硬音。[ночь]{.ru} 里的 [ч]{.ru} 永远是软的，[ь]{.ru} 不改变读音。词末的软辅音不能丢，[брать]{.ru} 不能读成 [brat]。"
+    items:
+      - stem: семья́ — ___
+        options: ["[sʲɪˈmʲa]", "[sʲɪmʲˈja]"]
+        answer: "[sʲɪmʲˈja]"
+      - stem: съел — ___
+        options: ["[sjeɫ]", "[sʲeɫ]"]
+        answer: "[sjeɫ]"
+      - stem: ночь — ___
+        options: ["[notɕ]", "[nots]"]
+        answer: "[notɕ]"
+      - stem: брать — ___
+        options: ["[brat]", "[bratʲ]"]
+        answer: "[bratʲ]"
+
+  - id: e3
+    type: fill
+    task: 根据读音写出单词。
+    why: "词末和辅音前的软辅音用 [ь]{.ru} 表示：[matʲ] 写作 [мать]{.ru}，[dʲenʲ] 写作 [день]{.ru}，软 [д]{.ru} 由后面的 [е]{.ru} 表示，词末的软 [н]{.ru} 由 [ь]{.ru} 表示。[ч]{.ru} 本来就是软的，但 [ночь]{.ru} 末尾照样要写 [ь]{.ru}，这一点要单独记。辅音后的 [j] 加元音，在前缀后写 [ъ]{.ru}（[подъе́зд]{.ru}、[съел]{.ru}），其他地方写 [ь]{.ru}（[семья́]{.ru}）。"
+    items:
+      - stem: "[mat] → ___"
+        accept: [мат]
+      - stem: "[matʲ] → ___"
+        accept: [мать]
+      - stem: "[bratʲ] → ___"
+        accept: [брать]
+      - stem: "[dʲenʲ] → ___"
+        accept: [день]
+      - stem: "[notɕ] → ___"
+        accept: [ночь]
+      - stem: "[sʲɪmʲˈja] → ___"
+        accept: [семья́]
+      - stem: "[sjeɫ] → ___"
+        accept: [съел]
+      - stem: "[pɐˈdjest] → ___"
+        accept: [подъе́зд]
+      - stem: "[pʲɪsʲˈmo] → ___"
+        accept: [письмо́]
