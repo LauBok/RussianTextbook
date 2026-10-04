@@ -15,7 +15,7 @@
 | `template.html`、`style.css`、`zh-punct.lua` | 印刷版模板、样式、汉语标点过滤器 |
 | `build.sh` | 生成 PDF：`./build.sh L01` |
 | `tools/exercises.py` | 由 YAML 生成 PDF 练习节、答案附录和交互页数据 |
-| `tools/web.py`、`web/template.html` | 生成交互课页：`python3 tools/web.py L01` |
+| `tools/web.py`、`web/template.html` | 生成交互课页：`python3 tools/web.py L01`；发布为 artifact 时声明 capabilities `sample`（AI 批改）、`db` 和 `user`（答题记录） |
 | `tools/check.py` | 编写规范检查（词表累积、重音、ё、{.ru} 标记、练习格式）：`python3 tools/check.py L01` |
 | `tools/tts_yandex.py` | 用 Yandex SpeechKit 逐句生成音频（尚未启用） |
 
