@@ -1,7 +1,7 @@
 <title>{{TITLE}}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Marck+Script&family=Charis+SIL&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=PT+Sans:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Marck+Script&family=Charis+SIL&display=swap">
 <style>
 /* 布局：与印刷版同一版式的单栏课本页，A4 正文宽度约 680px，手机全宽 */
 :root {
@@ -14,6 +14,7 @@
   --good: #2e6f4c;
   --bad: #a8332a;
   --serif: "PT Serif", "Noto Serif SC", "Songti SC", serif;
+  --kai: "LXGW WenKai", "Kaiti SC", "STKaiti", "KaiTi", "楷体", "Noto Serif SC", serif;
   --sans: "PT Sans", "Noto Sans SC", "PingFang SC", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
@@ -54,8 +55,8 @@ h3 { font: 700 15px var(--sans); margin: 16px 0 6px; }
 .question .ru { font-size: 17px; font-weight: 700; }
 
 /* 课文对话 */
-.dialogue p { padding-left: var(--sp, 7.4em); text-indent: calc(-1 * var(--sp, 7.4em)); margin: 0 0 3px; font-size: 18px; line-height: 1.55; }
-.dialogue .sp { display: inline-block; width: var(--sp, 7.4em); text-indent: 0; white-space: nowrap; vertical-align: top; font-weight: 700; color: var(--accent); }
+.dialogue p { font-style: italic; padding-left: var(--sp, 7.4em); text-indent: calc(-1 * var(--sp, 7.4em)); margin: 0 0 3px; font-size: 18px; line-height: 1.55; }
+.dialogue .sp { display: inline-block; width: var(--sp, 7.4em); text-indent: 0; white-space: nowrap; vertical-align: top; font-style: normal; font-weight: 700; color: var(--accent); }
 .dialogue .sp::after { content: ":"; }
 
 /* 表格 */
@@ -78,8 +79,8 @@ td { border-bottom: 1px solid var(--rule); padding: 6px 8px; vertical-align: top
 .ic::after { content: attr(data-n); font: 700 10px var(--sans); color: var(--accent); vertical-align: super; margin-left: 1px; }
 
 /* 参考译文 */
-.translation p { padding-left: var(--sp, 3.8em); text-indent: calc(-1 * var(--sp, 3.8em)); margin: 0 0 2px; }
-.translation .sp { display: inline-block; width: var(--sp, 3.8em); text-indent: 0; white-space: nowrap; vertical-align: top; font-weight: 700; }
+.translation p { font-family: var(--kai); padding-left: var(--sp, 3.8em); text-indent: calc(-1 * var(--sp, 3.8em)); margin: 0 0 2px; }
+.translation .sp { font-family: var(--serif); display: inline-block; width: var(--sp, 3.8em); text-indent: 0; white-space: nowrap; vertical-align: top; font-weight: 700; }
 .translation .sp::after { content: "："; }
 
 /* 练习：沿用印刷版的题目样式，作答控件做成书上的横线和小按钮 */
