@@ -6,8 +6,8 @@
 <path d="M24 22 A7 7 0 1 0 31 30 A5.5 5.5 0 1 1 24 22 Z" stroke-width="1.5"/>
 <path d="M54 20 V26 M51 23 H57 M56 52 V58 M53 55 H59 M20 56 V60 M18 58 H22" stroke-width="1.2"/>
 <path d="M14 150 V96 M14 112 H200 M14 124 H200 M200 150 V108" stroke-width="3"/>
-<path d="M18 112 Q18 104 26 104 H44 Q50 104 50 112" stroke-width="2"/>
-<use href="#wang-head" x="22" y="84" width="30" height="30"/>
+<path d="M18 112 Q18 104 24 104 M48 104 Q52 104 52 112" stroke-width="2"/>
+<use href="#wang-head" x="22" y="79" width="30" height="30"/>
 <path d="M44 104 Q60 95 88 98 Q130 101 168 100 Q190 100 196 112" stroke-width="2.5"/>
 <path d="M60 112 Q62 104 70 101 M120 112 Q122 106 126 101" stroke-width="1.5"/>
 <path d="M208 150 V128 Q208 122 214 122 H230 Q236 122 236 128 V150 Z" stroke-width="2.5"/>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M108 8 H192 V64 H108 Z" stroke-width="2.5"/>
+<path d="M124 52 V30 L130 22 L136 30 V52 M127 30 H133 M130 22 V16 M128 18 L130 14 L132 18" stroke-width="1.5"/>
+<path d="M114 52 V40 H124 M136 40 H146 V52 M114 40 V37 M118 40 V37 M140 40 V37 M144 40 V37" stroke-width="1.5"/>
+<path d="M112 56 Q130 53 150 56 Q170 59 188 56 M112 61 Q130 58 150 61 Q170 64 188 61" stroke-width="1.2"/>
+<path d="M150 48 Q160 34 172 30 Q178 28 186 34" stroke-width="2"/>
+<path d="M150 48 L154 44 M172 30 V36" stroke-width="1.2"/>
+<path d="M116 112 H190 V117 H116 Z" stroke-width="2.5"/>
+<path d="M122 117 V150 M184 117 V150" stroke-width="2.5"/>
+<path d="M140 112 V106 H160 V112 M142 106 V102 H158 V106" stroke-width="1.5"/>
+<use href="#olga" x="198" y="51" width="40" height="100"/>
+<use href="#wang-noarms" x="62" y="50" width="40" height="100"/>
+<path d="M72 80 L69 105"/>
+<circle cx="68.74" cy="107.18" r="1.9" stroke-width="2"/>
+<path d="M92 80 L102 70 L108 56"/>
+<circle cx="108.87" cy="53.98" r="1.9" stroke-width="2"/>
+<circle cx="26" cy="86" r="8.2"/>
+<path d="M17.8 85.5 C17.8 73.8 34.2 73.8 34.2 85.5 L32.2 82.4 H19.8 Z" stroke-width="2.5"/>
+<circle cx="23" cy="86.8" r="0.95" fill="#2b2b2b" stroke="none"/>
+<circle cx="29" cy="86.8" r="0.95" fill="#2b2b2b" stroke="none"/>
+<path d="M24 90.2 Q26 91.8 28 90.2" stroke-width="1.8"/>
+<path d="M24.4 95 V98 M27.6 95 V98" stroke-width="2"/>
+<path d="M17 101.4 Q17.8 98 26 98 Q34.2 98 35 101.4 L35.5 120 H16.5 Z"/>
+<path d="M22 98.4 L26 105 L30 98.4" stroke-width="1.5"/>
+<path d="M17 101.4 L16 114 L23 117"/>
+<circle cx="25.02" cy="117.87" r="1.9" stroke-width="2"/>
+<path d="M35 101.4 L37 108 L41 98"/>
+<circle cx="41.82" cy="95.96" r="1.9" stroke-width="2"/>
+<path d="M2 120 H52 V125 H2 Z" stroke-width="2.5"/>
+<path d="M8 125 V150 M46 125 V150" stroke-width="2.5"/>
+<path d="M10 120 L14 116 H30 L34 120" stroke-width="1.5"/>
+</g></svg>

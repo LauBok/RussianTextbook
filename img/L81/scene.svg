@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M150 10 H214 V64 H150 Z"/>
+<path d="M182 10 V64 M150 37 H214" stroke-width="2"/>
+<path d="M146 64 H218" stroke-width="2.5"/>
+<path d="M164 18 A6 6 0 1 0 170 25 A4.6 4.6 0 1 1 164 18 Z" stroke-width="1.5"/>
+<path d="M200 20 V24 M198 22 H202 M162 48 V52 M160 50 H164 M202 48 V52 M200 50 H204" stroke-width="1.2"/>
+<path d="M4 150 V36 H58 V150" stroke-width="2.5"/>
+<use href="#maria-noarms" x="12" y="51" width="40" height="100"/>
+<path d="M23 81 L20 104"/>
+<circle cx="19.72" cy="106.18" r="1.9" stroke-width="2"/>
+<path d="M41 81 L49 75 L53 65"/>
+<circle cx="53.82" cy="62.96" r="1.9" stroke-width="2"/>
+<path d="M60 60 Q64 64 60 68 M65 56 Q71 64 65 72" stroke-width="1.5"/>
+<path d="M80 150 V96 M80 116 H200 M80 128 H200 M200 150 V108" stroke-width="3"/>
+<path d="M84 116 Q84 108 89 108 M114 108 Q118 108 118 116" stroke-width="2"/>
+<use href="#misha-head" x="86" y="80" width="30" height="30"/>
+<path d="M110 108 Q124 98 150 102 Q178 104 194 106 Q200 108 198 116" stroke-width="2.5"/>
+<path d="M130 116 Q132 108 138 103 M170 116 Q172 110 176 105" stroke-width="1.5"/>
+<path d="M96 82 L100 78 L96 78 L100 74 M104 76 L107 73 L104 73 L107 70" stroke-width="1.2"/>
+<path d="M206 150 V116 H236 V150 M206 130 H236" stroke-width="2.5"/>
+<circle cx="221" cy="104" r="8" stroke-width="2.5"/>
+<path d="M221 99 V104 L225 106" stroke-width="1.8"/>
+<path d="M214 97 L211 94 M228 97 L231 94 M215 112 L213 116 M227 112 L229 116" stroke-width="2"/>
+<path d="M208 92 Q205 96 207 100 M234 92 Q237 96 235 100" stroke-width="1.2"/>
+</g></svg>

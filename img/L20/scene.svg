@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M8 14 H68 V56 H8 Z"/>
+<path d="M6 60 H70" stroke-width="2"/>
+<path d="M16 26 Q20 22 24 26 T32 26 T40 26 M16 36 Q20 32 24 36 T32 36 M16 46 Q20 42 24 46 T32 46 T40 46 T48 46" stroke-width="1.5"/>
+<path d="M50 24 L58 32 M58 24 L50 32" stroke-width="1.5"/>
+<path d="M22 60 H30" stroke-width="1.5"/>
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+<use href="#olga" x="72" y="50" width="40" height="100"/>
+<use href="#wang-noarms" x="138" y="50" width="40" height="100"/>
+<path d="M148 80 L131 73"/>
+<circle cx="129.2" cy="72.4" r="1.9" stroke-width="2"/>
+<g transform="rotate(8 122 68)">
+<path d="M112 58 H130 V76 H112 Z" stroke-width="2"/>
+<path d="M115 73 V66 H121 V73 M121 69 H127 V73" stroke-width="1.5"/>
+</g>
+<path d="M168 80 L181 101"/>
+<circle cx="182" cy="103" r="1.9" stroke-width="2"/>
+<path d="M178 106 H234"/>
+<path d="M182 106 V150 M230 106 V150"/>
+<path d="M188 104 L206 101 L208 105" stroke-width="2"/>
+<path d="M212 106 V96 H230 V106 M212 96 L221 101.5 L230 96" stroke-width="2"/>
+</g></svg>

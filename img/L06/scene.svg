@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="L06-k1"><path d="M-60 -60 L300 -60 L300 124 L-60 124 Z"/></clipPath><clipPath id="L06-k2"><path d="M-60 -60 L300 -60 L300 220 L-60 220 Z M20 105 L48 105 L48 118 L20 118 Z" clip-rule="evenodd"/></clipPath><clipPath id="L06-k3"><path d="M-60 -60 L300 -60 L300 118 L-60 118 Z"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+<path d="M78 8 H128 V44 H78 Z" stroke-width="2.5"/>
+<path d="M103 8 V44 M78 22.4 H128" stroke-width="2"/>
+<path d="M75 46 H131" stroke-width="2.5"/>
+<path d="M93 14 A6 6 0 1 0 99 24 A5 5 0 1 1 93 14 Z" stroke-width="1.5"/>
+<path d="M116 26 V30 M114 28 H118 M108 14 V17 M106.5 15.5 H109.5" stroke-width="1.5"/>
+<path d="M6 150 V112 Q6 106 12 106 Q16 106 16 112 V124 M54 150 V112 Q54 106 48 106 Q44 106 44 112 V124"/>
+<path d="M6 112 Q4 92 12 88 M54 112 Q56 92 48 88" stroke-width="2.5"/>
+<path d="M16 124 H44" stroke-width="3"/>
+<path d="M6 150 H54" stroke-width="2.5"/>
+<g clip-path="url(#L06-k2)"><g clip-path="url(#L06-k1)"><use href="#anna-noarms" x="14" y="58" width="40" height="100"/></g></g>
+<path d="M25 124 L24.4 128 Q34 130 43.6 128 L43 124" stroke-width="2.5"/>
+<path d="M29.5 129.4 V144.5 M38.5 129.4 V144.5" stroke-width="2.5"/>
+<path d="M27.2 145.6 H31.4 M36.6 145.6 H40.8" stroke-width="2.5"/>
+<path d="M34 107 Q27.5 104.5 21 106 V116 Q27.5 114.5 34 117 Q40.5 114.5 47 116 V106 Q40.5 104.5 34 107 V117" stroke-width="2"/>
+<path d="M23.6 109.5 H30.88 M37.12 109.5 H44.4" stroke-width="1.2"/>
+<path d="M23.6 112.5 H30.88 M37.12 112.5 H44.4" stroke-width="1.2"/>
+<path d="M26 92 L20 108"/>
+<circle cx="20" cy="111" r="1.9" stroke-width="2"/>
+<path d="M42 92 L48 108"/>
+<circle cx="48" cy="111" r="1.9" stroke-width="2"/>
+<use href="#wang-noarms" x="92" y="50" width="40" height="100"/>
+<path d="M102 80 L94 70 L104 60" stroke-width="3"/>
+<path d="M122 80 L130 70 L120 60" stroke-width="3"/>
+<path d="M150 118 H236" stroke-width="3"/>
+<path d="M154 118 V150 M232 118 V150" stroke-width="2.5"/>
+<path d="M154 118 V140 H184 V118 M154 129 H184" stroke-width="2"/>
+<path d="M166 123.5 H172 M166 134.5 H172" stroke-width="1.5"/>
+<g clip-path="url(#L06-k3)"><use href="#misha-noarms" x="180" y="50" width="40" height="100"/></g>
+<path d="M206 118 V112 H226 V118 M208 114 H224" stroke-width="1.5"/>
+<path d="M191.6 99.4 L186 114 L192 116"/>
+<circle cx="194.09" cy="116.7" r="1.9" stroke-width="2"/>
+<path d="M208.4 99.4 L216 90 L216 80"/>
+<circle cx="216" cy="77.8" r="1.9" stroke-width="2"/>
+<path d="M207 74 H225 M216 70 L218 74 L216 78 M208 71 V77" stroke-width="2"/>
+<path d="M204 82 Q200 85 196 83" stroke-width="1.5"/>
+</g></svg>

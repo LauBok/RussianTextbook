@@ -79,15 +79,15 @@
 <path d="M115.6 149.8 H122.6 M125.4 149.8 H132.4" stroke-width="2.5"/>
 <path d="M114 82 L110 106"/>
 <circle cx="109.6" cy="108.2" r="1.9" stroke-width="2"/>
-<path d="M134 82 L138 104"/>
-<circle cx="138.4" cy="106.2" r="1.9" stroke-width="2"/>
+<path d="M134 82 L132 106"/>
+<circle cx="131.8" cy="108.2" r="1.9" stroke-width="2"/>
 <use href="#wang-noarms" x="150" y="52" width="40" height="100"/>
-<path d="M160 82 L150 98 L158 86"/>
-<circle cx="159.2" cy="84.2" r="1.9" stroke-width="2"/>
+<path d="M160 82 L151 98"/>
+<circle cx="149.9" cy="99.9" r="1.9" stroke-width="2"/>
 <path d="M180 82 L183 107"/>
 <circle cx="183.3" cy="109.2" r="1.9" stroke-width="2"/>
-<path d="M155 86 V70 L159 64 H167 L171 70 V86 Z M155 70 H171 M159 64 V62 H167 V64" stroke-width="2"/>
-<path d="M159 77 Q163 74 167 77" stroke-width="1.5"/>
+<path d="M139 106 V90 L142 85 H148 L151 90 V106 Z M139 90 H151 M142 85 V83 H148 V85" stroke-width="2"/>
+<path d="M141.5 98 Q145 95 148.5 98" stroke-width="1.5"/>
 <circle cx="216" cy="67" r="8.4"/>
 <circle cx="212.8" cy="67.6" r="0.9" fill="#2b2b2b" stroke="none"/>
 <circle cx="219.2" cy="67.6" r="0.9" fill="#2b2b2b" stroke="none"/>

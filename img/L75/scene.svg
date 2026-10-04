@@ -48,7 +48,6 @@
 <circle cx="110.91" cy="76.7" r="1.9" stroke-width="2"/>
 <path d="M161 79.4 L164 101.4"/>
 <circle cx="164.3" cy="103.58" r="1.9" stroke-width="2"/>
-<path d="M108 76 L102 78 M108 82 L102 82" stroke-width="1.2"/>
 <circle cx="80" cy="10" r="1.1" stroke-width="1.5"/>
 <circle cx="120" cy="20" r="1.1" stroke-width="1.5"/>
 <circle cx="140" cy="54" r="1.1" stroke-width="1.5"/>

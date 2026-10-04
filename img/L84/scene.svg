@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="s84c1"><rect x="42" y="48" width="60" height="70"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M64 8 H232 V48 H64 Z" stroke-width="2.5"/>
+<path d="M64 52 H232" stroke-width="2"/>
+<path d="M76 20 Q90 14 104 22 M80 32 H120 M140 18 L150 30 L160 18 M180 26 Q196 16 212 28" stroke-width="1.2"/>
+<use href="#olga" x="6" y="51" width="40" height="100"/>
+<g clip-path="url(#s84c1)"><use href="#anna-noarms" x="52" y="58" width="40" height="100"/></g>
+<path d="M64 92 L63 110 L71 114"/>
+<circle cx="72.97" cy="114.98" r="1.9" stroke-width="2"/>
+<path d="M80 92 L85 98 L88 84"/>
+<circle cx="88.46" cy="81.85" r="1.9" stroke-width="2"/>
+<circle cx="196" cy="90" r="8.2"/>
+<path d="M187.8 89 C187.8 78.8 204.2 78.8 204.2 89 Q198 84 193 83" stroke-width="2.5"/>
+<circle cx="193" cy="90.8" r="0.95" fill="#2b2b2b" stroke="none"/>
+<circle cx="199" cy="90.8" r="0.95" fill="#2b2b2b" stroke="none"/>
+<path d="M194 94.2 Q196 95.8 198 94.2" stroke-width="1.8"/>
+<path d="M194.4 99 V102 M197.6 99 V102" stroke-width="2"/>
+<path d="M187 105.4 Q187.8 102 196 102 Q204.2 102 205 105.4 L205.5 118 H186.5 Z"/>
+<path d="M192 102.4 L196 109 L200 102.4" stroke-width="1.5"/>
+<path d="M187 105.4 L186 112 L193 115"/>
+<circle cx="195.02" cy="115.87" r="1.9" stroke-width="2"/>
+<path d="M205 105.4 L206 112 L199 115"/>
+<circle cx="196.98" cy="115.87" r="1.9" stroke-width="2"/>
+<path d="M44 118 H94 V123 H44 Z" stroke-width="2.5"/>
+<path d="M50 123 V150 M88 123 V150" stroke-width="2.5"/>
+<path d="M116 118 H166 V123 H116 Z" stroke-width="2.5"/>
+<path d="M122 123 V150 M160 123 V150" stroke-width="2.5"/>
+<path d="M172 118 H222 V123 H172 Z" stroke-width="2.5"/>
+<path d="M178 123 V150 M216 123 V150" stroke-width="2.5"/>
+<path d="M128 118 V96 Q128 92 132 92 H156 Q160 92 160 96 V118" stroke-width="2"/>
+<path d="M134 98 H154" stroke-width="1.5"/>
+<path d="M128 111 H160" stroke-width="1.5"/>
+<path d="M58 118 L62 114 H80 L84 118" stroke-width="1.5"/>
+</g></svg>

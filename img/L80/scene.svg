@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M106 44 L118 24 H224 L236 44 Z"/>
+<path d="M106 44 Q112 50 118 44 Q124 50 130 44 Q136 50 142 44 Q148 50 154 44 Q160 50 166 44 Q172 50 178 44 Q184 50 190 44 Q196 50 202 44 Q208 50 214 44 Q220 50 226 44 Q232 50 236 44" stroke-width="2"/>
+<path d="M140 24 L134 44 M162 24 L160 44 M184 24 L185 44 M206 24 L210 44" stroke-width="1.5"/>
+<path d="M116 48 V150 M228 48 V150"/>
+<path d="M180 54 H226" stroke-width="2"/>
+<path d="M203 54 L221 72 L203 90 L185 72 Z" stroke-width="2"/>
+<circle cx="203" cy="72" r="5" stroke-width="1.5"/>
+<path d="M195 62 L197 64 M211 62 L209 64 M195 82 L197 80 M211 82 L209 80" stroke-width="1.5"/>
+<path d="M187 76 L185 80 M191 80 L189 84 M195 84 L193 88 M211 84 L213 88 M215 80 L217 84 M219 76 L221 80" stroke-width="1.2"/>
+<path d="M112 104 H232"/>
+<path d="M114 104 V150 M230 104 V150" stroke-width="2"/>
+<path d="M114 116 H230" stroke-width="1.5"/>
+<ellipse cx="138" cy="95" rx="8" ry="9"/>
+<circle cx="138" cy="81" r="5.5" stroke-width="2.5"/>
+<circle cx="138" cy="81.5" r="2.6" stroke-width="1.2"/>
+<path d="M133 94 Q138 99 143 94" stroke-width="1.5"/>
+<ellipse cx="157" cy="97" rx="6" ry="7" stroke-width="2.5"/>
+<circle cx="157" cy="86" r="4.5" stroke-width="2"/>
+<circle cx="157" cy="86.4" r="2" stroke-width="1.2"/>
+<path d="M153.5 96.5 Q157 100 160.5 96.5" stroke-width="1.2"/>
+<ellipse cx="172" cy="99" rx="4.5" ry="5" stroke-width="2"/>
+<circle cx="172" cy="91.4" r="3.4" stroke-width="2"/>
+<circle cx="172" cy="91.7" r="1.4" stroke-width="1"/>
+<use href="#anna" x="14" y="50" width="40" height="100"/>
+<use href="#wang-noarms" x="60" y="50" width="40" height="100"/>
+<path d="M70 80 L66 104"/>
+<circle cx="65.7" cy="106.2" r="1.9" stroke-width="2"/>
+<path d="M90 80 L102 86 L120 80"/>
+<circle cx="122.1" cy="79.3" r="1.9" stroke-width="2"/>
+<path d="M2 150 H238"/>
+<path d="M30 150 L26 157 M100 150 L98 157 M160 150 L162 157 M220 150 L224 157" stroke-width="1.5"/>
+<circle cx="12" cy="14" r="1.1" stroke-width="1.5"/>
+<circle cx="40" cy="30" r="1.1" stroke-width="1.5"/>
+<circle cx="66" cy="12" r="1.1" stroke-width="1.5"/>
+<circle cx="90" cy="34" r="1.1" stroke-width="1.5"/>
+<circle cx="24" cy="44" r="1.1" stroke-width="1.5"/>
+<circle cx="100" cy="16" r="1.1" stroke-width="1.5"/>
+<circle cx="56" cy="40" r="1.1" stroke-width="1.5"/>
+</g></svg>

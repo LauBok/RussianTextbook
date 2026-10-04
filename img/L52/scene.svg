@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="L52-c1"><path d="M-4 44 H60 V118 H-4 Z M21 114 V118 H35 V114 Z"/></clipPath><clipPath id="L52-c2"><path d="M34 50 H98 V118 H34 Z M59 114 V118 H73 V114 Z"/></clipPath><clipPath id="L52-c3"><path d="M72 50 H136 V118 H72 Z M97 114 V118 H111 V114 Z"/></clipPath><clipPath id="L52-c4"><path d="M110 36 H174 V118 H110 Z M135 114 V118 H149 V114 Z"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M150 8 H230 V64 H150 Z M190 8 V64"/>
+<path d="M146 66 H234" stroke-width="2"/>
+<path d="M154 14 l-4 8 M166 12 l-4 8 M178 16 l-4 8 M160 30 l-4 8 M172 34 l-4 8 M196 14 l-4 8 M210 18 l-4 8 M224 12 l-4 8 M202 34 l-4 8 M218 36 l-4 8 M158 48 l-4 8 M184 46 l-4 8" stroke-width="1.5"/>
+<path d="M212 62 Q214 52 222 44 M222 44 Q228 40 228 36 M222 44 Q229 46 228 50" stroke-width="2"/>
+<path d="M80 0 V12" stroke-width="1.5"/>
+<path d="M70 20 Q71 12 80 12 Q89 12 90 20 Z" stroke-width="2"/>
+<g clip-path="url(#L52-c1)"><use href="#ivan-noarms" x="8" y="64" width="40" height="100"/></g>
+<path d="M16 91 L10 117"/>
+<circle cx="9.5" cy="119.1" r="1.9" stroke-width="2"/>
+<path d="M40 91 L44 117"/>
+<circle cx="44.3" cy="119.2" r="1.9" stroke-width="2"/>
+<g clip-path="url(#L52-c2)"><use href="#maria-noarms" x="46" y="70" width="40" height="100"/></g>
+<path d="M57 100 L50 117"/>
+<circle cx="49.2" cy="119" r="1.9" stroke-width="2"/>
+<path d="M75 100 L82 117"/>
+<circle cx="82.8" cy="119" r="1.9" stroke-width="2"/>
+<g clip-path="url(#L52-c3)"><use href="#wang-noarms" x="84" y="70" width="40" height="100"/></g>
+<path d="M94 100 L88 117"/>
+<circle cx="87.3" cy="119.1" r="1.9" stroke-width="2"/>
+<path d="M114 100 L118 117"/>
+<circle cx="118.5" cy="119.1" r="1.9" stroke-width="2"/>
+<g clip-path="url(#L52-c4)"><use href="#misha-noarms" x="122" y="56" width="40" height="100"/></g>
+<path d="M133.6 105.4 L126 117"/>
+<circle cx="124.8" cy="118.8" r="1.9" stroke-width="2"/>
+<path d="M150.4 105.4 L154 117"/>
+<circle cx="154.7" cy="119.1" r="1.9" stroke-width="2"/>
+<path d="M21 115.5 Q28 118.5 35 115.5 Z" stroke-width="1.8"/>
+<path d="M59 115.5 Q66 118.5 73 115.5 Z" stroke-width="1.8"/>
+<path d="M97 115.5 Q104 118.5 111 115.5 Z" stroke-width="1.8"/>
+<path d="M135 115.5 Q142 118.5 149 115.5 Z" stroke-width="1.8"/>
+<path d="M4 118 H164"/>
+<path d="M4 118 L2 130 H166 L164 118" stroke-width="2"/>
+<path d="M8 130 V150 M160 130 V150"/>
+<use href="#murka" x="184" y="120" width="40" height="30"/>
+<path d="M172 146 Q176 141 182 146 Q176 150 172 146 Z M172 146 L168 143 V149 Z" stroke-width="1.8"/>
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+</g></svg>

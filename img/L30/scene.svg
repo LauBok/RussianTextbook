@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M30 150 L24 158 M88 150 L86 158 M146 150 L148 158 M204 150 L210 158" stroke-width="1.5"/>
+<path d="M150 14 H210 V62 H150 Z"/>
+<path d="M180 14 V62 M150 38 H210" stroke-width="2"/>
+<path d="M146 66 H214" stroke-width="2"/>
+<circle cx="105" cy="34" r="15"/>
+<path d="M105 34 L108.5 40.5 M105 34 V23" stroke-width="2"/>
+<path d="M105 21 V22.5 M105 45.5 V47 M92 34 H93.5 M116.5 34 H118" stroke-width="1.5"/>
+<path d="M70 108 H140"/>
+<path d="M76 108 V150 M134 108 V150"/>
+<path d="M90 107 L94 100 H116 L120 107 Z" stroke-width="2"/>
+<path d="M97.5 100 L96 107 M105 100 V107 M112.5 100 L114 107 M92 103.5 H118" stroke-width="1.5"/>
+<path d="M101 99 V94 M99 94 H103 M100 92 Q101 89 102 92" stroke-width="1.5"/>
+<path d="M110 99 Q108 94 110.5 91 Q113 93 111.5 99" stroke-width="1.5"/>
+<use href="#wang-noarms" x="20" y="50" width="40" height="100"/>
+<path d="M32 84 L29 107"/>
+<circle cx="28.8" cy="109.2" r="1.9" stroke-width="2"/>
+<path d="M48 84 Q58 80 55 71"/>
+<circle cx="54.4" cy="69.4" r="1.9" stroke-width="2"/>
+<path d="M50.5 57 L56 58 L54 72 L48.5 71 Z" stroke-width="2"/>
+<use href="#misha" x="150" y="50" width="40" height="100"/>
+<use href="#murka" x="194" y="120" width="40" height="30"/>
+</g></svg>
