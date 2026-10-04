@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="L38-c1"><path d="M60 0 H120 V112 H60 Z M80 96 H100 V106 H80 Z" clip-rule="evenodd"/></clipPath></defs><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
 <path d="M14 12 H50 V48 H14 Z" stroke-width="2.5"/>
 <circle cx="32" cy="30" r="10" stroke-width="2"/>
-<path d="M28 26 L32 30 L37 27 M32 30 V36 M24 32 L28 26 M37 27 L40 33" stroke-width="1.5"/>
+<path d="M29 26.5 H35 L37 32 L32 35.5 L27 32 Z M29 26.5 L27 21.5 M35 26.5 L37 21.5 M37 32 L42 32 M27 32 L22 32 M32 35.5 V40" stroke-width="1.5"/>
 <path d="M140 8 H186 V44 H140 Z"/>
 <path d="M163 8 V44 M140 26 H186" stroke-width="2"/>
 <path d="M176 13 A5 5 0 1 0 179 22 A4 4 0 1 1 176 13 Z" stroke-width="1.5"/>
@@ -15,7 +15,7 @@
 <circle cx="95" cy="99" r="0.9" fill="#2b2b2b" stroke="none"/>
 <path d="M116 112 H136 M126 112 V104 M110 104 H142 V74 H110 Z" stroke-width="2.5"/>
 <path d="M114 78 H138 V100 H114 Z" stroke-width="1.5"/>
-<path d="M120 94 L126 84 L132 94 M119 90 H133" stroke-width="1.2"/>
+<path d="M116 98 L122 90 L126 94 L130 88 L136 98 M118 84 a2 2 0 1 0 4 0 a2 2 0 1 0 -4 0" stroke-width="1.2"/>
 <path d="M36 112 H154"/>
 <path d="M40 112 V150 M150 112 V150"/>
 <path d="M40 120 H150" stroke-width="2"/>
