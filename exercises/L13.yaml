@@ -25,6 +25,9 @@ exercises:
       - stem: Пьер ду́мает ___ Пари́же.
         options: [о, об, обо]
         answer: о
+      - stem: Студе́нты говоря́т ___ исто́рии.
+        options: [о, об, обо]
+        answer: об
 
   - id: e2
     type: fill
@@ -49,6 +52,9 @@ exercises:
       - stem: Ю́ми расска́зывает об ___.
         hint: уро́к
         accept: ["уро́ке"]
+      - stem: А́нна расска́зывает о ___.
+        hint: курс
+        accept: ["ку́рсе"]
 
   - id: e3
     type: rewrite
