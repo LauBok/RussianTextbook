@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M30 150 L26 157 M120 150 L118 157 M200 150 L204 157" stroke-width="1.5"/>
+<path d="M14 14 H64 V58 H14 Z M39 14 V58 M14 36 H64" stroke-width="2"/>
+<path d="M20 22 l-3 6 M48 20 l-3 6 M26 42 l-3 6 M56 44 l-3 6" stroke-width="1.5"/>
+<path d="M84 22 H108 V56 H84 Z" stroke-width="2"/>
+<path d="M90 30 L96 26 M90 38 L102 30" stroke-width="1.5"/>
+<path d="M8 150 V90"/>
+<path d="M12 112 V106 Q12 100 18 100 H38" stroke-width="2"/>
+<use href="#dima-head" x="14" y="82" width="26" height="26"/>
+<path d="M8 112 H36 M8 132 H152 M12 132 V150 M148 132 V150"/>
+<path d="M36 112 Q40 98 58 98 H146 Q152 98 152 106 V128 H36 Z"/>
+<path d="M62 104 Q90 108 120 102 M58 116 Q96 120 140 112" stroke-width="1.5"/>
+<path d="M158 126 H180 V150 M158 126 V150 M158 138 H180" stroke-width="2.5"/>
+<path d="M162 112 H176 V126 H162 Z M160 112 H178" stroke-width="2"/>
+<path d="M164 118 H174" stroke-width="1.5"/>
+<use href="#anna" x="178" y="58" width="36" height="92"/>
+<use href="#wang" x="204" y="54" width="36" height="96"/>
+<path d="M182 92 H194 V102 Q194 106 188 106 Q182 106 182 102 Z M194 95 Q198 95 198 98 Q198 101 194 101" stroke-width="2"/>
+<path d="M186 88 Q185 85 186 82 M190 88 Q189 85 190 82" stroke-width="1.2"/>
+</g></svg>

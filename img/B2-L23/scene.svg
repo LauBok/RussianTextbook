@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="B2L23-c"><rect x="150" y="40" width="90" height="70"/></clipPath></defs>
+<g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H238"/>
+<path d="M30 150 L26 157 M200 150 L204 157" stroke-width="1.5"/>
+<path d="M60 10 H170 V80 H60 Z"/>
+<path d="M56 84 H174" stroke-width="2"/>
+<path d="M66 14 H164 V76 H66 Z" stroke-width="1.5"/>
+<path d="M82 22 Q90 30 86 40 Q80 50 92 56 Q104 62 98 72" stroke-width="2"/>
+<path d="M120 24 Q132 30 128 42 Q124 52 140 58 Q152 62 150 72" stroke-width="2"/>
+<path d="M92 56 L104 50 M128 42 L114 38" stroke-width="1.5"/>
+<path d="M100 26 Q110 22 116 30 Q112 36 102 34 Z" stroke-width="1.5"/>
+<path d="M138 18 L144 26 L150 18 M146 24 L152 30 L158 22" stroke-width="1.5"/>
+<use href="#olga-noarms" x="16" y="54" width="38" height="96"/>
+<path d="M46 84 L64 62 L76 50"/>
+<path d="M76 50 L92 36" stroke-width="2"/>
+<path d="M24 84 L20 110"/>
+<g clip-path="url(#B2L23-c)">
+<use href="#wang-noarms" x="168" y="48" width="36" height="90"/>
+</g>
+<path d="M198 76 L206 58 L208 46"/>
+<path d="M174 76 L170 100"/>
+<path d="M150 110 H236 M156 110 V150 M230 110 V150 M156 122 H230"/>
+<circle cx="120" cy="114" r="9"/>
+<path d="M108 136 Q108 124 120 124 Q132 124 132 136" />
+<path d="M100 136 H142 M106 136 V150 M136 136 V150"/>
+<path d="M112 108 Q120 102 128 108" stroke-width="1.5"/>
+</g></svg>

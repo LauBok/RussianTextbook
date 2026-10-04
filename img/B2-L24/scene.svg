@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 150 H60 M226 150 H238"/>
+<path d="M60 150 Q70 146 90 147 Q120 152 150 147 Q190 144 226 150" stroke-width="2.5"/>
+<path d="M76 154 H96 M120 156 H150 M180 154 H204" stroke-width="1.5"/>
+<path d="M8 70 V150 M8 84 L2 76 M8 98 L14 90" stroke-width="2"/>
+<path d="M226 70 V150 M226 84 L218 76 M226 96 L234 88 M226 110 L220 104" stroke-width="2"/>
+<path d="M222 90 H230 M222 120 H230" stroke-width="1.5"/>
+<path d="M182 20 Q190 12 198 20 Q206 14 212 22 Q220 24 214 32 H184 Q176 28 182 20 Z" stroke-width="1.5"/>
+<path d="M30 30 Q40 22 50 30" stroke-width="1.5"/>
+<path d="M40 22 Q44 18 48 22 M44 22 Q48 18 52 22" stroke-width="1.5"/>
+<use href="#ivan-noarms" x="60" y="56" width="38" height="96"/>
+<use href="#misha-noarms" x="22" y="76" width="30" height="76"/>
+<path d="M90 86 L102 104 M92 94 L102 110"/>
+<path d="M46 98 L56 84 L58 72"/>
+<path d="M28 98 L24 118"/>
+<path d="M100 132 V108 Q100 100 108 98 L126 96 L138 80 H176 L190 96 Q206 98 208 108 V132 Z"/>
+<path d="M142 84 H160 V96 H132 Z M164 84 H174 L184 96 H164 Z" stroke-width="2"/>
+<path d="M100 118 H108 M200 116 H208" stroke-width="2"/>
+<path d="M118 132 A12 12 0 0 1 142 132 M168 132 A12 12 0 0 1 192 132"/>
+<path d="M96 136 Q110 131 124 135 Q150 130 166 135 Q186 130 212 136" stroke-width="2"/>
+<path d="M114 140 Q120 136 128 140 M158 141 Q166 137 174 141 M186 140 Q192 137 198 140" stroke-width="1.5"/>
+<path d="M112 126 l-6 -4 M196 126 l6 -4 M114 130 l-6 -1 M194 130 l6 -1" stroke-width="1.5"/>
+</g></svg>
