@@ -9,18 +9,14 @@
 <path d="M178 14 V60 M150 32.4 H206" stroke-width="2"/>
 <path d="M147 62 H209" stroke-width="2.5"/>
 <path d="M156 20 Q166 32 156 54 M200 20 Q190 32 200 54" stroke-width="1.5"/>
-<use href="#anna-noarms" x="40" y="50" width="40" height="100"/>
-<path d="M52 84 L41 94 L36 88"/>
-<circle cx="34.59" cy="86.31" r="1.9" stroke-width="2"/>
-<path d="M68 84 L71 107"/>
-<circle cx="71.28" cy="109.18" r="1.9" stroke-width="2"/>
-<use href="#misha" x="80" y="50" width="40" height="100"/>
-<use href="#wang-noarms" x="116" y="50" width="40" height="100"/>
-<path d="M126 80 L118 94 L113 88"/>
-<circle cx="111.59" cy="86.31" r="1.9" stroke-width="2"/>
-<path d="M104 76 L117 78 L116 92 L103 90 Z M106 76.4 L105 90.4" stroke-width="2"/>
-<path d="M146 80 L149 105"/>
-<circle cx="149.26" cy="107.18" r="1.9" stroke-width="2"/>
+<use href="#anna" x="38" y="50" width="40" height="100"/>
+<use href="#misha" x="76" y="50" width="40" height="100"/>
+<use href="#wang-noarms" x="118" y="50" width="40" height="100"/>
+<path d="M107 82 H119 V96 H107 Z M109.4 82 V96" stroke-width="2"/>
+<path d="M128 80 L122 97 L115 96"/>
+<circle cx="112.82" cy="95.69" r="1.9" stroke-width="2"/>
+<path d="M148 80 L151 105"/>
+<circle cx="151.26" cy="107.18" r="1.9" stroke-width="2"/>
 <path d="M160 112 H204" stroke-width="3"/>
 <path d="M164 112 V150 M200 112 V150" stroke-width="2.5"/>
 <path d="M164 118 H200" stroke-width="1.5"/>

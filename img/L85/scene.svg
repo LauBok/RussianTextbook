@@ -2,10 +2,10 @@
 <path d="M2 150 H238"/>
 <path d="M4 150 V94 M4 116 H140 M4 128 H140 M140 150 V108" stroke-width="3"/>
 <path d="M8 116 Q8 108 12 108 M38 108 Q42 108 42 116" stroke-width="2"/>
-<use href="#wang-head" x="12" y="80" width="30" height="30"/>
+<use href="#wang-head" x="12" y="83" width="30" height="30"/>
 <path d="M36 106 Q50 98 76 100 Q112 102 132 104 Q140 106 138 116" stroke-width="2.5"/>
 <path d="M60 116 Q62 108 68 102 M104 116 Q106 110 110 104" stroke-width="1.5"/>
-<path d="M33 102 L44 94" stroke-width="1.8"/>
+<path d="M33 104 L44 96" stroke-width="1.8"/>
 <path d="M18 76 Q16 72 18 68 M26 74 Q24 70 26 66" stroke-width="1.2"/>
 <path d="M146 150 V118 H178 V150 M146 132 H178" stroke-width="2.5"/>
 <path d="M150 118 L149 108 H161 L160 118 M161 110 Q165 110 164 115 L160 115" stroke-width="2"/>

@@ -35,9 +35,10 @@
 <circle cx="136.96" cy="88.58" r="1.9" stroke-width="2"/>
 <path d="M169 79.4 L172 102.4"/>
 <circle cx="172.28" cy="104.58" r="1.9" stroke-width="2"/>
-<path d="M122 88 C120 72 142 72 140 88" stroke-width="2"/>
+<path d="M122 88 C119 64 143 64 140 88" stroke-width="2"/>
 <path d="M121 88 H141 V92 H121 Z" stroke-width="2"/>
-<circle cx="131" cy="72" r="2" stroke-width="1.5"/>
+<circle cx="131" cy="67.5" r="2.4" stroke-width="1.5"/>
+<path d="M126 86 Q127 76 131 71 M136 86 Q135 76 131 71" stroke-width="1.2"/>
 <path d="M126 88.6 V91.4 M131 88.6 V91.4 M136 88.6 V91.4" stroke-width="1.2"/>
 <use href="#wang-head" x="81" y="49.32" width="30" height="30"/>
 <path d="M86 81 Q86.8 77.6 96 77.6 Q105.2 77.6 106 81 L107.5 125 H84.5 Z"/>

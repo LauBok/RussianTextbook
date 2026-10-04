@@ -30,6 +30,6 @@
 <circle cx="74.8" cy="109.2" r="1.9" stroke-width="2"/>
 <path d="M68 111 H82 L80 132 H70 Z" stroke-width="2"/>
 <path d="M71 111 Q75 105 79 111" stroke-width="1.5"/>
-<path d="M94 84 L124 79"/>
-<circle cx="126" cy="78.7" r="1.9" stroke-width="2"/>
+<path d="M94 84 L114 80"/>
+<circle cx="116" cy="79.6" r="1.9" stroke-width="2"/>
 </g></svg>

@@ -16,7 +16,6 @@
 <circle cx="87" cy="95" r="1.9" stroke-width="2"/>
 <path d="M120 80 L126 100"/>
 <circle cx="126.63" cy="102.11" r="1.9" stroke-width="2"/>
-<path d="M124 92 L133 112 M127 91 L134 111" stroke-width="1.5"/>
 <path d="M146 128 H230 V148 H146 Z"/>
 <path d="M146 128 L152 96 H236 L230 128" stroke-width="2.5"/>
 <path d="M156 100 H232 L228 124 H152 Z" stroke-width="1.5"/>

@@ -14,7 +14,7 @@
 <path d="M60 60 Q64 64 60 68 M65 56 Q71 64 65 72" stroke-width="1.5"/>
 <path d="M80 150 V96 M80 116 H200 M80 128 H200 M200 150 V108" stroke-width="3"/>
 <path d="M84 116 Q84 108 89 108 M114 108 Q118 108 118 116" stroke-width="2"/>
-<use href="#misha-head" x="86" y="80" width="30" height="30"/>
+<use href="#misha-head" x="86" y="85" width="30" height="30"/>
 <path d="M110 108 Q124 98 150 102 Q178 104 194 106 Q200 108 198 116" stroke-width="2.5"/>
 <path d="M130 116 Q132 108 138 103 M170 116 Q172 110 176 105" stroke-width="1.5"/>
 <path d="M96 82 L100 78 L96 78 L100 74 M104 76 L107 73 L104 73 L107 70" stroke-width="1.2"/>

@@ -1,20 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="s86c1"><rect x="4" y="36" width="60" height="72"/></clipPath><clipPath id="s86c2"><rect x="130" y="41" width="60" height="82"/></clipPath></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160"><defs><clipPath id="s86c1"><rect x="4" y="36" width="60" height="56"/></clipPath><clipPath id="s86c2"><rect x="130" y="41" width="60" height="82"/></clipPath></defs>
 <g fill="none" stroke="#2b2b2b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
 <path d="M2 150 H238"/>
 <path d="M150 30 H230" stroke-width="2.5"/>
 <path d="M156 30 V14 M162 30 V12 M168 30 V16 M176 30 L184 16 M196 30 V18 H210 V30" stroke-width="2"/>
-<path d="M160 54 H200 V80 H160 Z" stroke-width="2"/>
-<path d="M164 76 L174 64 L182 72 L188 66 L196 76" stroke-width="1.5"/>
+<path d="M198 50 H234 V76 H198 Z" stroke-width="2"/>
+<path d="M202 72 L211 61 L218 68 L223 63 L230 72" stroke-width="1.5"/>
 <path d="M4 150 V60 M4 116 H120 M4 128 H120 M120 150 V108" stroke-width="3"/>
 <g clip-path="url(#s86c1)"><use href="#wang-noarms" x="14" y="46" width="40" height="100"/></g>
-<path d="M8 108 Q8 74 12 72 M50 72 Q56 74 56 92" stroke-width="2"/>
 <path d="M8 108 Q30 102 60 104 Q100 104 116 106 Q120 108 118 116" stroke-width="2.5"/>
 <path d="M70 116 Q72 110 76 105" stroke-width="1.5"/>
-<path d="M30 96 L42 92 L54 96 V84 L42 80 L30 84 Z M42 80 V92" stroke-width="2"/>
-<path d="M24 76 L23 94 L29 100"/>
-<circle cx="30.56" cy="101.56" r="1.9" stroke-width="2"/>
-<path d="M44 76 L45 94 L39 100"/>
-<circle cx="37.44" cy="101.56" r="1.9" stroke-width="2"/>
+<path d="M20 108 L34 104 L48 108 V94 L34 90 L20 94 Z M34 90 V104" stroke-width="2"/>
+<path d="M24 76 L22 98 L23 106"/>
+<circle cx="23.27" cy="108.18" r="1.9" stroke-width="2"/>
+<path d="M44 76 L46 98 L45 106"/>
+<circle cx="44.73" cy="108.18" r="1.9" stroke-width="2"/>
 <g clip-path="url(#s86c2)"><use href="#misha-noarms" x="140" y="51" width="40" height="100"/></g>
 <path d="M151.6 100.4 L145.6 112.4 L139.6 106.4"/>
 <circle cx="138.04" cy="104.84" r="1.9" stroke-width="2"/>
@@ -22,7 +21,6 @@
 <circle cx="170.62" cy="122.59" r="1.9" stroke-width="2"/>
 <path d="M148 123 H172 V128 H148 Z" stroke-width="2.5"/>
 <path d="M149 128 V150 M171 128 V150" stroke-width="2.5"/>
-<path d="M149 123 V93 M171 123 V93 M149 97 H171" stroke-width="2"/>
 <path d="M155 128 V147 M165 128 V147"/>
 <path d="M151 149.6 Q151 146.6 154 146.6 H158 V149.6 Z M169 149.6 Q169 146.6 166 146.6 H162 V149.6 Z" stroke-width="2"/>
 </g></svg>
