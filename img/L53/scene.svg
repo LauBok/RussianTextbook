@@ -6,8 +6,6 @@
 <path d="M40 20 A5 5 0 1 0 44 29 A4 4 0 1 1 40 20 Z" stroke-width="1.5"/>
 <circle cx="118" cy="22" r="7" stroke-width="2"/>
 <path d="M118 22 l0 -5.2 M118 22 l-3.4 1.7" stroke-width="1.5"/>
-<path d="M118 32 V40" stroke-width="1.5"/>
-<path d="M108 48 Q109 40 118 40 Q127 40 128 48 Z" stroke-width="2"/>
 <path d="M180 40 H232" stroke-width="2"/>
 <path d="M184 40 V30 H194 V40 M200 40 V26 Q206 23 212 26 V40 M218 40 V32 H228 V40" stroke-width="1.8"/>
 <g clip-path="url(#L53-c1)"><use href="#misha-noarms" x="40" y="50" width="40" height="100"/></g>
