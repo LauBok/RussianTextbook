@@ -155,6 +155,21 @@ def tokens(s):
 
 # ---------- 读课文 ----------
 
+def vocab_key_pos(cell):
+    """重复判定用的词性标记：词性首标记，动词再加变位类型（I / II）。
+    释义以“新义”开头的行返回 None，表示旧词的新义项。"""
+    if len(cell) > 2 and strip_markup(cell[2]).strip().startswith("新义"):
+        return None
+    if len(cell) < 2:
+        return ""
+    parts = [p for p in re.split(r"[\s,(]", strip_markup(cell[1]).strip()) if p]
+    if not parts:
+        return ""
+    if parts[0] in ("impf.", "pf.") and len(parts) > 1 and parts[1] in ("I", "II", "irr."):
+        return f"{parts[0]} {parts[1]}"
+    return parts[0]
+
+
 class Lesson:
     def __init__(self, book, lid, path):
         self.book, self.id, self.path = book, lid, path
@@ -198,7 +213,7 @@ class Lesson:
                 m = re.match(r"\s*\[(.+?)\]\{\.ru\}", cell[0])
                 if m:
                     segs, _ = ru_segments(ln)
-                    pos = re.split(r"[\s,(]", strip_markup(cell[1]).strip())[0] if len(cell) > 1 else ""
+                    pos = vocab_key_pos(cell)
                     self.vocab.append((m.group(1).strip(), " ".join(segs), i, pos))
             if fence and fence[-1].startswith("names"):
                 segs, _ = ru_segments(ln)
@@ -507,7 +522,9 @@ class Checker:
 
         # 重复
         for w, _, i, pos in les.vocab:
-            key = (norm(w), pos)
+            if pos is None:          # “新义：……”：旧词的新义项，不算重复
+                continue
+            key = (nfc(w).lower(), pos)
             if key in self.first and self.first[key] != stem:
                 out.append((les.lineno(i), "重复", f"{w}：{self.first[key]} 已列为新词"))
             else:
