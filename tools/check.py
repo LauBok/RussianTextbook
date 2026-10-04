@@ -476,6 +476,27 @@ def check_exercise_yaml(stem, path):
     return probs, ru, zh
 
 
+# ---------- 读音例外 ----------
+
+# 拼写与读音不一致、学生照拼读规则会读错的字母组合（按词形匹配，忽略重音）
+IRREGULAR = [
+    (r"вств", "вств（第一个 в 不发音）"), (r"(?<![а-яё])что", "что（读 што）"),
+    (r"стн|стл", "стн / стл（т 不发音）"), (r"здн", "здн（д 不发音）"), (r"лнц", "лнц（л 不发音）"),
+    (r"рдц", "рдц（д 不发音）"), (r"ндск|нтск", "ндск（д 不发音）"),
+    (r"сч|зч|жч", "сч / жч（读 щ）"), (r"гк|гч", "гк（г 读 х）"), (r"хг", "хг（读 г）"),
+    (r"^(его|сегодня|ничего|чего|кого|никого|того|всего)$", "г 读 в"),
+    (r"^(конечно|скучно|скучный|нарочно|яичница|пожалуйста|здравствуй|здравствуйте|солнце|сердце|чтобы)$", "习惯读法"),
+]
+
+
+def irregular_reading(w):
+    k = norm(w)
+    for pat, desc in IRREGULAR:
+        if re.search(pat, k):
+            return desc
+    return None
+
+
 # ---------- 课文缩略图 ----------
 
 def check_scene(stem):
@@ -639,6 +660,15 @@ class Checker:
                 out.append((None, "提前使用", f"{w}：到 {later} 才列为新词（{locs}）"))
             else:
                 out.append((None, "漏列", f"{w}：没有列入任何一课的词表（{locs}）"))
+
+        # 不按读音规则读的词：生词表里要有 [[…]]{.tr} 注音
+        if les.book <= 2:
+            for w, _, i, _ in les.vocab:
+                if "{.tr}" in les.lines[i]:
+                    continue
+                hit = irregular_reading(w)
+                if hit:
+                    out.append((les.lineno(i), "注音", f"{w}：含 {hit}，读音不合拼读规则，生词表里要加 [[…]]{{.tr}} 注音"))
 
         # 本课新词是否用到
         for w, _, i, _ in les.vocab:
