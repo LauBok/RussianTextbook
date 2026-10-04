@@ -3,6 +3,7 @@
 
     python3 tools/check.py            # 检查 lessons/ 下全部课
     python3 tools/check.py L01 L02    # 只报告这几课（词表仍按课号顺序从头累积）
+    python3 tools/check.py lessons/B2-L28.md exercises/B2-L28.yaml   # 也可以给文件路径，按文件名取课号
 
 按课号顺序（P1–P8、L01–L100，然后第二、三、四册）读取每课生词表和专有名词，累积成已学词集合。
 每课检查：
@@ -138,13 +139,52 @@ def strip_markup(s):
     return s
 
 
+def _titles():
+    """各课专有名词表里登记过的作品名（«…»），课文、练习里出现时不当生词查。"""
+    out = set()
+    for p in (ROOT / "lessons").glob("*.md"):
+        for ln in p.read_text(encoding="utf-8").splitlines():
+            if ln.startswith("专有名词"):
+                for t in re.findall(r"[«„]([^»“]+)[»“]", strip_markup(ln)):
+                    out.add(_title_key(t))
+    return out
+
+
+def _title_key(t):
+    """作品名按词的原形比较，变格后（«Капита́нскую до́чку»）也认得出。"""
+    words = [norm(w) for w, _ in tokens(t)]
+    if MORPH is not None:
+        words = [analyses(w)[0][0] if analyses(w) else w for w in words]
+    return tuple(words)
+
+
+TITLES = None
+
+
+def drop_titles(s):
+    global TITLES
+    if TITLES is None:
+        TITLES = _titles()
+    return re.sub(r"[«„]([^»“]+)[»“]", lambda m: " " if _title_key(m.group(1)) in TITLES else m.group(0), s)
+
+
+def title_words(s):
+    """登记过的作品名里的词：算作用到，但不报漏列。"""
+    drop_titles("")
+    out = []
+    for m in re.finditer(r"[«„]([^»“]+)[»“]", s):
+        if _title_key(m.group(1)) in TITLES:
+            out += [w for w, mor in tokens(m.group(1)) if not mor]
+    return out
+
+
 def ru_segments(text):
     """返回 [.ru] 元素里的俄语（最外层），以及去掉 .ru/.tr/.sp 元素后的剩余文本。"""
     segs, cut = [], []
     for s, e, cs, ce, attrs in spans(text):
         cls = re.findall(r"\.([\w-]+)", attrs)
-        if "syl" in cls or "hand" in cls:
-            cut.append((s, e))          # 语音课的音节练习、手写体字样（不标重音），不查
+        if "syl" in cls or "hand" in cls or "name" in cls:
+            cut.append((s, e))          # 语音课的音节练习、手写体字样、作品名和外语音译（.name），不查
         elif "ru" in cls or 'lang="ru"' in attrs:
             if not any(a <= s and e <= b for a, b in cut):
                 segs.append(strip_markup(text[cs:ce]))
@@ -249,8 +289,9 @@ class Lesson:
                 continue
             in_ru = any('lang="ru"' in f for f in fence)
             if in_ru:
-                # 对话块里说话人用 .sp 标，其余整行都是俄语
-                segs = [strip_markup(ln)]
+                # 对话块里说话人用 .sp 标，其余整行都是俄语；.name/.syl/.hand 片段和登记过的作品名不查
+                bare = re.sub(r"\[[^\[\]]*\]\{[^}]*\.(?:name|syl|hand)\b[^}]*\}", " ", ln)
+                segs = [strip_markup(bare)]
                 rest = ""
             else:
                 segs, rest = ru_segments(ln)
@@ -264,26 +305,33 @@ class Lexicon:
 
     def __init__(self):
         self.forms = {}
+        self.proper = {}      # 专有名词表（names 块）的词：只用来认首字母大写的词
 
-    def add(self, text):
+    def add(self, text, proper=False):
+        target = self.proper if proper else self.forms
         for w, morpheme in tokens(text):
             if not morpheme:
-                self.forms.setdefault(norm(w), set()).add(plain(w))
+                target.setdefault(norm(w), set()).add(plain(w))
 
     def update(self, other):
-        for k, v in other.forms.items():
-            self.forms.setdefault(k, set()).update(v)
+        for mine, theirs in ((self.forms, other.forms), (self.proper, other.proper)):
+            for k, v in theirs.items():
+                mine.setdefault(k, set()).update(v)
 
-    def knows(self, w):
-        k = norm(w)
-        if k in self.forms:
+    @staticmethod
+    def _hit(table, k):
+        if k in table:
             return True
         if MORPH is None:
             return False
-        for nf, lex in analyses(k):
-            if nf in self.forms or any(f in self.forms for f in lex):
-                return True
-        return False
+        return any(nf in table or any(f in table for f in lex) for nf, lex in analyses(k))
+
+    def knows(self, w):
+        k = norm(w)
+        if self._hit(self.forms, k):
+            return True
+        # 专有名词表里的词（如 Пеки́нский университе́т 里的 пеки́нский）不算学过的普通词
+        return w[:1].isupper() and self._hit(self.proper, k)
 
 
 @lru_cache(maxsize=None)
@@ -552,7 +600,7 @@ def lesson_lexicon(les):
     for w, row, _, _ in les.vocab:
         lex.add(w + " " + row)
     for n in les.names:
-        lex.add(n)
+        lex.add(n, proper=True)
     return lex
 
 
@@ -612,7 +660,8 @@ class Checker:
             stress = need_stress_text or sec.startswith("生词")
             vocab_sec = is_vocab_section(sec)
             for seg in segs:
-                for w, morpheme in tokens(seg):
+                used.update(norm(w) for w in title_words(seg))
+                for w, morpheme in tokens(drop_titles(seg)):
                     for cat, msg in check_word(w, morpheme, stress):
                         out.append((ln, cat, msg))
                     if morpheme:
@@ -632,7 +681,8 @@ class Checker:
             probs, ru, zh = check_exercise_yaml(stem, ex_path)
             out += [(None, c, m) for c, m in probs]
             for where, s in ru:
-                for w, morpheme in tokens(s):
+                used.update(norm(w) for w in title_words(s))
+                for w, morpheme in tokens(drop_titles(s)):
                     for cat, msg in check_word(w, morpheme, need_stress_text):
                         out.append((f"练习 {where}", cat, msg))
                     if morpheme:
@@ -703,6 +753,7 @@ def word_used(k, used):
 
 
 def main(argv):
+    argv = [Path(a).stem if ("/" in a or a.endswith((".md", ".yaml"))) else a for a in argv]
     wanted = {canon(a) for a in argv}
     if None in wanted:
         sys.exit(f"无法识别的课号：{' '.join(a for a in argv if not canon(a))}")
