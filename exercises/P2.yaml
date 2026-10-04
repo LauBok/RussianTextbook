@@ -1,0 +1,85 @@
+lesson: P2
+grammar: "同形异音字母 [В]{.ru}、[Е]{.ru}、[Н]{.ru}、[Р]{.ru}、[С]{.ru}、[У]{.ru}、[Х]{.ru} 的读音和写法；颤音 [р]{.ru}、舌根音 [х]{.ru}；[е]{.ru} 前的辅音变软。"
+exercises:
+
+  - id: e1
+    type: choice
+    task: 选出字母的读音。
+    why: "这几个字母和拉丁字母同形，读音却不同：[н]{.ru} 读 [n]，[р]{.ru} 读 [r]，[с]{.ru} 读 [s]，[в]{.ru} 读 [v]，[у]{.ru} 读 [u]，[х]{.ru} 读 [x]。最常见的错误是按英语字母去读，例如把 [нос]{.ru} 读成 hoc。"
+    items:
+      - stem: н — ___
+        options: ["[h]", "[n]", "[x]"]
+        answer: "[n]"
+      - stem: р — ___
+        options: ["[p]", "[l]", "[r]"]
+        answer: "[r]"
+      - stem: с — ___
+        options: ["[s]", "[k]", "[ts]"]
+        answer: "[s]"
+      - stem: в — ___
+        options: ["[b]", "[v]", "[w]"]
+        answer: "[v]"
+      - stem: у — ___
+        options: ["[u]", "[j]", "[i]"]
+        answer: "[u]"
+      - stem: х — ___
+        options: ["[ks]", "[x]", "[h]"]
+        answer: "[x]"
+
+  - id: e2
+    type: choice
+    task: 选出正确的音标。
+    why: "辅音后面是 [е]{.ru} 时读软音，音标里加 [ʲ]；后面是 [а]{.ru}、[о]{.ru}、[у]{.ru} 或不跟元音时读硬音。[метро́]{.ru} 的 [е]{.ru} 不重读，读成短而弱的 [ɪ]，但 [м]{.ru} 仍然是软的。[у́тро]{.ru} 末尾的 [о]{.ru} 不重读，弱化成 [ə]。"
+    items:
+      - stem: нет — ___
+        options: ["[net]", "[nʲet]"]
+        answer: "[nʲet]"
+      - stem: нос — ___
+        options: ["[nos]", "[nʲos]"]
+        answer: "[nos]"
+      - stem: метро́ — ___
+        options: ["[mʲɪˈtro]", "[mɪˈtro]"]
+        answer: "[mʲɪˈtro]"
+      - stem: у́тро — ___
+        options: ["[ˈutrə]", "[uˈtro]"]
+        answer: "[ˈutrə]"
+
+  - id: e3
+    type: fill
+    task: 根据读音写出单词。
+    why: "本课的字母读音和写法基本一一对应。[ʲ] 不用单独写出来，软 [н]{.ru} 后面写 [е]{.ru} 就表示它是软的；[ˈmuxə] 末尾的 [ə] 是弱读的 [а]{.ru}，[rʊ] 里的 [ʊ] 是弱读的 [у]{.ru}，写的时候仍然是 [а]{.ru}、[у]{.ru}。"
+    items:
+      - stem: "[nos] → ___"
+        accept: [нос]
+      - stem: "[sok] → ___"
+        accept: [сок]
+      - stem: "[vot] → ___"
+        accept: [вот]
+      - stem: "[nʲet] → ___"
+        accept: [нет]
+      - stem: "[rʊˈka] → ___"
+        accept: [рука́]
+      - stem: "[ˈmuxə] → ___"
+        accept: [му́ха]
+      - stem: "[sʲɪˈstra] → ___"
+        accept: [сестра́]
+
+  - id: e4
+    type: fill
+    task: 用俄语键盘写出对应的小写字母。
+    why: "这七个字母和拉丁字母 B、E、H、P、C、Y、X 形状相同或相近，在电脑里却是不同的字符。如果用英文键盘打出外形一样的拉丁字母，词典查不到，搜索也找不到。俄语键盘上 [в]{.ru} 在 D 键，[е]{.ru} 在 T 键，[н]{.ru} 在 Y 键，[р]{.ru} 在 H 键，[с]{.ru} 在 C 键，[у]{.ru} 在 E 键，[х]{.ru} 在左方括号键。"
+    items:
+      - stem: В → ___
+        accept: [в]
+      - stem: Е → ___
+        accept: [е]
+      - stem: Н → ___
+        accept: [н]
+      - stem: Р → ___
+        accept: [р]
+      - stem: С → ___
+        accept: [с]
+      - stem: У → ___
+        accept: [у]
+      - stem: Х → ___
+        accept: [х]

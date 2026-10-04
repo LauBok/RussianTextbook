@@ -1,0 +1,67 @@
+lesson: P4
+grammar: "辅音字母 [Ж]{.ru}、[Ш]{.ru}、[Ц]{.ru}、[Ч]{.ru}、[Щ]{.ru} 的读音和写法；永远硬的 [ж]{.ru}、[ш]{.ru}、[ц]{.ru} 和永远软的 [ч]{.ru}、[щ]{.ru}；[что]{.ru} 的读音。"
+exercises:
+
+  - id: e1
+    type: choice
+    task: 选出字母的读音。
+    why: "[ш]{.ru} 舌头后缩，声音低沉，是 [ʂ]；[щ]{.ru} 舌面贴近硬腭，声音尖细而长，是 [ɕː]，两者最容易混。[ц]{.ru} 是 [ts]，[ч]{.ru} 是 [tɕ]，都不送气，分别接近拼音的 z 和 j。[ж]{.ru} 是 [ш]{.ru} 的浊音 [ʐ]，不是 [z]。"
+    items:
+      - stem: ж — ___
+        options: ["[z]", "[ʐ]", "[ʂ]"]
+        answer: "[ʐ]"
+      - stem: ш — ___
+        options: ["[ʂ]", "[ɕː]", "[s]"]
+        answer: "[ʂ]"
+      - stem: ц — ___
+        options: ["[tɕ]", "[s]", "[ts]"]
+        answer: "[ts]"
+      - stem: ч — ___
+        options: ["[tɕ]", "[ts]", "[ʂ]"]
+        answer: "[tɕ]"
+      - stem: щ — ___
+        options: ["[ʂ]", "[ɕː]", "[tɕ]"]
+        answer: "[ɕː]"
+
+  - id: e2
+    type: choice
+    task: 选出正确的音标。
+    why: "[ж]{.ru}、[ш]{.ru}、[ц]{.ru} 永远是硬的，不加 [ʲ]；[ч]{.ru}、[щ]{.ru} 永远是软的，[tɕ]、[ɕː] 本身就是软音。[оте́ц]{.ru} 末尾是硬的 [ts]，不要和 [ч]{.ru} 混淆。[что]{.ru} 是例外，[ч]{.ru} 读 [ʂ]。"
+    items:
+      - stem: шко́ла — ___
+        options: ["[ˈʂkoɫə]", "[ˈɕːkoɫə]"]
+        answer: "[ˈʂkoɫə]"
+      - stem: час — ___
+        options: ["[tsas]", "[tɕas]"]
+        answer: "[tɕas]"
+      - stem: оте́ц — ___
+        options: ["[ɐˈtʲets]", "[ɐˈtʲetɕ]"]
+        answer: "[ɐˈtʲets]"
+      - stem: борщ — ___
+        options: ["[borʂ]", "[borɕː]"]
+        answer: "[borɕː]"
+      - stem: что — ___
+        options: ["[tɕto]", "[ʂto]"]
+        answer: "[ʂto]"
+
+  - id: e3
+    type: fill
+    task: 根据读音写出单词。
+    why: "[ʂ] 写作 [ш]{.ru}，[ɕː] 写作 [щ]{.ru}，[tɕ] 写作 [ч]{.ru}，[ts] 写作 [ц]{.ru}，[ʐ] 写作 [ж]{.ru}。[ʂto] 是例外，写作 [что]{.ru}，不写 [ш]{.ru}。[ʊ]、[ɐ]、[ə] 是弱读的元音，按词的拼写写 [у]{.ru}、[о]{.ru}、[а]{.ru}，要和词一起记。"
+    items:
+      - stem: "[naʂ] → ___"
+        accept: [наш]
+      - stem: "[tɕas] → ___"
+        accept: [час]
+      - stem: "[borɕː] → ___"
+        accept: [борщ]
+      - stem: "[ʂto] → ___"
+        accept: [что]
+      - stem: "[ʐʊrˈnaɫ] → ___"
+        accept: [журна́л]
+      - stem: "[ˈʂkoɫə] → ___"
+        accept: [шко́ла]
+      - stem: "[ˈtɕaʂkə] → ___"
+        accept: [ча́шка]
+      - stem: "[xərɐˈʂo] → ___"
+        accept: [хорошо́]

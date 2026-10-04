@@ -1,0 +1,88 @@
+lesson: P3
+grammar: "辅音字母 [Б]{.ru}、[Г]{.ru}、[Д]{.ru}、[З]{.ru}、[Л]{.ru}、[П]{.ru}、[Ф]{.ru} 的读音和写法；清浊辅音的对立；硬 [л]{.ru}。"
+exercises:
+
+  - id: e1
+    type: choice
+    task: 选出与浊辅音成对的清辅音。
+    why: "成对的清浊辅音发音部位相同，只差声带是否振动：[б]{.ru}—[п]{.ru} 都用双唇，[д]{.ru}—[т]{.ru} 都用舌尖抵上齿背，[г]{.ru}—[к]{.ru} 都用舌根，[з]{.ru}—[с]{.ru} 都是舌尖摩擦，[в]{.ru}—[ф]{.ru} 都是上齿碰下唇。容易错的是 [в]{.ru}：它的清辅音是 [ф]{.ru}，不是 [п]{.ru}。"
+    items:
+      - stem: б — ___
+        options: [п, т, к]
+        answer: п
+      - stem: д — ___
+        options: [п, т, с]
+        answer: т
+      - stem: г — ___
+        options: [х, т, к]
+        answer: к
+      - stem: з — ___
+        options: [с, т, ф]
+        answer: с
+      - stem: в — ___
+        options: [п, ф, к]
+        answer: ф
+
+  - id: e2
+    type: choice
+    task: 选出字母的读音。
+    why: "[б]{.ru}、[д]{.ru}、[г]{.ru} 是浊辅音，声带要振动，和汉语拼音的 b、d、g 不同；[п]{.ru} 是清辅音，形状像希腊字母 π，读 [p]，不读 [n]。[л]{.ru} 是舌后部抬起的硬 [ɫ]，比汉语的 l 低沉。"
+    items:
+      - stem: г — ___
+        options: ["[ɡ]", "[k]", "[d]"]
+        answer: "[ɡ]"
+      - stem: д — ___
+        options: ["[t]", "[d]", "[ɡ]"]
+        answer: "[d]"
+      - stem: п — ___
+        options: ["[n]", "[b]", "[p]"]
+        answer: "[p]"
+      - stem: л — ___
+        options: ["[ɫ]", "[r]", "[n]"]
+        answer: "[ɫ]"
+      - stem: ф — ___
+        options: ["[v]", "[f]", "[p]"]
+        answer: "[f]"
+      - stem: з — ___
+        options: ["[s]", "[ts]", "[z]"]
+        answer: "[z]"
+
+  - id: e3
+    type: choice
+    task: 选出词中所给辅音的读音。
+    why: "浊辅音在元音前保持浊音，例如 [дом]{.ru}、[брат]{.ru}、[газе́та]{.ru}；但在词末要读成对应的清辅音，所以 [флаг]{.ru} 末尾的 [г]{.ru} 读 [k]。看到 [г]{.ru} 就读 [ɡ] 是常见错误，这条规则第 8 课详讲。"
+    items:
+      - stem: "дом: д = ___"
+        options: ["[d]", "[t]"]
+        answer: "[d]"
+      - stem: "брат: б = ___"
+        options: ["[p]", "[b]"]
+        answer: "[b]"
+      - stem: "газе́та: г = ___"
+        options: ["[ɡ]", "[k]"]
+        answer: "[ɡ]"
+      - stem: "флаг: г = ___"
+        options: ["[ɡ]", "[k]"]
+        answer: "[k]"
+
+  - id: e4
+    type: fill
+    task: 根据读音写出单词。
+    why: "[ɫ] 是硬 [л]{.ru}，写作 [л]{.ru}；[ʲ] 不单独写出，[zʲe] 写作 [зе]{.ru}；词末的 [ə]、词中的 [ɐ] 都是弱读的 [а]{.ru}。[fɫak] 末尾听到的是 [k]，写的时候是 [г]{.ru}，这个词要单独记住。"
+    items:
+      - stem: "[brat] → ___"
+        accept: [брат]
+      - stem: "[dom] → ___"
+        accept: [дом]
+      - stem: "[stoɫ] → ___"
+        accept: [стол]
+      - stem: "[sup] → ___"
+        accept: [суп]
+      - stem: "[ˈpapə] → ___"
+        accept: [па́па]
+      - stem: "[ˈɫampə] → ___"
+        accept: [ла́мпа]
+      - stem: "[ɡɐˈzʲetə] → ___"
+        accept: [газе́та]
+      - stem: "[fɫak] → ___"
+        accept: [флаг]
