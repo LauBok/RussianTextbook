@@ -23,7 +23,7 @@ exercises:
         options: ["[u]", "[j]", "[i]"]
         answer: "[u]"
       - stem: х — ___
-        options: ["[ks]", "[x]", "[h]"]
+        options: ["[ks]", "[x]", "[k]"]
         answer: "[x]"
 
   - id: e2

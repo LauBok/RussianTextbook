@@ -31,7 +31,7 @@ exercises:
 
   - id: e2
     type: rewrite
-    task: 按例句回答：人从刚才去过的地方回来了。
+    task: 按例句改写：人刚才在某处，现在正往回走。
     example:
       cue: Ми́ша был в шко́ле.
       answer: Ми́ша идёт из шко́лы.
