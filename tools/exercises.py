@@ -179,6 +179,23 @@ def scene(lesson):
     return f'<div class="scene" aria-hidden="true">{svg}</div>\n\n'
 
 
+def culture(lesson):
+    """“俄罗斯知识”配图 img/<课>/*GPT.jpg 等，缩小后内嵌为 <figure class="culture">；没有图时返回空串。"""
+    if not lesson:
+        return ""
+    files = sorted(p for p in (ROOT / "img" / lesson).glob("*GPT.*") if p.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"))
+    if not files:
+        return ""
+    import base64, io
+    from PIL import Image
+    im = Image.open(files[0]).convert("RGB")
+    im.thumbnail((1400, 1400))
+    buf = io.BytesIO()
+    im.save(buf, "JPEG", quality=82, optimize=True)
+    data = base64.b64encode(buf.getvalue()).decode()
+    return f'<figure class="culture"><img src="data:image/jpeg;base64,{data}" alt=""></figure>\n\n'
+
+
 SP_FONTS = {
     "dialogue": ("/usr/share/fonts/truetype/paratype/PTF75F.ttf", 0, ":"),        # PT Serif Bold
     "translation": ("/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc", 2, "："),  # Noto Serif CJK SC Bold
@@ -215,7 +232,7 @@ def speaker_widths(md):
         while j < len(lines) and not re.match(r"^:::\s*$", lines[j]):
             for n in re.findall(r"\[([^\[\]]+)\]\{\.sp\}", lines[j]):
                 names.append(re.sub(r"[\u0301]", "", n))
-            # \u540d\u5b57\u540e\u7684\u7a7a\u683c\u4f1a\u8ba9\u9996\u884c\u6bd4\u7eed\u884c\u591a\u7f29\u8fdb\u4e00\u683c
+            # 名字后的空格会让首行比续行多缩进一格
             lines[j] = re.sub(r"(\]\{\.sp\})[ \t]+", r"\1", lines[j])
             j += 1
         if names:
@@ -236,6 +253,10 @@ def expand(md, lesson=None):
     pic = scene(lesson)
     if pic:
         md = re.sub(r"^## 课文[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + pic, md, count=1, flags=re.M)
+    fig = culture(lesson)
+    if fig:
+        # 放在“俄罗斯知识”的第一个小标题之后，浮动图与正文顶端对齐
+        md = re.sub(r"^## 俄罗斯知识[ \t]*\n(?:\s*\n)*(### [^\n]*\n)?\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
     return md
 
 
