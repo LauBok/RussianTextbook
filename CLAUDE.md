@@ -19,7 +19,7 @@
 | `tools/check.py` | 编写规范检查（词表累积、重音、ё、{.ru} 标记、练习格式）：`python3 tools/check.py L01` |
 | `tools/tts_yandex.py` | 用 Yandex SpeechKit 逐句生成音频（尚未启用） |
 
-依赖：pandoc、WeasyPrint、PyYAML、pymorphy3（检查脚本用）；字体 PT Serif、PT Sans、Noto Serif CJK SC、Noto Sans CJK SC。
+依赖：pandoc、WeasyPrint、PyYAML、pymorphy3（检查脚本用）；字体 PT Serif、PT Sans、Noto Serif CJK SC、Noto Sans CJK SC、霞鹜文楷 LXGW WenKai（参考译文对话；Debian/Ubuntu 包 fonts-lxgw-wenkai）。
 
 ## 每课结构
 
