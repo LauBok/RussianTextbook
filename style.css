@@ -73,8 +73,8 @@ tr { break-inside: avoid; }
 thead { display: table-header-group; }
 th { font: 700 9pt "PT Sans", "CJK Sans"; text-align: left; color: var(--muted); border-bottom: 1.2pt solid var(--ink); padding: 3pt 6pt; }
 td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: top; }
-.vocab td:first-child { font-size: 11pt; font-weight: 700; width: 32%; }
-.vocab td:nth-child(2) { color: var(--muted); width: 26%; }
+.vocab td:first-child { font-size: 11pt; font-weight: 700; width: 40%; }
+.vocab td:nth-child(2) { color: var(--muted); width: 20%; }
 .tr { font-family: "PT Serif", "IPA", "CJK Serif", serif; font-weight: 400; font-size: 9.5pt; color: var(--muted); }
 .names { font-size: 10pt; color: var(--muted); margin-top: 4pt; }
 .names .ru { color: var(--ink); }
@@ -162,8 +162,8 @@ li .why { display: inline; margin: 0; }
 
 /* 单元词汇总表 */
 .unit-vocab td:first-child { width: 8%; color: var(--muted); font-size: 9.5pt; font-weight: 400; }
-.unit-vocab td:nth-child(2) { font-size: 11pt; font-weight: 700; width: 32%; }
-.unit-vocab td:nth-child(3) { color: var(--muted); width: 24%; }
+.unit-vocab td:nth-child(2) { font-size: 11pt; font-weight: 700; width: 38%; }
+.unit-vocab td:nth-child(3) { color: var(--muted); width: 18%; }
 .unit-vocab td:nth-child(4) { width: auto; }
 
 /* ===== 整册（tools/book.py） ===== */
@@ -194,3 +194,17 @@ li .why { display: inline; margin: 0; }
 .opts.c1 { grid-template-columns: 1fr; }
 .why-head { display: block; font: 700 9.5pt "PT Sans", "CJK Sans"; color: var(--muted); margin-top: 3pt; }
 .prose-zh em, .poem-zh em, .translation em { font-style: normal; font-family: "Kai", "CJK Serif", serif; }
+/* 俄语正文两端对齐时断词（pyphen 俄语词典，重音符不影响断词） */
+.prose p, .passage p { hyphens: auto; }
+/* 答案、总词汇表、前言、编写说明的首页：页眉已显示，正文里的单元行不再印出 */
+.book .answers > .running, .book .index > .running, .book .toc > .running, .book .front-part > .running { font-size: 0; line-height: 0; height: 0; margin: 0; overflow: hidden; }
+/* 没有解析的短答案列表分栏 */
+.keylist.c2 ol, .keylist.c2 ul { columns: 2; column-gap: 10mm; }
+.keylist.c3 ol, .keylist.c3 ul { columns: 3; column-gap: 8mm; }
+.keylist li { break-inside: avoid; }
+/* 书前：前言、编写说明 */
+.book .front-part { break-before: page; }
+.book-index td:nth-child(1) { width: 34%; }
+.book-index td:nth-child(2) { width: 16%; }
+.front-part h1 { font: 700 20pt "PT Sans", "CJK Sans"; color: var(--accent); margin: 0 0 12pt; }
+.front-part h2 { font: 700 12pt "PT Sans", "CJK Sans"; margin: 14pt 0 6pt; }

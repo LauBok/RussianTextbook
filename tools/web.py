@@ -77,6 +77,17 @@ def main(lesson):
     page = page.replace("<!--TEXT_HTML-->", html[:i] + html[j:])
     page = page.replace(">练习</button>", f">{heading}</button>", 1)
     page = page.replace("<!--EX_HTML-->", ex_html)
+    # 目录链接指向本册目录；上一课、下一课
+    import book as bookmod
+    bno = int(lesson[1]) if re.match(r"B\d-", lesson) else 1
+    codes = bookmod.lesson_codes(bno)
+    k = codes.index(lesson) if lesson in codes else -1
+    nav = f'<a class="toc" href="{bookmod.index_name(bno)}">目录</a>'
+    if k > 0:
+        nav += f' · <a class="toc" href="{codes[k - 1]}.html">← 上一课</a>'
+    if 0 <= k < len(codes) - 1:
+        nav += f' · <a class="toc" href="{codes[k + 1]}.html">下一课 →</a>'
+    page = page.replace('<a class="toc" href="index.html">目录</a>', nav, 1)
     page = page.replace("{{TITLE}}", f"{front['book']} " + (front.get("label") or f"第{front['lesson']}课"))
     # 课页作为多页 artifact 的附属页面发布时不会被套外壳，自己带上 doctype、字符集和视口
     if not page.lstrip().lower().startswith("<!doctype"):

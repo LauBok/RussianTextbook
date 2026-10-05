@@ -145,6 +145,13 @@ def key_markdown(data):
         t = ex["type"]
         if ex.get("passage_zh"):       # 测试页文章的参考译文放在答案里
             out += ["文章参考译文：", "", "::: prose-zh", ex["passage_zh"].strip(), ":::", ""]
+        short = t in ("picture_qa", "choice", "rewrite", "fill")
+        if short:
+            # 短答案列表按最长答案分两栏或三栏（解析、译文、范文仍为通栏）
+            ans = [it["answer"] if t == "choice" else (it["answer"][0] if t == "picture_qa" else it["accept"][0]) for it in ex["items"]]
+            longest = max(_text_em(f"10. A. {a}", "option") for a in ans)
+            cols = 3 if longest <= 13 else 2 if longest <= 22 else 1
+            out += [f"::: {{.keylist .c{cols}}}", ""]
         for i, it in enumerate(ex["items"], 1):
             if t == "picture_qa":
                 out.append(f"{i}. {ru('— ' + it['qword'] + ' э́то? — ' + it['answer'][0])}")
@@ -163,6 +170,8 @@ def key_markdown(data):
                 if alt:
                     line += "　也可：" + "；".join(ru(a) for a in alt)
                 out.append(line)
+        if short:
+            out += ["", ":::", ""]
         if ex.get("why"):
             out += [""] + why_lines(ex["why"])
         out.append("")

@@ -99,9 +99,31 @@ def vocab_index(codes, fms):
     return pandoc("\n".join(md), "index"), len(rows)
 
 
+def roman(n):
+    out = ""
+    for v, r in ((1000, "m"), (900, "cm"), (500, "d"), (400, "cd"), (100, "c"), (90, "xc"), (50, "l"), (40, "xl"), (10, "x"), (9, "ix"), (5, "v"), (4, "iv"), (1, "i")):
+        while n >= v:
+            out, n = out + r, n - v
+    return out
+
+
+def front_parts(book):
+    """书前的前言（各册一份）和编写说明（四册共用），文字取自 front/。"""
+    name = f"俄语教程 {BOOK_NAME[book]}"
+    out = []
+    for anchor, label, path in (("preface", "前言", ROOT / "front" / f"{BOOK_NAME[book]}前言.md"),
+                                ("guide", "编写说明", ROOT / "front" / "编写说明.md")):
+        if path.exists():
+            body = pandoc(path.read_text(encoding="utf-8"), anchor)
+            out.append(f'<section class="front-part" id="{anchor}"><div class="running">{name} · {label}</div>{body}</section>')
+    return "".join(out)
+
+
 def toc_html(codes, fms, pages=None):
     """目录。pages 给出各节起始页码时直接写出页码（并行排版用），否则用 target-counter。"""
-    out, unit = ['<nav class="toc"><h2 class="toc-title">目录</h2>'], None
+    out, unit = ['<nav class="toc"><div class="running">目录</div><h2 class="toc-title">目录</h2>'], None
+    out.append(f'<a class="toc-item"{_toc_target("preface", pages)}><span class="toc-no"></span><span class="toc-name">前言</span></a>')
+    out.append(f'<a class="toc-item"{_toc_target("guide", pages)}><span class="toc-no"></span><span class="toc-name">编写说明</span></a>')
     for code in codes:
         fm = fms[code]
         if fm["unit"] != unit:
@@ -160,14 +182,17 @@ def parallel_pdf(head, blocks, front, pdf, html_path, workers):
     tmp.mkdir(exist_ok=True)
     base = str(html_path)
     wrap = lambda body, css: f"{head}{css}</head><body class=\"book\">{body}</body></html>"
-    jobs = [(wrap(front({}), FRONT_CSS), base, str(tmp / "front0.pdf"), set())]
+    front_ids = {"preface", "guide"}
+    jobs = [(wrap(front({}), FRONT_CSS), base, str(tmp / "front0.pdf"), front_ids)]
     jobs += [(wrap(body, CHUNK_CSS), base, str(tmp / f"c{i:02d}.pdf"), set(ids)) for i, (ids, body) in enumerate(blocks)]
     order = sorted(range(len(jobs)), key=lambda k: -len(jobs[k][0]))      # 大块先排
     with ProcessPoolExecutor(workers) as ex:
         futs = {k: ex.submit(_render_chunk, jobs[k]) for k in order}
         res = {k: f.result() for k, f in futs.items()}
     n_front = res[0][0]
-    pages, offset, starts = {}, n_front, []
+    # 书前（封面、前言、编写说明、目录）用小写罗马数字，正文从 1 起
+    pages = {a: roman(i + 1) for a, i in res[0][1].items()}
+    offset, starts = 0, []
     for k in range(1, len(jobs)):
         n, where = res[k]
         starts.append(offset)
@@ -175,7 +200,7 @@ def parallel_pdf(head, blocks, front, pdf, html_path, workers):
             pages[a] = offset + i + 1
         offset += n
     # 目录写入真实页码后重排封面和目录（只有几页）；页数必须不变
-    n2, _ = _render_chunk((wrap(front(pages), FRONT_CSS), base, str(tmp / "front.pdf"), set()))
+    n2, _ = _render_chunk((wrap(front(pages), FRONT_CSS), base, str(tmp / "front.pdf"), front_ids))
     if n2 != n_front:
         raise RuntimeError(f"目录页数变了：{n_front} → {n2}")
     book = pymupdf.open()
@@ -189,8 +214,10 @@ def parallel_pdf(head, blocks, front, pdf, html_path, workers):
     # 页码：与 style.css 的 @bottom-center 一致（PT Sans 9pt，#8c8c8c）
     font = pymupdf.Font(fontfile="/usr/share/fonts/truetype/paratype/PTS55F.ttf")
     for i, page in enumerate(book):
+        if i == 0:
+            continue                # 封面不印页码
         page.wrap_contents()        # WeasyPrint 的内容流不恢复坐标变换，先包起来再追加文字
-        text = str(i + 1)
+        text = roman(i + 1) if i < n_front else str(i - n_front + 1)
         w = font.text_length(text, 9)
         tw = pymupdf.TextWriter(page.rect, color=(0x8c / 255,) * 3)
         tw.append(((page.rect.width - w) / 2, PAGE_NO_BASELINE), text, font=font, fontsize=9)
@@ -201,13 +228,45 @@ def parallel_pdf(head, blocks, front, pdf, html_path, workers):
             uri = link.get("uri") or ""
             if uri.startswith(TOC_LINK) and uri[len(TOC_LINK):] in pages:
                 page.delete_link(link)
-                page.insert_link({"kind": pymupdf.LINK_GOTO, "from": link["from"], "page": pages[uri[len(TOC_LINK):]] - 1})
+                target = pages[uri[len(TOC_LINK):]]
+                phys = target - 1 + n_front if isinstance(target, int) else [roman(j + 1) for j in range(n_front)].index(target)
+                page.insert_link({"kind": pymupdf.LINK_GOTO, "from": link["from"], "page": phys})
     book.set_toc(toc)
     book.save(pdf, garbage=3, deflate=True)
     return len(book)
 
 
+def front_page_name(book, anchor):
+    return f"{anchor}.html" if book == 1 else f"B{book}-{anchor}.html"
+
+
+def web_front_pages(book):
+    """网页版的前言、编写说明各一页，样式与目录页一致。"""
+    name = f"俄语教程 {BOOK_NAME[book]}"
+    for anchor, label, path in (("preface", "前言", ROOT / "front" / f"{BOOK_NAME[book]}前言.md"),
+                                ("guide", "编写说明", ROOT / "front" / "编写说明.md")):
+        if not path.exists():
+            continue
+        body = pandoc(path.read_text(encoding="utf-8"), anchor)
+        page = f"""<!DOCTYPE html>
+<html lang="zh-Hans"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{name} · {label}</title>
+<style>
+:root {{ --paper: #fbf8f3; --ink: #1f1f1f; --muted: #6b6b6b; --accent: #8a2b2b; --rule: #e3dbd0; }}
+@media (prefers-color-scheme: dark) {{ :root {{ --paper: #18181a; --ink: #e9e6e1; --muted: #a29d96; --accent: #e09088; --rule: #3a3633; }} }}
+body {{ margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.7 "PT Serif", "Noto Serif SC", serif; }}
+main {{ max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }}
+h1 {{ font: 700 28px "PT Sans", "Noto Sans SC", sans-serif; color: var(--accent); }}
+h2 {{ font: 700 18px "PT Sans", "Noto Sans SC", sans-serif; margin: 28px 0 8px; }}
+table {{ border-collapse: collapse; width: 100%; font-size: 15px; }} td, th {{ border-bottom: 1px solid var(--rule); padding: 5px 8px; text-align: left; vertical-align: top; }}
+a {{ color: var(--accent); }} .back {{ font: 14px "PT Sans", sans-serif; }}
+</style></head>
+<body><main><p class="back"><a href="{index_name(book)}">← 目录</a></p>{body}</main></body></html>"""
+        (ROOT / "web" / front_page_name(book, anchor)).write_text(page, encoding="utf-8")
+
+
 def web_index(book, codes, fms):
+    web_front_pages(book)
     items, unit = [], None
     for code in codes:
         fm = fms[code]
@@ -235,7 +294,7 @@ li a {{ display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(-
 li a:hover {{ color: var(--accent); }}
 .no {{ flex: 0 0 76px; color: var(--muted); font-size: 14px; }} .sub {{ color: var(--muted); }}
 </style></head>
-<body><main><h1>{name}</h1><p class="lead">{LEVEL.get(book, "")} · {sum(1 for c in codes if not re.search(r"T[012]$", c))} 课</p>
+<body><main><h1>{name}</h1><p class="lead"><a href="{front_page_name(book, 'preface')}">前言</a> · <a href="{front_page_name(book, 'guide')}">编写说明</a></p><p class="lead">{LEVEL.get(book, "")} · {sum(1 for c in codes if not re.search(r"T[012]$", c))} 课</p>
 {"".join(items)}
 </main></body></html>"""
     (ROOT / "web" / index_name(book)).write_text(page, encoding="utf-8")
@@ -263,7 +322,7 @@ def main(argv):
 <html lang="zh-Hans"><head><meta charset="utf-8"><title>{name}</title>
 <link rel="stylesheet" href="../style.css">"""
     page = f"""{head}</head>
-<body class="book">{cover}{toc_html(codes, fms)}{"".join(parts)}{answers}{index_sec}</body></html>"""
+<body class="book">{cover}{front_parts(book)}{toc_html(codes, fms)}{"".join(parts)}{answers}{index_sec}</body></html>"""
     out = ROOT / "build"
     out.mkdir(exist_ok=True)
     html_path = out / f"{BOOK_NAME[book]}.html"
@@ -291,7 +350,8 @@ def main(argv):
             if cur:
                 blocks.append((ids, "".join(cur)))
             blocks += [(["answers"], answers), (["index"], index_sec)]
-            n = parallel_pdf(head, blocks, lambda pg: cover + toc_html(codes, fms, pg), pdf, html_path, workers)
+            fronts = front_parts(book)
+            n = parallel_pdf(head, blocks, lambda pg: cover + fronts + toc_html(codes, fms, pg), pdf, html_path, workers)
             print(f"{pdf}（{n} 页）")
         dist = ROOT / "dist"
         dist.mkdir(exist_ok=True)
