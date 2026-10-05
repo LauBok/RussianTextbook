@@ -129,10 +129,10 @@ def pdf_exercises(data, img_dir):
 # ---------- 2. 答案与解析 ----------
 
 def why_lines(why):
-    """解析按“第 N 题”分行：每道小题的解析单独一段。"""
-    parts = [p.strip() for p in re.split(r"(?<=[。；）\]\}])\s*(?=第\s*\d+(?:[–、,，]\d+)*\s*题)", why.strip()) if p.strip()]
-    out = [f"[解析：{ipa(parts[0])}]{{.why}}", ""]
-    for p in parts[1:]:
+    """解析按“第 N 题 / 空 / 篇”分行：每道小题的解析单独一段。"""
+    parts = [p.strip() for p in re.split(r"(?<=[。；）\]\}])\s*(?=第\s*\d+(?:[–、,，]\d+)*\s*[题空篇])", why.strip()) if p.strip()]
+    out = ["[解析]{.why-head}", ""]
+    for p in parts:
         out += [f"[{ipa(p)}]{{.why}}", ""]
     return out
 

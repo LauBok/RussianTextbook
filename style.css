@@ -189,3 +189,4 @@ li .why { display: inline; margin: 0; }
 .opts.c4 { grid-template-columns: repeat(4, 1fr); }
 .opts.c2 { grid-template-columns: repeat(2, 1fr); }
 .opts.c1 { grid-template-columns: 1fr; }
+.why-head { display: block; font: 700 9.5pt "PT Sans", "CJK Sans"; color: var(--muted); margin-top: 3pt; }
