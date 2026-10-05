@@ -312,7 +312,10 @@ def main(argv):
         keys = list(ex.map(lambda c: answers_html(c, fms[c]), codes))
     index, n_words = vocab_index(codes, fms)
     name = f"俄语教程 {BOOK_NAME[book]}"
-    cover = (f'<section class="book-cover"><div class="cover-ru" lang="ru">Ру́сский язы́к</div>'
+    art = ROOT / "img" / "covers" / f"B{book}-coverGPT.jpg"
+    cover_attr = (f' class="book-cover art" style="background-image: url(\'../img/covers/{art.name}\')"' if art.exists()
+                  else ' class="book-cover"')
+    cover = (f'<section{cover_attr}><div class="cover-ru" lang="ru">Ру́сский язы́к</div>'
              f'<h1 class="cover-title">{name}</h1><div class="cover-sub">{COVER_SUB.get(book, "自学用")}</div></section>')
     answers = (f'<section class="answers" id="answers"><div class="running">{name} · 练习答案与解析</div>'
                f'<h1 class="part-title">练习答案与解析</h1>{"".join(keys)}</section>')
