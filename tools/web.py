@@ -77,7 +77,7 @@ def main(lesson):
     page = page.replace("<!--TEXT_HTML-->", html[:i] + html[j:])
     page = page.replace(">练习</button>", f">{heading}</button>", 1)
     page = page.replace("<!--EX_HTML-->", ex_html)
-    page = page.replace("{{TITLE}}", f"{front['book']} 第{front['lesson']}课")
+    page = page.replace("{{TITLE}}", f"{front['book']} " + (front.get("label") or f"第{front['lesson']}课"))
     # 课页作为多页 artifact 的附属页面发布时不会被套外壳，自己带上 doctype、字符集和视口
     if not page.lstrip().lower().startswith("<!doctype"):
         page = ('<!doctype html><html lang="zh-Hans"><meta charset="utf-8">'

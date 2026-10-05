@@ -50,7 +50,21 @@ def blank(stem):
 
 # ---------- 1. PDF 练习节 ----------
 
+def scored(data):
+    """测试题的 points（每小题分值）写进题目要求：“（每小题 2 分，共 20 分）”。只处理一次。"""
+    if data.get("_scored"):
+        return data
+    for ex in data.get("exercises", []):
+        p = ex.get("points")
+        if p:
+            n = len(ex.get("items") or [])
+            ex["task"] = ex["task"].rstrip("。") + (f"（共 {p} 分）" if n == 1 else f"（每小题 {p} 分，共 {p * n} 分）")
+    data["_scored"] = True
+    return data
+
+
 def pdf_exercises(data, img_dir):
+    data = scored(data)
     out = [f"## {data.get('heading', '练习')}", ""]
     if data.get("intro"):
         out += [data["intro"], ""]
@@ -94,6 +108,7 @@ def pdf_exercises(data, img_dir):
 # ---------- 2. 答案与解析 ----------
 
 def key_markdown(data):
+    data = scored(data)
     out = []
     for n, ex in enumerate(data["exercises"]):
         out += [f"## {NUM[n]}、{ex['task'].rstrip('。')}", ""]
@@ -123,6 +138,7 @@ def key_markdown(data):
 # ---------- 3. 交互页数据 ----------
 
 def web_json(data, img_dir):
+    data = scored(data)
     exs = []
     for ex in data["exercises"]:
         e = {k: v for k, v in ex.items()}

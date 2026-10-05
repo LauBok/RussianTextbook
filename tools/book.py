@@ -17,7 +17,8 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).parent))
-import exercises  # noqa: E402
+import exercises
+import check  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 BOOK_NAME = {1: "第一册", 2: "第二册", 3: "第三册", 4: "第四册"}
@@ -32,13 +33,10 @@ def index_name(book):
 
 
 def lesson_codes(book):
-    """按课号顺序列出本册已有的课。"""
-    def key(code):
-        m = re.search(r"([PL])(\d+)$", code)
-        return (m.group(1) == "L", int(m.group(2)))
-    pat = r"[PL]\d+" if book == 1 else rf"B{book}-L\d+"
+    """按课号顺序列出本册已有的课和测试页（顺序规则见 check.order_key）。"""
+    pat = r"[PL]\d+|T[012]" if book == 1 else rf"B{book}-(?:L\d+|T[012])"
     codes = [p.stem for p in (ROOT / "lessons").glob("*.md") if re.fullmatch(pat, p.stem)]
-    return sorted(codes, key=key)
+    return sorted(codes, key=lambda c: check.order_key(book, c))
 
 
 def front_matter(md):
@@ -237,7 +235,7 @@ li a {{ display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(-
 li a:hover {{ color: var(--accent); }}
 .no {{ flex: 0 0 76px; color: var(--muted); font-size: 14px; }} .sub {{ color: var(--muted); }}
 </style></head>
-<body><main><h1>{name}</h1><p class="lead">{LEVEL.get(book, "")} · {len(codes)} 课</p>
+<body><main><h1>{name}</h1><p class="lead">{LEVEL.get(book, "")} · {sum(1 for c in codes if not re.search(r"T[012]$", c))} 课</p>
 {"".join(items)}
 </main></body></html>"""
     (ROOT / "web" / index_name(book)).write_text(page, encoding="utf-8")

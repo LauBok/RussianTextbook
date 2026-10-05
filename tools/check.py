@@ -90,8 +90,15 @@ def all_ids():
     return ids
 
 
+# 测试页：T0 入册复习测试（第二册起，放在第 1 课前）、T1 期中测试（放在 MIDTERM_AFTER 那课之后）、T2 期末测试（放在全册最后）
+MIDTERM_AFTER = {1: 50, 2: 36, 3: 30, 4: 24}
+
+
 def canon(name):
-    """命令行和文件名 → 规划课号：L01 → L1，P01 → P1，B2-L1 → B2-L01。"""
+    """命令行和文件名 → 规划课号：L01 → L1，P01 → P1，B2-L1 → B2-L01；测试页 T1、B2-T0。"""
+    m = re.fullmatch(r"(?:B([234])-)?T([012])", name)
+    if m:
+        return int(m.group(1) or 1), name
     m = re.fullmatch(r"B([234])-L(\d+)", name)
     if m:
         return int(m.group(1)), f"B{m.group(1)}-L{int(m.group(2)):02d}"
@@ -479,7 +486,9 @@ def check_exercise_yaml(stem, path):
             probs.append(("练习", f"{where}：缺少 task"))
         if t in WHY_REQUIRED and not ex.get("why"):
             probs.append(("练习", f"{where}：封闭题缺少解析 why"))
-        allowed = {"id", "type", "task", "why", "items", "example", "placeholder"}
+        allowed = {"id", "type", "task", "why", "items", "example", "placeholder", "points"}
+        if "points" in ex and not (isinstance(ex["points"], (int, float)) and ex["points"] > 0):
+            probs.append(("练习", f"{where}：points 应为正数（每小题分值）"))
         for k in set(ex) - allowed:
             probs.append(("练习", f"{where}：多出字段 {k}"))
         for k in ("task", "why"):
@@ -590,8 +599,13 @@ def check_scene(stem):
 # ---------- 主流程 ----------
 
 def order_key(book, lid):
+    """册内顺序：P 课、L 课按号；T0 在最前，T1 紧跟期中那课，T2 在最后。"""
+    m = re.search(r"T([012])$", lid)
+    if m:
+        t = int(m.group(1))
+        return {0: (book, -1, 0, 0), 1: (book, 1, MIDTERM_AFTER[book], 1), 2: (book, 1, 10 ** 6, 0)}[t]
     m = re.search(r"([PL])(\d+)$", lid)
-    return book, m.group(1) == "L", int(m.group(2))
+    return book, int(m.group(1) == "L"), int(m.group(2)), 0
 
 
 def lesson_files():
