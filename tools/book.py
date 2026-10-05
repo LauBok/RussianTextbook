@@ -23,7 +23,7 @@ import check  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 BOOK_NAME = {1: "第一册", 2: "第二册", 3: "第三册", 4: "第四册"}
 LEVEL = {1: "从零起步到 A2", 2: "从 A2 到 B1", 3: "从 B1 到 B2", 4: "从 B2 到 C1"}
-COVER_SUB = {1: "从零起步", 2: "A2 → B1", 3: "B1 → B2", 4: "B2 → C1"}
+COVER_SUB = {1: "目标等级：A1 → A2", 2: "目标等级：A2 → B1", 3: "目标等级：B1 → B2", 4: "目标等级：B2 → C1"}
 RU_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 
 
