@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""重音位置核对：把全书（第一至三册）标了重音的词形和离线重音词典比对，列出位置不一致的词。
+"""重音位置核对：把全书（第一至四册）标了重音的词形和离线重音词典比对，列出位置不一致的词。
 
-    python3 tools/stress.py                 # 核对第一至三册，结果写进 docs/重音核对.md
+    python3 tools/stress.py                 # 核对第一至四册，结果写进 docs/重音核对.md
     python3 tools/stress.py B3-L03 L05      # 只核对这几课，结果打印到终端
     python3 tools/stress.py build <openrussian 目录> <zalizniak 目录>   # 重新生成词典
 
@@ -116,7 +116,7 @@ def mark(w, pos):
 
 def sources(wanted):
     for (book, lid), path in check.lesson_files():
-        if book > 3 or (wanted and (book, lid) not in wanted):
+        if book > 4 or (wanted and (book, lid) not in wanted):
             continue
         stem = path.stem
         for i, ln in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
@@ -150,7 +150,7 @@ def run(wanted):
 
 def report(rows, checked, missing):
     out = ["# 重音核对", "",
-           "由 `python3 tools/stress.py` 生成：把第一至三册课文、生词表、练习里标了重音的多音节词形，"
+           "由 `python3 tools/stress.py` 生成：把第一至四册课文、生词表、练习里标了重音的多音节词形，"
            "和离线重音词典（OpenRussian 词形表 + 扎利兹尼亚克《俄语语法词典》原形）比对，"
            "列出重音位置与词典任何一种读法都不一致的词形。只报告，不自动改；词典缺词、同形异义、词典本身有误的不算错。", "",
            f"比对词次 {checked}，词典未收词次 {missing}，不一致词形 {len(rows)} 个。", "",

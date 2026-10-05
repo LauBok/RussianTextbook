@@ -274,11 +274,14 @@ def expand(md, lesson=None):
     fig = culture(lesson)
     if fig:
         # 有“俄罗斯知识”时放在它的第一个小标题之后，浮动图与正文顶端对齐
-        if re.search(r"^## 俄罗斯知识", md, re.M):
+        if re.search(r"^## 作者与作品简介", md, re.M):
+            # 第四册：作家肖像、作品插图放在“作者与作品简介”右侧
+            md = re.sub(r"^## 作者与作品简介[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
+        elif re.search(r"^## 俄罗斯知识", md, re.M):
             md = re.sub(r"^## 俄罗斯知识[ \t]*\n(?:\s*\n)*(### [^\n]*\n)?\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
         else:
-            # 第三册起没有“俄罗斯知识”：放在课文第一段右侧
-            md = re.sub(r"^## 课文[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
+            # 第三册起没有“俄罗斯知识”：放在课文（选文）第一段右侧
+            md = re.sub(r"^## (?:课文|选文)[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
     return md
 
 

@@ -15,7 +15,10 @@
   词表　本课新词数量（第三册每课不超过 60 个，“新义”行不计）；本课新词是否在课文、例句、练习中用到
   重音　多音节词是否标了重音，单音节词是否误标，重音符是否放在元音上
         （第一、二册全文标重音；第三册起课文、例句、练习不要求标，只查生词表）
+        第四册诗歌（::: {.poem lang="ru"} 块）全文标重音，其余选文不要求
   插图　第一、二册每课要有 img/<课>/scene.svg；第三册起不要求
+  原著　front matter 写 source: original 的第四册原著选文：未学词只要在本课生词表或“课文注释”里
+        出现过就算已解释，注释里的词不计入新词数
   ё　　 应写 ё 的地方是否写成了 е
   标记　俄语是否都放在 [...]{.ru} 或 lang="ru" 的块里
   练习　exercises/<课>.yaml 是否符合 exercises/FORMAT.md
@@ -54,7 +57,7 @@ UNSTRESSED_POLY = {"обо", "изо", "подо", "ото", "передо", "н
 STRESSABLE_MONO = {"не", "ни", "на", "за", "по", "под", "из", "от", "без", "до", "про", "над"}
 BOOK_SIZE = {1: 108, 2: 72, 3: 60, 4: 40}
 # 每课新词上限（不计“新义：……”行）；没写的册不查
-MAX_NEW = {3: 60}
+MAX_NEW = {3: 60, 4: 70}
 # 检查词汇的节；其余各节（生词表、注释、俄罗斯知识、作者简介、译文）只查书写
 VOCAB_SECTIONS = ("课前问题", "课文", "选文", "语法", "语音", "练习")
 
@@ -663,13 +666,27 @@ class Checker:
         if les.book in MAX_NEW and new > MAX_NEW[les.book]:
             out.append((None, "词表", f"本课新词 {new} 个，超过第{les.book}册上限 {MAX_NEW[les.book]} 个"))
 
+        # 原著选文：课文注释里随文解释过的词也算已解释
+        annotated = Lexicon()
+        if les.front.get("source") == "original":
+            for i, ln in enumerate(les.lines):
+                if les.meta[i][0].startswith("课文注释"):
+                    for seg in ru_segments(ln)[0]:
+                        annotated.add(seg)
+        known_here = known
+        if annotated.forms:
+            known_here = Lexicon()
+            known_here.update(known)
+            known_here.update(annotated)
+
         used, agg = set(), {}
         for i, sec, segs, rest in les.ru_lines():
             ln = les.lineno(i)
             if CYR.search(re.sub(r"<!--.*?-->", "", rest)):
                 bare = sorted(set(WORD.findall(nfc(rest))))
                 out.append((ln, "标记", f"俄语没有放在 {{.ru}} 里：{'、'.join(bare)}"))
-            stress = need_stress_text or sec.startswith("生词")
+            poem = les.book >= 4 and any("poem" in f and 'lang="ru"' in f for f in les.meta[i][1])
+            stress = need_stress_text or sec.startswith("生词") or poem
             vocab_sec = is_vocab_section(sec)
             for seg in segs:
                 used.update(norm(w) for w in title_words(seg))
@@ -682,7 +699,7 @@ class Checker:
                     if y:
                         out.append((ln, "ё", f"{w}：应写作 {y}"))
                     if vocab_sec:
-                        self.check_vocab_use(w, ln, k, known, agg, used)
+                        self.check_vocab_use(w, ln, k, known_here, agg, used)
 
         # 练习
         ex_path = ROOT / "exercises" / f"{stem}.yaml"
@@ -702,7 +719,7 @@ class Checker:
                     y = yo_problem(w, self.everything)
                     if y:
                         out.append((f"练习 {where}", "ё", f"{w}：应写作 {y}"))
-                    self.check_vocab_use(w, f"练习 {where}", k, known, agg, used)
+                    self.check_vocab_use(w, f"练习 {where}", k, known_here, agg, used)
             for where, s in zh:
                 segs, rest = ru_segments(s)
                 if CYR.search(rest):

@@ -127,6 +127,9 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 .poem .line-block { font-size: 13pt; line-height: 1.75; margin-bottom: 10pt; }
 .poem .year { display: block; font-size: 9.5pt; color: var(--muted); }
 .prose-zh .line-block { margin: 0 0 8pt 2em; line-height: 1.8; }
+.poem-zh { margin: 4pt 0 8pt 14mm; }
+.poem-zh .line-block { font-family: "CJK Serif", serif; line-height: 1.75; margin-bottom: 10pt; }
+.poem .line-block, .poem-zh .line-block { white-space: normal; break-inside: avoid; }
 
 /* 答案解析 */
 .why { display: block; font-size: 9.5pt; line-height: 1.6; color: var(--muted); margin: 3pt 0 6pt; }
