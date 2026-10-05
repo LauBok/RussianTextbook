@@ -197,10 +197,11 @@ def scene(lesson):
 
 
 def culture(lesson):
-    """“俄罗斯知识”配图 img/<课>/*GPT.jpg 等，缩小后内嵌为 <figure class="culture">；没有图时返回空串。"""
+    """彩色配图 img/<课>/*GPT.jpg（AI 生成）或 *PD.jpg（公有领域原作），缩小后内嵌为 <figure class="culture">；没有图时返回空串。"""
     if not lesson:
         return ""
-    files = sorted(p for p in (ROOT / "img" / lesson).glob("*GPT.*") if p.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"))
+    files = sorted(p for p in (ROOT / "img" / lesson).glob("*") if re.search(r"(GPT|PD)$", p.stem)
+                   and p.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"))
     if not files:
         return ""
     import base64, io
@@ -272,8 +273,12 @@ def expand(md, lesson=None):
         md = re.sub(r"^## 课文[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + pic, md, count=1, flags=re.M)
     fig = culture(lesson)
     if fig:
-        # 放在“俄罗斯知识”的第一个小标题之后，浮动图与正文顶端对齐
-        md = re.sub(r"^## 俄罗斯知识[ \t]*\n(?:\s*\n)*(### [^\n]*\n)?\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
+        # 有“俄罗斯知识”时放在它的第一个小标题之后，浮动图与正文顶端对齐
+        if re.search(r"^## 俄罗斯知识", md, re.M):
+            md = re.sub(r"^## 俄罗斯知识[ \t]*\n(?:\s*\n)*(### [^\n]*\n)?\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
+        else:
+            # 第三册起没有“俄罗斯知识”：放在课文第一段右侧
+            md = re.sub(r"^## 课文[ \t]*\n\n?", lambda m: m.group(0).rstrip("\n") + "\n\n" + fig, md, count=1, flags=re.M)
     return md
 
 

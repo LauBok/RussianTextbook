@@ -12,8 +12,10 @@
         漏列　　　用了，但哪一课的词表都没有
         提前使用　用了，但要到后面某课才列为新词
         重复　　　本课列为新词的词，此前已有一课列过
-  词表　本课新词数量；本课新词是否在课文、例句、练习中用到
+  词表　本课新词数量（第三册每课不超过 60 个，“新义”行不计）；本课新词是否在课文、例句、练习中用到
   重音　多音节词是否标了重音，单音节词是否误标，重音符是否放在元音上
+        （第一、二册全文标重音；第三册起课文、例句、练习不要求标，只查生词表）
+  插图　第一、二册每课要有 img/<课>/scene.svg；第三册起不要求
   ё　　 应写 ё 的地方是否写成了 е
   标记　俄语是否都放在 [...]{.ru} 或 lang="ru" 的块里
   练习　exercises/<课>.yaml 是否符合 exercises/FORMAT.md
@@ -51,6 +53,8 @@ HOMOGLYPH = re.compile(r"[А-Яа-яЁё][́]?[aeopcxyAEOPCXYKMTBH]|[aeopcxyAEOP
 UNSTRESSED_POLY = {"обо", "изо", "подо", "ото", "передо", "нибудь"}
 STRESSABLE_MONO = {"не", "ни", "на", "за", "по", "под", "из", "от", "без", "до", "про", "над"}
 BOOK_SIZE = {1: 108, 2: 72, 3: 60, 4: 40}
+# 每课新词上限（不计“新义：……”行）；没写的册不查
+MAX_NEW = {3: 60}
 # 检查词汇的节；其余各节（生词表、注释、俄罗斯知识、作者简介、译文）只查书写
 VOCAB_SECTIONS = ("课前问题", "课文", "选文", "语法", "语音", "练习")
 
@@ -650,6 +654,10 @@ class Checker:
                 self.first.setdefault(key, stem)
         if not full:                 # 只登记词表，供后面的课判断重复
             return out
+
+        new = sum(1 for _, _, _, pos in les.vocab if pos is not None)
+        if les.book in MAX_NEW and new > MAX_NEW[les.book]:
+            out.append((None, "词表", f"本课新词 {new} 个，超过第{les.book}册上限 {MAX_NEW[les.book]} 个"))
 
         used, agg = set(), {}
         for i, sec, segs, rest in les.ru_lines():
