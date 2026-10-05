@@ -118,6 +118,15 @@ def pdf_exercises(data, img_dir):
 
 # ---------- 2. 答案与解析 ----------
 
+def why_lines(why):
+    """解析按“第 N 题”分行：每道小题的解析单独一段。"""
+    parts = [p.strip() for p in re.split(r"(?<=[。；）\]\}])\s*(?=第\s*\d+(?:[–、,，]\d+)*\s*题)", why.strip()) if p.strip()]
+    out = [f"[解析：{ipa(parts[0])}]{{.why}}", ""]
+    for p in parts[1:]:
+        out += [f"[{ipa(p)}]{{.why}}", ""]
+    return out
+
+
 def key_markdown(data):
     data = scored(data)
     out = []
@@ -145,7 +154,7 @@ def key_markdown(data):
                     line += "　也可：" + "；".join(ru(a) for a in alt)
                 out.append(line)
         if ex.get("why"):
-            out += ["", f"[解析：{ipa(ex['why'])}]{{.why}}"]
+            out += [""] + why_lines(ex["why"])
         out.append("")
     return "\n".join(out)
 
