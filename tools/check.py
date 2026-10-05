@@ -225,7 +225,7 @@ def vocab_key_pos(cell):
         return None
     if len(cell) < 2:
         return ""
-    parts = [p for p in re.split(r"[\s,(]", strip_markup(cell[1]).strip()) if p]
+    parts = [p for p in re.split(r"[\s,(（]", strip_markup(cell[1]).strip()) if p]
     if not parts:
         return ""
     if parts[0] in ("impf.", "pf.") and len(parts) > 1 and parts[1] in ("I", "II", "irr."):
