@@ -120,7 +120,7 @@ def pdf_exercises(data, img_dir):
                 out += [f"{i}. {it['zh']}"] + ["   []{.line}"] * n_lines
         elif t == "open":
             for it in ex["items"]:
-                n_lines = answer_lines(it) if re.search(r"T[012]$", str(data.get("lesson", ""))) else it.get("lines", 6)
+                n_lines = answer_lines(it)
                 out += [it["prompt"], ""] + ["[]{.line}"] * n_lines + [""]
         out += [":::", ""]
     return "\n".join(out)
