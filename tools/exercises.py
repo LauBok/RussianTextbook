@@ -70,7 +70,8 @@ def pdf_exercises(data, img_dir):
         out += [data["intro"], ""]
     for n, ex in enumerate(data["exercises"]):
         head = f"[{NUM[n]}、{ex['task']}]{{.task}}"
-        out += ["::: {.exercise .long}" if ex.get("passage") else "::: exercise", head, ""]
+        long = ex.get("passage") or re.search(r"T[012]$", str(data.get("lesson", "")))   # 测试页的大题可以跨页
+        out += ["::: {.exercise .long}" if long else "::: exercise", head, ""]
         if ex.get("passage"):          # 阅读理解、完形填空的文章，放在本题要求之后
             out += ["::: passage", ex["passage"].strip(), ":::", ""]
         t = ex["type"]
@@ -121,6 +122,8 @@ def key_markdown(data):
     for n, ex in enumerate(data["exercises"]):
         out += [f"## {NUM[n]}、{ex['task'].rstrip('。')}", ""]
         t = ex["type"]
+        if ex.get("passage_zh"):       # 测试页文章的参考译文放在答案里
+            out += ["文章参考译文：", "", "::: prose-zh", ex["passage_zh"].strip(), ":::", ""]
         for i, it in enumerate(ex["items"], 1):
             if t == "picture_qa":
                 out.append(f"{i}. {ru('— ' + it['qword'] + ' э́то? — ' + it['answer'][0])}")

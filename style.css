@@ -97,9 +97,10 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 /* 练习 */
 .exercise { break-inside: avoid; }
 .exercise.long { break-inside: auto; }
+.exercise > p:first-child { break-after: avoid; page-break-after: avoid; }
 .passage { break-inside: avoid; }
 .exercise ol { padding-left: 18pt; margin: 2pt 0 8pt; }
-.exercise li { margin-bottom: 3pt; }
+.exercise li { margin-bottom: 3pt; break-inside: avoid; }
 .task { font-weight: 700; margin-top: 8pt; }
 .blank { display: inline-block; min-width: 18mm; border-bottom: .6pt solid var(--ink); }
 .line { display: block; border-bottom: .6pt solid var(--rule); height: 16pt; margin: 2pt 0 4pt 0; }
