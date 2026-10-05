@@ -99,6 +99,7 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 .exercise.long { break-inside: auto; }
 .exercise > p:first-child { break-after: avoid; page-break-after: avoid; }
 .passage { break-inside: avoid; }
+.passage:has(.long) { break-inside: auto; }   /* 测试页超过一页的长文章允许跨页 */
 .exercise ol { padding-left: 18pt; margin: 2pt 0 8pt; }
 .exercise li { margin-bottom: 3pt; break-inside: avoid; }
 .task { font-weight: 700; margin-top: 8pt; }
