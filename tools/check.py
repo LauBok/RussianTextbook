@@ -310,17 +310,21 @@ class Lexicon:
     def __init__(self):
         self.forms = {}
         self.proper = {}      # 专有名词表（names 块）的词：只用来认首字母大写的词
+        self.proper_lower = set()   # 专有名词里本来就小写的词（фон Мекк 的 фон），小写出现也认
 
     def add(self, text, proper=False):
         target = self.proper if proper else self.forms
         for w, morpheme in tokens(text):
             if not morpheme:
                 target.setdefault(norm(w), set()).add(plain(w))
+                if proper and w[:1].islower():
+                    self.proper_lower.add(norm(w))
 
     def update(self, other):
         for mine, theirs in ((self.forms, other.forms), (self.proper, other.proper)):
             for k, v in theirs.items():
                 mine.setdefault(k, set()).update(v)
+        self.proper_lower |= other.proper_lower
 
     @staticmethod
     def _hit(table, k):
@@ -335,7 +339,7 @@ class Lexicon:
         if self._hit(self.forms, k):
             return True
         # 专有名词表里的词（如 Пеки́нский университе́т 里的 пеки́нский）不算学过的普通词
-        return w[:1].isupper() and self._hit(self.proper, k)
+        return (w[:1].isupper() or k in self.proper_lower) and self._hit(self.proper, k)
 
 
 @lru_cache(maxsize=None)
