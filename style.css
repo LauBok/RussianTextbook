@@ -152,10 +152,13 @@ li .why { display: inline; margin: 0; }
 .drill p { font-size: 13pt; letter-spacing: .02em; word-spacing: .6em; margin: 0 0 4pt; }
 
 /* 手写练习：左侧字样，右侧带中线的书写格 */
-.handwriting p { display: flex; align-items: flex-end; gap: 8pt; margin: 0 0 8pt; }
-.handwriting .hand { font-size: 26pt; line-height: 1; min-width: 22mm; }
-.handwriting .write { flex: 1; height: 26pt; border-bottom: .8pt solid var(--ink);
-  background-image: linear-gradient(to bottom, transparent 48%, var(--rule) 48%, var(--rule) 52%, transparent 52%); }
+/* 四线格：四条线三格等高，第三条（基线）加粗；大写字母和 б、в 等的上部到第一条线，小写字母在中格，у、р、д 的尾巴到第四条线 */
+.handwriting p { display: flex; align-items: flex-start; gap: 6pt; margin: 0 0 9pt; height: 33pt;
+  background-image: linear-gradient(to bottom,
+    #cfc6b8 0, #cfc6b8 .5pt, transparent .5pt, transparent 11pt, #cfc6b8 11pt, #cfc6b8 11.5pt, transparent 11.5pt,
+    transparent 22pt, #8a8a8a 22pt, #8a8a8a 22.8pt, transparent 22.8pt, transparent 32.5pt, #cfc6b8 32.5pt, #cfc6b8 33pt); }
+.handwriting .hand { font-size: 29pt; line-height: 33pt; height: 33pt; min-width: 22mm; padding-top: var(--hand-shift, 0pt); box-sizing: border-box; }
+.handwriting .write { flex: 1; height: 33pt; }
 
 /* 单元词汇总表 */
 .unit-vocab td:first-child { width: 8%; color: var(--muted); font-size: 9.5pt; font-weight: 400; }
