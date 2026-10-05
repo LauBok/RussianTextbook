@@ -15,7 +15,7 @@
 | `template.html`、`style.css`、`zh-punct.lua` | 印刷版模板、样式、汉语标点过滤器 |
 | `build.sh` | 生成 PDF：`./build.sh L01` |
 | `tools/exercises.py` | 由 YAML 生成 PDF 练习节、答案附录和交互页数据 |
-| `tools/web.py`、`web/template.html` | 生成交互课页：`python3 tools/web.py L01`；发布为 artifact 时声明 capabilities `sample`（AI 批改）、`db` 和 `user`（答题记录）。已发布的地址（读者的答题记录存在各自的 artifact 里，更新时一律传 `url` 原地发布，不要新建）：第一册 https://claude.ai/artifact/HAM17DEyhspuKkKarPJk7W （首页 web/index.html），第二册 https://claude.ai/artifact/YHU3wuXLEqpFvUwguyoMhp （首页 web/B2-index.html）；课页作为附属文件一起发布 |
+| `tools/web.py`、`web/template.html` | 生成交互课页：`python3 tools/web.py L01`；发布为 artifact 时声明 capabilities `sample`（AI 批改）、`db` 和 `user`（答题记录）。已发布的地址（读者的答题记录存在各自的 artifact 里，更新时一律传 `url` 原地发布，不要新建）：第一册 https://claude.ai/artifact/HAM17DEyhspuKkKarPJk7W （首页 web/index.html），第二册 https://claude.ai/artifact/YHU3wuXLEqpFvUwguyoMhp （首页 web/B2-index.html），第三册 https://claude.ai/artifact/889DZx1UMGbNsHaJkvtJtL （首页 web/B3-index.html）；课页作为附属文件一起发布 |
 | `tools/check.py` | 编写规范检查（词表累积、重音、ё、{.ru} 标记、练习格式）：`python3 tools/check.py L01` |
 | `tools/stress.py` | 重音位置核对：全书标了重音的词形与离线词典（OpenRussian 词形表 + 扎利兹尼亚克语法词典，`tools/data/stress.tsv.gz`）比对，结果写进 `docs/重音核对.md`，只报告不自动改 |
 | `tools/tts_yandex.py` | 用 Yandex SpeechKit 逐句生成音频（尚未启用） |
