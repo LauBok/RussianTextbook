@@ -75,6 +75,7 @@ th { font: 700 9pt "PT Sans", "CJK Sans"; text-align: left; color: var(--muted);
 td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: top; }
 .vocab td:first-child { font-size: 11pt; font-weight: 700; width: 40%; }
 .vocab td:nth-child(2) { color: var(--muted); width: 20%; }
+.vocab col, .unit-vocab col, .book-index col, .index col { width: auto !important; }
 .tr { font-family: "PT Serif", "IPA", "CJK Serif", serif; font-weight: 400; font-size: 9.5pt; color: var(--muted); }
 .names { font-size: 10pt; color: var(--muted); margin-top: 4pt; }
 .names .ru { color: var(--ink); }
