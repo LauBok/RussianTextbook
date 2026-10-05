@@ -185,3 +185,7 @@ li .why { display: inline; margin: 0; }
 .book .lesson-head .running { font-size: 0; line-height: 0; height: 0; margin: 0; overflow: hidden; }
 .passage { margin: 3pt 0 6pt; padding: 4pt 8pt; border-left: 1.5pt solid var(--rule); }
 .passage p { margin: 0 0 3pt; text-align: justify; }
+.opts { display: grid; column-gap: 6pt; row-gap: 1pt; margin-top: 1pt; }
+.opts.c4 { grid-template-columns: repeat(4, 1fr); }
+.opts.c2 { grid-template-columns: repeat(2, 1fr); }
+.opts.c1 { grid-template-columns: 1fr; }

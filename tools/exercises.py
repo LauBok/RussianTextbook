@@ -87,10 +87,12 @@ def pdf_exercises(data, img_dir):
         elif t == "choice":
             test = re.search(r"T[012]$", str(data.get("lesson", "")))
             for i, it in enumerate(ex["items"], 1):
-                if test:      # 测试页：选项标 A B C D；完形填空没有题干，只列选项
-                    opts = "　".join(f"{'ABCD'[k]}. {ru(o)}" for k, o in enumerate(it["options"]))
-                    stem = f"{ru(blank(it['stem']))}\\\n   " if it.get("stem") else ""
-                    out.append(f"{i}. {stem}{opts}")
+                if test:      # 测试页：选项标 A B C D，按最长选项排成一行四个、两个或一个；完形填空没有题干
+                    longest = max(_text_em(f"A. {o}", "option") for o in it["options"])
+                    cols = 4 if longest <= 9 else 2 if longest <= 20 else 1
+                    opts = "".join(f"[{'ABCD'[k]}. {ru(o)}]{{.opt}}" for k, o in enumerate(it["options"]))
+                    stem = ru(blank(it["stem"])) if it.get("stem") else ""
+                    out.append(f"{i}. {stem}[{opts}]{{.opts .c{cols}}}")
                 else:
                     opts = " / ".join(it["options"])
                     out.append(f"{i}. {ru(blank(it['stem']))}　（{ru(opts)}）")
@@ -253,6 +255,7 @@ SP_FONTS = {
     "translation": ("/usr/share/fonts/opentype/noto/NotoSerifCJK-Bold.ttc", 2, "："),  # Noto Serif CJK SC Bold
 }
 SP_MIN = {"dialogue": 3.5, "translation": 3.0}
+SP_FONTS["option"] = ("/usr/share/fonts/truetype/paratype/PTF55F.ttf", 0, "")    # PT Serif，选择题选项宽度
 
 
 def _text_em(text, kind):
