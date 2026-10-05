@@ -70,7 +70,7 @@ def main(lesson):
     tpl = (ROOT / "web" / "template.html").read_text(encoding="utf-8")
     page = tpl.replace("/*LESSON_DATA*/null", json.dumps(data, ensure_ascii=False))
     i = html.index(f'<h2 id="{heading}">')
-    j = html.find('<h2 id="参考译文">')
+    j = html.find('<h2 id="参考译文">', i)   # 复习课的参考译文在练习前面，只找练习之后的
     if j < 0:
         j = len(html)
     ex_html = html[i:j].split("</h2>", 1)[1]
