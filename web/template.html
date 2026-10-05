@@ -153,13 +153,10 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .letters td:first-child { font-size: 26px; font-weight: 700; width: 18%; }
 .letters td:nth-child(2) .hand { font-size: 28px; }
 .drill p { font-size: 18px; word-spacing: .5em; margin: 0 0 4px; }
-/* 四线格：四条线三格等高，第三条是基线 */
-.handwriting p { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 12px; height: 45px;
-  background-image: linear-gradient(to bottom,
-    var(--rule) 0, var(--rule) 1px, transparent 1px, transparent 15px, var(--rule) 15px, var(--rule) 16px, transparent 16px,
-    transparent 30px, var(--muted) 30px, var(--muted) 31px, transparent 31px, transparent 44px, var(--rule) 44px, var(--rule) 45px); }
-.handwriting .hand { font-size: 36px; line-height: 45px; height: 45px; min-width: 70px; }
-.handwriting .write { flex: 1; height: 45px; }
+/* 网页上不能手写：只显示字样，不画书写格 */
+.handwriting p { margin: 0 0 8px; }
+.handwriting .hand { font-size: 32px; line-height: 1.3; }
+.handwriting .write { display: none; }
 .unit-vocab td:first-child { width: 8%; color: var(--muted); font-size: 13px; font-weight: 400; }
 .unit-vocab td:nth-child(2) { font-size: 16px; font-weight: 700; width: 34%; }
 @media (max-width: 480px) {
