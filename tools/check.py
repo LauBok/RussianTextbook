@@ -518,6 +518,8 @@ def check_exercise_yaml(stem, path):
                 probs.append(("练习", f"{iw}：小题应为映射"))
                 continue
             for k in spec["req"]:
+                if t == "choice" and k == "stem" and ex.get("passage"):
+                    continue            # 完形填空：空在文章里，小题只有选项
                 if it.get(k) in (None, "", []):
                     probs.append(("练习", f"{iw}：缺少 {k}"))
             for k in set(it) - set(spec["req"]) - set(spec.get("opt", [])):
@@ -526,7 +528,7 @@ def check_exercise_yaml(stem, path):
                 if k in it and k in spec["req"] and not (t == "choice" and k == "answer"):
                     if not isinstance(it[k], list):
                         probs.append(("练习", f"{iw}：{k} 应为列表"))
-            if t in ("choice", "fill") and "___" not in str(it.get("stem", "")):
+            if t in ("choice", "fill") and "___" not in str(it.get("stem", "")) and not (t == "choice" and ex.get("passage")):
                 probs.append(("练习", f"{iw}：stem 里没有空位 ___"))
             if t == "choice" and isinstance(it.get("options"), list) and it.get("answer") not in it["options"]:
                 probs.append(("练习", f"{iw}：answer 不在 options 里"))

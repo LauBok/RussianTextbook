@@ -70,7 +70,7 @@ def pdf_exercises(data, img_dir):
         out += [data["intro"], ""]
     for n, ex in enumerate(data["exercises"]):
         head = f"[{NUM[n]}、{ex['task']}]{{.task}}"
-        out += ["::: exercise", head, ""]
+        out += ["::: {.exercise .long}" if ex.get("passage") else "::: exercise", head, ""]
         if ex.get("passage"):          # 阅读理解、完形填空的文章，放在本题要求之后
             out += ["::: passage", ex["passage"].strip(), ":::", ""]
         t = ex["type"]
@@ -84,9 +84,15 @@ def pdf_exercises(data, img_dir):
                 out += [f"![{i}](../{img_dir}/{it['image']})", ""]
             out += [":::"]
         elif t == "choice":
+            test = re.search(r"T[012]$", str(data.get("lesson", "")))
             for i, it in enumerate(ex["items"], 1):
-                opts = " / ".join(it["options"])
-                out.append(f"{i}. {ru(blank(it['stem']))}　（{ru(opts)}）")
+                if test:      # 测试页：选项标 A B C D；完形填空没有题干，只列选项
+                    opts = "　".join(f"{'ABCD'[k]}. {ru(o)}" for k, o in enumerate(it["options"]))
+                    stem = f"{ru(blank(it['stem']))}\\\n   " if it.get("stem") else ""
+                    out.append(f"{i}. {stem}{opts}")
+                else:
+                    opts = " / ".join(it["options"])
+                    out.append(f"{i}. {ru(blank(it['stem']))}　（{ru(opts)}）")
         elif t == "rewrite":
             e = ex.get("example")
             if e:
@@ -119,7 +125,9 @@ def key_markdown(data):
             if t == "picture_qa":
                 out.append(f"{i}. {ru('— ' + it['qword'] + ' э́то? — ' + it['answer'][0])}")
             elif t == "choice":
-                out.append(f"{i}. {ru(it['answer'])}")
+                k = it["options"].index(it["answer"]) if it["answer"] in it["options"] else -1
+                letter = f"{'ABCD'[k]}. " if re.search(r"T[012]$", str(data.get("lesson", ""))) and 0 <= k < 4 else ""
+                out.append(f"{i}. {letter}{ru(it['answer'])}")
             elif t in ("rewrite", "fill"):
                 out.append(f"{i}. {ru(it['accept'][0])}")
             elif t == "open":

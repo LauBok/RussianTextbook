@@ -334,14 +334,15 @@ DATA.exercises.forEach((ex, n) => {
       const card = el("div", "item");
       const stem = ru("div", "stem");
       stem.append(el("span", "num", String(i + 1)));
-      const parts = it.stem.split("___");
+      const parts = (it.stem || "").split("___");
       const gap = el("span", "gap", "\u00a0");
       stem.append(withIpa(parts[0]));
       if (parts.length > 1) stem.append(gap, withIpa(parts[1]));
       const opts = el("div", "opts");
       const fb = el("div", "fb");
-      it.options.forEach((o) => {
-        const b = ru("button", isIpa(o) ? "opt ipa" : "opt", o);
+      const lettered = /T[012]$/.test(DATA.code || "");
+      it.options.forEach((o, k) => {
+        const b = ru("button", isIpa(o) ? "opt ipa" : "opt", (lettered ? "ABCD"[k] + ". " : "") + o);
         b.onclick = () => {
           if (id in results) return;
           const ok = o === it.answer;

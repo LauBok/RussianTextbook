@@ -96,6 +96,8 @@ td { border-bottom: .5pt solid var(--rule); padding: 3pt 6pt; vertical-align: to
 
 /* 练习 */
 .exercise { break-inside: avoid; }
+.exercise.long { break-inside: auto; }
+.passage { break-inside: avoid; }
 .exercise ol { padding-left: 18pt; margin: 2pt 0 8pt; }
 .exercise li { margin-bottom: 3pt; }
 .task { font-weight: 700; margin-top: 8pt; }

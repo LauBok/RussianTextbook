@@ -53,7 +53,7 @@ def main(lesson):
     front = yaml.safe_load(md.split("\n---\n", 1)[0].lstrip("-\n"))
     ex = yaml.safe_load((ROOT / "exercises" / f"{lesson}.yaml").read_text(encoding="utf-8"))
     data = {
-        "book": front["book"], "unit": front["unit"], "lesson": front["lesson"],
+        "book": front["book"], "unit": front["unit"], "lesson": front["lesson"], "code": lesson,
         "title": front["title"], "subtitle": front["subtitle"],
         "label": front.get("label", ""),
         "grammar": ex.get("grammar", ""),
