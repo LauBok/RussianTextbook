@@ -235,12 +235,12 @@ def vocab_key_pos(cell):
         return None
     if len(cell) < 2:
         return ""
-    parts = [p for p in re.split(r"[\s,(（]", strip_markup(cell[1]).strip()) if p]
-    if not parts:
-        return ""
-    if parts[0] in ("impf.", "pf.") and len(parts) > 1 and parts[1] in ("I", "II", "irr."):
-        return f"{parts[0]} {parts[1]}"
-    return parts[0]
+    # 只取大类，词性栏里的写法差异（标点、括号、补充说明）不影响判断
+    text = strip_markup(cell[1])
+    if re.search(r"\b(?:impf|pf)\.", text):
+        conj = re.search(r"\b(II|I)(?![\w.])", text)      # 只用 I / II 区分同形动词（боле́ть I / II）
+        return "verb " + (conj.group(1) if conj else "")
+    return ""      # 非动词：只看词形和重音（同形异义词靠重音区分；同重音不同词类的少见情况用“新义”）
 
 
 class Lesson:
@@ -670,7 +670,7 @@ class Checker:
 
         # 重复
         for w, _, i, pos in les.vocab:
-            if pos is None:          # “新义：……”：旧词的新义项，不算重复
+            if pos is None or les.id.startswith("P"):   # “新义：……”不算重复；语音课的拼读词表不登记
                 continue
             key = (nfc(w).lower(), pos)
             if key in self.first and self.first[key] != stem:
