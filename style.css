@@ -173,9 +173,9 @@ li .why { display: inline; margin: 0; }
 @page cover { margin: 0; @top-left { content: none; } }
 .book-cover.art { page: cover; height: 297mm; width: 210mm; justify-content: flex-start; padding-top: 42mm; box-sizing: border-box;
   background-size: cover; background-position: center bottom; background-repeat: no-repeat; }
-.book-cover.art .cover-title { font-size: 40pt; color: #1f1f1f; }
-.book-cover.art .cover-ru { color: #5a1f1f; font-size: 22pt; }
-.book-cover.art .cover-sub { color: #3a3a3a; }
+.book-cover.art .cover-ru { font: italic 400 24pt "PT Serif", serif; color: #6b2a2a; letter-spacing: .06em; }
+.book-cover.art .cover-title { font: 700 38pt "CJK Serif", serif; color: #2a2522; letter-spacing: .18em; margin: 14pt 0 10pt; }
+.book-cover.art .cover-sub { font: 400 13pt "PT Serif", "CJK Serif", serif; color: #4a4440; letter-spacing: .12em; }
 .cover-ru { font: 400 20pt "PT Serif", "CJK Serif", serif; color: var(--accent); letter-spacing: .04em; }
 .cover-title { font: 700 36pt "PT Sans", "CJK Sans"; margin: 10pt 0 8pt; }
 .cover-sub { font: 13pt "PT Sans", "CJK Sans"; color: var(--muted); }
