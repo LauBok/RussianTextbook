@@ -70,8 +70,8 @@ EX_TYPES = {
     "choice": {"req": ["stem", "options", "answer"], "ru": ["stem", "options", "answer"]},
     "fill": {"req": ["stem", "accept"], "opt": ["hint"], "ru": ["stem", "hint", "accept"]},
     "rewrite": {"req": ["cue", "accept"], "ru": ["cue", "accept"]},
-    "translate": {"req": ["zh", "accept", "rubric"], "ru": ["accept"]},
-    "open": {"req": ["prompt", "length", "model", "rubric", "notes"], "ru": ["model"]},
+    "translate": {"req": ["zh", "accept", "rubric"], "opt": ["lines"], "ru": ["accept"]},
+    "open": {"req": ["prompt", "length", "model", "rubric", "notes"], "opt": ["lines"], "ru": ["model"]},
 }
 EX_ZH = {"task", "why", "zh", "rubric", "notes", "prompt"}
 WHY_REQUIRED = {"picture_qa", "choice", "fill", "rewrite"}

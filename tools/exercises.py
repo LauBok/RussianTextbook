@@ -50,6 +50,14 @@ def blank(stem):
 
 # ---------- 1. PDF 练习节 ----------
 
+def answer_lines(it):
+    """开放题留几行：手写俄语约每行 8 词，按 length 上限算，至少 6 行；lines 字段可直接指定。"""
+    if it.get("lines"):
+        return it["lines"]
+    nums = [int(x) for x in re.findall(r"\d+", str(it.get("length", "")))]
+    return max(6, -(-max(nums) // 8) + 1) if nums else 6
+
+
 def scored(data):
     """测试题的 points（每小题分值）写进题目要求：“（每小题 2 分，共 20 分）”。只处理一次。"""
     if data.get("_scored"):
@@ -108,10 +116,12 @@ def pdf_exercises(data, img_dir):
                 out.append(f"{i}. {ru(blank(it['stem']) + hint)}")
         elif t == "translate":
             for i, it in enumerate(ex["items"], 1):
-                out += [f"{i}. {it['zh']}", "   []{.line}"]
+                n_lines = it.get("lines") or (2 if len(it["zh"]) > 25 and re.search(r"T[012]$", str(data.get("lesson", ""))) else 1)
+                out += [f"{i}. {it['zh']}"] + ["   []{.line}"] * n_lines
         elif t == "open":
             for it in ex["items"]:
-                out += [it["prompt"], ""] + ["[]{.line}"] * 6 + [""]
+                n_lines = answer_lines(it) if re.search(r"T[012]$", str(data.get("lesson", ""))) else it.get("lines", 6)
+                out += [it["prompt"], ""] + ["[]{.line}"] * n_lines + [""]
         out += [":::", ""]
     return "\n".join(out)
 
