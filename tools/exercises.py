@@ -71,6 +71,8 @@ def pdf_exercises(data, img_dir):
     for n, ex in enumerate(data["exercises"]):
         head = f"[{NUM[n]}、{ex['task']}]{{.task}}"
         out += ["::: exercise", head, ""]
+        if ex.get("passage"):          # 阅读理解、完形填空的文章，放在本题要求之后
+            out += ["::: passage", ex["passage"].strip(), ":::", ""]
         t = ex["type"]
         if t == "picture_qa":
             k = ex.get("example")
@@ -142,6 +144,11 @@ def web_json(data, img_dir):
     exs = []
     for ex in data["exercises"]:
         e = {k: v for k, v in ex.items()}
+        if ex.get("passage"):
+            import subprocess
+            e["passage_html"] = subprocess.run(
+                ["pandoc", "-f", "markdown", "-t", "html5", "--lua-filter", str(ROOT / "zh-punct.lua")],
+                input=ex["passage"], capture_output=True, text=True, check=True, cwd=ROOT).stdout
         if ex["type"] == "picture_qa":
             for it in e["items"]:
                 svg = (ROOT / img_dir / it["image"]).read_text(encoding="utf-8")

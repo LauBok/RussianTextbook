@@ -60,6 +60,8 @@ h3 { font: 700 15px var(--sans); margin: 16px 0 6px; }
 .dialogue .sp { display: inline-block; width: var(--sp, 7.4em); text-indent: 0; white-space: nowrap; vertical-align: top; font-style: normal; font-weight: 700; color: var(--accent); }
 .dialogue .sp::after { content: ":"; }
 .dialogue + .prose, .translation + .prose-zh { margin-top: .4em; }
+.passage { margin: 8px 0 14px; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 8px; }
+.passage p { margin: 0 0 .6em; }
 .poem, .poem-zh { margin: 4px 0 12px 1.5em; }
 .poem .author { display: block; font: 700 14px var(--sans); color: var(--muted); margin-bottom: 8px; }
 .poem .line-block, .poem-zh .line-block { line-height: 1.8; margin-bottom: 12px; }
@@ -283,6 +285,7 @@ const exWrap = $("exercises");
 DATA.exercises.forEach((ex, n) => {
   const sec = el("div", "exset");
   sec.append(rich("p", "task", NUM[n] + "、" + ex.task));
+  if (ex.passage_html) { const ps = el("div", "passage"); ps.innerHTML = ex.passage_html; sec.append(ps); }
   const why = rich("div", "why", "解析：" + (ex.why || "")); why.hidden = true;
   const itemIds = [];
   const maybeWhy = () => { if (itemIds.every((id) => id in results)) why.hidden = false; };

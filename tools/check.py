@@ -486,7 +486,7 @@ def check_exercise_yaml(stem, path):
             probs.append(("练习", f"{where}：缺少 task"))
         if t in WHY_REQUIRED and not ex.get("why"):
             probs.append(("练习", f"{where}：封闭题缺少解析 why"))
-        allowed = {"id", "type", "task", "why", "items", "example", "placeholder", "points"}
+        allowed = {"id", "type", "task", "why", "items", "example", "placeholder", "points", "passage"}
         if "points" in ex and not (isinstance(ex["points"], (int, float)) and ex["points"] > 0):
             probs.append(("练习", f"{where}：points 应为正数（每小题分值）"))
         for k in set(ex) - allowed:
@@ -494,6 +494,8 @@ def check_exercise_yaml(stem, path):
         for k in ("task", "why"):
             if isinstance(ex.get(k), str):
                 zh.append((f"{where}.{k}", ex[k]))
+        if isinstance(ex.get("passage"), str):     # 文章里的俄语按课文查生词和书写
+            ru.append((f"{where}.passage", strip_markup(ex["passage"])))
         items = ex.get("items")
         if not isinstance(items, list) or not items:
             probs.append(("练习", f"{where}：缺少 items"))
