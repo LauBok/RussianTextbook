@@ -1,0 +1,1393 @@
+{
+"P1": [
+"pron"
+],
+"P2": [
+"pron"
+],
+"P3": [
+"pron"
+],
+"P4": [
+"pron"
+],
+"P5": [
+"pron"
+],
+"P6": [
+"pron"
+],
+"P7": [
+"pron"
+],
+"P8": [
+"pron"
+],
+"L01": [
+"intn",
+"pq",
+"basic"
+],
+"L02": [
+"intn",
+"ppers",
+"adv",
+"basic"
+],
+"L03": [
+"pron",
+"intn",
+"ngen",
+"pposs"
+],
+"L04": [
+"intn",
+"ppers"
+],
+"L05": [
+"pron",
+"intn",
+"c1",
+"npl"
+],
+"L06": [
+"pron",
+"intn",
+"vpres"
+],
+"L07": [
+"pron",
+"intn",
+"vpres",
+"adv"
+],
+"L08": [
+"pron",
+"intn",
+"ppers",
+"pposs",
+"pq"
+],
+"L09": [
+"intn",
+"c1",
+"adj",
+"pq"
+],
+"L10": [
+"intn",
+"c1",
+"ngen",
+"npl",
+"adj",
+"ppers",
+"pposs",
+"pq",
+"vpres",
+"adv",
+"basic"
+],
+"L11": [
+"pron",
+"c6",
+"nsg",
+"prep"
+],
+"L12": [
+"intn",
+"c6",
+"nsg",
+"prep"
+],
+"L13": [
+"pron",
+"c6",
+"ppers",
+"prep"
+],
+"L14": [
+"intn",
+"vpres"
+],
+"L15": [
+"pron",
+"intn",
+"adv",
+"wf"
+],
+"L16": [
+"pron",
+"intn",
+"vpast",
+"basic"
+],
+"L17": [
+"pron",
+"intn",
+"c6",
+"nsg",
+"vpast"
+],
+"L18": [
+"pron",
+"c6",
+"adj"
+],
+"L19": [
+"intn",
+"c6",
+"pposs",
+"pdem"
+],
+"L20": [
+"c6",
+"nsg",
+"adj",
+"ppers",
+"pposs",
+"pdem",
+"vpres",
+"vpast",
+"adv",
+"prep"
+],
+"L21": [
+"intn",
+"c4",
+"nsg",
+"vpres"
+],
+"L22": [
+"pron",
+"intn",
+"c4",
+"nsg",
+"ppers"
+],
+"L23": [
+"pron",
+"intn",
+"c4",
+"adj",
+"pposs",
+"pdem"
+],
+"L24": [
+"pron",
+"intn",
+"c4",
+"motion",
+"prep"
+],
+"L25": [
+"pron",
+"intn",
+"motion"
+],
+"L26": [
+"pron",
+"intn",
+"c4",
+"vpres",
+"gov",
+"modal",
+"prep"
+],
+"L27": [
+"pron",
+"intn",
+"modal"
+],
+"L28": [
+"pron",
+"intn",
+"card",
+"numn",
+"time",
+"vpres"
+],
+"L29": [
+"pron",
+"intn",
+"c4",
+"time",
+"adv",
+"prep"
+],
+"L30": [
+"intn",
+"c4",
+"nsg",
+"adj",
+"ppers",
+"pposs",
+"pdem",
+"time",
+"vpres",
+"motion",
+"modal",
+"prep"
+],
+"L31": [
+"intn",
+"c2",
+"ppers",
+"prep",
+"basic"
+],
+"L32": [
+"pron",
+"c2",
+"nsg",
+"vpast",
+"basic"
+],
+"L33": [
+"intn",
+"c2",
+"nsg"
+],
+"L34": [
+"pron",
+"c2",
+"adj",
+"pposs",
+"pdem"
+],
+"L35": [
+"pron",
+"intn",
+"card",
+"numn"
+],
+"L36": [
+"pron",
+"intn",
+"c2",
+"prep",
+"wf"
+],
+"L37": [
+"pron",
+"intn",
+"c2",
+"prep"
+],
+"L38": [
+"pron",
+"refl"
+],
+"L39": [
+"pron",
+"intn",
+"card",
+"numn"
+],
+"L40": [
+"intn",
+"c2",
+"nsg",
+"adj",
+"ppers",
+"pposs",
+"pdem",
+"numn",
+"refl",
+"prep",
+"basic",
+"wf"
+],
+"L41": [
+"intn",
+"vfut",
+"asp"
+],
+"L42": [
+"pron",
+"intn",
+"vpast",
+"asp"
+],
+"L43": [
+"intn",
+"vfut",
+"asp"
+],
+"L44": [
+"pron",
+"vfut",
+"asp"
+],
+"L45": [
+"pron",
+"pdem",
+"pdef",
+"asp"
+],
+"L46": [
+"intn",
+"asp",
+"imp"
+],
+"L47": [
+"pron",
+"intn",
+"c4",
+"time",
+"prep"
+],
+"L48": [
+"pron",
+"c6",
+"ord",
+"time",
+"prep"
+],
+"L49": [
+"pron",
+"intn",
+"c1",
+"c2",
+"ord",
+"time"
+],
+"L50": [
+"ord",
+"time",
+"vfut",
+"asp",
+"imp"
+],
+"L51": [
+"pron",
+"intn",
+"c3",
+"nsg",
+"vpres",
+"gov"
+],
+"L52": [
+"intn",
+"c3",
+"ppers",
+"gov"
+],
+"L53": [
+"pron",
+"intn",
+"c3",
+"numn",
+"time"
+],
+"L54": [
+"intn",
+"asp",
+"modal",
+"impers"
+],
+"L55": [
+"intn",
+"c3",
+"short",
+"impers"
+],
+"L56": [
+"intn",
+"c3",
+"adj",
+"pposs",
+"pdem"
+],
+"L57": [
+"pron",
+"c3",
+"prep"
+],
+"L58": [
+"intn",
+"adv",
+"impers"
+],
+"L59": [
+"pron",
+"intn",
+"short",
+"modal"
+],
+"L60": [
+"c3",
+"nsg",
+"adj",
+"short",
+"ppers",
+"pposs",
+"pdem",
+"prep",
+"impers"
+],
+"L61": [
+"pron",
+"intn",
+"c5",
+"nsg",
+"prep"
+],
+"L62": [
+"pron",
+"intn",
+"c5",
+"ppers",
+"prep"
+],
+"L63": [
+"pron",
+"intn",
+"c5",
+"gov"
+],
+"L64": [
+"intn",
+"c5",
+"ngen",
+"gov"
+],
+"L65": [
+"pron",
+"intn",
+"c5",
+"adj",
+"pposs",
+"pdem",
+"prep"
+],
+"L66": [
+"pron",
+"c4",
+"c5",
+"prep"
+],
+"L67": [
+"pron",
+"intn",
+"c6",
+"motion",
+"prep"
+],
+"L68": [
+"pron",
+"intn",
+"c2",
+"ngen",
+"time",
+"prep"
+],
+"L69": [
+"pron",
+"intn",
+"adv"
+],
+"L70": [
+"pron",
+"intn",
+"c5",
+"ngen",
+"nsg",
+"ppers",
+"time",
+"gov",
+"adv",
+"prep"
+],
+"L71": [
+"intn",
+"vpast",
+"motion"
+],
+"L72": [
+"intn",
+"motion",
+"advcl"
+],
+"L73": [
+"intn",
+"asp",
+"motion",
+"pmotion"
+],
+"L74": [
+"intn",
+"c2",
+"c3",
+"c4",
+"c6",
+"adv",
+"prep"
+],
+"L75": [
+"intn",
+"imp",
+"motion",
+"adv"
+],
+"L76": [
+"intn",
+"asp",
+"imp"
+],
+"L77": [
+"intn",
+"asp",
+"cond"
+],
+"L78": [
+"pron",
+"card",
+"numn"
+],
+"L79": [
+"intn",
+"c1",
+"rel"
+],
+"L80": [
+"intn",
+"c1",
+"card",
+"numn",
+"vpast",
+"imp",
+"motion",
+"pmotion",
+"adv",
+"prep",
+"rel"
+],
+"L81": [
+"pron",
+"intn",
+"vpres",
+"refl"
+],
+"L82": [
+"intn",
+"adv",
+"advcl"
+],
+"L83": [
+"intn",
+"vfut",
+"imp",
+"advcl"
+],
+"L84": [
+"pron",
+"intn",
+"short",
+"advcl",
+"coord"
+],
+"L85": [
+"intn",
+"vpres",
+"basic"
+],
+"L86": [
+"pron",
+"intn",
+"comp",
+"adv"
+],
+"L87": [
+"pron",
+"intn",
+"pposs"
+],
+"L88": [
+"pron",
+"intn",
+"obj",
+"speech"
+],
+"L89": [
+"intn",
+"part",
+"obj",
+"speech"
+],
+"L90": [
+"intn",
+"short",
+"comp",
+"pposs",
+"vpres",
+"refl",
+"obj",
+"advcl",
+"speech",
+"coord"
+],
+"L91": [
+"intn",
+"c2",
+"c5",
+"gov",
+"prep"
+],
+"L92": [
+"intn",
+"c3",
+"c4",
+"gov",
+"wordord"
+],
+"L93": [
+"intn",
+"c4",
+"gov",
+"prep"
+],
+"L94": [
+"intn",
+"cond",
+"advcl"
+],
+"L95": [
+"intn",
+"c1",
+"pposs",
+"imp"
+],
+"L96": [
+"intn",
+"vpast",
+"asp",
+"refl"
+],
+"L97": [
+"intn",
+"pdef"
+],
+"L98": [
+"intn",
+"pneg"
+],
+"L99": [
+"intn",
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"nsg",
+"adj",
+"ppers",
+"pposs",
+"pdem",
+"pdef"
+],
+"L100": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"npl",
+"nsg",
+"adj",
+"ppers",
+"vpres",
+"vpast",
+"vfut",
+"asp",
+"imp",
+"motion",
+"impers",
+"obj",
+"rel",
+"advcl",
+"speech"
+],
+"B2-L01": [
+"c2",
+"npld",
+"numn"
+],
+"B2-L02": [
+"c2",
+"npld",
+"nirr"
+],
+"B2-L03": [
+"c2",
+"numn"
+],
+"B2-L04": [
+"ngen",
+"adj",
+"card",
+"numn"
+],
+"B2-L05": [
+"c6",
+"ord",
+"numn",
+"time"
+],
+"B2-L06": [
+"c2",
+"time",
+"prep"
+],
+"B2-L07": [
+"numn",
+"coll"
+],
+"B2-L08": [
+"c2",
+"numn"
+],
+"B2-L09": [
+"c2",
+"npld",
+"nirr",
+"numn",
+"coll",
+"time"
+],
+"B2-L10": [
+"c6",
+"npld"
+],
+"B2-L11": [
+"c3",
+"npld"
+],
+"B2-L12": [
+"c5",
+"npld"
+],
+"B2-L13": [
+"c4",
+"npld"
+],
+"B2-L14": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"adj"
+],
+"B2-L15": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"pposs",
+"pdem"
+],
+"B2-L16": [
+"npl",
+"nirr"
+],
+"B2-L17": [
+"c2",
+"nirr",
+"numn"
+],
+"B2-L18": [
+"c3",
+"c4",
+"c5",
+"c6",
+"npl",
+"npld",
+"nirr",
+"adj",
+"pposs",
+"pdem",
+"numn"
+],
+"B2-L19": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"ppers",
+"prep"
+],
+"B2-L20": [
+"prefl"
+],
+"B2-L21": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"pq"
+],
+"B2-L22": [
+"pdef"
+],
+"B2-L23": [
+"c2",
+"comp"
+],
+"B2-L24": [
+"comp",
+"sup"
+],
+"B2-L25": [
+"short",
+"gov"
+],
+"B2-L26": [
+"comp",
+"adv",
+"wf"
+],
+"B2-L27": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"short",
+"comp",
+"sup",
+"ppers",
+"pq",
+"prefl",
+"pdef",
+"adv",
+"prep",
+"wf"
+],
+"B2-L28": [
+"vpast",
+"asp"
+],
+"B2-L29": [
+"vfut",
+"asp",
+"advcl"
+],
+"B2-L30": [
+"asp",
+"imp"
+],
+"B2-L31": [
+"asp",
+"impers"
+],
+"B2-L32": [
+"vpres"
+],
+"B2-L33": [
+"vpres"
+],
+"B2-L34": [
+"refl",
+"passive"
+],
+"B2-L35": [
+"c2",
+"c3",
+"c4",
+"c5",
+"gov",
+"prep"
+],
+"B2-L36": [
+"c2",
+"c3",
+"c4",
+"c5",
+"vpres",
+"vpast",
+"vfut",
+"asp",
+"imp",
+"refl",
+"gov",
+"prep",
+"impers",
+"passive"
+],
+"B2-L37": [
+"vpres",
+"motion"
+],
+"B2-L38": [
+"vpres",
+"motion"
+],
+"B2-L39": [
+"asp",
+"pmotion",
+"prep"
+],
+"B2-L40": [
+"asp",
+"pmotion",
+"prep"
+],
+"B2-L41": [
+"pmotion",
+"prep"
+],
+"B2-L42": [
+"pmotion"
+],
+"B2-L43": [
+"asp",
+"pmotion"
+],
+"B2-L44": [
+"motion",
+"pmotion"
+],
+"B2-L45": [
+"asp",
+"motion",
+"pmotion",
+"prep"
+],
+"B2-L46": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"prep",
+"rel"
+],
+"B2-L47": [
+"cond",
+"obj"
+],
+"B2-L48": [
+"advcl"
+],
+"B2-L49": [
+"advcl"
+],
+"B2-L50": [
+"cond",
+"advcl"
+],
+"B2-L51": [
+"advcl",
+"coord"
+],
+"B2-L52": [
+"advcl"
+],
+"B2-L53": [
+"advcl"
+],
+"B2-L54": [
+"cond",
+"obj",
+"rel",
+"advcl",
+"coord"
+],
+"B2-L55": [
+"c1",
+"c2",
+"c3",
+"c4",
+"c5",
+"c6",
+"card",
+"numn"
+],
+"B2-L56": [
+"ord",
+"time"
+],
+"B2-L57": [
+"c2",
+"c4",
+"time",
+"prep"
+],
+"B2-L58": [
+"c2",
+"npld",
+"pdef"
+],
+"B2-L59": [
+"pindef"
+],
+"B2-L60": [
+"pneg",
+"impers"
+],
+"B2-L61": [
+"c3",
+"c5",
+"impers"
+],
+"B2-L62": [
+"asp",
+"refl",
+"pshort",
+"passive"
+],
+"B2-L63": [
+"pdef",
+"pindef",
+"pneg",
+"card",
+"ord",
+"numn",
+"time",
+"pshort",
+"prep",
+"impers",
+"passive"
+],
+"B2-L64": [
+"obj",
+"speech"
+],
+"B2-L65": [
+"imp"
+],
+"B2-L66": [
+"part"
+],
+"B2-L67": [
+"c2",
+"c3",
+"prep"
+],
+"B2-L68": [
+"wf"
+],
+"B2-L69": [
+"gov",
+"wf"
+],
+"B2-L70": [
+"part"
+],
+"B2-L71": [
+"pact",
+"ger"
+],
+"B2-L72": [
+"c2",
+"npld",
+"adj",
+"short",
+"comp",
+"sup",
+"ppers",
+"pposs",
+"pdem",
+"pindef",
+"pneg",
+"card",
+"numn",
+"vpres",
+"asp",
+"motion",
+"pmotion",
+"part",
+"impers",
+"obj",
+"rel",
+"advcl",
+"speech",
+"passive",
+"coord",
+"wf"
+],
+"B3-L01": [
+"pact",
+"rel"
+],
+"B3-L02": [
+"asp",
+"pact",
+"rel"
+],
+"B3-L03": [
+"ppass"
+],
+"B3-L04": [
+"ppass"
+],
+"B3-L05": [
+"pshort",
+"passive"
+],
+"B3-L06": [
+"c1",
+"c4",
+"pact",
+"ppass",
+"rel"
+],
+"B3-L07": [
+"pact",
+"ppass",
+"wordord"
+],
+"B3-L08": [
+"pact",
+"ppass"
+],
+"B3-L09": [
+"refl",
+"pshort",
+"passive"
+],
+"B3-L10": [
+"c1",
+"c4",
+"refl",
+"pact",
+"ppass",
+"pshort",
+"rel",
+"passive",
+"wordord"
+],
+"B3-L11": [
+"asp",
+"ger"
+],
+"B3-L12": [
+"asp",
+"ger"
+],
+"B3-L13": [
+"asp",
+"ger",
+"advcl"
+],
+"B3-L14": [
+"ger",
+"advcl"
+],
+"B3-L15": [
+"ger",
+"adv",
+"prep"
+],
+"B3-L16": [
+"c3",
+"impers"
+],
+"B3-L17": [
+"basic"
+],
+"B3-L18": [
+"vpast",
+"asp",
+"imp",
+"impers"
+],
+"B3-L19": [
+"imp",
+"cond"
+],
+"B3-L20": [
+"asp",
+"imp",
+"cond",
+"ger",
+"prep",
+"basic",
+"impers",
+"advcl"
+],
+"B3-L21": [
+"wf"
+],
+"B3-L22": [
+"wf"
+],
+"B3-L23": [
+"ngen",
+"nirr"
+],
+"B3-L24": [
+"wf"
+],
+"B3-L25": [
+"adj",
+"wf"
+],
+"B3-L26": [
+"wf"
+],
+"B3-L27": [
+"nirr"
+],
+"B3-L28": [
+"wf"
+],
+"B3-L29": [
+"wf"
+],
+"B3-L30": [
+"ngen",
+"nirr",
+"adj",
+"wf"
+],
+"B3-L31": [
+"wordord"
+],
+"B3-L32": [
+"wordord"
+],
+"B3-L33": [
+"wordord"
+],
+"B3-L34": [
+"pact",
+"wordord"
+],
+"B3-L35": [
+"advcl",
+"coord"
+],
+"B3-L36": [
+"advcl"
+],
+"B3-L37": [
+"pdem",
+"rel",
+"advcl"
+],
+"B3-L38": [
+"coord"
+],
+"B3-L39": [
+"speech"
+],
+"B3-L40": [
+"pdem",
+"pact",
+"rel",
+"advcl",
+"speech",
+"coord",
+"wordord"
+],
+"B3-L41": [
+"part",
+"wordord"
+],
+"B3-L42": [
+"wf"
+],
+"B3-L43": [
+"passive"
+],
+"B3-L44": [
+"passive"
+],
+"B3-L45": [],
+"B3-L46": [
+"asp",
+"pact",
+"impers",
+"wordord"
+],
+"B3-L47": [
+"imp",
+"cond"
+],
+"B3-L48": [
+"part"
+],
+"B3-L49": [
+"ppers",
+"gov"
+],
+"B3-L50": [
+"cond",
+"gov",
+"part",
+"passive",
+"wordord",
+"wf"
+],
+"B3-L51": [
+"prep"
+],
+"B3-L52": [
+"c2",
+"adj",
+"numn"
+],
+"B3-L53": [
+"c2",
+"c4",
+"gov"
+],
+"B3-L54": [
+"c3",
+"c6",
+"prep"
+],
+"B3-L55": [
+"c2",
+"npl",
+"npld",
+"nirr",
+"numn"
+],
+"B3-L56": [
+"c2",
+"time"
+],
+"B3-L57": [
+"pact",
+"ppass",
+"ger"
+],
+"B3-L58": [
+"gov",
+"wf"
+],
+"B3-L59": [
+"wordord"
+],
+"B3-L60": [
+"ngen",
+"nirr",
+"asp",
+"cond",
+"gov",
+"pact",
+"ppass",
+"ger",
+"prep",
+"part",
+"impers",
+"advcl",
+"passive",
+"coord",
+"wordord",
+"wf"
+]
+}
