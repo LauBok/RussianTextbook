@@ -389,7 +389,8 @@
 "intn",
 "c3",
 "short",
-"impers"
+"impers",
+"modal"
 ],
 "L56": [
 "intn",
@@ -423,7 +424,8 @@
 "pposs",
 "pdem",
 "prep",
-"impers"
+"impers",
+"modal"
 ],
 "L61": [
 "pron",
