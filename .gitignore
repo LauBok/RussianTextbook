@@ -1,5 +1,4 @@
 build/
-audio/
 web/*.html
 !web/template.html
 __pycache__/
