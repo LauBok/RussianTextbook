@@ -5,7 +5,7 @@
     python tools/tts.py L89            # 一课或几课
     python tools/tts.py --book 1       # 整册（第一册、第二册……）
     python tools/tts.py --all          # 第一、二册全部
-    选项：--device cuda|cpu（默认有显卡就用）  --force（已有的 mp3 也重录）
+    选项：--device cuda|cpu（默认有显卡就用）  --force（已有的 mp3 也重录）  --batch N（每批句数，默认 8）
 
 输出 audio/<课号>.mp3。安装和说明见 tts/README.md。
 
@@ -34,7 +34,7 @@ TTS = ROOT / "tts"
 # 可用环境变量改成本地目录
 DESIGN_MODEL = os.environ.get("TTS_DESIGN_MODEL", "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign")
 CLONE_MODEL = os.environ.get("TTS_CLONE_MODEL", "siriusfreak/qwen3-tts-12hz-1.7b-ru-stress-cf")
-GAP = {"narrator": 0.9, "line": 0.5}
+GAP = {"narrator": 0.9, "line": 0.5, "sentence": 0.35}
 SEED = 7
 
 def norm(name):
@@ -115,7 +115,26 @@ class Voices:
                 ref_audio=str(TTS / "ref" / v["ref"]), ref_text=v["ref_text"])
         return self.prompts[k]
 
-def render(lesson, voices, force):
+MIN_SEC_PER_LETTER = 0.075  # 正常朗读约 0.08–0.13 秒/字母
+
+def too_short(wav, sr, text):
+    letters = len(re.findall(r"[^\W\d_]", text))
+    return letters >= 20 and len(wav) / sr < MIN_SEC_PER_LETTER * letters
+
+def split_long(text, limit=200):
+    """长段落按句切开，再把相邻短句合并到不超过 limit 字符：模型读长段容易漏读，分批时长短也更整齐。"""
+    if len(text) <= limit:
+        return [text]
+    sents = re.split(r"(?<=[.!?…»])\s+(?=[—«А-ЯЁA-Z])", text)
+    parts = [sents[0]]
+    for s in sents[1:]:
+        if len(parts[-1]) + 1 + len(s) <= limit:
+            parts[-1] += " " + s
+        else:
+            parts.append(s)
+    return parts
+
+def render(lesson, voices, force, batch=8):
     out = ROOT / "audio" / f"{lesson}.mp3"
     if out.exists() and not force:
         print(lesson, "已有，跳过")
@@ -125,24 +144,51 @@ def render(lesson, voices, force):
     if not segs:
         print(lesson, "没有课文，跳过")
         return
-    keyed = [(voices.key(lesson, sp), text) for sp, text in segs]
-    voices.ensure_refs({k for k, _ in keyed})
+    keyed = []  # (音色, 文本, 之后的停顿)
+    for sp, text in segs:
+        k = voices.key(lesson, sp)
+        parts = split_long(text)
+        for j, part in enumerate(parts):
+            gap = GAP["sentence"] if j < len(parts) - 1 else GAP["narrator" if k == "narrator" else "line"]
+            keyed.append((k, part, gap))
+    voices.ensure_refs({k for k, _, _ in keyed})
 
     import numpy as np
     import soundfile as sf
     import torch
-    pieces, sr = [], 24000
-    for k, text in keyed:
+    # 按长度分批送进模型，长短相近的放一批，少补齐；生成后按课文顺序拼接
+    order = sorted(range(len(keyed)), key=lambda i: len(keyed[i][1]))
+    wavs_by_seg, sr = {}, 24000
+    for b in range(0, len(order), batch):
+        idx = order[b:b + batch]
         torch.manual_seed(SEED)
-        wavs, sr = voices.clone.generate_voice_clone(text=text, language="Russian", voice_clone_prompt=voices.prompt(k))
-        w = np.asarray(wavs[0], dtype=np.float32)
-        gap = GAP["narrator"] if k == "narrator" else GAP["line"]
+        wavs, sr = voices.clone.generate_voice_clone(
+            text=[keyed[i][1] for i in idx], language="Russian",
+            voice_clone_prompt=[item for i in idx for item in voices.prompt(keyed[i][0])])
+        wavs_by_seg.update(zip(idx, wavs))
+    # 批量生成偶尔跳过半句：按字母数估计应有时长，明显偏短的单独重录
+    for i, (k, text, _) in enumerate(keyed):
+        if not too_short(wavs_by_seg[i], sr, text):
+            continue
+        for seed in (SEED, SEED + 1, SEED + 2):
+            torch.manual_seed(seed)
+            wavs, sr = voices.clone.generate_voice_clone(text=text, language="Russian", voice_clone_prompt=voices.prompt(k))
+            if len(wavs[0]) > len(wavs_by_seg[i]):
+                wavs_by_seg[i] = wavs[0]
+            if not too_short(wavs_by_seg[i], sr, text):
+                break
+        else:
+            print(f"  {lesson} 第 {i + 1} 段可能读漏：{text[:40]}…", flush=True)
+    pieces = []
+    for i, (_, _, gap) in enumerate(keyed):
+        w = np.asarray(wavs_by_seg[i], dtype=np.float32)
         pieces += [w, np.zeros(int(sr * gap), dtype=np.float32)]
     audio = np.concatenate([np.zeros(int(sr * 0.4), dtype=np.float32)] + pieces)
     out.parent.mkdir(exist_ok=True)
-    with tempfile.NamedTemporaryFile(suffix=".wav") as tmp:
-        sf.write(tmp.name, audio, sr)
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", tmp.name, "-af", "loudnorm=I=-18",
+    with tempfile.TemporaryDirectory() as tmpdir:
+        wav = Path(tmpdir) / "audio.wav"
+        sf.write(wav, audio, sr)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-af", "loudnorm=I=-18",
                         "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "64k", str(out)], check=True)
     print(lesson, f"{len(audio) / sr:.0f} 秒", out.relative_to(ROOT), flush=True)
 
@@ -153,6 +199,7 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--device")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--batch", type=int, default=8, help="一次送进模型的句数，显存不够就调小")
     a = ap.parse_args()
 
     import torch
@@ -166,7 +213,7 @@ def main():
 
     voices = Voices(device, dtype)
     for c in codes:
-        render(c, voices, a.force)
+        render(c, voices, a.force, a.batch)
     if voices.missing:
         print("以下说话人没有在 tts/voices.json 里配置音色，暂用旁白音色：", "、".join(sorted(voices.missing)))
 
