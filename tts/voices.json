@@ -214,5 +214,77 @@
   "instruct": "A Russian man about fifty, Ivan's old friend from institute. Warm, nostalgic, humorous baritone, native Russian.",
   "ref_text": "Ваня, ты помнишь нашу первую практику? Сколько лет прошло!",
   "ref": "oleg.wav"
+ },
+ "B3:narrator": {
+  "name": "第三册旁白",
+  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+  "ref": "b3_narrator.wav"
+ },
+ "B3-L44:narrator": {
+  "name": "新闻主播",
+  "instruct": "A professional Russian male TV news anchor in his forties, crisp, confident and neutral, formal broadcast intonation, precise diction, brisk but clear pace.",
+  "ref_text": "Добрый вечер. В Москве сегодня открылись новые станции метро. Подробности в нашем репортаже.",
+  "ref": "news.wav"
+ },
+ "B4-L25:narrator": {
+  "name": "新闻主播",
+  "instruct": "A professional Russian male TV news anchor in his forties, crisp, confident and neutral, formal broadcast intonation, precise diction, brisk but clear pace.",
+  "ref_text": "Добрый вечер. В Москве сегодня открылись новые станции метро. Подробности в нашем репортаже.",
+  "ref": "news.wav"
+ },
+ "B4:narrator": {
+  "name": "第四册旁白",
+  "instruct": "A mature Russian male audiobook reader around sixty, deep velvety baritone, expressive and artistic, classic Moscow stage pronunciation, reads classical Russian literature with feeling and natural pauses, unhurried.",
+  "ref_text": "Была поздняя осень. Над рекой стоял туман, и в старом саду тихо падали последние листья.",
+  "ref": "b4_narrator.wav"
+ },
+ "B4:poem": {
+  "name": "诗歌朗诵",
+  "instruct": "A Russian male poetry reciter in his fifties, rich resonant baritone, solemn and lyrical, classic recitation style with a clear rhythm, measured pace and expressive pauses at the end of each line.",
+  "ref_text": "Белеет парус одинокой в тумане моря голубом. Что ищет он в стране далёкой? Что кинул он в краю родном?",
+  "ref": "poem.wav"
+ },
+ "B4-L13:poem": {
+  "name": "马雅可夫斯基朗诵",
+  "instruct": "A young Russian male poet in his twenties reciting futurist poetry, powerful loud oratorical voice, bold, passionate and rhythmic, emphatic declamation like on a public stage.",
+  "ref_text": "Вашу мысль, мечтающую на размягчённом мозгу, буду дразнить об окровавленный сердца лоскут.",
+  "ref": "mayakovsky.wav"
+ },
+ "B4-L29:narrator": {
+  "name": "毕业典礼致辞",
+  "instruct": "A Russian male university rector in his late fifties giving a commencement speech, warm, dignified and inspiring, confident public-speaking voice, clear articulation, measured pace.",
+  "ref_text": "Дорогие выпускники! Сегодня у вас начинается новая жизнь. Я от всей души поздравляю вас.",
+  "ref": "rector.wav"
+ },
+ "B4-L26:narrator": {
+  "name": "第三册旁白",
+  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+  "ref": "b3_narrator.wav"
+ },
+ "B4-L27:narrator": {
+  "name": "第三册旁白",
+  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+  "ref": "b3_narrator.wav"
+ },
+ "B4-L28:narrator": {
+  "name": "第三册旁白",
+  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+  "ref": "b3_narrator.wav"
+ },
+ "B4-L30:narrator": {
+  "name": "第三册旁白",
+  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+  "ref": "b3_narrator.wav"
+ },
+ "B4-L31:narrator": {
+  "name": "第三册旁白",
+  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+  "ref": "b3_narrator.wav"
  }
 }

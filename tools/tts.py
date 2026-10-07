@@ -34,8 +34,9 @@ TTS = ROOT / "tts"
 # 可用环境变量改成本地目录
 DESIGN_MODEL = os.environ.get("TTS_DESIGN_MODEL", "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign")
 CLONE_MODEL = os.environ.get("TTS_CLONE_MODEL", "siriusfreak/qwen3-tts-12hz-1.7b-ru-stress-cf")
-GAP = {"narrator": 0.9, "line": 0.5, "sentence": 0.35}
+GAP = {"narrator": 0.9, "line": 0.5, "poem": 1.2, "sentence": 0.35, "verse": 0.6}
 SEED = 7
+BATCH_CHARS = 1000  # 12 GB 显存下一批的字符上限
 
 def norm(name):
     s = unicodedata.normalize("NFD", name)
@@ -43,19 +44,28 @@ def norm(name):
     return unicodedata.normalize("NFC", s).lower().strip()
 
 def segments(md):
-    """课文节按顺序：prose 段落（旁白）、dialogue 行（说话人）。"""
-    sec = re.search(r"^## 课文\n(.*?)^## ", md, re.S | re.M)
+    """课文节（第四册“选文”）按顺序：prose 段落（旁白）、dialogue 行（说话人）、poem 诗节（poem）。
+    文本里的换行（诗行、段内用反斜杠换的行）各读成一句。"""
+    sec = re.search(r"^## (?:课文|选文)\n(.*?)^## ", md, re.S | re.M)
     out = []
     if not sec:
         return out
-    for m in re.finditer(r"^:::\s*\{\.(prose|dialogue)[^\n]*\n(.*?)^:::\s*$", sec.group(1), re.S | re.M):
+    for m in re.finditer(r"^:::\s*\{\.(prose|dialogue|poem)[ }][^\n]*\n(.*?)^:::\s*$", sec.group(1), re.S | re.M):
         kind, body = m.groups()
         if kind == "dialogue":
             for ln in web.lines(body):
                 out.append((web.strip_md(ln["sp"]), web.strip_md(ln["text"])))
+        elif kind == "poem":
+            for st in re.split(r"\n\s*\n", body.strip()):
+                verses = [web.strip_md(ln.strip()[1:]) for ln in st.splitlines() if ln.strip().startswith("|")]
+                if verses:
+                    out.append(("poem", "\n".join(verses)))
         else:
             for p in re.split(r"\n\s*\n", body.strip()):
-                out.append(("narrator", web.strip_md(" ".join(p.split()))))
+                if p.strip() == "<…>":  # 节选的删节号
+                    continue
+                rows = [re.sub(r"\*+", "", web.strip_md(" ".join(r.split()))) for r in re.split(r"\\\n", p)]
+                out.append(("narrator", "\n".join(r for r in rows if r)))
     return out
 
 def lessons_of(book):
@@ -72,7 +82,8 @@ class Voices:
         self._clone = None
 
     def key(self, lesson, speaker):
-        for k in (f"{lesson}:{norm(speaker)}", norm(speaker)):
+        book = lesson.split("-")[0] if "-" in lesson else "B1"
+        for k in (f"{lesson}:{norm(speaker)}", f"{book}:{norm(speaker)}", norm(speaker)):
             if k in self.cfg:
                 return k
         self.missing.add(speaker)
@@ -115,11 +126,14 @@ class Voices:
                 ref_audio=str(TTS / "ref" / v["ref"]), ref_text=v["ref_text"])
         return self.prompts[k]
 
-MIN_SEC_PER_LETTER = 0.075  # 正常朗读约 0.08–0.13 秒/字母
+MIN_SEC_PER_LETTER = 0.075  # 正常朗读约 0.08–0.13 秒/字母；语速快的音色按本课中位语速放宽
 
-def too_short(wav, sr, text):
-    letters = len(re.findall(r"[^\W\d_]", text))
-    return letters >= 20 and len(wav) / sr < MIN_SEC_PER_LETTER * letters
+def letters(text):
+    return len(re.findall(r"[^\W\d_]", text))
+
+def too_short(wav, sr, text, limit=MIN_SEC_PER_LETTER):
+    n = letters(text)
+    return n >= 20 and len(wav) / sr < limit * n
 
 def split_long(text, limit=200):
     """长段落按句切开，再把相邻短句合并到不超过 limit 字符：模型读长段容易漏读，分批时长短也更整齐。"""
@@ -139,17 +153,22 @@ def render(lesson, voices, force, batch=8):
     if out.exists() and not force:
         print(lesson, "已有，跳过")
         return
-    md = (ROOT / "lessons" / f"{lesson}.md").read_text(encoding="utf-8")
-    segs = segments(md)
+    import accent
+    try:
+        segs = accent.load(lesson)
+    except RuntimeError as e:
+        print(e, flush=True)
+        return
     if not segs:
         print(lesson, "没有课文，跳过")
         return
     keyed = []  # (音色, 文本, 之后的停顿)
     for sp, text in segs:
         k = voices.key(lesson, sp)
-        parts = split_long(text)
+        kind = sp if sp in ("narrator", "poem") else "line"
+        parts = [p for row in text.split("\n") for p in ([row] if kind == "poem" else split_long(row))]
         for j, part in enumerate(parts):
-            gap = GAP["sentence"] if j < len(parts) - 1 else GAP["narrator" if k == "narrator" else "line"]
+            gap = (GAP["verse"] if kind == "poem" else GAP["sentence"]) if j < len(parts) - 1 else GAP[kind]
             keyed.append((k, part, gap))
     voices.ensure_refs({k for k, _, _ in keyed})
 
@@ -159,23 +178,32 @@ def render(lesson, voices, force, batch=8):
     # 按长度分批送进模型，长短相近的放一批，少补齐；生成后按课文顺序拼接
     order = sorted(range(len(keyed)), key=lambda i: len(keyed[i][1]))
     wavs_by_seg, sr = {}, 24000
-    for b in range(0, len(order), batch):
-        idx = order[b:b + batch]
+    batches = []
+    for i in order:  # 每批不超过 batch 句、BATCH_CHARS 字符，长句多的课自动少放几句，免得显存不够
+        if not batches or len(batches[-1]) >= batch or sum(len(keyed[j][1]) for j in batches[-1]) + len(keyed[i][1]) > BATCH_CHARS:
+            batches.append([])
+        batches[-1].append(i)
+    for idx in batches:
         torch.manual_seed(SEED)
         wavs, sr = voices.clone.generate_voice_clone(
             text=[keyed[i][1] for i in idx], language="Russian",
             voice_clone_prompt=[item for i in idx for item in voices.prompt(keyed[i][0])])
         wavs_by_seg.update(zip(idx, wavs))
     # 批量生成偶尔跳过半句：按字母数估计应有时长，明显偏短的单独重录
+    rates = {}
     for i, (k, text, _) in enumerate(keyed):
-        if not too_short(wavs_by_seg[i], sr, text):
+        if letters(text) >= 20:
+            rates.setdefault(k, []).append(len(wavs_by_seg[i]) / sr / letters(text))
+    limit = {k: min(MIN_SEC_PER_LETTER, 0.8 * sorted(r)[len(r) // 2]) for k, r in rates.items()}
+    for i, (k, text, _) in enumerate(keyed):
+        if not too_short(wavs_by_seg[i], sr, text, limit.get(k, MIN_SEC_PER_LETTER)):
             continue
         for seed in (SEED, SEED + 1, SEED + 2):
             torch.manual_seed(seed)
             wavs, sr = voices.clone.generate_voice_clone(text=text, language="Russian", voice_clone_prompt=voices.prompt(k))
             if len(wavs[0]) > len(wavs_by_seg[i]):
                 wavs_by_seg[i] = wavs[0]
-            if not too_short(wavs_by_seg[i], sr, text):
+            if not too_short(wavs_by_seg[i], sr, text, limit[k]):
                 break
         else:
             print(f"  {lesson} 第 {i + 1} 段可能读漏：{text[:40]}…", flush=True)
