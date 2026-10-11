@@ -2,3 +2,4 @@ build/
 web/*.html
 !web/template.html
 __pycache__/
+site/
