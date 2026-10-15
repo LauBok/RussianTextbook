@@ -54,10 +54,6 @@ def span(lessons):
     return "第 " + "、".join(parts) + " 课"
 
 
-def label(g, combined):
-    return ("综合：" if combined else "") + span(g.get("lessons") or [])
-
-
 def note(r):
     bits = []
     if r.get("hint"):
@@ -117,6 +113,35 @@ def merge_why(why):
     return "\n".join(out)
 
 
+PREP = re.compile(r"^(во|в|на|обо|об|о)\s+(.+)$")
+
+
+def split_prep(cell):
+    """[в шко́ле]{.ru} → ('в', 'шко́ле')；没有前置词 → ('', 原文)。"""
+    t = plain_ru(cell)
+    m = PREP.match(t)
+    return (m.group(1), m.group(2)) if m else ("", t)
+
+
+def paren(r, given):
+    """括号里写原形；新词加释义和性；hint 里除性和前置词以外的提示保留。"""
+    base = re.sub(r"^(во|в|на|обо|об|о)\s*\+\s*", "", plain_ru(r["cells"][min(given)]))   # 前置词已印在题面
+    bits, extra = [], []
+    toks = [x.strip() for x in str(r.get("hint", "")).split("；") if x.strip()]
+    gender = next((x for x in toks if x in ("m", "f", "n")), "")
+    for x in toks:
+        if x in ("m", "f", "n") or x.startswith("前置词"):
+            continue
+        extra.append(md_inline(x))
+    if r.get("new"):
+        if r.get("gloss"):
+            bits.append(html.escape(str(r["gloss"])))
+        if gender:
+            bits.append(gender)
+    inner = f"<span class='ru'>{base}</span>" + (" " + "，".join(bits) if bits else "") + ("；" + "；".join(extra) if extra else "")
+    return f"<span class='wb-paren'>（{inner}）</span>"
+
+
 def matrix_md(g, answers):
     cols, rows = g["cols"], g["rows"]
     given = set(g.get("given") or [0])
@@ -130,25 +155,26 @@ def matrix_md(g, answers):
         tail = f"<span class='wb-hint'>{md_inline('；'.join(bits))}</span>" if bits else ""
         return md_inline(ru(r["cells"][min(given)])) + tail
 
-    if answers:   # 紧凑答案
-        if len(todo) == 1:
-            items = "".join(f"<span class='wb-ans'>{i}. {md_inline(ru(r['cells'][todo[0]]))}</span>" for i, r in enumerate(rows, 1))
+    one = len(todo) == 1
+    preps = [split_prep(r["cells"][todo[0]]) for r in rows] if one else []
+    if answers:   # 紧凑答案：只写要填的部分
+        if one:
+            items = "".join(f"<span class='wb-ans'>{i}. <span class='ru'>{rest}</span></span>"
+                            for i, (_, rest) in enumerate(preps, 1))
             return f"<div class='wb-anslist'>{items}</div>"
         items = "".join(f"<li>{md_inline(', '.join(plain_ru(r['cells'][j]) for j in todo))}</li>" for r in rows)
         return f"<ol class='wb-anscols'>{items}</ol>"
-    if len(todo) == 1:   # 一对一：两三组“词 | 空格”并排
-        longest = max(len(plain(r["cells"][min(given)])) + len(plain(r["cells"][todo[0]])) for r in rows)
-        ncol = 3 if longest <= 24 else 2
-        trs = []
-        for k in range(0, len(rows), ncol):
-            tds = ""
-            for i in range(k, k + ncol):
-                if i < len(rows):
-                    tds += f"<td class='n'>{i + 1}</td><td class='w'>{word(rows[i])}</td><td class='b'></td>"
-                else:
-                    tds += "<td class='n'></td><td class='w'></td><td class='e'></td>"
-            trs.append(f"<tr>{tds}</tr>")
-        return f"<table class='wb-grid c{ncol}'>{''.join(trs)}</table>"
+    if one:   # 一对一：“前置词 ＿＿（原形 释义，性）”，三栏或两栏
+        cells = []
+        for i, (r, (prep, rest)) in enumerate(zip(rows, preps), 1):
+            gap = min(28, max(12, len(plain(rest)) * 1.7))
+            cells.append(f"<span class='n'>{i}.</span> " + (f"<span class='ru'>{prep}</span> " if prep else "")
+                         + f"<span class='gap' style='width:{gap:.0f}mm'></span>{paren(r, given)}")
+        longest = max(len(plain(r["cells"][min(given)])) + len(plain(rest)) for r, (_, rest) in zip(rows, preps))
+        ncol = 3 if longest <= 22 else 2
+        trs = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in cells[k:k + ncol])
+                      + "<td></td>" * (ncol - len(cells[k:k + ncol])) + "</tr>" for k in range(0, len(cells), ncol))
+        return f"<table class='wb-grid c{ncol}'>{trs}</table>"
     head = "".join(f"<th>{html.escape(cols[j])}</th>" for j in [min(given)] + todo)
     body = "".join(f"<tr><td class='n'>{i}</td><td>{word(r)}</td>" + "<td></td>" * len(todo) + "</tr>"
                    for i, r in enumerate(rows, 1))
@@ -160,15 +186,15 @@ def plain_ru(s):
     return re.sub(r"^\[(.*)\]\{\.ru\}$", r"\1", str(s))
 
 
-def exercise_md(n, g, combined, answers=False):
+def exercise_md(k, g, answers=False):
+    """一道大题：k 为本节内的大题序号（一、二、三……）。"""
     t = g["type"]
-    head = f"[练习 {n}]{{.wb-no}}[{label(g, combined)}]{{.wb-lesson}}"
     task = g["task"]
-    if t == "matrix" and not answers:
+    if t == "matrix" and not answers and len(g["cols"]) - len(g.get("given") or [0]) > 1:
         sh = common_hint(g["rows"])
         if sh:
             task = task.rstrip("。") + f"（{sh}）。"
-    out = ["::: {.exercise .wb}", head, "", f"[{task}]{{.task}}", ""]
+    out = ["::: {.exercise .wb}", f"[{exercises.zh_num(k)}、{task}]{{.task}}", ""]
     if t == "matrix":
         html_block = matrix_md(g, answers)
         if answers and "wb-anscols" in html_block:
@@ -206,21 +232,22 @@ def exercise_md(n, g, combined, answers=False):
 
 
 CSS = """
-.wb { break-inside: auto; margin-top: 10pt; }
+.wb { break-inside: auto; margin-top: 6pt; }
+h2.wb-sec { font: 700 14pt "PT Sans", "CJK Sans"; color: var(--ink); margin: 18pt 0 2pt; border-bottom: .8pt solid var(--accent); padding-bottom: 2pt; break-after: avoid; }
+h2.wb-sec .wb-no { font-size: 14pt; }
+h2.wb-sec .wb-lesson { font-weight: 400; margin-left: 8pt; }
 .wb-no { font: 700 11pt "PT Sans", "CJK Sans"; color: var(--accent); margin-right: 8pt; }
 .wb-lesson { font: 9pt "PT Sans", "CJK Sans"; color: var(--muted); }
 .wb-hint { font: 8pt "PT Sans", "CJK Sans"; color: var(--muted); margin-left: 4pt; }
 table.wb-matrix { width: 100%; border-collapse: collapse; margin: 4pt 0 6pt; font-size: 10pt; }
 table.wb-matrix th { font: 700 8.5pt "PT Sans", "CJK Sans"; color: var(--muted); text-align: left; border-bottom: .8pt solid var(--accent); padding: 2pt 4pt; }
 table.wb-matrix td { border-bottom: .4pt solid var(--rule); padding: 3pt 4pt; vertical-align: bottom; }
-table.wb-grid { width: 100%; border-collapse: separate; border-spacing: 0 2pt; margin: 2pt 0 6pt; font-size: 10pt; table-layout: fixed; }
+table.wb-grid { width: 100%; border-collapse: collapse; margin: 2pt 0 6pt; font-size: 10pt; table-layout: fixed; }
 table.wb-grid tr { break-inside: avoid; }
-table.wb-grid td { padding: 3pt 2pt 1pt; vertical-align: bottom; }
-table.wb-grid td.n { width: 5mm; color: var(--muted); font-size: 8pt; }
-table.wb-grid.c3 td.w { width: 25mm; } table.wb-grid.c3 td.b, table.wb-grid.c3 td.e { width: 27mm; }
-table.wb-grid.c2 td.w { width: 48mm; } table.wb-grid.c2 td.b, table.wb-grid.c2 td.e { width: 32mm; }
-table.wb-grid td.b { border-bottom: .5pt solid var(--ink); }
-table.wb-grid td.w .wb-hint { display: block; margin-left: 0; font-size: 7pt; line-height: 1.2; }
+table.wb-grid td { padding: 5pt 4pt 2pt 0; vertical-align: bottom; }
+table.wb-grid .n { color: var(--muted); font-size: 8pt; }
+table.wb-grid .gap { display: inline-block; border-bottom: .5pt solid var(--ink); height: 1em; vertical-align: baseline; }
+.wb-paren { font-size: 9pt; color: #444; }
 .wb-anslist { line-height: 1.7; margin: 2pt 0 4pt; }
 .wb-ans { display: inline-block; margin-right: 10pt; white-space: nowrap; }
 ol.wb-anscols { columns: 2; column-gap: 8mm; margin: 2pt 0 4pt; padding-left: 16pt; }
@@ -240,12 +267,25 @@ def main(argv):
     body, keys, n = [], [], 0
     for p in files(lo, hi):
         d = yaml.safe_load(p.read_text(encoding="utf-8"))
+        groups = d.get("groups") or []
+        if not groups:
+            continue
         combined = p.stem.endswith("-综合")
-        for g in d.get("groups") or []:
-            n += 1
-            g.setdefault("lessons", d.get("lessons") or [re.match(r"L\d+", p.stem).group(0)])
-            body.append(exercise_md(n, g, combined))
-            keys.append(exercise_md(n, g, combined, answers=True))
+        code = re.match(r"L\d+", p.stem).group(0)
+        lessons = d.get("lessons") or [code]
+        # 一节一个知识点：练习 N + 标题；大题一、二、三；小题 1、2、3
+        n += 1
+        topic = re.sub(r"^(第\s*\d+\s*课|综合练习)\s*", "", str(d.get("heading", ""))).strip()
+        if combined:
+            topic = "综合：" + topic
+        head = (f"<h2 class='wb-sec'><span class='wb-no'>练习 {n}</span>{html.escape(topic)}"
+                f"<span class='wb-lesson'>{span(lessons)}</span></h2>")
+        body.append(head)
+        keys.append(head)
+        for k, g in enumerate(groups, 1):
+            g.setdefault("lessons", lessons)
+            body.append(exercise_md(k, g))
+            keys.append(exercise_md(k, g, answers=True))
     title = "第一册练习册" + (f"（第 {lo}–{hi} 课样稿）" if argv else "")
     html_doc = (f'<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><title>{title}</title>'
                 f'<link rel="stylesheet" href="../style.css"><style>{CSS}</style></head><body class="book">'
@@ -258,7 +298,7 @@ def main(argv):
     out.write_text(html_doc, encoding="utf-8")
     pdf = ROOT / "dist" / f"{title}.pdf"
     subprocess.run([sys.executable, "-m", "weasyprint", str(out), str(pdf)], check=True, cwd=ROOT)
-    print(pdf, n, "个练习")
+    print(pdf, n, "节练习")
 
 
 if __name__ == "__main__":
