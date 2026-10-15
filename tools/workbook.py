@@ -86,18 +86,94 @@ def md_inline(s):
     return s
 
 
+def plain(s):
+    return re.sub(r"\[([^\[\]]*)\]\{[^}]*\}", r"\1", str(s)).replace("\u0301", "")
+
+
+def common_hint(rows):
+    """所有行提示相同时提到题目要求里，只写一次。"""
+    hs = {str(r.get("hint", "")) for r in rows}
+    return hs.pop() if len(hs) == 1 and "" not in hs else None
+
+
+def merge_why(why):
+    """相同的解析合并：第 1 题：X / 第 2 题：X → 第 1–2 题：X。"""
+    items = re.findall(r"第\s*(\d+)\s*[题行][：:]\s*(.+)", why)
+    if not items:
+        return why
+    groups = []
+    for n, text in items:
+        key = re.sub(r"\[[^\]]*\]\{\.ru\}", "…", text).strip()
+        if groups and groups[-1][2] == key:
+            groups[-1][1] = n
+        else:
+            groups.append([n, n, key, text])
+    out = []
+    for a, b, key, text in groups:
+        if a == b:
+            out.append(f"第 {a} 题：{text.strip()}")
+        else:
+            out.append(f"第 {a}–{b} 题：{key.replace('…', '……')}" if "…" in key else f"第 {a}–{b} 题：{text.strip()}")
+    return "\n".join(out)
+
+
+def matrix_md(g, answers):
+    cols, rows = g["cols"], g["rows"]
+    given = set(g.get("given") or [0])
+    todo = [j for j in range(len(cols)) if j not in given]
+    shared = common_hint(rows)
+
+    def word(r):
+        bits = [] if shared else ([str(r["hint"])] if r.get("hint") else [])
+        if r.get("gloss"):
+            bits.append(str(r["gloss"]))
+        tail = f"<span class='wb-hint'>{md_inline('；'.join(bits))}</span>" if bits else ""
+        return md_inline(ru(r["cells"][min(given)])) + tail
+
+    if answers:   # 紧凑答案
+        if len(todo) == 1:
+            items = "".join(f"<span class='wb-ans'>{i}. {md_inline(ru(r['cells'][todo[0]]))}</span>" for i, r in enumerate(rows, 1))
+            return f"<div class='wb-anslist'>{items}</div>"
+        items = "".join(f"<li>{md_inline(', '.join(plain_ru(r['cells'][j]) for j in todo))}</li>" for r in rows)
+        return f"<ol class='wb-anscols'>{items}</ol>"
+    if len(todo) == 1:   # 一对一：两三组“词 | 空格”并排
+        longest = max(len(plain(r["cells"][min(given)])) + len(plain(r["cells"][todo[0]])) for r in rows)
+        ncol = 3 if longest <= 24 else 2
+        trs = []
+        for k in range(0, len(rows), ncol):
+            tds = ""
+            for i in range(k, k + ncol):
+                if i < len(rows):
+                    tds += f"<td class='n'>{i + 1}</td><td class='w'>{word(rows[i])}</td><td class='b'></td>"
+                else:
+                    tds += "<td class='n'></td><td class='w'></td><td class='e'></td>"
+            trs.append(f"<tr>{tds}</tr>")
+        return f"<table class='wb-grid c{ncol}'>{''.join(trs)}</table>"
+    head = "".join(f"<th>{html.escape(cols[j])}</th>" for j in [min(given)] + todo)
+    body = "".join(f"<tr><td class='n'>{i}</td><td>{word(r)}</td>" + "<td></td>" * len(todo) + "</tr>"
+                   for i, r in enumerate(rows, 1))
+    return f"<table class='wb-matrix'><thead><tr><th></th>{head}</tr></thead><tbody>{body}</tbody></table>"
+
+
+def plain_ru(s):
+    """答案列表里多个形式合成一个 .ru span。"""
+    return re.sub(r"^\[(.*)\]\{\.ru\}$", r"\1", str(s))
+
+
 def exercise_md(n, g, combined, answers=False):
     t = g["type"]
     head = f"[练习 {n}]{{.wb-no}}[{label(g, combined)}]{{.wb-lesson}}"
-    out = ["::: {.exercise .wb}", head, "", f"[{g['task']}]{{.task}}", ""]
+    task = g["task"]
+    if t == "matrix" and not answers:
+        sh = common_hint(g["rows"])
+        if sh:
+            task = task.rstrip("。") + f"（{sh}）。"
+    out = ["::: {.exercise .wb}", head, "", f"[{task}]{{.task}}", ""]
     if t == "matrix":
-        given = set(g.get("given") or [])
-
-        def show(i, j, r):
-            if j in given or answers:
-                return md_inline(ru(r["cells"][j]) + (note(r) if j == 0 else ""))
-            return "<span class='wb-blank'></span>"
-        out += [cell_table(g["cols"], g["rows"], show), ""]
+        html_block = matrix_md(g, answers)
+        if answers and "wb-anscols" in html_block:
+            html_block = html_block.replace("<li>", "<li><span class='ru'>", ).replace("</li>", "</span></li>")
+        out += [html_block, ""]
     elif t == "classify":
         if answers:
             for b in g["bins"]:
@@ -107,9 +183,10 @@ def exercise_md(n, g, combined, answers=False):
         else:
             words = "".join(f"<span class='wb-item'>{k}. {md_inline(ru(it['text']) + note(it))}</span>"
                             for k, it in enumerate(g["items"], 1))
+            per = max(1, -(-len(g["items"]) // len(g["bins"])))
             out += [f"<div class='wb-items'>{words}</div>", ""]
             out += ["<table class='wb-bins'><tr>" + "".join(f"<th>{md_inline(ru(b))}</th>" for b in g["bins"]) + "</tr><tr>"
-                    + "<td></td>" * len(g["bins"]) + "</tr></table>", ""]
+                    + f"<td style='height:{6 + per * 6}mm'></td>" * len(g["bins"]) + "</tr></table>", ""]
     elif t in ("fill", "choice"):
         for i, it in enumerate(g["items"], 1):
             stem = exercises.blank(str(it["stem"]))
@@ -135,7 +212,18 @@ CSS = """
 .wb-hint { font: 8pt "PT Sans", "CJK Sans"; color: var(--muted); margin-left: 4pt; }
 table.wb-matrix { width: 100%; border-collapse: collapse; margin: 4pt 0 6pt; font-size: 10pt; }
 table.wb-matrix th { font: 700 8.5pt "PT Sans", "CJK Sans"; color: var(--muted); text-align: left; border-bottom: .8pt solid var(--accent); padding: 2pt 4pt; }
-table.wb-matrix td { border-bottom: .4pt solid var(--rule); padding: 5pt 4pt; vertical-align: bottom; }
+table.wb-matrix td { border-bottom: .4pt solid var(--rule); padding: 3pt 4pt; vertical-align: bottom; }
+table.wb-grid { width: 100%; border-collapse: separate; border-spacing: 0 2pt; margin: 2pt 0 6pt; font-size: 10pt; table-layout: fixed; }
+table.wb-grid tr { break-inside: avoid; }
+table.wb-grid td { padding: 3pt 2pt 1pt; vertical-align: bottom; }
+table.wb-grid td.n { width: 5mm; color: var(--muted); font-size: 8pt; }
+table.wb-grid.c3 td.w { width: 25mm; } table.wb-grid.c3 td.b, table.wb-grid.c3 td.e { width: 27mm; }
+table.wb-grid.c2 td.w { width: 48mm; } table.wb-grid.c2 td.b, table.wb-grid.c2 td.e { width: 32mm; }
+table.wb-grid td.b { border-bottom: .5pt solid var(--ink); }
+table.wb-grid td.w .wb-hint { display: block; margin-left: 0; font-size: 7pt; line-height: 1.2; }
+.wb-anslist { line-height: 1.7; margin: 2pt 0 4pt; }
+.wb-ans { display: inline-block; margin-right: 10pt; white-space: nowrap; }
+ol.wb-anscols { columns: 2; column-gap: 8mm; margin: 2pt 0 4pt; padding-left: 16pt; }
 table.wb-matrix td.n { width: 5mm; color: var(--muted); font-size: 8pt; }
 table.wb-matrix tr { break-inside: avoid; }
 .wb-blank { display: inline-block; width: 100%; min-width: 22mm; }
@@ -143,7 +231,7 @@ table.wb-matrix tr { break-inside: avoid; }
 .wb-item { display: inline-block; margin-right: 12pt; white-space: nowrap; }
 table.wb-bins { width: 100%; border-collapse: collapse; margin: 4pt 0 6pt; break-inside: avoid; }
 table.wb-bins th { border: .6pt solid var(--rule); padding: 3pt; background: #f6f1ea; }
-table.wb-bins td { border: .6pt solid var(--rule); height: 32mm; }
+table.wb-bins td { border: .6pt solid var(--rule); }
 """
 
 
