@@ -165,20 +165,25 @@ def matrix_md(g, answers):
         items = "".join(f"<li>{md_inline(', '.join(plain_ru(r['cells'][j]) for j in todo))}</li>" for r in rows)
         return f"<ol class='wb-anscols'>{items}</ol>"
     if one:   # 一对一：“前置词 ＿＿（原形 释义，性）”，三栏或两栏
+        # 手写比印刷宽：答题线按每字母约 3 mm 留，最短 24 mm；再按整格宽度选三栏、两栏或一栏
+        gaps = [min(70, max(24, len(plain(rest)) * 3.0)) for _, rest in preps]
+        widths = [(6 if prep else 0) + gap + len(re.sub(r'<[^>]+>', '', paren(r, given)).replace('\u0301', '')) * 1.9 + 6
+                  for (prep, _), gap, r in zip(preps, gaps, rows)]
+        ncol = 3 if max(widths) <= 56 else 2 if max(widths) <= 85 else 1
+        gap = max(gaps)   # 同一题答题线一样长
         cells = []
         for i, (r, (prep, rest)) in enumerate(zip(rows, preps), 1):
-            gap = min(28, max(12, len(plain(rest)) * 1.7))
             cells.append(f"<span class='n'>{i}.</span> " + (f"<span class='ru'>{prep}</span> " if prep else "")
                          + f"<span class='gap' style='width:{gap:.0f}mm'></span>{paren(r, given)}")
-        longest = max(len(plain(r["cells"][min(given)])) + len(plain(rest)) for r, (_, rest) in zip(rows, preps))
-        ncol = 3 if longest <= 22 else 2
         trs = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in cells[k:k + ncol])
                       + "<td></td>" * (ncol - len(cells[k:k + ncol])) + "</tr>" for k in range(0, len(cells), ncol))
         return f"<table class='wb-grid c{ncol}'>{trs}</table>"
+    w = (100 - 6 - 22) / len(todo)   # 序号 6%，原形 22%，其余各列等宽
+    colgroup = "<colgroup><col style='width:6%'/><col style='width:22%'/>" + f"<col style='width:{w:.2f}%'/>" * len(todo) + "</colgroup>"
     head = "".join(f"<th>{html.escape(cols[j])}</th>" for j in [min(given)] + todo)
-    body = "".join(f"<tr><td class='n'>{i}</td><td>{word(r)}</td>" + "<td></td>" * len(todo) + "</tr>"
+    body = "".join(f"<tr><td class='n'>{i}</td><td>{word(r)}</td>" + "<td class='a'></td>" * len(todo) + "</tr>"
                    for i, r in enumerate(rows, 1))
-    return f"<table class='wb-matrix'><thead><tr><th></th>{head}</tr></thead><tbody>{body}</tbody></table>"
+    return f"<table class='wb-matrix'>{colgroup}<thead><tr><th></th>{head}</tr></thead><tbody>{body}</tbody></table>"
 
 
 def plain_ru(s):
@@ -233,25 +238,31 @@ def exercise_md(k, g, answers=False):
 
 CSS = """
 .wb { break-inside: auto; margin-top: 6pt; }
+section.wb-page { break-before: page; }
+section.wb-page > .running { font-size: 0; line-height: 0; height: 0; margin: 0; overflow: hidden; }
+h1.wb-title .wb-lesson { font: 400 10pt "PT Sans", "CJK Sans"; color: var(--muted); margin-left: 10pt; }
 h2.wb-sec { font: 700 14pt "PT Sans", "CJK Sans"; color: var(--ink); margin: 18pt 0 2pt; border-bottom: .8pt solid var(--accent); padding-bottom: 2pt; break-after: avoid; }
 h2.wb-sec .wb-no { font-size: 14pt; }
 h2.wb-sec .wb-lesson { font-weight: 400; margin-left: 8pt; }
 .wb-no { font: 700 11pt "PT Sans", "CJK Sans"; color: var(--accent); margin-right: 8pt; }
 .wb-lesson { font: 9pt "PT Sans", "CJK Sans"; color: var(--muted); }
 .wb-hint { font: 8pt "PT Sans", "CJK Sans"; color: var(--muted); margin-left: 4pt; }
-table.wb-matrix { width: 100%; border-collapse: collapse; margin: 4pt 0 6pt; font-size: 10pt; }
+table.wb-matrix { width: 100%; border-collapse: collapse; margin: 4pt 0 6pt; font-size: 10pt; table-layout: fixed; }
+table.wb-matrix td.a, table.wb-matrix thead th:nth-child(n+3) { border-left: .5pt solid var(--rule); }
+table.wb-matrix td.a:nth-child(even), table.wb-matrix thead th:nth-child(n+3):nth-child(even) { background: #f7f3ee; }
+table.wb-matrix td { height: 9mm; }
 table.wb-matrix th { font: 700 8.5pt "PT Sans", "CJK Sans"; color: var(--muted); text-align: left; border-bottom: .8pt solid var(--accent); padding: 2pt 4pt; }
 table.wb-matrix td { border-bottom: .4pt solid var(--rule); padding: 3pt 4pt; vertical-align: bottom; }
 table.wb-grid { width: 100%; border-collapse: collapse; margin: 2pt 0 6pt; font-size: 10pt; table-layout: fixed; }
 table.wb-grid tr { break-inside: avoid; }
-table.wb-grid td { padding: 5pt 4pt 2pt 0; vertical-align: bottom; }
+table.wb-grid td { padding: 9pt 4pt 2pt 0; vertical-align: bottom; }
 table.wb-grid .n { color: var(--muted); font-size: 8pt; }
 table.wb-grid .gap { display: inline-block; border-bottom: .5pt solid var(--ink); height: 1em; vertical-align: baseline; }
 .wb-paren { font-size: 9pt; color: #444; }
 .wb-anslist { line-height: 1.7; margin: 2pt 0 4pt; }
 .wb-ans { display: inline-block; margin-right: 10pt; white-space: nowrap; }
 ol.wb-anscols { columns: 2; column-gap: 8mm; margin: 2pt 0 4pt; padding-left: 16pt; }
-table.wb-matrix td.n { width: 5mm; color: var(--muted); font-size: 8pt; }
+table.wb-matrix td.n { color: var(--muted); font-size: 8pt; }
 table.wb-matrix tr { break-inside: avoid; }
 .wb-blank { display: inline-block; width: 100%; min-width: 22mm; }
 .wb-items { line-height: 2; margin: 4pt 0; break-after: avoid; }
@@ -278,20 +289,22 @@ def main(argv):
         topic = re.sub(r"^(第\s*\d+\s*课|综合练习)\s*", "", str(d.get("heading", ""))).strip()
         if combined:
             topic = "综合：" + topic
-        head = (f"<h2 class='wb-sec'><span class='wb-no'>练习 {n}</span>{html.escape(topic)}"
-                f"<span class='wb-lesson'>{span(lessons)}</span></h2>")
-        body.append(head)
-        keys.append(head)
+        name = f"练习 {n}　{topic}"
+        sec = [f"<div class='running'>{html.escape(name)}</div>"
+               f"<h1 class='part-title wb-title'>{html.escape(name)}<span class='wb-lesson'>{span(lessons)}</span></h1>"]
+        keys.append(f"<h2 class='wb-sec'><span class='wb-no'>练习 {n}</span>{html.escape(topic)}"
+                    f"<span class='wb-lesson'>{span(lessons)}</span></h2>")
+        md = []
         for k, g in enumerate(groups, 1):
             g.setdefault("lessons", lessons)
-            body.append(exercise_md(k, g))
+            md.append(exercise_md(k, g))
             keys.append(exercise_md(k, g, answers=True))
+        body.append(f"<section class='wb-page'>{sec[0]}{book.pandoc(chr(10).join(md), f'wb{n}')}</section>")
     title = "第一册练习册" + (f"（第 {lo}–{hi} 课样稿）" if argv else "")
     html_doc = (f'<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><title>{title}</title>'
                 f'<link rel="stylesheet" href="../style.css"><style>{CSS}</style></head><body class="book">'
-                f'<section class="lesson"><div class="running">俄语教程 · {title}</div><h1 class="part-title">{title}</h1>'
-                f'{book.pandoc(chr(10).join(body), "wb")}</section>'
-                f'<section class="answers"><div class="running">{title} · 答案与解析</div><h1 class="part-title">答案与解析</h1>'
+                f'{"".join(body)}'
+                f'<section class="answers"><div class="running">答案与解析</div><h1 class="part-title">答案与解析</h1>'
                 f'{book.pandoc(chr(10).join(keys), "wbk")}</section></body></html>')
     out = ROOT / "build" / f"{title}.html"
     out.parent.mkdir(exist_ok=True)
