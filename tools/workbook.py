@@ -218,6 +218,19 @@ def exercise_md(k, g, answers=False):
             out += [f"<div class='wb-items'>{words}</div>", ""]
             out += ["<table class='wb-bins'><tr>" + "".join(f"<th>{md_inline(ru(b))}</th>" for b in g["bins"]) + "</tr><tr>"
                     + f"<td style='height:{6 + per * 6}mm'></td>" * len(g["bins"]) + "</tr></table>", ""]
+    elif t == "fill" and not answers:   # 句中填空：空线按手写长度留，短句排两栏
+        items = g["items"]
+        gap = min(45, max(26, max(len(plain(it.get("accept", [""])[0])) for it in items) * 3.0))
+        cells = []
+        for i, it in enumerate(items, 1):
+            stem = md_inline(ru(str(it["stem"]))).replace("___", f"<span class='gap' style='width:{gap:.0f}mm'></span>")
+            hint = f"<span class='wb-paren'>（{md_inline(ru(it['hint']))}）</span>" if it.get("hint") else ""
+            cells.append(f"<span class='n'>{i}.</span> {stem}{hint}")
+        longest = max(len(plain(it["stem"])) + len(plain(it.get("hint", ""))) for it in items) * 2.0 + gap
+        ncol = 2 if longest <= 84 else 1
+        trs = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in cells[k:k + ncol])
+                      + "<td></td>" * (ncol - len(cells[k:k + ncol])) + "</tr>" for k in range(0, len(cells), ncol))
+        out += [f"<table class='wb-grid c{ncol}'>{trs}</table>", ""]
     elif t in ("fill", "choice"):
         for i, it in enumerate(g["items"], 1):
             stem = exercises.blank(str(it["stem"]))
@@ -241,6 +254,8 @@ CSS = """
 section.wb-page { break-before: page; }
 section.wb-page > .running { font-size: 0; line-height: 0; height: 0; margin: 0; overflow: hidden; }
 h1.wb-title .wb-lesson { font: 400 10pt "PT Sans", "CJK Sans"; color: var(--muted); margin-left: 10pt; }
+section.t1 table.wb-grid td { padding-top: 5pt; } section.t1 table.wb-matrix td { height: 7.5mm; }
+section.t2 table.wb-grid td { padding-top: 2pt; } section.t2 table.wb-matrix td { height: 6.5mm; } section.t2 .wb { margin-top: 2pt; }
 h2.wb-sec { font: 700 14pt "PT Sans", "CJK Sans"; color: var(--ink); margin: 18pt 0 2pt; border-bottom: .8pt solid var(--accent); padding-bottom: 2pt; break-after: avoid; }
 h2.wb-sec .wb-no { font-size: 14pt; }
 h2.wb-sec .wb-lesson { font-weight: 400; margin-left: 8pt; }
@@ -275,7 +290,7 @@ table.wb-bins td { border: .6pt solid var(--rule); }
 
 def main(argv):
     lo, hi = (int(argv[0][1:]), int(argv[1][1:])) if len(argv) >= 2 else (1, 100)
-    body, keys, n = [], [], 0
+    body, keys, n, names = [], [], 0, []
     for p in files(lo, hi):
         d = yaml.safe_load(p.read_text(encoding="utf-8"))
         groups = d.get("groups") or []
@@ -299,19 +314,51 @@ def main(argv):
             g.setdefault("lessons", lessons)
             md.append(exercise_md(k, g))
             keys.append(exercise_md(k, g, answers=True))
-        body.append(f"<section class='wb-page'>{sec[0]}{book.pandoc(chr(10).join(md), f'wb{n}')}</section>")
+        body.append((sec[0], book.pandoc(chr(10).join(md), f'wb{n}')))
+        names.append((name, groups))
     title = "第一册练习册" + (f"（第 {lo}–{hi} 课样稿）" if argv else "")
-    html_doc = (f'<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><title>{title}</title>'
-                f'<link rel="stylesheet" href="../style.css"><style>{CSS}</style></head><body class="book">'
-                f'{"".join(body)}'
-                f'<section class="answers"><div class="running">答案与解析</div><h1 class="part-title">答案与解析</h1>'
-                f'{book.pandoc(chr(10).join(keys), "wbk")}</section></body></html>')
     out = ROOT / "build" / f"{title}.html"
     out.parent.mkdir(exist_ok=True)
-    out.write_text(html_doc, encoding="utf-8")
     pdf = ROOT / "dist" / f"{title}.pdf"
-    subprocess.run([sys.executable, "-m", "weasyprint", str(out), str(pdf)], check=True, cwd=ROOT)
+    tight = {}   # 节号 → 收紧级别：只溢出几行的节逐级压缩行距重排
+    for _ in range(3):
+        secs = "".join(f"<section class='wb-page t{tight.get(k, 0)}'>{h}{b}</section>" for k, (h, b) in enumerate(body))
+        out.write_text(f'<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><title>{title}</title>'
+                       f'<link rel="stylesheet" href="../style.css"><style>{CSS}</style></head><body class="book">{secs}'
+                       f'<section class="answers"><div class="running">答案与解析</div><h1 class="part-title">答案与解析</h1>'
+                       f'{book.pandoc(chr(10).join(keys), "wbk")}</section></body></html>', encoding="utf-8")
+        subprocess.run([sys.executable, "-m", "weasyprint", str(out), str(pdf)], check=True, cwd=ROOT)
+        spill = [k for k, empty in fill_report(pdf, names, quiet=True) if empty > 0.8 and tight.get(k, 0) < 2]
+        if not spill:
+            break
+        for k in spill:
+            tight[k] = tight.get(k, 0) + 1
     print(pdf, n, "节练习")
+    fill_report(pdf, names)
+
+
+def fill_report(pdf, names, quiet=False):
+    """每节最后一页空了多少：空白超过四分之一页时提示补几道小题（按最后一道大题的行高估算）。"""
+    import pymupdf
+    d = pymupdf.open(pdf)
+    starts = []
+    for i, page in enumerate(d):
+        first = page.get_text().strip().split("\n")[0] if page.get_text().strip() else ""
+        for k, (name, _) in enumerate(names):
+            if first.replace(" ", "").startswith(name.replace("　", "").replace(" ", "")) and k not in [s[1] for s in starts]:
+                starts.append((i, k))
+    ans = next((i for i, pg in enumerate(d) if pg.get_text().lstrip().startswith("答案与解析")), len(d))
+    starts.append((ans, None))
+    usable = 842 - 60 - 55
+    res = []
+    for (a, k), (b, _) in zip(starts, starts[1:]):
+        last = d[b - 1]
+        bottom = max([bl[3] for bl in last.get_text("blocks") if 60 < bl[1] < 790], default=60)
+        empty = (842 - 55) - bottom
+        res.append((k, empty / usable))
+        if empty > usable / 4 and not quiet:
+            print(f"  {names[k][0]}：{b - a} 页，最后一页空 {empty / usable:.0%}")
+    return res
 
 
 if __name__ == "__main__":
