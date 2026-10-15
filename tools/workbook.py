@@ -224,7 +224,8 @@ def exercise_md(k, g, answers=False):
         cells = []
         for i, it in enumerate(items, 1):
             stem = md_inline(ru(str(it["stem"]))).replace("___", f"<span class='gap' style='width:{gap:.0f}mm'></span>")
-            hint = f"<span class='wb-paren'>（{md_inline(ru(it['hint']))}）</span>" if it.get("hint") else ""
+            bits = ([md_inline(ru(it["hint"]))] if it.get("hint") else []) + ([html.escape(str(it["gloss"]))] if it.get("new") and it.get("gloss") else [])
+            hint = f"<span class='wb-paren'>（{' '.join(bits)}）</span>" if bits else ""
             cells.append(f"<span class='n'>{i}.</span> {stem}{hint}")
         longest = max(len(plain(it["stem"])) + len(plain(it.get("hint", ""))) for it in items) * 2.0 + gap
         ncol = 2 if longest <= 84 else 1
