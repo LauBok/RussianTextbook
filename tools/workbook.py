@@ -319,7 +319,7 @@ def main(argv):
     title = "第一册练习册" + (f"（第 {lo}–{hi} 课样稿）" if argv else "")
     out = ROOT / "build" / f"{title}.html"
     out.parent.mkdir(exist_ok=True)
-    pdf = ROOT / "dist" / f"{title}.pdf"
+    pdf = ROOT / ("build" if argv else "dist") / f"{title}.pdf"   # 分段样稿放 build/，整本才进 dist/
     tight = {}   # 节号 → 收紧级别：只溢出几行的节逐级压缩行距重排
     for _ in range(3):
         secs = "".join(f"<section class='wb-page t{tight.get(k, 0)}'>{h}{b}</section>" for k, (h, b) in enumerate(body))
