@@ -157,6 +157,9 @@ def matrix_md(g, answers):
 
     one = len(todo) == 1
     preps = [split_prep(r["cells"][todo[0]]) for r in rows] if one else []
+    # 原形本身带前置词（改错、改写题）时不把前置词印在题面，免得泄露答案；“в + наш + дом”这类组合照常拆
+    if one and any(PREP.match(plain_ru(r["cells"][min(given)])) for r in rows):
+        preps = [("", plain_ru(r["cells"][todo[0]])) for r in rows]
     if answers:   # 紧凑答案：只写要填的部分
         if one:
             items = "".join(f"<span class='wb-ans'>{i}. <span class='ru'>{rest}</span></span>"
