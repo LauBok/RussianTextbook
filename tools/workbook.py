@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""第一册练习册：按课号顺序排 workbook/*.yaml，全书连续编号，书末附答案。
+"""练习册：按课号顺序排 workbook/*.yaml，全书连续编号，书末附答案。
 
-    python3 tools/workbook.py              →  dist/第一册练习册.pdf
-    python3 tools/workbook.py L11 L20      →  只排第 11–20 课（样稿）
+    python3 tools/workbook.py                     →  dist/第一册练习册.pdf（workbook/L*.yaml）
+    python3 tools/workbook.py L11 L20             →  只排第 11–20 课（样稿，放 build/）
+    python3 tools/workbook.py --book 2 [L1 L18]   →  dist/第二册练习册.pdf（workbook/B2-L*.yaml）
 
 <课号>-综合.yaml 紧排在该课之后。练习编号构建时按顺序生成；标题写“第 11 课”或“综合：第 11–19 课”。
 """
@@ -20,16 +21,17 @@ import exercises  # noqa: E402
 
 ROOT = book.ROOT
 WB = ROOT / "workbook"
+PREFIX = ""   # 第二册起文件名带 B2- 等前缀
 
 
 def lesson_no(code):
-    return int(re.match(r"L(\d+)", code).group(1))
+    return int(re.search(r"L(\d+)", code).group(1))
 
 
 def files(lo=1, hi=100):
     out = []
-    for p in WB.glob("L*.yaml"):
-        m = re.fullmatch(r"L(\d+)(-综合)?", p.stem)
+    for p in WB.glob(f"{PREFIX}L*.yaml"):
+        m = re.fullmatch(re.escape(PREFIX) + r"L(\d+)(-综合)?", p.stem)
         if m and lo <= int(m.group(1)) <= hi:
             out.append((int(m.group(1)), 1 if m.group(2) else 0, p))
     return [p for *_, p in sorted(out)]
@@ -293,6 +295,11 @@ table.wb-bins td { border: .6pt solid var(--rule); }
 
 
 def main(argv):
+    global PREFIX
+    bk = 1
+    if argv[:1] == ["--book"]:
+        bk, argv = int(argv[1]), argv[2:]
+    PREFIX = "" if bk == 1 else f"B{bk}-"
     lo, hi = (int(argv[0][1:]), int(argv[1][1:])) if len(argv) >= 2 else (1, 100)
     body, keys, n, names = [], [], 0, []
     for p in files(lo, hi):
@@ -301,7 +308,7 @@ def main(argv):
         if not groups:
             continue
         combined = p.stem.endswith("-综合")
-        code = re.match(r"L\d+", p.stem).group(0)
+        code = re.match(re.escape(PREFIX) + r"L\d+", p.stem).group(0)
         lessons = d.get("lessons") or [code]
         # 一节一个知识点：练习 N + 标题；大题一、二、三；小题 1、2、3
         n += 1
@@ -320,7 +327,7 @@ def main(argv):
             keys.append(exercise_md(k, g, answers=True))
         body.append((sec[0], book.pandoc(chr(10).join(md), f'wb{n}')))
         names.append((name, groups))
-    title = "第一册练习册" + (f"（第 {lo}–{hi} 课样稿）" if argv else "")
+    title = book.BOOK_NAME[bk] + "练习册" + (f"（第 {lo}–{hi} 课样稿）" if argv else "")
     out = ROOT / "build" / f"{title}.html"
     out.parent.mkdir(exist_ok=True)
     pdf = ROOT / ("build" if argv else "dist") / f"{title}.pdf"   # 分段样稿放 build/，整本才进 dist/
