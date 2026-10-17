@@ -183,12 +183,32 @@ def matrix_md(g, answers):
         trs = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in cells[k:k + ncol])
                       + "<td></td>" * (ncol - len(cells[k:k + ncol])) + "</tr>" for k in range(0, len(cells), ncol))
         return f"<table class='wb-grid c{ncol}'>{trs}</table>"
-    w = (100 - 6 - 22) / len(todo)   # 序号 6%，原形 22%，其余各列等宽
-    colgroup = "<colgroup><col style='width:6%'/><col style='width:22%'/>" + f"<col style='width:{w:.2f}%'/>" * len(todo) + "</colgroup>"
-    head = "".join(f"<th>{html.escape(cols[j])}</th>" for j in [min(given)] + todo)
-    body = "".join(f"<tr><td class='n'>{i}</td><td>{word(r)}</td>" + "<td class='a'></td>" * len(todo) + "</tr>"
-                   for i, r in enumerate(rows, 1))
-    return f"<table class='wb-matrix'>{colgroup}<thead><tr><th></th>{head}</tr></thead><tbody>{body}</tbody></table>"
+    # 版心 170 mm：序号 6 mm；原形列按最长原形定宽，释义另起一行；答题列按最长答案的手写长度（每字母约 2.8 mm）定宽，
+    # 一行放不下就把形式分成几张表（每张都重复原形列），各列等宽
+    letters = lambda t: len(re.findall(r"[^\W\d_]", plain(t)))
+    word_w = min(42, max(20, max(letters(r["cells"][min(given)]) for r in rows) * 2.1 + 5))
+    need = max(18, max(letters(r["cells"][j]) for r in rows for j in todo) * 2.8 + 5)
+    avail = 170 - 6 - word_w
+    per = max(1, int(avail // need))
+    nt = -(-len(todo) // per)
+    chunks = [todo[k * len(todo) // nt:(k + 1) * len(todo) // nt] for k in range(nt)]
+    # 答题列有富余时让给原形列，释义尽量一行写完（8pt：汉字约 2.9 mm，其他约 1.6 mm）
+    def hint_w(r):
+        t = plain(re.sub(r"<[^>]+>", "", word(r).split("wb-hint'>", 1)[-1])) if "wb-hint" in word(r) else ""
+        return sum(2.9 if ord(c) > 0x2e80 else 1.6 for c in t) + 3
+    want = min(60, max([word_w] + [hint_w(r) for r in rows]))
+    word_w = max(word_w, min(want, 170 - 6 - need * max(len(ch) for ch in chunks)))
+    avail = 170 - 6 - word_w
+    tables = []
+    for ch in chunks:
+        pct = lambda mm: f"{mm / 170 * 100:.2f}%"
+        colgroup = (f"<colgroup><col style='width:{pct(6)}'/><col style='width:{pct(word_w)}'/>"
+                    + f"<col style='width:{pct(avail / len(ch))}'/>" * len(ch) + "</colgroup>")
+        head = "".join(f"<th>{html.escape(cols[j])}</th>" for j in [min(given)] + ch)
+        body = "".join(f"<tr><td class='n'>{i}</td><td class='w'>{word(r)}</td>" + "<td class='a'></td>" * len(ch) + "</tr>"
+                       for i, r in enumerate(rows, 1))
+        tables.append(f"<table class='wb-matrix'>{colgroup}<thead><tr><th></th>{head}</tr></thead><tbody>{body}</tbody></table>")
+    return "".join(tables)
 
 
 def plain_ru(s):
@@ -284,6 +304,7 @@ table.wb-grid .gap { display: inline-block; border-bottom: .5pt solid var(--ink)
 .wb-ans { display: inline-block; margin-right: 10pt; white-space: nowrap; }
 ol.wb-anscols { columns: 2; column-gap: 8mm; margin: 2pt 0 4pt; padding-left: 16pt; }
 table.wb-matrix td.n { color: var(--muted); font-size: 8pt; }
+table.wb-matrix td.w .wb-hint { display: block; margin-left: 0; line-height: 1.2; }
 table.wb-matrix tr { break-inside: avoid; }
 .wb-blank { display: inline-block; width: 100%; min-width: 22mm; }
 .wb-items { line-height: 2; margin: 4pt 0; break-after: avoid; }
