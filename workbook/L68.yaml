@@ -3,7 +3,7 @@ groups:
 - id: L68-01
   tags:
   - с … до …：时刻第二格
-  task: 用 [с … до …]{.ru} 写出时间段。
+  task: 用 [с … до …]{.ru} 写出几点到几点（数词用词写出）。
   type: matrix
   cols:
   - 时间
@@ -76,7 +76,7 @@ groups:
 - id: L68-02
   tags:
   - с … до …：名词第二格
-  task: 用 [с … до …]{.ru} 写出时间段。
+  task: 用 [с … до …]{.ru} 写出从何时到何时。
   type: matrix
   cols:
   - 起点 — 终点
@@ -146,7 +146,7 @@ groups:
 - id: L68-03
   tags:
   - с + 第二格与 с + 第五格对照
-  task: 按 [с]{.ru} 后面的格和意思归类。
+  task: 按 [с]{.ru} 的意思归类。
   type: classify
   bins:
   - '[с]{.ru} + 第二格（从……起）'

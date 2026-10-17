@@ -3,7 +3,7 @@ groups:
 - id: L05-01
   tags:
   - 名词复数第一格：硬辅音与 -а 结尾
-  task: 阳性硬辅音结尾的名词加 [-ы]{.ru}，阴性 [-а]{.ru} 改 [-ы]{.ru}：写出复数。
+  task: 写出名词的复数。
   type: matrix
   cols:
   - 单数
@@ -43,35 +43,30 @@ groups:
     cells:
     - '[ва́за]{.ru}'
     - '[ва́зы]{.ru}'
-    hint: f
     new: true
     gloss: 花瓶
   - base: '[дива́н]{.ru}'
     cells:
     - '[дива́н]{.ru}'
     - '[дива́ны]{.ru}'
-    hint: m
     new: true
     gloss: 沙发
   - base: '[карти́на]{.ru}'
     cells:
     - '[карти́на]{.ru}'
     - '[карти́ны]{.ru}'
-    hint: f
     new: true
     gloss: 画
   - base: '[биле́т]{.ru}'
     cells:
     - '[биле́т]{.ru}'
     - '[биле́ты]{.ru}'
-    hint: m
     new: true
     gloss: 票
   - base: '[магази́н]{.ru}'
     cells:
     - '[магази́н]{.ru}'
     - '[магази́ны]{.ru}'
-    hint: m
     new: true
     gloss: 商店
   why: |-
@@ -80,7 +75,7 @@ groups:
 - id: L05-02
   tags:
   - 名词复数第一格：-ь 与 -я 结尾
-  task: 以 [-ь]{.ru}、[-я]{.ru} 结尾的名词改 [-и]{.ru}：写出复数。
+  task: 写出复数第一格。
   type: matrix
   cols:
   - 单数
@@ -108,7 +103,6 @@ groups:
     cells:
     - '[ку́хня]{.ru}'
     - '[ку́хни]{.ru}'
-    hint: f
     new: true
     gloss: 厨房
   - base: '[портфе́ль]{.ru}'
@@ -122,7 +116,6 @@ groups:
     cells:
     - '[неде́ля]{.ru}'
     - '[неде́ли]{.ru}'
-    hint: f
     new: true
     gloss: 星期
   - base: '[пло́щадь]{.ru}'
@@ -136,14 +129,12 @@ groups:
     cells:
     - '[галере́я]{.ru}'
     - '[галере́и]{.ru}'
-    hint: f
     new: true
     gloss: 画廊
   - base: '[ле́кция]{.ru}'
     cells:
     - '[ле́кция]{.ru}'
     - '[ле́кции]{.ru}'
-    hint: f
     new: true
     gloss: 讲座课
   why: |-
@@ -153,7 +144,7 @@ groups:
 - id: L05-03
   tags:
   - 名词复数第一格：拼写规则 г к х ж ш щ ч 后写 и
-  task: 词干末尾是 [г, к, х, ж, ш, щ, ч]{.ru} 的名词：按拼写规则写出复数。
+  task: 把单数改成复数。
   type: matrix
   cols:
   - 单数
@@ -197,35 +188,30 @@ groups:
     cells:
     - '[ма́льчик]{.ru}'
     - '[ма́льчики]{.ru}'
-    hint: m
     new: true
     gloss: 男孩
   - base: '[доро́га]{.ru}'
     cells:
     - '[доро́га]{.ru}'
     - '[доро́ги]{.ru}'
-    hint: f
     new: true
     gloss: 路
   - base: '[руба́шка]{.ru}'
     cells:
     - '[руба́шка]{.ru}'
     - '[руба́шки]{.ru}'
-    hint: f
     new: true
     gloss: 衬衫
   - base: '[ча́шка]{.ru}'
     cells:
     - '[ча́шка]{.ru}'
     - '[ча́шки]{.ru}'
-    hint: f
     new: true
     gloss: 杯子
   - base: '[де́вочка]{.ru}'
     cells:
     - '[де́вочка]{.ru}'
     - '[де́вочки]{.ru}'
-    hint: f
     new: true
     gloss: 小女孩
   why: |-
@@ -235,7 +221,7 @@ groups:
 - id: L05-04
   tags:
   - 名词复数第一格：按复数词尾归类
-  task: 不写复数，只判断复数词尾，把名词归入相应一栏。
+  task: 按复数词尾把名词归类。
   type: classify
   bins:
   - '[-ы]{.ru}'
@@ -250,7 +236,6 @@ groups:
     answer: '[-а]{.ru}'
   - text: '[крова́ть]{.ru}'
     answer: '[-и]{.ru}'
-    hint: f
   - text: '[журна́л]{.ru}'
     answer: '[-ы]{.ru}'
   - text: '[ключ]{.ru}'
@@ -267,7 +252,6 @@ groups:
     answer: '[-а]{.ru}'
   - text: '[слова́рь]{.ru}'
     answer: '[-и]{.ru}'
-    hint: m
   - text: '[инжене́р]{.ru}'
     answer: '[-ы]{.ru}'
   - text: '[шко́льник]{.ru}'
@@ -292,7 +276,7 @@ groups:
 - id: L05-05
   tags:
   - 名词复数第一格：各类混合与 мои́
-  task: 各类名词混合（含本课要特别记的复数）：把“我的”词组改成复数。
+  task: 把“我的”词组改成复数。
   type: matrix
   cols:
   - 单数
@@ -394,7 +378,7 @@ groups:
 - id: L05-06
   tags:
   - 名词复数第一格：错误核查
-  task: 每个复数形式都有一处错误，写出正确形式。
+  task: 改正复数形式中的错误。
   type: matrix
   cols:
   - 有错的形式

@@ -12,7 +12,7 @@ groups:
   recycles:
   - L16-01
   - L17-02
-  task: 按行首的主语写出三个动词的过去时。
+  task: 按主语写出三个动词的过去时。
   type: matrix
   cols:
   - 主语
@@ -114,7 +114,7 @@ groups:
   recycles:
   - L16-02
   - L17-04
-  task: 每句的过去时和主语不一致，写出改正后的动词。
+  task: 每句有一处错误，写出改正后的动词。
   type: matrix
   cols:
   - 有错的句子
@@ -205,7 +205,7 @@ groups:
   recycles:
   - L16-03
   - L17-04
-  task: 写出括号里动词的过去时；括号里有 [не]{.ru} 的写否定形式并标出重音。
+  task: 用括号里动词的过去时填空（标出重音）。
   type: fill
   items:
   - stem: Вчера́ Ю́ми ___ в библиоте́ке.

@@ -3,7 +3,7 @@ groups:
 - id: L65-01
   tags:
   - 形容词单数第五格：硬变化
-  task: 硬变化形容词（含词尾重读）变第五格。
+  task: 写出形容词的第五格（一）。
   type: matrix
   cols: &id001
   - 原形
@@ -90,7 +90,7 @@ groups:
   tags:
   - 形容词单数第五格：软变化
   - 形容词单数第五格：拼写规则
-  task: 软变化和词干末尾为 [г、к、х、ж、ш、ч、щ]{.ru} 的形容词变第五格。
+  task: 写出形容词的第五格（二）。
   type: matrix
   cols: *id001
   given:
@@ -186,7 +186,7 @@ groups:
   tags:
   - 物主代词单数第五格
   - 指示代词单数第五格
-  task: 物主代词、指示代词和 [чей]{.ru} 变第五格。
+  task: 写出代词的第五格。
   type: matrix
   cols: *id001
   given:
@@ -387,7 +387,7 @@ groups:
 - id: L65-06
   tags:
   - 修饰语与名词第五格配合：句中填空
-  task: 把括号里的词组变成第五格填空。
+  task: 用括号里的词组填空。
   type: fill
   items:
   - stem: Мой оте́ц рабо́тает ___.

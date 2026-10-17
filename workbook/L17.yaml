@@ -3,7 +3,7 @@ groups:
 - id: L17-01
   tags:
   - 动词过去时：规则构成
-  task: 第一变位规则动词：写出过去时的四个性数形式。
+  task: 写出动词过去时的四个形式。
   type: matrix
   cols: &id001
   - 不定式
@@ -94,7 +94,7 @@ groups:
 - id: L17-02
   tags:
   - 动词过去时：第二变位、变干动词与短动词
-  task: 第二变位、现在时词干有变化的动词和短动词：从不定式写出过去时（阴性重音在词尾的已提示）。
+  task: 由不定式写出过去时（阳性、阴性、中性、复数）。
   type: matrix
   cols: *id001
   given:
@@ -182,7 +182,7 @@ groups:
 - id: L17-03
   tags:
   - 名词单数第六格：处所词尾 -у́
-  task: 下面的阳性名词表示处所时第六格用重读的 [-у́]{.ru}：写出处所词组（前置词已印出）。
+  task: 写出处所词组。
   type: matrix
   cols:
   - 第一格
@@ -202,42 +202,42 @@ groups:
     cells:
     - '[лес]{.ru}'
     - '[в лесу́]{.ru}'
-    hint: m
+    hint: '第六格 [-у́]{.ru}'
     new: true
     gloss: 森林
   - base: '[пол]{.ru}'
     cells:
     - '[пол]{.ru}'
     - '[на полу́]{.ru}'
-    hint: m
+    hint: '第六格 [-у́]{.ru}'
     new: true
     gloss: 地板
   - base: '[бе́рег]{.ru}'
     cells:
     - '[бе́рег]{.ru}'
     - '[на берегу́]{.ru}'
-    hint: m
+    hint: '第六格 [-у́]{.ru}'
     new: true
     gloss: 岸
   - base: '[мост]{.ru}'
     cells:
     - '[мост]{.ru}'
     - '[на мосту́]{.ru}'
-    hint: m
+    hint: '第六格 [-у́]{.ru}'
     new: true
     gloss: 桥
   - base: '[Крым]{.ru}'
     cells:
     - '[Крым]{.ru}'
     - '[в Крыму́]{.ru}'
-    hint: m
+    hint: '第六格 [-у́]{.ru}'
     new: true
     gloss: 克里米亚
   - base: '[аэропо́рт]{.ru}'
     cells:
     - '[аэропо́рт]{.ru}'
     - '[в аэропорту́]{.ru}'
-    hint: m
+    hint: '第六格 [-у́]{.ru}'
     new: true
     gloss: 机场
   why: |-
@@ -247,7 +247,7 @@ groups:
 - id: L17-04
   tags:
   - 动词过去时：句中填空
-  task: 句中有表示过去的词，写出括号里动词的过去时。
+  task: 用括号里动词的过去时填空。
   type: fill
   items:
   - stem: Вчера́ А́нна ___ рома́н.

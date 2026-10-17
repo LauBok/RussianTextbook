@@ -5,7 +5,7 @@ groups:
   lessons: [L51, L52, L56]
   tags: [综合：名词、代词与词组单数第三格]
   recycles: [L51-01, L51-02, L52-01, L56-03]
-  task: 把名词、代词和词组变成第三格（各类混合）。
+  task: 写出第三格。
   type: matrix
   cols: [第一格, 第三格]
   given: [0]
@@ -41,7 +41,7 @@ groups:
   lessons: [L56, L57]
   tags: [综合：前置词 + 第三格词组]
   recycles: [L56-03, L57-01, L57-02]
-  task: 写出 [к]{.ru} + 第三格词组。
+  task: 写出带 [к]{.ru} 的词组。
   type: matrix
   cols: [原形, '[к]{.ru} + 第三格']
   given: [0]
@@ -66,7 +66,7 @@ groups:
   lessons: [L52, L56]
   tags: [综合：喜欢的人用第三格]
   recycles: [L52-02, L52-04, L56-03]
-  task: 把括号里表示喜欢者的词组变成第三格。
+  task: 用括号里的词组填空。
   type: fill
   items:
   - {stem: '___ нра́вятся блины́.', hint: мой мла́дший брат, accept: [моему́ мла́дшему бра́ту]}

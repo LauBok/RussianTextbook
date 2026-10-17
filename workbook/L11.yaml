@@ -3,7 +3,7 @@ groups:
 - id: L11-01
   tags:
   - 名词单数第六格：阴性 -а / -я
-  task: 阴性 [-а]{.ru} / [-я]{.ru} 名词变第六格（前置词已印出）。
+  task: 写出名词的第六格。
   type: matrix
   cols: &id001
   - 第一格
@@ -39,14 +39,12 @@ groups:
     cells:
     - '[па́пка]{.ru}'
     - '[в па́пке]{.ru}'
-    hint: f
     new: true
     gloss: 文件夹
   - base: '[галере́я]{.ru}'
     cells:
     - '[галере́я]{.ru}'
     - '[в галере́е]{.ru}'
-    hint: f
     new: true
     gloss: 画廊
   why: |-
@@ -55,7 +53,7 @@ groups:
 - id: L11-02
   tags:
   - 名词单数第六格：阳性
-  task: 阳性名词（辅音、[-й]{.ru}、[-ь]{.ru} 结尾）变第六格。
+  task: 把名词变成第六格，填在前置词后。
   type: matrix
   cols: *id001
   given:
@@ -85,7 +83,6 @@ groups:
     cells:
     - '[трамва́й]{.ru}'
     - '[в трамва́е]{.ru}'
-    hint: m
     new: true
     gloss: 有轨电车
   - base: '[портфе́ль]{.ru}'
@@ -99,7 +96,6 @@ groups:
     cells:
     - '[слова́рь]{.ru}'
     - '[в словаре́]{.ru}'
-    hint: m
   why: |-
     第 1、2、4 题：辅音结尾的阳性名词直接加 [-е]{.ru}：[на заво́де, в университе́те, в журна́ле]{.ru}。
     第 3、6 题：[-й]{.ru} 换成 [-е]{.ru}：[в музе́е, в трамва́е]{.ru}。
@@ -109,7 +105,7 @@ groups:
   tags:
   - 名词单数第六格：阴性 -ь 与中性
   - 名词单数第六格：不变格名词
-  task: 阴性 [-ь]{.ru} 名词、中性名词和不变格名词变第六格。
+  task: 写出前置词后的第六格。
   type: matrix
   cols: *id001
   given:
@@ -119,12 +115,10 @@ groups:
     cells:
     - '[тетра́дь]{.ru}'
     - '[в тетра́ди]{.ru}'
-    hint: f
   - base: '[пло́щадь]{.ru}'
     cells:
     - '[пло́щадь]{.ru}'
     - '[на пло́щади]{.ru}'
-    hint: f
   - base: '[кре́сло]{.ru}'
     cells:
     - '[кре́сло]{.ru}'
@@ -137,7 +131,6 @@ groups:
     cells:
     - '[крова́ть]{.ru}'
     - '[на крова́ти]{.ru}'
-    hint: f
   - base: '[окно́]{.ru}'
     cells:
     - '[окно́]{.ru}'
@@ -157,7 +150,6 @@ groups:
     cells:
     - '[зе́ркало]{.ru}'
     - '[в зе́ркале]{.ru}'
-    hint: n
     new: true
     gloss: 镜子
   - base: '[фо́то]{.ru}'
@@ -168,7 +160,7 @@ groups:
     cells:
     - '[метро́]{.ru}'
     - '[в метро́]{.ru}'
-    hint: n
+    hint: 'n；indecl.'
     new: true
     gloss: 地铁
   why: |-
@@ -179,7 +171,7 @@ groups:
 - id: L11-04
   tags:
   - 名词单数第六格：一般词尾混合
-  task: 各类名词混合：先判断性和词尾，再写第六格。
+  task: 写出第六格（综合）。
   type: matrix
   cols: *id001
   given:
@@ -189,7 +181,6 @@ groups:
     cells:
     - '[кабине́т]{.ru}'
     - '[в кабине́те]{.ru}'
-    hint: m
     new: true
     gloss: 办公室
   - base: '[газе́та]{.ru}'
@@ -200,7 +191,6 @@ groups:
     cells:
     - '[крова́ть]{.ru}'
     - '[на крова́ти]{.ru}'
-    hint: f
   - base: '[чемода́н]{.ru}'
     cells:
     - '[чемода́н]{.ru}'
@@ -209,14 +199,12 @@ groups:
     cells:
     - '[гости́ница]{.ru}'
     - '[в гости́нице]{.ru}'
-    hint: f
     new: true
     gloss: 宾馆
   - base: '[о́зеро]{.ru}'
     cells:
     - '[о́зеро]{.ru}'
     - '[на о́зере]{.ru}'
-    hint: n
     new: true
     gloss: 湖
   - base: '[музе́й]{.ru}'
@@ -227,14 +215,12 @@ groups:
     cells:
     - '[стадио́н]{.ru}'
     - '[на стадио́не]{.ru}'
-    hint: m
     new: true
     gloss: 体育场
   - base: '[тетра́дь]{.ru}'
     cells:
     - '[тетра́дь]{.ru}'
     - '[в тетра́ди]{.ru}'
-    hint: f
   - base: '[ку́хня]{.ru}'
     cells:
     - '[ку́хня]{.ru}'
@@ -243,35 +229,31 @@ groups:
     cells:
     - '[кафе́]{.ru}'
     - '[в кафе́]{.ru}'
-    hint: n
+    hint: 'n；indecl.'
     new: true
     gloss: 咖啡馆
   - base: '[дива́н]{.ru}'
     cells:
     - '[дива́н]{.ru}'
     - '[на дива́не]{.ru}'
-    hint: m
     new: true
     gloss: 沙发
   - base: '[по́ле]{.ru}'
     cells:
     - '[по́ле]{.ru}'
     - '[на по́ле]{.ru}'
-    hint: n
     new: true
     gloss: 田野
   - base: '[бассе́йн]{.ru}'
     cells:
     - '[бассе́йн]{.ru}'
     - '[в бассе́йне]{.ru}'
-    hint: m
     new: true
     gloss: 游泳池
   - base: '[пло́щадь]{.ru}'
     cells:
     - '[пло́щадь]{.ru}'
     - '[на пло́щади]{.ru}'
-    hint: f
   - base: '[телефо́н]{.ru}'
     cells:
     - '[телефо́н]{.ru}'
@@ -295,7 +277,6 @@ groups:
     cells:
     - '[ва́за]{.ru}'
     - '[в ва́зе]{.ru}'
-    hint: f
     new: true
     gloss: 花瓶
   why: |-
@@ -310,7 +291,7 @@ groups:
 - id: L11-05
   tags:
   - 名词单数第六格：句中填空（前置词已给出）
-  task: 前置词已给出，只把括号里的名词变成第六格。
+  task: 用括号里名词的第六格填空。
   type: fill
   items:
   - stem: Па́па на ___.

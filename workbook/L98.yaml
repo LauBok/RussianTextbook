@@ -3,7 +3,7 @@ groups:
 - id: L98-01
   tags:
   - 否定代词与副词：变格与前置词位置
-  task: 把疑问词的形式变成对应的否定词形式；有前置词的，注意前置词的位置。
+  task: 写出与疑问词对应的否定词形式。
   type: matrix
   cols:
   - 疑问词
@@ -91,7 +91,7 @@ groups:
 - id: L98-02
   tags:
   - 否定代词：双重否定与形式核查
-  task: 核查否定句，把句子归类。
+  task: 判断否定句是否正确。
   type: classify
   bins:
   - 正确

@@ -6,7 +6,7 @@ groups:
   recycles:
   - L03-01
   - L05-05
-  task: 写出名词的性（m / f / n）和复数第一格。
+  task: 写出名词的性和复数第一格。
   type: matrix
   cols:
   - 名词
@@ -109,7 +109,7 @@ groups:
   recycles:
   - L06-01
   - L07-01
-  task: 两类变位混合，不给变位类型：写出六个现在时人称形式。
+  task: 写出动词现在时的六个人称形式。
   type: matrix
   cols:
   - 不定式
@@ -224,7 +224,7 @@ groups:
   - 单元复习：动词变位类型归类
   recycles:
   - L07-02
-  task: 按变位类型把动词归类（只凭记忆，不看提示）。
+  task: 按变位类型把动词归类。
   type: classify
   bins:
   - 第一变位
@@ -274,7 +274,7 @@ groups:
   - L06-03
   - L07-04
   - L09-03
-  task: 按主语写出括号里动词的现在时或形容词的正确形式。
+  task: 用括号里的词填空。
   type: fill
   items:
   - stem: На́ши студе́нты ___ по-ру́сски.
@@ -364,7 +364,7 @@ groups:
   - L06-04
   - L07-03
   - L08-04
-  task: 每句有一处不一致，写出改正后的那个词。
+  task: 每句有一处错误，写出改正后的词。
   type: matrix
   cols:
   - 有错的句子

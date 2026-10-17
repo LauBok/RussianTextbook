@@ -3,7 +3,7 @@ groups:
 - id: L21-01
   tags:
   - 名词单数第四格：阴性 -а / -я
-  task: 阴性 -а / -я 名词变第四格。
+  task: 写出名词的第四格。
   type: matrix
   cols:
   - 第一格
@@ -13,97 +13,80 @@ groups:
     cells:
     - '[газе́та]{.ru}'
     - '[газе́ту]{.ru}'
-    hint: f
   - base: '[кни́га]{.ru}'
     cells:
     - '[кни́га]{.ru}'
     - '[кни́гу]{.ru}'
-    hint: f
   - base: '[ру́чка]{.ru}'
     cells:
     - '[ру́чка]{.ru}'
     - '[ру́чку]{.ru}'
-    hint: f
   - base: '[ка́ша]{.ru}'
     cells:
     - '[ка́ша]{.ru}'
     - '[ка́шу]{.ru}'
-    hint: f
   - base: '[му́зыка]{.ru}'
     cells:
     - '[му́зыка]{.ru}'
     - '[му́зыку]{.ru}'
-    hint: f
   - base: '[ла́мпа]{.ru}'
     cells:
     - '[ла́мпа]{.ru}'
     - '[ла́мпу]{.ru}'
-    hint: f
   - base: '[су́мка]{.ru}'
     cells:
     - '[су́мка]{.ru}'
     - '[су́мку]{.ru}'
-    hint: f
   - base: '[ко́мната]{.ru}'
     cells:
     - '[ко́мната]{.ru}'
     - '[ко́мнату]{.ru}'
-    hint: f
   - base: '[ры́ба]{.ru}'
     cells:
     - '[ры́ба]{.ru}'
     - '[ры́бу]{.ru}'
-    hint: f
     new: true
     gloss: 鱼
   - base: '[колбаса́]{.ru}'
     cells:
     - '[колбаса́]{.ru}'
     - '[колбасу́]{.ru}'
-    hint: f
     new: true
     gloss: 香肠
   - base: '[карти́на]{.ru}'
     cells:
     - '[карти́на]{.ru}'
     - '[карти́ну]{.ru}'
-    hint: f
     new: true
     gloss: 画
   - base: '[програ́мма]{.ru}'
     cells:
     - '[програ́мма]{.ru}'
     - '[програ́мму]{.ru}'
-    hint: f
     new: true
     gloss: 节目；课程表
   - base: '[статья́]{.ru}'
     cells:
     - '[статья́]{.ru}'
     - '[статью́]{.ru}'
-    hint: f
   - base: '[исто́рия]{.ru}'
     cells:
     - '[исто́рия]{.ru}'
     - '[исто́рию]{.ru}'
-    hint: f
   - base: '[ле́кция]{.ru}'
     cells:
     - '[ле́кция]{.ru}'
     - '[ле́кцию]{.ru}'
-    hint: f
   - base: '[пе́сня]{.ru}'
     cells:
     - '[пе́сня]{.ru}'
     - '[пе́сню]{.ru}'
-    hint: f
     new: true
     gloss: 歌曲
   - base: '[фотогра́фия]{.ru}'
     cells:
     - '[фотогра́фия]{.ru}'
     - '[фотогра́фию]{.ru}'
-    hint: f
     new: true
     gloss: 照片
   why: '第 1–12 题：[-а]{.ru} 改 [-у]{.ru}，重音位置不变：[газе́та → газе́ту]{.ru}，[колбаса́ → колбасу́]{.ru}。[г, к, ч]{.ru} 后面照样写 [у]{.ru}：[кни́гу, ру́чку]{.ru}。
@@ -112,7 +95,7 @@ groups:
 - id: L21-02
   tags:
   - 名词单数第四格：同第一格与改词尾辨别
-  task: 判断非动物名词的第四格是否和第一格相同。
+  task: 判断名词的第四格是否和第一格相同。
   type: classify
   bins:
   - 同第一格
@@ -124,24 +107,20 @@ groups:
     answer: 同第一格
   - text: '[ко́фе]{.ru}'
     answer: 同第一格
-    hint: m
   - text: '[окно́]{.ru}'
     answer: 同第一格
   - text: '[письмо́]{.ru}'
     answer: 同第一格
   - text: '[но́вость]{.ru}'
     answer: 同第一格
-    hint: f
   - text: '[тетра́дь]{.ru}'
     answer: 同第一格
-    hint: f
   - text: '[сы́рники]{.ru}'
     answer: 同第一格
   - text: '[кни́ги]{.ru}'
     answer: 同第一格
   - text: '[слова́рь]{.ru}'
     answer: 同第一格
-    hint: m
   - text: '[упражне́ние]{.ru}'
     answer: 同第一格
   - text: '[хлеб]{.ru}'
@@ -150,7 +129,6 @@ groups:
     answer: 同第一格
   - text: '[пло́щадь]{.ru}'
     answer: 同第一格
-    hint: f
   - text: '[ка́ша]{.ru}'
     answer: 改词尾
   - text: '[статья́]{.ru}'
@@ -173,7 +151,7 @@ groups:
 - id: L21-03
   tags:
   - 名词单数第四格：动词宾语混合
-  task: 动词加宾语：各类名词混合，先判断要不要变再写词组。
+  task: 组成动宾词组。
   type: matrix
   cols:
   - 动词 + 名词
@@ -352,7 +330,7 @@ groups:
 - id: L21-05
   tags:
   - 名词第一格与第四格对照
-  task: 名词作主语或表语用第一格，作宾语用第四格；按句子填写。
+  task: 用括号里的名词填空。
   type: fill
   items:
   - stem: Вот ___.

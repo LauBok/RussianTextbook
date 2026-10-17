@@ -5,7 +5,7 @@ groups:
   lessons: [L53, L54, L55, L58]
   tags: [综合：第三格句型的过去时与将来时]
   recycles: [L53-02, L54-02, L55-01, L58-01]
-  task: 写出句子的过去时和将来时（注意哪些句子的 [быть]{.ru} 要变）。
+  task: 写出句子的过去时和将来时。
   type: matrix
   cols: [现在, 过去, 将来]
   given: [0]
@@ -90,7 +90,7 @@ groups:
   lessons: [L53, L54, L55, L58]
   tags: [综合：第三格句型中的人]
   recycles: [L53-04, L58-03]
-  task: 把括号里的词组变成第三格。
+  task: 用括号里的词组填空。
   type: fill
   items:
   - {stem: '___ се́мьдесят пять лет.', hint: на́ша ба́бушка, accept: [на́шей ба́бушке]}

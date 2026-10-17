@@ -185,7 +185,7 @@ groups:
 - id: L88-04
   tags:
   - 间接引语：动词的时保持不变
-  task: 核查转述句里动词的时有没有保持原话的时，把句子归类。
+  task: 判断转述句是否正确。
   type: classify
   bins:
   - 正确

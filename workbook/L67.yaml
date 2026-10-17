@@ -43,49 +43,42 @@ groups:
     cells:
     - '[самолёт]{.ru}'
     - '[на самолёте]{.ru}'
-    hint: m
     new: true
     gloss: 飞机
   - base: '[велосипе́д]{.ru}'
     cells:
     - '[велосипе́д]{.ru}'
     - '[на велосипе́де]{.ru}'
-    hint: m
     new: true
     gloss: 自行车
   - base: '[тролле́йбус]{.ru}'
     cells:
     - '[тролле́йбус]{.ru}'
     - '[на тролле́йбусе]{.ru}'
-    hint: m
     new: true
     gloss: 无轨电车
   - base: '[мотоци́кл]{.ru}'
     cells:
     - '[мотоци́кл]{.ru}'
     - '[на мотоци́кле]{.ru}'
-    hint: m
     new: true
     gloss: 摩托车
   - base: '[ло́дка]{.ru}'
     cells:
     - '[ло́дка]{.ru}'
     - '[на ло́дке]{.ru}'
-    hint: f
     new: true
     gloss: 小船
   - base: '[теплохо́д]{.ru}'
     cells:
     - '[теплохо́д]{.ru}'
     - '[на теплохо́де]{.ru}'
-    hint: m
     new: true
     gloss: 内燃机船
   - base: '[маршру́тка]{.ru}'
     cells:
     - '[маршру́тка]{.ru}'
     - '[на маршру́тке]{.ru}'
-    hint: f
     new: true
     gloss: 小公共汽车
   why: |
@@ -94,7 +87,7 @@ groups:
 - id: L67-02
   tags:
   - 运动动词：步行与乘车、定向与不定向
-  task: 句中应该用哪个动词？按线索归类。
+  task: 判断句中应该用哪个动词，填写序号。
   type: classify
   bins:
   - '[идти́]{.ru}'
@@ -143,7 +136,7 @@ groups:
   tags:
   - 交通工具：на + 第六格
   - 去向：в / на + 第四格
-  task: 写出“坐……去某处”：去处用第四格，交通工具用 [на]{.ru} + 第六格。
+  task: 写出“坐……去某处”的说法。
   type: matrix
   cols:
   - 去处 + 交通工具

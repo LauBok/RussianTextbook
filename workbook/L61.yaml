@@ -3,7 +3,7 @@ groups:
 - id: L61-01
   tags:
   - 名词单数第五格：阳性 -ом / -ем / -ём
-  task: 阳性辅音结尾名词变第五格。
+  task: 写出名词的第五格（一）。
   type: matrix
   cols:
   - 第一格
@@ -39,7 +39,6 @@ groups:
     cells:
     - '[сыр]{.ru}'
     - '[сы́ром]{.ru}'
-    hint: m
     new: true
     gloss: 奶酪
   - base: '[музе́й]{.ru}'
@@ -54,7 +53,6 @@ groups:
     cells:
     - '[трамва́й]{.ru}'
     - '[трамва́ем]{.ru}'
-    hint: m
     new: true
     gloss: 有轨电车
   - base: '[учи́тель]{.ru}'
@@ -88,14 +86,12 @@ groups:
     cells:
     - '[това́рищ]{.ru}'
     - '[това́рищем]{.ru}'
-    hint: m
     new: true
     gloss: 同伴，同学
   - base: '[оте́ц]{.ru}'
     cells:
     - '[оте́ц]{.ru}'
     - '[отцо́м]{.ru}'
-    hint: gen. [отца́]{.ru}
   - base: '[пирожо́к]{.ru}'
     cells:
     - '[пирожо́к]{.ru}'
@@ -110,7 +106,7 @@ groups:
 - id: L61-02
   tags:
   - 名词单数第五格：-а / -я 结尾
-  task: 以 [-а / -я]{.ru} 结尾的名词（含 [па́па]{.ru} 类阳性）变第五格。
+  task: 写出名词的第五格（二）。
   type: matrix
   cols:
   - 第一格
@@ -138,7 +134,6 @@ groups:
     cells:
     - '[колбаса́]{.ru}'
     - '[колбасо́й]{.ru}'
-    hint: f
     new: true
     gloss: 香肠
   - base: '[подру́га]{.ru}'
@@ -161,7 +156,6 @@ groups:
     cells:
     - '[ку́рица]{.ru}'
     - '[ку́рицей]{.ru}'
-    hint: f
     new: true
     gloss: 鸡肉
   - base: '[Та́ня]{.ru}'
@@ -184,7 +178,6 @@ groups:
     cells:
     - '[земля́]{.ru}'
     - '[землёй]{.ru}'
-    hint: f
     new: true
     gloss: 土地
   - base: '[па́па]{.ru}'
@@ -212,7 +205,7 @@ groups:
 - id: L61-03
   tags:
   - 名词单数第五格：中性与 -ь 阴性
-  task: 中性名词和以 [-ь]{.ru} 结尾的阴性名词变第五格。
+  task: 写出名词的第五格（三）。
   type: matrix
   cols:
   - 第一格
@@ -244,7 +237,6 @@ groups:
     cells:
     - '[яйцо́]{.ru}'
     - '[яйцо́м]{.ru}'
-    hint: n
     new: true
     gloss: 鸡蛋
   - base: '[варе́нье]{.ru}'
@@ -386,7 +378,7 @@ groups:
 - id: L61-05
   tags:
   - 前置词 с + 第五格：句中填空
-  task: 把括号里的名词变成第五格填空。
+  task: 用括号里的名词填空。
   type: fill
   items:
   - stem: Ван Лэй говори́т по телефо́ну с ___.

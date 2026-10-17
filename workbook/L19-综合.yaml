@@ -31,7 +31,6 @@ groups:
     answer: '[-е]{.ru}'
   - text: '[тетра́дь]{.ru}'
     answer: '[-и]{.ru}'
-    hint: f
   - text: '[аудито́рия]{.ru}'
     answer: '[-и]{.ru}'
   - text: '[сад]{.ru}'
@@ -48,10 +47,8 @@ groups:
     answer: '[-у́]{.ru}'
   - text: '[слова́рь]{.ru}'
     answer: '[-е]{.ru}'
-    hint: m
   - text: '[пло́щадь]{.ru}'
     answer: '[-и]{.ru}'
-    hint: f
   - text: '[ле́кция]{.ru}'
     answer: '[-и]{.ru}'
   - text: '[парк]{.ru}'
@@ -89,7 +86,7 @@ groups:
   - L13-01
   - L18-04
   - L19-03
-  task: 各类词混合：写出第六格词组（前置词已印出）。
+  task: 写出第六格词组。
   type: matrix
   cols:
   - 原形
@@ -180,7 +177,7 @@ groups:
   - L18-03
   - L19-01
   - L19-02
-  task: 每个词组有一处错误，写出正确的词组（前置词已印出）。
+  task: 改正词组中的错误。
   type: matrix
   cols:
   - 有错的词组
@@ -267,7 +264,7 @@ groups:
   recycles:
   - L12-05
   - L13-03
-  task: 选用 [в]{.ru}、[на]{.ru}、[о]{.ru}（[об, обо]{.ru}），连同括号里词组的第六格一起填写。
+  task: 用前置词和括号里词的第六格填空。
   type: fill
   items:
   - stem: Мы бы́ли ___.
