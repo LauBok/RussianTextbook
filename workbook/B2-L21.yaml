@@ -293,51 +293,51 @@ groups:
   type: fill
   items:
   - stem: ___ ты бои́шься?
-    hint: '[]{.ru}什么'
+    hint: '什么'
     accept:
     - Чего́
   - stem: С ___ ты игра́ешь в ша́хматы?
-    hint: '[]{.ru}谁'
+    hint: '谁'
     accept:
     - кем
   - stem: ___ ты звони́л вчера́?
-    hint: '[]{.ru}谁'
+    hint: '谁'
     accept:
     - Кому́
   - stem: В ___ ко́мнате живёт Му́рка?
-    hint: '[]{.ru}谁的'
+    hint: '谁的'
     accept:
     - чьей
   - stem: О ___ вы говори́те?
-    hint: '[]{.ru}什么'
+    hint: '什么'
     accept:
     - чём
   - stem: ___ ты интересу́ешься?
-    hint: '[]{.ru}什么'
+    hint: '什么'
     accept:
     - Чем
   - stem: У ___ мо́жно узна́ть а́дрес?
-    hint: '[]{.ru}谁'
+    hint: '谁'
     accept:
     - кого́
   - stem: ___ кни́гу ты чита́ешь?
-    hint: '[]{.ru}谁的'
+    hint: '谁的'
     accept:
     - Чью
   - stem: К ___ ты идёшь в го́сти?
-    hint: '[]{.ru}谁'
+    hint: '谁'
     accept:
     - кому́
   - stem: ___ ты ждёшь?
-    hint: '[]{.ru}谁'
+    hint: '谁'
     accept:
     - Кого́
   - stem: С ___ сестро́й ты познако́мился?
-    hint: '[]{.ru}谁的'
+    hint: '谁的'
     accept:
     - чьей
   - stem: ___ ты пи́шешь — ру́чкой и́ли карандашо́м?
-    hint: '[]{.ru}什么'
+    hint: '什么'
     accept:
     - Чем
   why: |-

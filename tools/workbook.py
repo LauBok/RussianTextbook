@@ -43,7 +43,11 @@ def files(lo=1, hi=100):
 def ru(s):
     """已带 {.ru} 标记的原样保留，否则整段当俄语。"""
     s = str(s)
-    return s if "{.ru}" in s else exercises.ru(s)
+    if "{.ru}" in s:
+        return s
+    if re.search(r"[\u4e00-\u9fff]", s):   # 夹中文的提示只给俄语部分加标记
+        return re.sub(r"[А-Яа-яЁё\u0301][А-Яа-яЁё\u0301 ,/.-]*[А-Яа-яЁё\u0301]|[А-Яа-яЁё]", lambda m: exercises.ru(m.group(0)), s)
+    return exercises.ru(s)
 
 
 def span(lessons):
