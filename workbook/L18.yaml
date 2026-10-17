@@ -64,7 +64,7 @@ groups:
 - id: L18-02
   tags:
   - 形容词单数第六格：软变化
-  task: 由阳性第一格写出第六格。
+  task: 写出形容词的第六格。
   type: matrix
   cols: *id001
   given:
@@ -128,7 +128,7 @@ groups:
 - id: L18-03
   tags:
   - 形容词单数第六格：ж ш ч щ 与 г к х 词干
-  task: 写出形容词第六格的两个形式。
+  task: 写出形容词的第六格。
   type: matrix
   cols: *id001
   given:

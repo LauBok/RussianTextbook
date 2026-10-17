@@ -14,7 +14,7 @@ groups:
   - B2-L02-01
   - B2-L02-02
   - B2-L02-03
-  task: 写出复数第二格（单数和复数第一格已给出）。
+  task: 写出复数第二格。
   type: matrix
   cols:
   - 单数第一格 — 复数第一格
@@ -256,7 +256,7 @@ groups:
   recycles:
   - B2-L01-06
   - B2-L02-05
-  task: 用括号里的词填空（句中）。
+  task: 用括号里的词填空。
   type: fill
   items:
   - stem: В э́том го́роде нет ___.

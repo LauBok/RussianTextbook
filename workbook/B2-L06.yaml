@@ -211,7 +211,7 @@ groups:
 - id: B2-L06-04
   tags:
   - 钟点：句中
-  task: 用文字写出括号里的时刻（句中）。
+  task: 用文字写出括号里的时刻。
   type: fill
   items:
   - stem: Уро́к начина́ется ___.

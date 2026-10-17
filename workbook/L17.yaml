@@ -94,7 +94,7 @@ groups:
 - id: L17-02
   tags:
   - 动词过去时：第二变位、变干动词与短动词
-  task: 由不定式写出过去时（阳性、阴性、中性、复数）。
+  task: 写出动词过去时的四个形式。
   type: matrix
   cols: *id001
   given:

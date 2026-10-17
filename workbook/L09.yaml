@@ -97,7 +97,7 @@ groups:
 - id: L09-02
   tags:
   - 形容词第一格：软变化与混合变化
-  task: 由阳性写出阴性、中性和复数。
+  task: 写出形容词的阴性、中性和复数形式。
   type: matrix
   cols: *id001
   given:

@@ -75,7 +75,7 @@ groups:
 - id: L05-02
   tags:
   - 名词复数第一格：-ь 与 -я 结尾
-  task: 写出复数第一格。
+  task: 写出名词的复数。
   type: matrix
   cols:
   - 单数
@@ -144,7 +144,7 @@ groups:
 - id: L05-03
   tags:
   - 名词复数第一格：拼写规则 г к х ж ш щ ч 后写 и
-  task: 把单数改成复数。
+  task: 写出名词的复数。
   type: matrix
   cols:
   - 单数
