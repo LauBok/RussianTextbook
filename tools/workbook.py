@@ -183,11 +183,11 @@ def matrix_md(g, answers):
         trs = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in cells[k:k + ncol])
                       + "<td></td>" * (ncol - len(cells[k:k + ncol])) + "</tr>" for k in range(0, len(cells), ncol))
         return f"<table class='wb-grid c{ncol}'>{trs}</table>"
-    # 版心 170 mm：序号 6 mm；原形列按最长原形定宽，释义另起一行；答题列按最长答案的手写长度（每字母约 2.8 mm）定宽，
+    # 版心 170 mm：序号 6 mm；原形列按最长原形定宽，释义另起一行；答题列按最长答案的手写长度（每字母约 2.5 mm）定宽，
     # 一行放不下就把形式分成几张表（每张都重复原形列），各列等宽
     letters = lambda t: len(re.findall(r"[^\W\d_]", plain(t)))
     word_w = min(42, max(20, max(letters(r["cells"][min(given)]) for r in rows) * 2.1 + 5))
-    need = max(18, max(letters(r["cells"][j]) for r in rows for j in todo) * 2.8 + 5)
+    need = max(18, max(letters(r["cells"][j]) for r in rows for j in todo) * 2.5 + 3)
     avail = 170 - 6 - word_w
     per = max(1, int(avail // need))
     nt = -(-len(todo) // per)
