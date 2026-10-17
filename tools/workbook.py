@@ -193,8 +193,10 @@ def matrix_md(g, answers):
     # 版心 TEXT_W mm：序号 6 mm；原形列按最长原形定宽，释义另起一行；答题列按最长答案的手写长度（每字母约 1.9 mm，一行约 12 个词）定宽，
     # 一行放不下就把形式分成几张表（每张都重复原形列），各列等宽
     letters = lambda t: len(re.findall(r"[^\W\d_]", plain(t)))
-    word_w = min(42, max(20, max(letters(r["cells"][min(given)]) for r in rows) * 2.1 + 5))
+    natural = max(20, max(letters(r["cells"][min(given)]) for r in rows) * 2.1 + 5)
     need = max(18, max(letters(r["cells"][j]) for r in rows for j in todo) * 1.9 + 3)
+    # 原形是长句时，答题列按手写长度留够以后，剩下的宽度都给句子列（至少 42 mm，最多占版心六成）
+    word_w = natural if natural <= 42 else min(natural, max(42, min(0.6 * (TEXT_W - 6), TEXT_W - 6 - need * len(todo))))
     avail = TEXT_W - 6 - word_w
     per = max(1, int(avail // need))
     nt = -(-len(todo) // per)
