@@ -22,6 +22,9 @@ import exercises  # noqa: E402
 ROOT = book.ROOT
 WB = ROOT / "workbook"
 PREFIX = ""   # 第二册起文件名带 B2- 等前缀
+# 练习册按美国 Letter 纸打印（216 × 279 mm），左右页边距 20 mm
+TEXT_W = 216 - 40      # 版心宽（mm）
+PAGE_H = 792           # 页高（pt）
 
 
 def lesson_no(code):
@@ -183,12 +186,12 @@ def matrix_md(g, answers):
         trs = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in cells[k:k + ncol])
                       + "<td></td>" * (ncol - len(cells[k:k + ncol])) + "</tr>" for k in range(0, len(cells), ncol))
         return f"<table class='wb-grid c{ncol}'>{trs}</table>"
-    # 版心 170 mm：序号 6 mm；原形列按最长原形定宽，释义另起一行；答题列按最长答案的手写长度（每字母约 1.9 mm，一行约 12 个词）定宽，
+    # 版心 TEXT_W mm：序号 6 mm；原形列按最长原形定宽，释义另起一行；答题列按最长答案的手写长度（每字母约 1.9 mm，一行约 12 个词）定宽，
     # 一行放不下就把形式分成几张表（每张都重复原形列），各列等宽
     letters = lambda t: len(re.findall(r"[^\W\d_]", plain(t)))
     word_w = min(42, max(20, max(letters(r["cells"][min(given)]) for r in rows) * 2.1 + 5))
     need = max(18, max(letters(r["cells"][j]) for r in rows for j in todo) * 1.9 + 3)
-    avail = 170 - 6 - word_w
+    avail = TEXT_W - 6 - word_w
     per = max(1, int(avail // need))
     nt = -(-len(todo) // per)
     chunks = [todo[k * len(todo) // nt:(k + 1) * len(todo) // nt] for k in range(nt)]
@@ -197,11 +200,11 @@ def matrix_md(g, answers):
         t = plain(re.sub(r"<[^>]+>", "", word(r).split("wb-hint'>", 1)[-1])) if "wb-hint" in word(r) else ""
         return sum(2.9 if ord(c) > 0x2e80 else 1.6 for c in t) + 3
     want = min(60, max([word_w] + [hint_w(r) for r in rows]))
-    word_w = max(word_w, min(want, 170 - 6 - need * max(len(ch) for ch in chunks)))
-    avail = 170 - 6 - word_w
+    word_w = max(word_w, min(want, TEXT_W - 6 - need * max(len(ch) for ch in chunks)))
+    avail = TEXT_W - 6 - word_w
     tables = []
     for ch in chunks:
-        pct = lambda mm: f"{mm / 170 * 100:.2f}%"
+        pct = lambda mm: f"{mm / TEXT_W * 100:.2f}%"
         colgroup = (f"<colgroup><col style='width:{pct(6)}'/><col style='width:{pct(word_w)}'/>"
                     + f"<col style='width:{pct(avail / len(ch))}'/>" * len(ch) + "</colgroup>")
         head = "".join(f"<th>{html.escape(cols[j])}</th>" for j in [min(given)] + ch)
@@ -277,6 +280,7 @@ def exercise_md(k, g, answers=False):
 
 CSS = """
 .wb { break-inside: auto; margin-top: 6pt; }
+@page { size: letter; }
 section.wb-page { break-before: page; }
 section.wb-page > .running { font-size: 0; line-height: 0; height: 0; margin: 0; overflow: hidden; }
 h1.wb-title .wb-lesson { font: 400 10pt "PT Sans", "CJK Sans"; color: var(--muted); margin-left: 10pt; }
@@ -381,12 +385,12 @@ def fill_report(pdf, names, quiet=False):
                 starts.append((i, k))
     ans = next((i for i, pg in enumerate(d) if pg.get_text().lstrip().startswith("答案与解析")), len(d))
     starts.append((ans, None))
-    usable = 842 - 60 - 55
+    usable = PAGE_H - 60 - 55
     res = []
     for (a, k), (b, _) in zip(starts, starts[1:]):
         last = d[b - 1]
-        bottom = max([bl[3] for bl in last.get_text("blocks") if 60 < bl[1] < 790], default=60)
-        empty = (842 - 55) - bottom
+        bottom = max([bl[3] for bl in last.get_text("blocks") if 60 < bl[1] < PAGE_H - 52], default=60)
+        empty = (PAGE_H - 55) - bottom
         res.append((k, empty / usable))
         if empty > usable / 4 and not quiet:
             print(f"  {names[k][0]}：{b - a} 页，最后一页空 {empty / usable:.0%}")
