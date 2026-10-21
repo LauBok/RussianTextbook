@@ -347,9 +347,10 @@ def main(argv):
         if combined:
             topic = "综合：" + topic
         name = f"练习 {n}　{topic}"
-        sec = [f"<div class='running'>{html.escape(name)}</div>"
-               f"<h1 class='part-title wb-title'>{html.escape(name)}<span class='wb-lesson'>{span(lessons)}</span></h1>"]
-        keys.append(f"<h2 class='wb-sec'><span class='wb-no'>练习 {n}</span>{html.escape(topic)}"
+        name_txt = re.sub(r"\[([^\[\]]*)\]\{[^}]*\}", r"\1", name)   # 标题可写 [俄语]{.ru}
+        sec = [f"<div class='running'>{html.escape(name_txt)}</div>"
+               f"<h1 class='part-title wb-title'>{md_inline(name)}<span class='wb-lesson'>{span(lessons)}</span></h1>"]
+        keys.append(f"<h2 class='wb-sec'><span class='wb-no'>练习 {n}</span>{md_inline(topic)}"
                     f"<span class='wb-lesson'>{span(lessons)}</span></h2>")
         md = []
         for k, g in enumerate(groups, 1):
@@ -357,7 +358,7 @@ def main(argv):
             md.append(exercise_md(k, g))
             keys.append(exercise_md(k, g, answers=True))
         body.append((sec[0], book.pandoc(chr(10).join(md), f'wb{n}')))
-        names.append((name, groups))
+        names.append((name_txt, groups))
     title = book.BOOK_NAME[bk] + "练习册" + (f"（第 {lo}–{hi} 课样稿）" if argv else "")
     out = ROOT / "build" / f"{title}.html"
     out.parent.mkdir(exist_ok=True)
