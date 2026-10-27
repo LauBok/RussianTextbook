@@ -115,8 +115,10 @@ class Builder:
 def pandoc(md):
     """同 book.pandoc，但不加 id 前缀：节和索引锚点全书统一引用。"""
     import subprocess
-    return subprocess.run(["pandoc", "-f", "markdown", "-t", "html5", "--lua-filter", str(ROOT / "zh-punct.lua")],
-                          input=md, capture_output=True, text=True, check=True, cwd=ROOT).stdout
+    out = subprocess.run(["pandoc", "-f", "markdown", "-t", "html5", "--lua-filter", str(ROOT / "zh-punct.lua")],
+                         input=md, capture_output=True, text=True, check=True, cwd=ROOT).stdout
+    # 被例句块隔开后接着编号的列表（2. 3. ……）：WeasyPrint 不认 start 属性，改用计数器
+    return re.sub(r'<ol start="(\d+)"', lambda m: f'<ol style="counter-reset: list-item {int(m.group(1)) - 1}"', out)
 
 
 def inline(s):
