@@ -6,7 +6,8 @@
 
 源文件按文件名排序（编号-章号-章名.md），front matter 写 part（编号）、part_title（编名）、chapter（章号，全书连续）、title（章名）。
 标记约定见 docs/语法书编写规范.md：
-- 节标题 `## §123 标题`，构建时加 id s123；正文里的 §123 自动链接到该节，目标不存在时报错。
+- 编号分层：章在编内编号（front matter 的 chapter），节写成 编.章.节。节标题 `## §2.2.1 标题`，构建时加 id s2-2-1；
+  正文里的 §2.2.1 自动链接到该节；大纲里有、还没写的节先不加链接，大纲里没有的节报错。
 - 俄语词索引 `[кни́га]{.ru .ix}`，另立词头写 `{.ru .ix key="кни́га"}`；术语索引 `[第二格]{.term}`。
 - 变格变位表 `::: paradigm`，例句 `::: ex`，常见错误 `::: err`，教程课号 `::: course`。
 先排一遍取得各锚点所在页码，再把页码写进目录和索引排第二遍（正文页码不变）。
@@ -26,7 +27,7 @@ SRC = ROOT / "grammar"
 PAGE = "letter"   # 与练习册一致，按 Letter 纸打印
 CN = "零一二三四五六七八九十"
 OUTLINE_FILE = ROOT / "docs" / "语法书大纲.md"
-OUTLINE = {int(n) for n in re.findall(r"^\|\s*§(\d+)", OUTLINE_FILE.read_text(encoding="utf-8"), re.M)} if OUTLINE_FILE.exists() else set()
+OUTLINE = {n for n in re.findall(r"^\|\s*§(\d+\.\d+\.\d+)", OUTLINE_FILE.read_text(encoding="utf-8"), re.M)} if OUTLINE_FILE.exists() else set()
 
 
 def cn_num(n):
@@ -37,9 +38,14 @@ def cn_num(n):
     return CN[n // 10] + "十" + (CN[n % 10] if n % 10 else "")
 
 
-SEC_HEAD = re.compile(r"^## §(\d+)\s+(.+?)\s*$", re.M)
+SEC_HEAD = re.compile(r"^## §(\d+\.\d+\.\d+)\s+(.+?)\s*$", re.M)
 SPAN = re.compile(r"\[((?:[^\[\]]|\[[^\[\]]*\])+)\]\{([^{}]*)\}")
-SEC_REF = re.compile(r"(?<![\[#\w])§(\d+)")
+SEC_REF = re.compile(r"(?<![\[#])§(\d+\.\d+\.\d+)")
+
+
+def sid(k):
+    """节号 2.2.1 → 锚点 s2-2-1"""
+    return "s" + k.replace(".", "-")
 
 
 def plain(s):
@@ -71,14 +77,14 @@ class Builder:
     def collect_sections(self, chs):
         for p, fm, body in chs:
             for m in SEC_HEAD.finditer(body):
-                k = int(m.group(1))
+                k = m.group(1)
                 if k in self.secs:
                     sys.exit(f"{p.name}：§{k} 重复")
                 self.secs[k] = (m.group(2), fm.get("chapter"))
 
     def prep(self, p, body):
         def head(m):
-            return f"## [§{m.group(1)}]{{.sec-no}} {m.group(2)} {{#s{m.group(1)}}}"
+            return f"## [§{m.group(1)}]{{.sec-no}} {m.group(2)} {{#{sid(m.group(1))}}}"
         body = SEC_HEAD.sub(head, body)
 
         def span(m):
@@ -97,13 +103,13 @@ class Builder:
         body = SPAN.sub(span, body)
 
         def ref(m):
-            k = int(m.group(1))
+            k = m.group(1)
             if k not in self.secs:
                 if k in OUTLINE:          # 大纲里有、还没写的节：先不加链接
                     self.pending.add(k)
                     return f"[§{k}]{{.xref-pending}}"
                 missing.append(f"{p.name}：§{k}")
-            return f"[§{k}](#s{k}){{.xref}}"
+            return f"[§{k}](#{sid(k)}){{.xref}}"
         missing = []
         lines = []
         for ln in body.split("\n"):
@@ -147,13 +153,13 @@ def toc_html(chs, pages):
         if fm.get("part") != part:
             part = fm.get("part")
             out.append(f"<div class='toc-part'>第{cn_num(part)}编　{html.escape(fm.get('part_title', ''))}</div>")
-        cid = f"ch{fm['chapter']}"
+        cid = f"ch{fm['part']}-{fm['chapter']}"
         out.append(f"<a class='toc-chap' href='#{cid}'><span>第 {fm['chapter']} 章　{html.escape(fm['title'])}</span>"
                    f"<span class='pg'>{pages.get(cid, '000')}</span></a>")
         for m in SEC_HEAD.finditer(body):
-            sid = f"s{m.group(1)}"
-            out.append(f"<a class='toc-sec' href='#{sid}'><span>§{m.group(1)}　{html.escape(plain(m.group(2)))}</span>"
-                       f"<span class='pg'>{pages.get(sid, '000')}</span></a>")
+            sid_ = sid(m.group(1))
+            out.append(f"<a class='toc-sec' href='#{sid_}'><span>§{m.group(1)}　{html.escape(plain(m.group(2)))}</span>"
+                       f"<span class='pg'>{pages.get(sid_, '000')}</span></a>")
     for t, a in (("俄语词索引", "ix-index"), ("术语索引", "tm-index")):
         out.append(f"<a class='toc-chap' href='#{a}'><span>{t}</span><span class='pg'>{pages.get(a, '000')}</span></a>")
     out.append("</section>")
@@ -225,13 +231,13 @@ def main(argv):
             part = fm.get("part")
             body.append(f"<h1 class='g-part' id='part{part}'>第{cn_num(part)}编　{html.escape(fm.get('part_title', ''))}</h1>")
         title = inline(fm["title"])
-        body.append(f"<section class='g-chapter'><div class='running'>第 {fm['chapter']} 章　{html.escape(plain(fm['title']))}</div>"
-                    f"<h1 class='g-chap-title' id='ch{fm['chapter']}'><span class='chap-no'>第 {fm['chapter']} 章　</span>{title}</h1>"
+        body.append(f"<section class='g-chapter'><div class='running'>第{cn_num(fm['part'])}编　第 {fm['chapter']} 章　{html.escape(plain(fm['title']))}</div>"
+                    f"<h1 class='g-chap-title' id='ch{fm['part']}-{fm['chapter']}'><span class='chap-no'>第 {fm['chapter']} 章　</span>{title}</h1>"
                     f"{pandoc(b.prep(p, md))}</section>")
     if b.missing:
         sys.exit("§ 引用指向大纲里不存在的节：" + "、".join(b.missing))
     if b.pending:
-        print(f"提示：{len(b.pending)} 个 § 引用指向尚未编写的节，暂不加链接：" + "、".join(f"§{k}" for k in sorted(b.pending)))
+        print(f"提示：{len(b.pending)} 个 § 引用指向尚未编写的节，暂不加链接：" + "、".join(f"§{k}" for k in sorted(b.pending, key=lambda x: tuple(map(int, x.split("."))))))
     title = "俄语语法"
     head = (f'<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><title>{title}</title>'
             f'<link rel="stylesheet" href="../style.css"><style>{CSS}</style></head><body class="book grammar">')

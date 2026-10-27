@@ -807,12 +807,12 @@ GRAMMAR_TERMS = ROOT / "docs" / "语法书术语.md"
 
 
 def grammar_sections():
-    """大纲和各章里定义的节号。"""
+    """大纲和各章里定义的节号（编.章.节，如 2.2.1）。"""
     secs = set()
     if GRAMMAR_OUTLINE.exists():
-        secs |= {int(n) for n in re.findall(r"^(?:#+\s*|\|\s*|[-*]\s*)§(\d+)", GRAMMAR_OUTLINE.read_text(encoding="utf-8"), re.M)}
+        secs |= set(re.findall(r"^(?:#+\s*|\|\s*|[-*]\s*)§(\d+\.\d+\.\d+)", GRAMMAR_OUTLINE.read_text(encoding="utf-8"), re.M))
     for f in GRAMMAR.glob("*.md"):
-        secs |= {int(n) for n in re.findall(r"^## §(\d+)", f.read_text(encoding="utf-8"), re.M)}
+        secs |= set(re.findall(r"^## §(\d+\.\d+\.\d+)", f.read_text(encoding="utf-8"), re.M))
     return secs
 
 
@@ -858,9 +858,9 @@ def check_grammar(paths):
                         probs.append((ln, "ё", f"{w}：应写作 {y}"))
         for i, line in enumerate(g.lines):
             ln = g.lineno(i)
-            for n in re.findall(r"§(\d+)", line):
-                if int(n) not in secs:
-                    probs.append((ln, "引用", f"§{n} 在大纲和各章里都不存在"))
+            for n in re.findall(r"§(\d+(?:\.\d+)*)", line):
+                if n not in secs:
+                    probs.append((ln, "引用", f"§{n} 在大纲和各章里都不存在（节号写成 编.章.节）"))
             for t in re.findall(r"\[([^\[\]]+)\]\{[^}]*\.term[^}]*\}", line):
                 if strip_markup(t).strip() not in terms:
                     probs.append((ln, "术语", f"“{strip_markup(t)}”不在 docs/语法书术语.md 里"))
