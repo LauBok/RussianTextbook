@@ -25,6 +25,8 @@ ROOT = book.ROOT
 SRC = ROOT / "grammar"
 PAGE = "letter"   # 与练习册一致，按 Letter 纸打印
 CN = "零一二三四五六七八九十"
+OUTLINE_FILE = ROOT / "docs" / "语法书大纲.md"
+OUTLINE = {int(n) for n in re.findall(r"^\|\s*§(\d+)", OUTLINE_FILE.read_text(encoding="utf-8"), re.M)} if OUTLINE_FILE.exists() else set()
 
 
 def cn_num(n):
@@ -60,6 +62,7 @@ class Builder:
         self.terms = defaultdict(list)  # 术语索引
         self.secs = {}                  # 节号 → (标题, 章号)
         self.n = 0
+        self.pending = set()
 
     def anchor(self, kind):
         self.n += 1
@@ -96,6 +99,9 @@ class Builder:
         def ref(m):
             k = int(m.group(1))
             if k not in self.secs:
+                if k in OUTLINE:          # 大纲里有、还没写的节：先不加链接
+                    self.pending.add(k)
+                    return f"[§{k}]{{.xref-pending}}"
                 missing.append(f"{p.name}：§{k}")
             return f"[§{k}](#s{k}){{.xref}}"
         missing = []
@@ -173,6 +179,7 @@ CSS = f"""
 .g-chapter h4 {{ font: 700 10.5pt "CJK Sans"; margin: 8pt 0 3pt; bookmark-level: none; break-after: avoid; }}
 .sec-no {{ color: var(--accent); margin-right: 6pt; }}
 a.xref {{ color: var(--accent); text-decoration: none; }}
+.xref-pending {{ color: var(--accent); }}
 .paradigm table {{ width: auto; min-width: 60%; border: .6pt solid var(--rule); margin: 4pt 0 10pt; }}
 .paradigm th, .paradigm td {{ border: .5pt solid var(--rule); padding: 2.5pt 8pt; }}
 .paradigm th {{ background: var(--tint); border-bottom: 1pt solid var(--ink); }}
@@ -220,7 +227,9 @@ def main(argv):
                     f"<h1 class='g-chap-title' id='ch{fm['chapter']}'><span class='chap-no'>第 {fm['chapter']} 章　</span>{title}</h1>"
                     f"{pandoc(b.prep(p, md))}</section>")
     if b.missing:
-        sys.exit("§ 引用指向不存在的节：" + "、".join(b.missing))
+        sys.exit("§ 引用指向大纲里不存在的节：" + "、".join(b.missing))
+    if b.pending:
+        print(f"提示：{len(b.pending)} 个 § 引用指向尚未编写的节，暂不加链接：" + "、".join(f"§{k}" for k in sorted(b.pending)))
     title = "俄语语法"
     head = (f'<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><title>{title}</title>'
             f'<link rel="stylesheet" href="../style.css"><style>{CSS}</style></head><body class="book grammar">')
