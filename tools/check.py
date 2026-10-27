@@ -799,7 +799,80 @@ def word_used(k, used):
     return any(nf == k or k in lex for u in used for nf, lex in analyses(u))
 
 
+# ---------- 语法书 grammar/ ----------
+
+GRAMMAR = ROOT / "grammar"
+GRAMMAR_OUTLINE = ROOT / "docs" / "语法书大纲.md"
+GRAMMAR_TERMS = ROOT / "docs" / "语法书术语.md"
+
+
+def grammar_sections():
+    """大纲和各章里定义的节号。"""
+    secs = set()
+    if GRAMMAR_OUTLINE.exists():
+        secs |= {int(n) for n in re.findall(r"^(?:#+\s*|\|\s*|[-*]\s*)§(\d+)", GRAMMAR_OUTLINE.read_text(encoding="utf-8"), re.M)}
+    for f in GRAMMAR.glob("*.md"):
+        secs |= {int(n) for n in re.findall(r"^## §(\d+)", f.read_text(encoding="utf-8"), re.M)}
+    return secs
+
+
+def grammar_terms():
+    """术语表第一栏（中文术语）。"""
+    if not GRAMMAR_TERMS.exists():
+        return set()
+    out = set()
+    for ln in GRAMMAR_TERMS.read_text(encoding="utf-8").splitlines():
+        if ln.startswith("|") and not re.match(r"^\|\s*(-|中文)", ln):
+            out.add(strip_markup(ln.strip("|").split("|")[0]).strip())
+    return out
+
+
+def check_grammar(paths):
+    """语法书：重音（多音节词一律标）、ё、{.ru} 标记、§ 引用、术语；不查生词累积。"""
+    secs, terms = grammar_sections(), grammar_terms()
+    lessons = [Lesson(b, lid, p) for (b, lid), p in lesson_files()]
+    lex = Checker(lessons).everything
+    total = 0
+    for path in paths:
+        g = Lesson(5, path.stem, path)
+        probs = []
+        for i, sec, segs, rest in g.ru_lines():
+            ln = g.lineno(i)
+            if CYR.search(re.sub(r"<!--.*?-->", "", rest)):
+                probs.append((ln, "标记", f"俄语没有放在 {{.ru}} 里：{'、'.join(sorted(set(WORD.findall(nfc(rest)))))}"))
+            for seg in segs:
+                for w, morpheme in tokens(drop_titles(seg)):
+                    for cat, msg in check_word(w, morpheme, True):
+                        probs.append((ln, cat, msg))
+                    y = yo_problem(w, lex)
+                    if y:
+                        probs.append((ln, "ё", f"{w}：应写作 {y}"))
+        for i, line in enumerate(g.lines):
+            ln = g.lineno(i)
+            for n in re.findall(r"§(\d+)", line):
+                if int(n) not in secs:
+                    probs.append((ln, "引用", f"§{n} 在大纲和各章里都不存在"))
+            for t in re.findall(r"\[([^\[\]]+)\]\{[^}]*\.term[^}]*\}", line):
+                if strip_markup(t).strip() not in terms:
+                    probs.append((ln, "术语", f"“{strip_markup(t)}”不在 docs/语法书术语.md 里"))
+            if "\"" in re.sub(r"\{[^}]*\}|<[^>]+>|`[^`]*`", "", line) and re.search(r"[\u4e00-\u9fff]", line):
+                probs.append((ln, "标点", "中文里用了半角引号"))
+        print(f"== {path.name}（{len(probs)} 个问题）")
+        for ln, cat, msg in probs:
+            print(f"  第 {ln} 行 [{cat}] {msg}")
+        print()
+        total += len(probs)
+    print(f"共 {total} 个问题")
+    return total
+
+
 def main(argv):
+    if argv and all(a.rstrip("/").startswith("grammar") for a in argv):
+        paths = []
+        for a in argv:
+            p = ROOT / a
+            paths += sorted(p.glob("*.md")) if p.is_dir() else [p]
+        return check_grammar(paths)
     argv = [Path(a).stem if ("/" in a or a.endswith((".md", ".yaml"))) else a for a in argv]
     wanted = {canon(a) for a in argv}
     if None in wanted:

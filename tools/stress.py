@@ -3,6 +3,7 @@
 
     python3 tools/stress.py                 # 核对第一至四册，结果写进 docs/重音核对.md
     python3 tools/stress.py B3-L03 L05      # 只核对这几课，结果打印到终端
+    python3 tools/stress.py grammar         # 核对语法书 grammar/*.md，结果打印到终端
     python3 tools/stress.py build <openrussian 目录> <zalizniak 目录>   # 重新生成词典
 
 词典 tools/data/stress.tsv.gz 由两份开放数据合成，每行“词形（去重音、ё→е）<TAB>重音位置,…”：
@@ -115,6 +116,11 @@ def mark(w, pos):
 
 
 def sources(wanted):
+    if wanted == {"grammar"}:      # 语法书各章
+        for path in sorted((ROOT / "grammar").glob("*.md")):
+            for i, ln in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                yield path.stem, f"grammar/{path.name}:{i}", ln
+        return
     for (book, lid), path in check.lesson_files():
         if book > 4 or (wanted and (book, lid) not in wanted):
             continue
@@ -164,7 +170,7 @@ def report(rows, checked, missing):
 def main(argv):
     if argv[:1] == ["build"]:
         return build(argv[1], argv[2])
-    wanted = {check.canon(Path(a).stem) for a in argv}
+    wanted = {"grammar"} if argv and all(a.rstrip("/") == "grammar" for a in argv) else {check.canon(Path(a).stem) for a in argv}
     rows, checked, missing = run(wanted)
     if wanted:
         for ours, theirs, places in rows:
