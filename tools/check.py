@@ -822,9 +822,12 @@ def grammar_terms():
         return set()
     out = set()
     for ln in GRAMMAR_TERMS.read_text(encoding="utf-8").splitlines():
-        if ln.startswith("|") and not re.match(r"^\|\s*(-|中文)", ln):
+        if ln.startswith("|") and not re.match(r"^\|[\s:|-]*$|^\|\s*中文术语", ln):
             out.add(strip_markup(ln.strip("|").split("|")[0]).strip())
     return out
+
+
+PREP_STRESSED = {nfc(p) for p in ("на́", "за́", "по́", "по́д", "из", "бе́з", "до́", "о́т", "о́б", "и́з", "со́", "во́", "ко́", "по́д")}
 
 
 def check_grammar(paths):
@@ -841,9 +844,15 @@ def check_grammar(paths):
             if CYR.search(re.sub(r"<!--.*?-->", "", rest)):
                 probs.append((ln, "标记", f"俄语没有放在 {{.ru}} 里：{'、'.join(sorted(set(WORD.findall(nfc(rest)))))}"))
             for seg in segs:
+                prev = ""
                 for w, morpheme in tokens(drop_titles(seg)):
-                    for cat, msg in check_word(w, morpheme, True):
+                    # 重音移到前置词上（на́ гору、за́ город、по́ полю），后面的词不再标重音
+                    after_prep = prev in PREP_STRESSED
+                    prev = nfc(w).lower()
+                    for cat, msg in check_word(w, morpheme, not after_prep):
                         probs.append((ln, cat, msg))
+                    if morpheme:
+                        continue
                     y = yo_problem(w, lex)
                     if y:
                         probs.append((ln, "ё", f"{w}：应写作 {y}"))
