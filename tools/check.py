@@ -852,6 +852,8 @@ def check_grammar(paths):
             if CYR.search(re.sub(r"<!--.*?-->", "", rest)):
                 probs.append((ln, "标记", f"俄语没有放在 {{.ru}} 里：{'、'.join(sorted(set(WORD.findall(nfc(rest)))))}"))
             for seg in segs:
+                # 不重读的前置词变体 надо、безо（надо мной、безо всего́）不要求重音
+                seg = re.sub(r"(?<![А-Яа-яЁё])(над|без)о(?=\s+(?:мн|вс)|$)", r"\1", seg.strip(), flags=re.I)
                 prev = prev2 = ""
                 for w, morpheme in tokens(drop_titles(seg)):
                     # 重音移到前置词上（на́ гору）或 не́ 上（не́ у кого），后面的词不再标重音；（на́ гору、за́ город、по́ полю），后面的词不再标重音
