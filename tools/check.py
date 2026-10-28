@@ -864,7 +864,8 @@ def check_grammar(paths):
                     if morpheme:
                         continue
                     y = yo_problem(w, lex)
-                    if y:
+                    # -е́дший、-е́тший（приве́дший、цве́тший）是标准形式，词形分析器给的 ё 写法不规范
+                    if y and not re.search(r"е\u0301[дт]ш", nfc(w)):
                         probs.append((ln, "ё", f"{w}：应写作 {y}"))
         for i, line in enumerate(g.lines):
             ln = g.lineno(i)
