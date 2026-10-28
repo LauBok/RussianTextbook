@@ -404,6 +404,9 @@ def yo_problem(w, lex):
 
 # ---------- 单词书写检查 ----------
 
+HYPHEN_PARTICLES = {"то", "либо", "нибудь", "ка", "таки", "де", "кое", "с"}
+
+
 def check_word(w, morpheme, need_stress):
     """返回这个词的书写问题。"""
     probs = []
@@ -422,6 +425,11 @@ def check_word(w, morpheme, need_stress):
     if not need_stress:
         return probs
     has_yo = any(ch in "ёЁ" for ch in low)
+    parts = low.split("-")
+    if len(parts) > 1 and all(sum(ch in VOWELS for ch in x) <= 1 for x in parts) \
+            and not set(norm(x) for x in parts) & HYPHEN_PARTICLES:
+        # 两个单音节词连写（два-три、пять-шесть）可以不标重音；词素切分（стол-а́）、чуть-чу́ть 照样可标
+        return probs
     if vowels >= 2 and acutes == 0 and not has_yo and norm(w) not in UNSTRESSED_POLY:
         probs.append(("重音", f"{w}：多音节词没有标重音"))
     if vowels == 1 and acutes and norm(w) not in STRESSABLE_MONO:
