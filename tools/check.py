@@ -852,11 +852,11 @@ def check_grammar(paths):
             if CYR.search(re.sub(r"<!--.*?-->", "", rest)):
                 probs.append((ln, "标记", f"俄语没有放在 {{.ru}} 里：{'、'.join(sorted(set(WORD.findall(nfc(rest)))))}"))
             for seg in segs:
-                prev = ""
+                prev = prev2 = ""
                 for w, morpheme in tokens(drop_titles(seg)):
-                    # 重音移到前置词上（на́ гору、за́ город、по́ полю），后面的词不再标重音
-                    after_prep = prev in PREP_STRESSED
-                    prev = nfc(w).lower()
+                    # 重音移到前置词上（на́ гору）或 не́ 上（не́ у кого），后面的词不再标重音；（на́ гору、за́ город、по́ полю），后面的词不再标重音
+                    after_prep = prev in PREP_STRESSED or prev2 == nfc("не́")
+                    prev2, prev = prev, nfc(w).lower()
                     for cat, msg in check_word(w, morpheme, not after_prep):
                         probs.append((ln, cat, msg))
                     if morpheme:
