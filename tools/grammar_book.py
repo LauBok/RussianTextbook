@@ -10,6 +10,9 @@
   正文里的 §2.2.1 自动链接到该节；大纲里有、还没写的节先不加链接，大纲里没有的节报错。
 - 俄语词索引 `[кни́га]{.ru .ix}`，另立词头写 `{.ru .ix key="кни́га"}`；术语索引 `[第二格]{.term}`。
 - 变格变位表 `::: paradigm`，例句 `::: ex`，常见错误 `::: err`，教程课号 `::: course`。
+- 附录：`grammar/90-NN-附录名.md`，front matter 写 appendix（序号）和 title；正文里的“附录五”自动链接。
+  附录十四（教程课号—本书节号对照）、十五（俄汉术语对照）由大纲和术语表生成，十六、十七是两种索引。
+术语索引按拼音排序，需要 pypinyin（pip install pypinyin）。
 先排一遍取得各锚点所在页码，再把页码写进目录和索引排第二遍（正文页码不变）。
 """
 import argparse
@@ -50,6 +53,94 @@ def sid(k):
 
 def plain(s):
     return re.sub(r"\[([^\[\]]*)\]\{[^}]*\}", r"\1", s)
+
+
+APP_REF = re.compile(r"附录([一二三四五六七八九十]+)")
+BOOKS = {"第一册": 1, "第二册": 2, "第三册": 3, "第四册": 4}
+
+
+def cn_to_int(c):
+    if c == "十":
+        return 10
+    if c.startswith("十"):
+        return 10 + CN.index(c[1])
+    if "十" in c:
+        a, b = c.split("十")
+        return CN.index(a) * 10 + (CN.index(b) if b else 0)
+    return CN.index(c)
+
+
+def expand_lessons(cell):
+    """“第一册 P1–P3、L32；第二册 L01–L02” → [(1, 'P1'), (1, 'P2'), …]"""
+    out = []
+    for part in re.split(r"[；;]", plain(cell)):
+        m = re.match(r"\s*(第[一二三四]册)\s*(.+)", part)
+        if not m:
+            continue
+        bk = BOOKS[m.group(1)]
+        for item in re.split(r"[、，,]\s*", m.group(2)):
+            r = re.match(r"([PLT])(\d+)\s*[–-]\s*[PLT]?(\d+)", item.strip())
+            if r:
+                w = len(r.group(2))
+                out += [(bk, f"{r.group(1)}{str(k).zfill(w)}") for k in range(int(r.group(2)), int(r.group(3)) + 1)]
+            else:
+                r = re.match(r"([PLT]\d+)", item.strip())
+                if r:
+                    out.append((bk, r.group(1)))
+    return out
+
+
+def lesson_key(code):
+    return (0 if code.startswith("P") else 1, int(code[1:]))
+
+
+def app_lessons():
+    """附录十四：教程课号—本书节号对照，由大纲各节的课号栏反查。"""
+    rows = defaultdict(list)
+    for m in re.finditer(r"^\|\s*§(\d+\.\d+\.\d+)\s*\|\s*(.+?)\s*\|.*\|\s*(.*?)\s*\|\s*$",
+                         OUTLINE_FILE.read_text(encoding="utf-8"), re.M):
+        for bk, code in expand_lessons(m.group(3)):
+            if f"§{m.group(1)}" not in rows[(bk, code)]:
+                rows[(bk, code)].append(f"§{m.group(1)}")
+    md = ["《俄语教程》各课讲到的语法点在本书的节号。", ""]
+    for bk in (1, 2, 3, 4):
+        codes = sorted((c for b, c in rows if b == bk), key=lesson_key)
+        if not codes:
+            continue
+        md += [f"## 第{CN[bk]}册", "", "| 课 | 本书节号 |", "|---|---|"]
+        md += [f"| {c} | {'、'.join(rows[(bk, c)])} |" for c in codes]
+        md.append("")
+    return "\n".join(md)
+
+
+def app_terms():
+    """附录十五：俄汉术语对照，按俄语字母排序。"""
+    rows = []
+    t = (ROOT / "docs" / "语法书术语.md").read_text(encoding="utf-8").split("## 教程叫法和常见别称")[0]
+    for ln in t.splitlines():
+        c = [x.strip() for x in ln.strip().strip("|").split("|")]
+        if ln.startswith("|") and len(c) >= 4 and "{.ru}" in c[1]:
+            rows.append((plain(c[1]), c[1], c[0], c[3]))
+    rows.sort(key=lambda r: book.sort_key(r[0]))
+    md = ["本书术语的俄语名称，按俄语字母顺序排列；“首见”是该术语首次讲解的节。", "",
+          "| 俄语 | 中文 | 首见 |", "|---|---|---|"]
+    md += [f"| {ru} | {zh} | {first} |" for _, ru, zh, first in rows]
+    return "\n".join(md)
+
+
+def term_aliases():
+    """术语表末“教程叫法和常见别称”：别称 → 本书术语。"""
+    t = (ROOT / "docs" / "语法书术语.md").read_text(encoding="utf-8")
+    if "## 教程叫法和常见别称" not in t:
+        return {}
+    out = {}
+    for ln in t.split("## 教程叫法和常见别称", 1)[1].splitlines():
+        c = [x.strip() for x in ln.strip().strip("|").split("|")]
+        if ln.startswith("|") and len(c) >= 2 and not re.match(r"^[-:\s]*$", c[0]) and c[0] != "中文术语":
+            for alias in re.split(r"[、，,]", plain(c[1])):
+                if alias.strip() and alias.strip() != c[0]:
+                    out[alias.strip()] = c[0]
+    return out
 
 
 def chapters(src=SRC):
@@ -132,9 +223,22 @@ def inline(s):
     return re.sub(r"\[([^\[\]]*)\]\{\.ru\}", r"<span class='ru'>\1</span>", s)
 
 
-def index_html(title, entries, pages, cls):
+def zh_key(s):
+    """术语索引按汉语拼音排序（需要 pypinyin；没有时按字符排序）。"""
+    try:
+        from pypinyin import lazy_pinyin, Style
+        return (" ".join(lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)), s)
+    except ImportError:
+        return (s, s)
+
+
+def index_html(title, entries, pages, cls, aliases=None):
     rows = []
-    for key in sorted(entries, key=book.sort_key):
+    aliases = {a: t for a, t in (aliases or {}).items() if t in entries and a not in entries}
+    for key in sorted(list(entries) + list(aliases), key=book.sort_key if cls == "ix" else zh_key):
+        if key in aliases:
+            rows.append(f"<p class='ix-row'><span class='ix-key'>{html.escape(key)}</span> <span class='ix-pg'>见 {html.escape(aliases[key])}</span></p>")
+            continue
         nums = []
         for a in entries[key]:
             n = pages.get(a)
@@ -144,10 +248,10 @@ def index_html(title, entries, pages, cls):
         word = f"<span class='ru'>{html.escape(key)}</span>" if cls == "ix" else html.escape(key)
         rows.append(f"<p class='ix-row'><span class='ix-key'>{word}</span> <span class='ix-pg'>{links}</span></p>")
     return (f"<section class='g-index' id='{cls}-index'><div class='running'>{title}</div>"
-            f"<h1 class='g-index-title'>{title}</h1><div class='ix-cols'>{''.join(rows)}</div></section>")
+            f"<h1 class='g-index-title g-app-title'>{title}</h1><div class='ix-cols'>{''.join(rows)}</div></section>")
 
 
-def toc_html(chs, pages):
+def toc_html(chs, apps, pages):
     out, part = ["<section class='g-toc'><h1 class='g-toc-title'>目　录</h1>"], None
     for p, fm, body in chs:
         if fm.get("part") != part:
@@ -160,8 +264,12 @@ def toc_html(chs, pages):
             sid_ = sid(m.group(1))
             out.append(f"<a class='toc-sec' href='#{sid_}'><span>§{m.group(1)}　{html.escape(plain(m.group(2)))}</span>"
                        f"<span class='pg'>{pages.get(sid_, '000')}</span></a>")
-    for t, a in (("俄语词索引", "ix-index"), ("术语索引", "tm-index")):
-        out.append(f"<a class='toc-chap' href='#{a}'><span>{t}</span><span class='pg'>{pages.get(a, '000')}</span></a>")
+    out.append("<div class='toc-part'>附　录</div>")
+    for n, title, _ in apps:
+        out.append(f"<a class='toc-chap' href='#app{n}'><span>附录{cn_num(n)}　{html.escape(plain(title))}</span>"
+                   f"<span class='pg'>{pages.get(f'app{n}', '000')}</span></a>")
+    for n, (t, a) in ((16, ("俄语词索引", "ix-index")), (17, ("术语索引", "tm-index"))):
+        out.append(f"<a class='toc-chap' href='#{a}'><span>附录{cn_num(n)}　{t}</span><span class='pg'>{pages.get(a, '000')}</span></a>")
     out.append("</section>")
     return "".join(out)
 
@@ -171,6 +279,8 @@ CSS = f"""
 .g-cover {{ height: 220mm; display: flex; flex-direction: column; justify-content: center; text-align: center; break-after: page; }}
 .g-toc, .g-index {{ break-before: page; }}
 .g-toc-title, .g-index-title {{ font: 700 20pt "PT Sans", "CJK Sans"; color: var(--accent); margin: 0 0 12pt; bookmark-level: 1; }}
+.g-index-title.g-app-title {{ bookmark-level: 2; }}
+.g-app h2 {{ bookmark-level: none !important; }}
 .toc-part {{ font: 700 11pt "PT Sans", "CJK Sans"; margin: 10pt 0 3pt; color: var(--accent); }}
 .toc-chap, .toc-sec {{ display: flex; color: inherit; text-decoration: none; line-height: 1.55; }}
 .toc-chap {{ font: 700 10pt "PT Sans", "CJK Sans"; margin-top: 3pt; }}
@@ -220,9 +330,28 @@ def main(argv):
     ap.add_argument("--out", default=str(ROOT / "dist" / "俄语语法.pdf"))
     ap.add_argument("--src", default=str(SRC), help="章节目录（默认 grammar/）")
     a = ap.parse_args(argv)
-    chs = chapters(a.src)
+    allf = chapters(a.src)
+    chs = [c for c in allf if "appendix" not in c[1]]
+    apps = [(int(fm["appendix"]), fm["title"], body) for p, fm, body in allf if "appendix" in fm]
     if not chs:
         sys.exit("grammar/ 下没有章节文件")
+    if a.src == str(SRC):
+        have = {n for n, _, _ in apps}
+        for n, t, gen in ((14, "教程课号—本书节号对照", app_lessons), (15, "俄汉术语对照", app_terms)):
+            if n not in have:
+                apps.append((n, t, gen()))
+    apps.sort()
+    app_nums = {n for n, _, _ in apps} | {16, 17}
+
+    def app_link(html_text):
+        def rep(m):
+            n = cn_to_int(m.group(1))
+            if n in (16, 17):
+                return f"<a class='xref' href='#{'ix' if n == 16 else 'tm'}-index'>{m.group(0)}</a>"
+            return f"<a class='xref' href='#app{n}'>{m.group(0)}</a>" if n in app_nums else m.group(0)
+        # 只替换正文文字，不动标签和标题
+        return re.sub(r"(<h[1-6][^>]*>.*?</h[1-6]>)|(<[^>]+>)|([^<]+)",
+                      lambda m: m.group(0) if not m.group(3) else APP_REF.sub(rep, m.group(3)), html_text, flags=re.S)
     b = Builder()
     b.collect_sections(chs)
     body, part = [], None
@@ -233,7 +362,13 @@ def main(argv):
         title = inline(fm["title"])
         body.append(f"<section class='g-chapter'><div class='running'>第{cn_num(fm['part'])}编　第 {fm['chapter']} 章　{html.escape(plain(fm['title']))}</div>"
                     f"<h1 class='g-chap-title' id='ch{fm['part']}-{fm['chapter']}'><span class='chap-no'>第 {fm['chapter']} 章　</span>{title}</h1>"
-                    f"{pandoc(b.prep(p, md))}</section>")
+                    f"{app_link(pandoc(b.prep(p, md)))}</section>")
+    if apps:
+        body.append("<h1 class='g-part' id='appendix'>附　录</h1>")
+    for n, t, md in apps:
+        body.append(f"<section class='g-chapter g-app'><div class='running'>附录{cn_num(n)}　{html.escape(plain(t))}</div>"
+                    f"<h1 class='g-chap-title' id='app{n}'><span class='chap-no'>附录{cn_num(n)}　</span>{inline(t)}</h1>"
+                    f"{app_link(pandoc(b.prep(Path(f'附录{n}'), md)))}</section>")
     if b.missing:
         sys.exit("§ 引用指向大纲里不存在的节：" + "、".join(b.missing))
     if b.pending:
@@ -245,14 +380,15 @@ def main(argv):
              f"<div class='cover-title'>{title}</div><div class='cover-sub'>《俄语教程》配套语法</div></section>")
     pages = {}
     for _ in range(2):
-        parts = [cover, toc_html(chs, pages), *body,
-                 index_html("俄语词索引", b.ix, pages, "ix"), index_html("术语索引", b.terms, pages, "tm")]
+        parts = [cover, toc_html(chs, apps, pages), *body,
+                 index_html("附录十六　俄语词索引", b.ix, pages, "ix"),
+                 index_html("附录十七　术语索引", b.terms, pages, "tm", term_aliases())]
         doc, pages = render(head, parts)
     out = Path(a.out)
     out.parent.mkdir(exist_ok=True)
     (ROOT / "build" / (out.stem + ".html")).write_text(head + "".join(parts) + "</body></html>", encoding="utf-8")
     doc.write_pdf(out)
-    print(out, f"{len(doc.pages)} 页，{len(chs)} 章，{len(b.secs)} 节，俄语词索引 {len(b.ix)} 条，术语索引 {len(b.terms)} 条")
+    print(out, f"{len(doc.pages)} 页，{len(chs)} 章，{len(b.secs)} 节，附录 {len(apps) + 2} 项，俄语词索引 {len(b.ix)} 条，术语索引 {len(b.terms)} 条")
 
 
 if __name__ == "__main__":
