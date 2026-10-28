@@ -875,6 +875,8 @@ def check_grammar(paths):
             for t in re.findall(r"\[([^\[\]]+)\]\{[^}]*\.term[^}]*\}", line):
                 if strip_markup(t).strip() not in terms:
                     probs.append((ln, "术语", f"“{strip_markup(t)}”不在 docs/语法书术语.md 里"))
+            if "【补】" in line:
+                probs.append((ln, "旁白", "成品里不留大纲的“【补】”标记"))
             if "\"" in re.sub(r"\{[^}]*\}|<[^>]+>|`[^`]*`", "", line) and re.search(r"[\u4e00-\u9fff]", line):
                 probs.append((ln, "标点", "中文里用了半角引号"))
         print(f"== {path.name}（{len(probs)} 个问题）")
