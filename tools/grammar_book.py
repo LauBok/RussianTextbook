@@ -258,7 +258,7 @@ def toc_html(chs, apps, pages):
             part = fm.get("part")
             out.append(f"<div class='toc-part'>第{cn_num(part)}编　{html.escape(fm.get('part_title', ''))}</div>")
         cid = f"ch{fm['part']}-{fm['chapter']}"
-        out.append(f"<a class='toc-chap' href='#{cid}'><span>第 {fm['chapter']} 章　{html.escape(fm['title'])}</span>"
+        out.append(f"<a class='toc-chap' href='#{cid}'><span>第 {fm['chapter']} 章　{inline(fm['title'])}</span>"
                    f"<span class='pg'>{pages.get(cid, '000')}</span></a>")
         for m in SEC_HEAD.finditer(body):
             sid_ = sid(m.group(1))
