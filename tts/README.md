@@ -33,6 +33,7 @@ python tools/tts.py --book 1         # 第一册全部
 python tools/tts.py --book 2         # 第二册全部
 python tools/tts.py --all            # 第一、二册全部
 python tools/tts.py --book 3 --book 4   # 第三、四册（要先有朗读稿）
+python tools/tts.py --vocab L01 L02   # 生词朗读：俄语词—中文释义—俄语词，输出 audio/vocab/<课号>.mp3
 ```
 
 已经生成过的课自动跳过，加 `--force` 重录。中途中断，重新运行同一条命令会接着录。没有显卡时加 `--device cpu` 也能跑，但很慢（一分钟音频要算七分钟左右）。
