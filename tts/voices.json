@@ -1,290 +1,297 @@
 {
- "narrator": {
-  "name": "旁白",
-  "instruct": "A calm, mature Russian male narrator in his forties, warm medium-low voice, standard Moscow pronunciation, clear and unhurried, like an audiobook for language learners.",
-  "ref_text": "Это было в понедельник утром. Студенты шли в университет, а на улице светило солнце.",
-  "ref": "narrator.wav"
- },
- "ван лэй": {
-  "name": "王磊",
-  "instruct": "A 20-year-old Chinese male student speaking Russian with a slight Chinese accent. Gentle, polite, a little shy, clear articulation, moderate pace.",
-  "ref_text": "Здравствуйте! Меня зовут Ван Лэй. Я из Китая, я учусь в Москве.",
-  "ref": "wanglei.wav"
- },
- "иван сергеевич": {
-  "name": "伊万",
-  "instruct": "A 50-year-old Russian man, an engineer and father. Deep low baritone, calm, good-humoured, native Moscow Russian.",
-  "ref_text": "Ну что, все готовы? Тогда поехали, а то опоздаем на поезд.",
-  "ref": "ivan.wav"
- },
- "мария николаевна": {
-  "name": "玛丽亚",
-  "instruct": "A 47-year-old Russian woman, a doctor and mother. Warm, caring alto voice, composed and kind, native Russian.",
-  "ref_text": "Дети, ужин готов! Мойте руки и садитесь за стол.",
-  "ref": "maria.wav"
- },
- "анна": {
-  "name": "安娜",
-  "instruct": "A young Russian woman around twenty, studies at university. Warm, rich and resonant voice, speaks clearly and fairly loudly, mature for her age, cheerful and open, native Russian.",
-  "ref_text": "Привет! Пойдём сегодня в кино? Я уже купила билеты.",
-  "ref": "anna.wav"
- },
- "миша": {
-  "name": "米沙",
-  "instruct": "A 13-year-old Russian schoolboy. High youthful boyish voice, playful, quick and mischievous, native Russian.",
-  "ref_text": "Мама, можно я пойду играть в футбол? Я уже сделал уроки!",
-  "ref": "misha.wav"
- },
- "ольга викторовна": {
-  "name": "奥莉加老师",
-  "instruct": "A 40-year-old Russian female language teacher. Clear, articulate, encouraging, slightly formal, slow and precise diction, native Russian.",
-  "ref_text": "Откройте, пожалуйста, учебники. Сегодня у нас новая тема.",
-  "ref": "olga.wav"
- },
- "юми": {
-  "name": "由美",
-  "instruct": "A 20-year-old Japanese female student speaking Russian with a light Japanese accent. Soft, gentle, polite, slightly high-pitched voice.",
-  "ref_text": "Извините, я не поняла. Повторите, пожалуйста, ещё раз.",
-  "ref": "yumi.wav"
- },
- "пьер": {
-  "name": "皮埃尔",
-  "instruct": "A 21-year-old French male student speaking Russian with a light French accent. Cheerful, relaxed, charming, medium pitch.",
-  "ref_text": "Привет, друзья! Я очень люблю Москву, особенно зимой.",
-  "ref": "pierre.wav"
- },
- "дима": {
-  "name": "季马",
-  "instruct": "A 20-year-old Russian male student. Confident, casual, energetic tenor voice, speaks a bit fast, native Russian.",
-  "ref_text": "Слушай, давай после пар сходим в спортзал, а потом поужинаем.",
-  "ref": "dima.wav"
- },
- "катя": {
-  "name": "卡佳",
-  "instruct": "A 19-year-old Russian female student, Anna's friend. Light, quick, chatty voice, playful and warm, native Russian.",
-  "ref_text": "Ой, привет! Как хорошо, что ты позвонила. Я как раз хотела тебе рассказать новость.",
-  "ref": "katya.wav"
- },
- "бабушка": {
-  "name": "外婆",
-  "instruct": "A Russian grandmother in her late seventies. Soft, slightly creaky elderly female voice, kind and unhurried, native Russian.",
-  "ref_text": "Садитесь, садитесь, я пирогов напекла. Кушайте, пока горячие.",
-  "ref": "babushka.wav"
- },
- "B2-L39:бабушка": {
-  "name": "季马的奶奶",
-  "instruct": "A Russian grandmother around seventy from a town on the Volga. Lively, hearty elderly female voice, talkative and welcoming, native Russian.",
-  "ref_text": "Ну наконец-то приехали! Проходите в дом, я вас целый день жду.",
-  "ref": "babushka2.wav"
- },
- "продавец": {
-  "name": "售货员（男）",
-  "instruct": "A Russian male shop assistant in his thirties. Polite, matter-of-fact, clear voice, medium pitch, native Russian.",
-  "ref_text": "Добрый день! Что вы хотите? Эта книга стоит пятьсот рублей.",
-  "ref": "prodavets.wav"
- },
- "продавщица": {
-  "name": "售货员（女）",
-  "instruct": "A Russian female shop assistant in her forties. Brisk, friendly, practical voice, native Russian.",
-  "ref_text": "Пожалуйста, выбирайте. Яблоки сегодня очень хорошие, недорогие.",
-  "ref": "prodavshchitsa.wav"
- },
- "хосе": {
-  "name": "何塞",
-  "instruct": "A 24-year-old male student from Spain speaking Russian with a noticeable Spanish accent. Warm, outgoing, expressive, medium-low voice.",
-  "ref_text": "Привет! Меня зовут Хосе, я из Испании. Я очень люблю футбол и музыку.",
-  "ref": "jose.wav"
- },
- "наталья игоревна": {
-  "name": "娜塔莉娅（季马妈妈）",
-  "instruct": "A Russian woman around fifty, Dima's mother, from a town on the Volga. Warm, hospitable, gentle voice, native Russian.",
-  "ref_text": "Дима, как ты вырос! Ребята, раздевайтесь, сейчас будем обедать.",
-  "ref": "natalya.wav"
- },
- "андрей петрович": {
-  "name": "安德烈（季马爸爸）",
-  "instruct": "A Russian man in his fifties, Dima's father. Sturdy, friendly baritone, a bit jokey, native Russian.",
-  "ref_text": "Ну, здравствуйте, гости дорогие! Давайте ваши сумки, машина вон там.",
-  "ref": "andrey.wav"
- },
- "женщина": {
-  "name": "女路人",
-  "instruct": "A Russian woman in her thirties, a passer-by. Neutral, polite, clear everyday voice, native Russian.",
-  "ref_text": "Извините, я не знаю. Спросите, пожалуйста, вон там, в киоске.",
-  "ref": "zhenshchina.wav"
- },
- "мужчина": {
-  "name": "男路人",
-  "instruct": "A Russian man in his forties, a passer-by. Neutral, helpful, ordinary male voice, native Russian.",
-  "ref_text": "Идите прямо, потом налево. Там будет остановка автобуса.",
-  "ref": "muzhchina.wav"
- },
- "девушка": {
-  "name": "姑娘",
-  "instruct": "A Russian young woman about twenty, a passer-by. Light, friendly, quick voice, native Russian.",
-  "ref_text": "Это совсем близко, пять минут пешком. Я тоже туда иду.",
-  "ref": "devushka.wav"
- },
- "вера": {
-  "name": "薇拉（新邻居）",
-  "instruct": "A Russian woman in her early thirties, a new neighbour and young mother. Pleasant, slightly shy, friendly voice, native Russian.",
-  "ref_text": "Добрый вечер! Извините, что беспокоим. Мы ваши новые соседи.",
-  "ref": "vera.wav"
- },
- "врач": {
-  "name": "医生",
-  "instruct": "A Russian female doctor in her fifties. Calm, professional, reassuring, slightly authoritative voice, native Russian.",
-  "ref_text": "Садитесь, пожалуйста. Что у вас болит? Откройте рот, скажите «а».",
-  "ref": "vrach.wav"
- },
- "лиза": {
-  "name": "丽莎（奥莉加老师的女儿）",
-  "instruct": "A 20-year-old Russian woman, a drama-school student. Expressive, bright, artistic voice with clear stage diction, native Russian.",
-  "ref_text": "Очень приятно! Мама много рассказывала о вас.",
-  "ref": "liza.wav"
- },
- "дядя петя": {
-  "name": "彼佳叔叔",
-  "instruct": "A Russian man about sixty, Ivan's uncle-like relative at a family party. Loud, jovial, hearty voice, native Russian.",
-  "ref_text": "Ну, Ваня, с юбилеем тебя! Пятьдесят лет, а ты всё как мальчик!",
-  "ref": "dyadya_petya.wav"
- },
- "елена борисовна": {
-  "name": "叶莲娜（舞蹈老师）",
-  "instruct": "A Russian female dance teacher in her forties. Energetic, rhythmic, encouraging voice with clear commands, native Russian.",
-  "ref_text": "Встали в пары! Раз, два, три, раз, два, три. Молодцы, очень хорошо!",
-  "ref": "elena.wav"
- },
- "пётр михайлович": {
-  "name": "彼得（圣像画师）",
-  "instruct": "A Russian icon painter in his sixties. Slow, deep, thoughtful and gentle male voice, native Russian.",
-  "ref_text": "Иконы не рисуют, их пишут. Это старая традиция.",
-  "ref": "pyotr.wav"
- },
- "лена": {
-  "name": "列娜",
-  "instruct": "A 20-year-old Russian female student from a provincial town. Cheerful, curious, open voice, native Russian.",
-  "ref_text": "Очень приятно! А правда, что в Пекине живёт двадцать миллионов человек?",
-  "ref": "lena.wav"
- },
- "рустам": {
-  "name": "鲁斯塔姆",
-  "instruct": "A 20-year-old Russian young man, Dima's school friend from a town on the Volga. Easygoing, warm, energetic voice, native Russian.",
-  "ref_text": "Привет! Я ненадолго. Приезжайте завтра к нам на дачу!",
-  "ref": "rustam.wav"
- },
- "рыбак": {
-  "name": "渔夫",
-  "instruct": "An old Russian fisherman around seventy on the Volga. Gravelly, calm, unhurried, folksy male voice, native Russian.",
-  "ref_text": "Рыба сегодня плохо клюёт. Вот вчера был улов, а сегодня тишина.",
-  "ref": "rybak.wav"
- },
- "вера колосова": {
-  "name": "薇拉·科洛索娃（作家）",
-  "instruct": "A Russian woman writer in her fifties. Thoughtful, articulate, warm voice, speaks with measured intonation, native Russian.",
-  "ref_text": "Спасибо, что пришли. Для писателя самое главное — его читатели.",
-  "ref": "vera_kolosova.wav"
- },
- "сотрудница": {
-  "name": "女职员",
-  "instruct": "A Russian female office worker in her thirties. Polite, efficient, slightly formal voice, native Russian.",
-  "ref_text": "Ваш паспорт, пожалуйста. Заполните эту анкету и подождите минуту.",
-  "ref": "sotrudnitsa.wav"
- },
- "костя": {
-  "name": "科斯佳（米沙的同学）",
-  "instruct": "A 13-year-old Russian schoolboy, Misha's classmate. Youthful boyish voice, a bit shy but friendly, native Russian.",
-  "ref_text": "Привет! Можно к вам? Я принёс новую игру.",
-  "ref": "kostya.wav"
- },
- "официантка": {
-  "name": "女服务员",
-  "instruct": "A Russian waitress in her twenties. Friendly, quick, polite service voice, native Russian.",
-  "ref_text": "Добрый вечер! Вот меню. Что будете заказывать?",
-  "ref": "ofitsiantka.wav"
- },
- "официант": {
-  "name": "男服务员",
-  "instruct": "A Russian waiter in his thirties. Courteous, smooth, professional voice, native Russian.",
-  "ref_text": "Добрый вечер! Пожалуйста, ваш столик у окна. Вот меню.",
-  "ref": "ofitsiant.wav"
- },
- "олег петрович": {
-  "name": "奥列格（伊万的老友）",
-  "instruct": "A Russian man about fifty, Ivan's old friend from institute. Warm, nostalgic, humorous baritone, native Russian.",
-  "ref_text": "Ваня, ты помнишь нашу первую практику? Сколько лет прошло!",
-  "ref": "oleg.wav"
- },
- "B3:narrator": {
-  "name": "第三册旁白",
-  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
-  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
-  "ref": "b3_narrator.wav"
- },
- "B3-L44:narrator": {
-  "name": "新闻主播",
-  "instruct": "A professional Russian male TV news anchor in his forties, crisp, confident and neutral, formal broadcast intonation, precise diction, brisk but clear pace.",
-  "ref_text": "Добрый вечер. В Москве сегодня открылись новые станции метро. Подробности в нашем репортаже.",
-  "ref": "news.wav"
- },
- "B4-L25:narrator": {
-  "name": "新闻主播",
-  "instruct": "A professional Russian male TV news anchor in his forties, crisp, confident and neutral, formal broadcast intonation, precise diction, brisk but clear pace.",
-  "ref_text": "Добрый вечер. В Москве сегодня открылись новые станции метро. Подробности в нашем репортаже.",
-  "ref": "news.wav"
- },
- "B4:narrator": {
-  "name": "第四册旁白",
-  "instruct": "A mature Russian male audiobook reader around sixty, deep velvety baritone, expressive and artistic, classic Moscow stage pronunciation, reads classical Russian literature with feeling and natural pauses, unhurried.",
-  "ref_text": "Была поздняя осень. Над рекой стоял туман, и в старом саду тихо падали последние листья.",
-  "ref": "b4_narrator.wav"
- },
- "B4:poem": {
-  "name": "诗歌朗诵",
-  "instruct": "A Russian male poetry reciter in his fifties, rich resonant baritone, solemn and lyrical, classic recitation style with a clear rhythm, measured pace and expressive pauses at the end of each line.",
-  "ref_text": "Белеет парус одинокой в тумане моря голубом. Что ищет он в стране далёкой? Что кинул он в краю родном?",
-  "ref": "poem.wav"
- },
- "B4-L13:poem": {
-  "name": "马雅可夫斯基朗诵",
-  "instruct": "A young Russian male poet in his twenties reciting futurist poetry, powerful loud oratorical voice, bold, passionate and rhythmic, emphatic declamation like on a public stage.",
-  "ref_text": "Вашу мысль, мечтающую на размягчённом мозгу, буду дразнить об окровавленный сердца лоскут.",
-  "ref": "mayakovsky.wav"
- },
- "B4-L29:narrator": {
-  "name": "毕业典礼致辞",
-  "instruct": "A Russian male university rector in his late fifties giving a commencement speech, warm, dignified and inspiring, confident public-speaking voice, clear articulation, measured pace.",
-  "ref_text": "Дорогие выпускники! Сегодня у вас начинается новая жизнь. Я от всей души поздравляю вас.",
-  "ref": "rector.wav"
- },
- "B4-L26:narrator": {
-  "name": "第三册旁白",
-  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
-  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
-  "ref": "b3_narrator.wav"
- },
- "B4-L27:narrator": {
-  "name": "第三册旁白",
-  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
-  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
-  "ref": "b3_narrator.wav"
- },
- "B4-L28:narrator": {
-  "name": "第三册旁白",
-  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
-  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
-  "ref": "b3_narrator.wav"
- },
- "B4-L30:narrator": {
-  "name": "第三册旁白",
-  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
-  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
-  "ref": "b3_narrator.wav"
- },
- "B4-L31:narrator": {
-  "name": "第三册旁白",
-  "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
-  "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
-  "ref": "b3_narrator.wav"
- }
+  "narrator": {
+    "name": "旁白",
+    "instruct": "A calm, mature Russian male narrator in his forties, warm medium-low voice, standard Moscow pronunciation, clear and unhurried, like an audiobook for language learners.",
+    "ref_text": "Это было в понедельник утром. Студенты шли в университет, а на улице светило солнце.",
+    "ref": "narrator.wav"
+  },
+  "ван лэй": {
+    "name": "王磊",
+    "instruct": "A 20-year-old Chinese male student speaking Russian with a slight Chinese accent. Gentle, polite, a little shy, clear articulation, moderate pace.",
+    "ref_text": "Здравствуйте! Меня зовут Ван Лэй. Я из Китая, я учусь в Москве.",
+    "ref": "wanglei.wav"
+  },
+  "иван сергеевич": {
+    "name": "伊万",
+    "instruct": "A 50-year-old Russian man, an engineer and father. Deep low baritone, calm, good-humoured, native Moscow Russian.",
+    "ref_text": "Ну что, все готовы? Тогда поехали, а то опоздаем на поезд.",
+    "ref": "ivan.wav"
+  },
+  "мария николаевна": {
+    "name": "玛丽亚",
+    "instruct": "A 47-year-old Russian woman, a doctor and mother. Warm, caring alto voice, composed and kind, native Russian.",
+    "ref_text": "Дети, ужин готов! Мойте руки и садитесь за стол.",
+    "ref": "maria.wav"
+  },
+  "анна": {
+    "name": "安娜",
+    "instruct": "A young Russian woman around twenty, studies at university. Warm, rich and resonant voice, speaks clearly and fairly loudly, mature for her age, cheerful and open, native Russian.",
+    "ref_text": "Привет! Пойдём сегодня в кино? Я уже купила билеты.",
+    "ref": "anna.wav"
+  },
+  "миша": {
+    "name": "米沙",
+    "instruct": "A 13-year-old Russian schoolboy. High youthful boyish voice, playful, quick and mischievous, native Russian.",
+    "ref_text": "Мама, можно я пойду играть в футбол? Я уже сделал уроки!",
+    "ref": "misha.wav"
+  },
+  "ольга викторовна": {
+    "name": "奥莉加老师",
+    "instruct": "A 40-year-old Russian female language teacher. Clear, articulate, encouraging, slightly formal, slow and precise diction, native Russian.",
+    "ref_text": "Откройте, пожалуйста, учебники. Сегодня у нас новая тема.",
+    "ref": "olga.wav"
+  },
+  "юми": {
+    "name": "由美",
+    "instruct": "A 20-year-old Japanese female student speaking Russian with a light Japanese accent. Soft, gentle, polite, slightly high-pitched voice.",
+    "ref_text": "Извините, я не поняла. Повторите, пожалуйста, ещё раз.",
+    "ref": "yumi.wav"
+  },
+  "пьер": {
+    "name": "皮埃尔",
+    "instruct": "A 21-year-old French male student speaking Russian with a light French accent. Cheerful, relaxed, charming, medium pitch.",
+    "ref_text": "Привет, друзья! Я очень люблю Москву, особенно зимой.",
+    "ref": "pierre.wav"
+  },
+  "дима": {
+    "name": "季马",
+    "instruct": "A 20-year-old Russian male student. Confident, casual, energetic tenor voice, speaks a bit fast, native Russian.",
+    "ref_text": "Слушай, давай после пар сходим в спортзал, а потом поужинаем.",
+    "ref": "dima.wav"
+  },
+  "катя": {
+    "name": "卡佳",
+    "instruct": "A 19-year-old Russian female student, Anna's friend. Light, quick, chatty voice, playful and warm, native Russian.",
+    "ref_text": "Ой, привет! Как хорошо, что ты позвонила. Я как раз хотела тебе рассказать новость.",
+    "ref": "katya.wav"
+  },
+  "бабушка": {
+    "name": "外婆",
+    "instruct": "A Russian grandmother in her late seventies. Soft, slightly creaky elderly female voice, kind and unhurried, native Russian.",
+    "ref_text": "Садитесь, садитесь, я пирогов напекла. Кушайте, пока горячие.",
+    "ref": "babushka.wav"
+  },
+  "B2-L39:бабушка": {
+    "name": "季马的奶奶",
+    "instruct": "A Russian grandmother around seventy from a town on the Volga. Lively, hearty elderly female voice, talkative and welcoming, native Russian.",
+    "ref_text": "Ну наконец-то приехали! Проходите в дом, я вас целый день жду.",
+    "ref": "babushka2.wav"
+  },
+  "продавец": {
+    "name": "售货员（男）",
+    "instruct": "A Russian male shop assistant in his thirties. Polite, matter-of-fact, clear voice, medium pitch, native Russian.",
+    "ref_text": "Добрый день! Что вы хотите? Эта книга стоит пятьсот рублей.",
+    "ref": "prodavets.wav"
+  },
+  "продавщица": {
+    "name": "售货员（女）",
+    "instruct": "A Russian female shop assistant in her forties. Brisk, friendly, practical voice, native Russian.",
+    "ref_text": "Пожалуйста, выбирайте. Яблоки сегодня очень хорошие, недорогие.",
+    "ref": "prodavshchitsa.wav"
+  },
+  "хосе": {
+    "name": "何塞",
+    "instruct": "A 24-year-old male student from Spain speaking Russian with a noticeable Spanish accent. Warm, outgoing, expressive, medium-low voice.",
+    "ref_text": "Привет! Меня зовут Хосе, я из Испании. Я очень люблю футбол и музыку.",
+    "ref": "jose.wav"
+  },
+  "наталья игоревна": {
+    "name": "娜塔莉娅（季马妈妈）",
+    "instruct": "A Russian woman around fifty, Dima's mother, from a town on the Volga. Warm, hospitable, gentle voice, native Russian.",
+    "ref_text": "Дима, как ты вырос! Ребята, раздевайтесь, сейчас будем обедать.",
+    "ref": "natalya.wav"
+  },
+  "андрей петрович": {
+    "name": "安德烈（季马爸爸）",
+    "instruct": "A Russian man in his fifties, Dima's father. Sturdy, friendly baritone, a bit jokey, native Russian.",
+    "ref_text": "Ну, здравствуйте, гости дорогие! Давайте ваши сумки, машина вон там.",
+    "ref": "andrey.wav"
+  },
+  "женщина": {
+    "name": "女路人",
+    "instruct": "A Russian woman in her thirties, a passer-by. Neutral, polite, clear everyday voice, native Russian.",
+    "ref_text": "Извините, я не знаю. Спросите, пожалуйста, вон там, в киоске.",
+    "ref": "zhenshchina.wav"
+  },
+  "мужчина": {
+    "name": "男路人",
+    "instruct": "A Russian man in his forties, a passer-by. Neutral, helpful, ordinary male voice, native Russian.",
+    "ref_text": "Идите прямо, потом налево. Там будет остановка автобуса.",
+    "ref": "muzhchina.wav"
+  },
+  "девушка": {
+    "name": "姑娘",
+    "instruct": "A Russian young woman about twenty, a passer-by. Light, friendly, quick voice, native Russian.",
+    "ref_text": "Это совсем близко, пять минут пешком. Я тоже туда иду.",
+    "ref": "devushka.wav"
+  },
+  "вера": {
+    "name": "薇拉（新邻居）",
+    "instruct": "A Russian woman in her early thirties, a new neighbour and young mother. Pleasant, slightly shy, friendly voice, native Russian.",
+    "ref_text": "Добрый вечер! Извините, что беспокоим. Мы ваши новые соседи.",
+    "ref": "vera.wav"
+  },
+  "врач": {
+    "name": "医生",
+    "instruct": "A Russian female doctor in her fifties. Calm, professional, reassuring, slightly authoritative voice, native Russian.",
+    "ref_text": "Садитесь, пожалуйста. Что у вас болит? Откройте рот, скажите «а».",
+    "ref": "vrach.wav"
+  },
+  "лиза": {
+    "name": "丽莎（奥莉加老师的女儿）",
+    "instruct": "A 20-year-old Russian woman, a drama-school student. Expressive, bright, artistic voice with clear stage diction, native Russian.",
+    "ref_text": "Очень приятно! Мама много рассказывала о вас.",
+    "ref": "liza.wav"
+  },
+  "дядя петя": {
+    "name": "彼佳叔叔",
+    "instruct": "A Russian man about sixty, Ivan's uncle-like relative at a family party. Loud, jovial, hearty voice, native Russian.",
+    "ref_text": "Ну, Ваня, с юбилеем тебя! Пятьдесят лет, а ты всё как мальчик!",
+    "ref": "dyadya_petya.wav"
+  },
+  "елена борисовна": {
+    "name": "叶莲娜（舞蹈老师）",
+    "instruct": "A Russian female dance teacher in her forties. Energetic, rhythmic, encouraging voice with clear commands, native Russian.",
+    "ref_text": "Встали в пары! Раз, два, три, раз, два, три. Молодцы, очень хорошо!",
+    "ref": "elena.wav"
+  },
+  "пётр михайлович": {
+    "name": "彼得（圣像画师）",
+    "instruct": "A Russian icon painter in his sixties. Slow, deep, thoughtful and gentle male voice, native Russian.",
+    "ref_text": "Иконы не рисуют, их пишут. Это старая традиция.",
+    "ref": "pyotr.wav"
+  },
+  "лена": {
+    "name": "列娜",
+    "instruct": "A 20-year-old Russian female student from a provincial town. Cheerful, curious, open voice, native Russian.",
+    "ref_text": "Очень приятно! А правда, что в Пекине живёт двадцать миллионов человек?",
+    "ref": "lena.wav"
+  },
+  "рустам": {
+    "name": "鲁斯塔姆",
+    "instruct": "A 20-year-old Russian young man, Dima's school friend from a town on the Volga. Easygoing, warm, energetic voice, native Russian.",
+    "ref_text": "Привет! Я ненадолго. Приезжайте завтра к нам на дачу!",
+    "ref": "rustam.wav"
+  },
+  "рыбак": {
+    "name": "渔夫",
+    "instruct": "An old Russian fisherman around seventy on the Volga. Gravelly, calm, unhurried, folksy male voice, native Russian.",
+    "ref_text": "Рыба сегодня плохо клюёт. Вот вчера был улов, а сегодня тишина.",
+    "ref": "rybak.wav"
+  },
+  "вера колосова": {
+    "name": "薇拉·科洛索娃（作家）",
+    "instruct": "A Russian woman writer in her fifties. Thoughtful, articulate, warm voice, speaks with measured intonation, native Russian.",
+    "ref_text": "Спасибо, что пришли. Для писателя самое главное — его читатели.",
+    "ref": "vera_kolosova.wav"
+  },
+  "сотрудница": {
+    "name": "女职员",
+    "instruct": "A Russian female office worker in her thirties. Polite, efficient, slightly formal voice, native Russian.",
+    "ref_text": "Ваш паспорт, пожалуйста. Заполните эту анкету и подождите минуту.",
+    "ref": "sotrudnitsa.wav"
+  },
+  "костя": {
+    "name": "科斯佳（米沙的同学）",
+    "instruct": "A 13-year-old Russian schoolboy, Misha's classmate. Youthful boyish voice, a bit shy but friendly, native Russian.",
+    "ref_text": "Привет! Можно к вам? Я принёс новую игру.",
+    "ref": "kostya.wav"
+  },
+  "официантка": {
+    "name": "女服务员",
+    "instruct": "A Russian waitress in her twenties. Friendly, quick, polite service voice, native Russian.",
+    "ref_text": "Добрый вечер! Вот меню. Что будете заказывать?",
+    "ref": "ofitsiantka.wav"
+  },
+  "официант": {
+    "name": "男服务员",
+    "instruct": "A Russian waiter in his thirties. Courteous, smooth, professional voice, native Russian.",
+    "ref_text": "Добрый вечер! Пожалуйста, ваш столик у окна. Вот меню.",
+    "ref": "ofitsiant.wav"
+  },
+  "олег петрович": {
+    "name": "奥列格（伊万的老友）",
+    "instruct": "A Russian man about fifty, Ivan's old friend from institute. Warm, nostalgic, humorous baritone, native Russian.",
+    "ref_text": "Ваня, ты помнишь нашу первую практику? Сколько лет прошло!",
+    "ref": "oleg.wav"
+  },
+  "B3:narrator": {
+    "name": "第三册旁白",
+    "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+    "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+    "ref": "b3_narrator.wav"
+  },
+  "B3-L44:narrator": {
+    "name": "新闻主播",
+    "instruct": "A professional Russian male TV news anchor in his forties, crisp, confident and neutral, formal broadcast intonation, precise diction, brisk but clear pace.",
+    "ref_text": "Добрый вечер. В Москве сегодня открылись новые станции метро. Подробности в нашем репортаже.",
+    "ref": "news.wav"
+  },
+  "B4-L25:narrator": {
+    "name": "新闻主播",
+    "instruct": "A professional Russian male TV news anchor in his forties, crisp, confident and neutral, formal broadcast intonation, precise diction, brisk but clear pace.",
+    "ref_text": "Добрый вечер. В Москве сегодня открылись новые станции метро. Подробности в нашем репортаже.",
+    "ref": "news.wav"
+  },
+  "B4:narrator": {
+    "name": "第四册旁白",
+    "instruct": "A mature Russian male audiobook reader around sixty, deep velvety baritone, expressive and artistic, classic Moscow stage pronunciation, reads classical Russian literature with feeling and natural pauses, unhurried.",
+    "ref_text": "Была поздняя осень. Над рекой стоял туман, и в старом саду тихо падали последние листья.",
+    "ref": "b4_narrator.wav"
+  },
+  "B4:poem": {
+    "name": "诗歌朗诵",
+    "instruct": "A Russian male poetry reciter in his fifties, rich resonant baritone, solemn and lyrical, classic recitation style with a clear rhythm, measured pace and expressive pauses at the end of each line.",
+    "ref_text": "Белеет парус одинокой в тумане моря голубом. Что ищет он в стране далёкой? Что кинул он в краю родном?",
+    "ref": "poem.wav"
+  },
+  "B4-L13:poem": {
+    "name": "马雅可夫斯基朗诵",
+    "instruct": "A young Russian male poet in his twenties reciting futurist poetry, powerful loud oratorical voice, bold, passionate and rhythmic, emphatic declamation like on a public stage.",
+    "ref_text": "Вашу мысль, мечтающую на размягчённом мозгу, буду дразнить об окровавленный сердца лоскут.",
+    "ref": "mayakovsky.wav"
+  },
+  "B4-L29:narrator": {
+    "name": "毕业典礼致辞",
+    "instruct": "A Russian male university rector in his late fifties giving a commencement speech, warm, dignified and inspiring, confident public-speaking voice, clear articulation, measured pace.",
+    "ref_text": "Дорогие выпускники! Сегодня у вас начинается новая жизнь. Я от всей души поздравляю вас.",
+    "ref": "rector.wav"
+  },
+  "B4-L26:narrator": {
+    "name": "第三册旁白",
+    "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+    "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+    "ref": "b3_narrator.wav"
+  },
+  "B4-L27:narrator": {
+    "name": "第三册旁白",
+    "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+    "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+    "ref": "b3_narrator.wav"
+  },
+  "B4-L28:narrator": {
+    "name": "第三册旁白",
+    "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+    "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+    "ref": "b3_narrator.wav"
+  },
+  "B4-L30:narrator": {
+    "name": "第三册旁白",
+    "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+    "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+    "ref": "b3_narrator.wav"
+  },
+  "B4-L31:narrator": {
+    "name": "第三册旁白",
+    "instruct": "A clear, warm Russian female narrator in her mid-thirties, standard Moscow pronunciation, friendly and articulate, like a documentary or educational audiobook for advanced language learners, moderate pace.",
+    "ref_text": "Москва стоит на семи холмах. Каждый год сюда приезжают миллионы людей, чтобы увидеть её музеи и старые улицы.",
+    "ref": "b3_narrator.wav"
+  },
+  "zh_gloss": {
+    "name": "中文释义",
+    "language": "Chinese",
+    "instruct": "A calm, gentle Chinese female voice in her thirties, standard Mandarin (Putonghua), soft and unhurried, suitable for bedtime vocabulary review.",
+    "ref_text": "今天我们复习这一课的生词，请跟着慢慢听。",
+    "ref": "zh_gloss.wav"
+  }
 }

@@ -5,6 +5,7 @@
     python tools/tts.py L89            # 一课或几课
     python tools/tts.py --book 1       # 整册（第一册、第二册……）
     python tools/tts.py --all          # 第一、二册全部
+    python tools/tts.py --vocab L01 L02 # 生词朗读：俄语词—中文释义—俄语词，输出 audio/vocab/<课号>.mp3
     选项：--device cuda|cpu（默认有显卡就用）  --force（已有的 mp3 也重录）  --batch N（每批句数，默认 8）
 
 输出 audio/<课号>.mp3。安装和说明见 tts/README.md。
@@ -104,7 +105,7 @@ class Voices:
         for k in todo:
             v = self.cfg[k]
             torch.manual_seed(1234)
-            wavs, sr = m.generate_voice_design(text=v["ref_text"], instruct=v["instruct"], language="Russian")
+            wavs, sr = m.generate_voice_design(text=v["ref_text"], instruct=v["instruct"], language=v.get("language", "Russian"))
             (TTS / "ref").mkdir(exist_ok=True)
             sf.write(TTS / "ref" / v["ref"], wavs[0], sr, subtype="PCM_16")
             print("  ", v["name"], v["ref"], flush=True)
@@ -220,11 +221,78 @@ def render(lesson, voices, force, batch=8):
                         "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "64k", str(out)], check=True)
     print(lesson, f"{len(audio) / sr:.0f} 秒", out.relative_to(ROOT), flush=True)
 
+# ---------- 生词朗读 ----------
+
+VOCAB_GAP = {"ru": 1.0, "zh": 1.0, "word": 2.0}
+
+
+def vocab_items(lesson):
+    """生词表 → [(俄语词, 中文释义)]：形容词只读阳性形式，释义去掉括号注解和俄语。"""
+    import exercises
+    out = []
+    for word, _pos, gloss in exercises.lesson_vocab(lesson):
+        ru = re.search(r"\[(.+?)\]\{\.ru\}", word).group(1)
+        ru = re.split(r",\s*-", ru)[0].strip()            # ка́ждый, -ая, -ое, -ые → ка́ждый
+        zh = re.sub(r"\[[^\]]*\]\{[^}]*\}", "", gloss)
+        zh = zh.split("：")[0]                                # 冒号后是用例，不读
+        zh = re.sub(r"（\s*\+[^）]*）|（复数）", "", zh)         # （+ 第六格）一类语法标注不读
+        zh = re.sub(r"\([^)]*\)", "", zh)                  # 半角括号里是语法标注，不读
+        zh = zh.replace("……", "")
+        zh = re.sub(r"（([^）]*)）", r"\1", zh)               # （步行）去 → 步行去
+        zh = re.sub(r"^新义[：:]", "", zh).strip(" ；;，,")
+        zh = re.sub(r"\s*[；;]\s*", "；", zh)
+        if ru and zh:
+            out.append((ru, zh))
+    return out
+
+
+def render_vocab(lesson, voices, force, batch=8):
+    out = ROOT / "audio" / "vocab" / f"{lesson}.mp3"
+    if out.exists() and not force:
+        print(lesson, "生词已有，跳过")
+        return
+    items = vocab_items(lesson)
+    if not items:
+        print(lesson, "没有生词表，跳过")
+        return
+    ru_key, zh_key = voices.key(lesson, "narrator"), "zh_gloss"
+    voices.ensure_refs({ru_key, zh_key})
+    import numpy as np
+    import soundfile as sf
+    import torch
+
+    def synth(texts, key, lang):
+        res = []
+        for k in range(0, len(texts), batch):
+            torch.manual_seed(SEED)
+            wavs, sr = voices.clone.generate_voice_clone(
+                text=texts[k:k + batch], language=lang,
+                voice_clone_prompt=[item for _ in texts[k:k + batch] for item in voices.prompt(key)])
+            res += [np.asarray(w, dtype=np.float32) for w in wavs]
+        return res, sr
+
+    ru, sr = synth([r for r, _ in items], ru_key, "Russian")
+    zh, _ = synth([z for _, z in items], zh_key, "Chinese")
+    sil = lambda t: np.zeros(int(sr * t), dtype=np.float32)
+    pieces = [sil(0.5)]
+    for a, b in zip(ru, zh):   # 俄语词 — 中文释义 — 俄语词
+        pieces += [a, sil(VOCAB_GAP["ru"]), b, sil(VOCAB_GAP["zh"]), a, sil(VOCAB_GAP["word"])]
+    audio = np.concatenate(pieces)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        wav = Path(tmpdir) / "audio.wav"
+        sf.write(wav, audio, sr)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-af", "loudnorm=I=-18",
+                        "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "64k", str(out)], check=True)
+    print(lesson, f"生词 {len(items)} 个，{len(audio) / sr:.0f} 秒", out.relative_to(ROOT), flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("lessons", nargs="*")
     ap.add_argument("--book", type=int, action="append", default=[])
     ap.add_argument("--all", action="store_true")
+    ap.add_argument("--vocab", action="store_true", help="读生词表而不是课文")
     ap.add_argument("--device")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--batch", type=int, default=8, help="一次送进模型的句数，显存不够就调小")
@@ -241,7 +309,7 @@ def main():
 
     voices = Voices(device, dtype)
     for c in codes:
-        render(c, voices, a.force, a.batch)
+        (render_vocab if a.vocab else render)(c, voices, a.force, a.batch)
     if voices.missing:
         print("以下说话人没有在 tts/voices.json 里配置音色，暂用旁白音色：", "、".join(sorted(voices.missing)))
 
