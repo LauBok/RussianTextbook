@@ -2,7 +2,7 @@ name: Pages
 on:
   push:
     branches: [main]
-    paths: ["audio/**", "dist/**", "lessons/**", "tools/site.py", ".github/workflows/pages.yml"]
+    paths: ["audio/**", "dist/**", "lessons/**", "tools/site.py", "tools/words.py", "words/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,10 +24,12 @@ jobs:
           python-version: "3.11"
       - run: pip install pyyaml pymorphy3
       - run: python tools/site.py
+      - run: python tools/words.py
       - name: Assemble site
         run: |
           mkdir -p _site/dist
           cp site/index.html _site/
+          cp -r site/words _site/
           cp -r audio _site/
           cp dist/*.pdf _site/dist/
           touch _site/.nojekyll

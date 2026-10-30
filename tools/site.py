@@ -90,7 +90,7 @@ def main():
         total += k
         secs.append(f'<h2 id="b{n}">{book.BOOK_NAME[n]}</h2><p class="count">{book.COVER_SUB[n]} · {k} 课录音</p>{body}')
     pdfs = "".join(f'<a href="{p}" download>{esc(t)}<span>PDF · {mb(p)}</span></a>' for t, p in PDFS if (ROOT / p).exists())
-    nav = "".join(f'<a href="#b{n}">{book.BOOK_NAME[n]}</a>' for n in (1, 2, 3, 4)) + '<a href="#pdf">PDF 下载</a>'
+    nav = "".join(f'<a href="#b{n}">{book.BOOK_NAME[n]}</a>' for n in (1, 2, 3, 4)) + '<a href="#pdf">PDF 下载</a><a href="words/">背单词</a>'
     page = (f'<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width, initial-scale=1"><title>俄语教程 课文朗读</title>'
             f'<style>{CSS}</style></head><body><main><h1>俄语教程</h1>'

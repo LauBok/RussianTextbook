@@ -5,6 +5,7 @@
     python tools/tts.py L89            # 一课或几课
     python tools/tts.py --book 1       # 整册（第一册、第二册……）
     python tools/tts.py --all          # 第一、二册全部
+    python tools/tts.py --words L01 L02 # 每个生词单独发音 audio/words/<课号>-<序号>.mp3（背单词网页用）
     python tools/tts.py --vocab L01 L02 # 生词朗读：俄语词—中文释义—俄语词，输出 audio/vocab/<课号>.mp3
     选项：--device cuda|cpu（默认有显卡就用）  --force（已有的 mp3 也重录）  --batch N（每批句数，默认 8）
 
@@ -287,12 +288,51 @@ def render_vocab(lesson, voices, force, batch=8):
     print(lesson, f"生词 {len(items)} 个，{len(audio) / sr:.0f} 秒", out.relative_to(ROOT), flush=True)
 
 
+def word_list(lesson):
+    """生词表逐行的俄语词（序号从 1 起，与 tools/words.py 的词条 id 一致）。"""
+    import exercises
+    out = []
+    for k, (word, _pos, _gloss) in enumerate(exercises.lesson_vocab(lesson), 1):
+        ru = re.search(r"\[(.+?)\]\{\.ru\}", word).group(1)
+        out.append((k, re.split(r",\s*-", ru)[0].strip()))
+    return out
+
+
+def render_words(lesson, voices, force, batch=8):
+    """每个生词单独一个俄语发音：audio/words/<课号>-<序号>.mp3（背单词网页用）。"""
+    todo = [(k, w) for k, w in word_list(lesson)
+            if force or not (ROOT / "audio" / "words" / f"{lesson}-{k:02d}.mp3").exists()]
+    if not todo:
+        print(lesson, "单词发音已有，跳过")
+        return
+    key = voices.key(lesson, "narrator")
+    voices.ensure_refs({key})
+    import soundfile as sf
+    import torch
+    (ROOT / "audio" / "words").mkdir(parents=True, exist_ok=True)
+    for i in range(0, len(todo), batch):
+        part = todo[i:i + batch]
+        torch.manual_seed(SEED)
+        wavs, sr = voices.clone.generate_voice_clone(
+            text=[w for _, w in part], language="Russian",
+            voice_clone_prompt=[item for _ in part for item in voices.prompt(key)])
+        for (k, _), wav in zip(part, wavs):
+            with tempfile.TemporaryDirectory() as tmpdir:
+                tmp = Path(tmpdir) / "w.wav"
+                sf.write(tmp, wav, sr)
+                subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(tmp), "-af", "loudnorm=I=-16",
+                                "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "48k",
+                                str(ROOT / "audio" / "words" / f"{lesson}-{k:02d}.mp3")], check=True)
+    print(lesson, f"单词发音 {len(todo)} 个", flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("lessons", nargs="*")
     ap.add_argument("--book", type=int, action="append", default=[])
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--vocab", action="store_true", help="读生词表而不是课文")
+    ap.add_argument("--words", action="store_true", help="每个生词单独一个发音文件（背单词网页用）")
     ap.add_argument("--device")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--batch", type=int, default=8, help="一次送进模型的句数，显存不够就调小")
@@ -309,7 +349,7 @@ def main():
 
     voices = Voices(device, dtype)
     for c in codes:
-        (render_vocab if a.vocab else render)(c, voices, a.force, a.batch)
+        (render_words if a.words else render_vocab if a.vocab else render)(c, voices, a.force, a.batch)
     if voices.missing:
         print("以下说话人没有在 tts/voices.json 里配置音色，暂用旁白音色：", "、".join(sorted(voices.missing)))
 
