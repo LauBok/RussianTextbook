@@ -307,6 +307,7 @@ def render_words(lesson, voices, force, batch=8):
         return
     key = voices.key(lesson, "narrator")
     voices.ensure_refs({key})
+    import numpy as np
     import soundfile as sf
     import torch
     (ROOT / "audio" / "words").mkdir(parents=True, exist_ok=True)
