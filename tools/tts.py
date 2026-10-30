@@ -316,13 +316,16 @@ def render_words(lesson, voices, force, batch=8):
         wavs, sr = voices.clone.generate_voice_clone(
             text=[w for _, w in part], language="Russian",
             voice_clone_prompt=[item for _ in part for item in voices.prompt(key)])
-        for (k, _), wav in zip(part, wavs):
+        for (k, w), wav in zip(part, wavs):
+            out = ROOT / "audio" / "words" / f"{lesson}-{k:02d}.mp3"
             with tempfile.TemporaryDirectory() as tmpdir:
                 tmp = Path(tmpdir) / "w.wav"
-                sf.write(tmp, wav, sr)
-                subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(tmp), "-af", "loudnorm=I=-16",
-                                "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "48k",
-                                str(ROOT / "audio" / "words" / f"{lesson}-{k:02d}.mp3")], check=True)
+                sf.write(tmp, np.clip(np.nan_to_num(wav), -1, 1), sr)
+                r = subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(tmp), "-af", "loudnorm=I=-16",
+                                    "-ar", "24000", "-codec:a", "libmp3lame", "-b:a", "48k", str(out)])
+            if r.returncode or out.stat().st_size == 0:
+                out.unlink(missing_ok=True)          # 合成失败（多为单字母前置词）：这个词不放发音
+                print(lesson, k, w, "发音失败，跳过", flush=True)
     print(lesson, f"单词发音 {len(todo)} 个", flush=True)
 
 
