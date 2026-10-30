@@ -315,7 +315,7 @@ def render_words(lesson, voices, force, batch=8):
         part = todo[i:i + batch]
         torch.manual_seed(SEED)
         wavs, sr = voices.clone.generate_voice_clone(
-            text=[w for _, w in part], language="Russian",
+            text=[w + "." if len(w.replace("\u0301", "")) <= 6 else w for _, w in part], language="Russian",  # 短词加句号，否则常被截短
             voice_clone_prompt=[item for _ in part for item in voices.prompt(key)])
         for (k, w), wav in zip(part, wavs):
             out = ROOT / "audio" / "words" / f"{lesson}-{k:02d}.mp3"
