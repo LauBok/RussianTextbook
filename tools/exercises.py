@@ -58,6 +58,34 @@ def answer_lines(it):
     return max(6, -(-max(nums) // 8) + 1) if nums else 6
 
 
+def is_test(data):
+    """测试页（期中、期末，以及试卷册 exams/K*.yaml）：选项标 A B C D、大题可跨页。"""
+    return bool(re.search(r"(T[012]|K\d+)$", str(data.get("lesson", ""))))
+
+
+SUB = re.compile(r"^(.+?)（[一二三四五六七八九]）")
+
+
+def labels(data):
+    """大题题号：试卷册里“阅读理解（一）（二）……”同属一道大题，只在第一篇前写题号。"""
+    out, n, prev = [], 0, None
+    for ex in data["exercises"]:
+        m = SUB.match(ex["task"]) if re.search(r"K\d+$", str(data.get("lesson", ""))) else None
+        base = m.group(1) if m else None
+        if base and base == prev:
+            out.append("")
+        else:
+            out.append(NUM[n] + "、")
+            n += 1
+        prev = base
+    return out
+
+
+def pts(x):
+    """分值：1.5 → 1.5，30.0 → 30"""
+    return f"{x:g}"
+
+
 def scored(data):
     """测试题的 points（每小题分值）写进题目要求：“（每小题 2 分，共 20 分）”。只处理一次。"""
     if data.get("_scored"):
@@ -66,7 +94,7 @@ def scored(data):
         p = ex.get("points")
         if p:
             n = len(ex.get("items") or [])
-            ex["task"] = ex["task"].rstrip("。") + (f"（共 {p} 分）" if n == 1 else f"（每小题 {p} 分，共 {p * n} 分）")
+            ex["task"] = ex["task"].rstrip("。") + (f"（共 {pts(p)} 分）" if n == 1 else f"（每小题 {pts(p)} 分，共 {pts(p * n)} 分）")
     data["_scored"] = True
     return data
 
@@ -77,8 +105,8 @@ def pdf_exercises(data, img_dir):
     if data.get("intro"):
         out += [data["intro"], ""]
     for n, ex in enumerate(data["exercises"]):
-        head = f"[{NUM[n]}、{ex['task']}]{{.task}}"
-        long = ex.get("passage") or re.search(r"T[012]$", str(data.get("lesson", "")))   # 测试页的大题可以跨页
+        head = f"[{labels(data)[n]}{ex['task']}]{{.task}}"
+        long = ex.get("passage") or is_test(data)   # 测试页的大题可以跨页
         out += ["::: {.exercise .long}" if long else "::: exercise", head, ""]
         if ex.get("passage"):          # 阅读理解、完形填空的文章，放在本题要求之后
             out += ["::: passage", ex["passage"].strip(), ":::", ""]
@@ -93,7 +121,7 @@ def pdf_exercises(data, img_dir):
                 out += [f"![{i}](../{img_dir}/{it['image']})", ""]
             out += [":::"]
         elif t == "choice":
-            test = re.search(r"T[012]$", str(data.get("lesson", "")))
+            test = is_test(data)
             for i, it in enumerate(ex["items"], 1):
                 if test:      # 测试页：选项标 A B C D，按最长选项排成一行四个、两个或一个；完形填空没有题干
                     longest = max(_text_em(f"A. {o}", "option") for o in it["options"])
@@ -110,13 +138,15 @@ def pdf_exercises(data, img_dir):
                 out += [f"例：{ru(e['cue'])} → {ru(e['answer'])}", ""]
             for i, it in enumerate(ex["items"], 1):
                 out.append(f"{i}. {ru(it['cue'])}")
+        elif t == "fill" and ex.get("passage"):
+            pass                       # 语法填空：空和提示词都在文章里，小题只有答案
         elif t == "fill":
             for i, it in enumerate(ex["items"], 1):
                 hint = f" ({it['hint']})" if it.get("hint") else ""
                 out.append(f"{i}. {ru(blank(it['stem']) + hint)}")
         elif t == "translate":
             for i, it in enumerate(ex["items"], 1):
-                n_lines = it.get("lines") or (2 if len(it["zh"]) > 25 and re.search(r"T[012]$", str(data.get("lesson", ""))) else 1)
+                n_lines = it.get("lines") or (2 if len(it["zh"]) > 25 and is_test(data) else 1)
                 out += [f"{i}. {it['zh']}"] + ["   []{.line}"] * n_lines
         elif t == "open":
             for it in ex["items"]:
@@ -141,7 +171,7 @@ def key_markdown(data):
     data = scored(data)
     out = []
     for n, ex in enumerate(data["exercises"]):
-        out += [f"## {NUM[n]}、{ex['task'].rstrip('。')}", ""]
+        out += [f"## {labels(data)[n]}{ex['task'].rstrip('。')}", ""]
         t = ex["type"]
         if ex.get("passage_zh"):       # 测试页文章的参考译文放在答案里
             out += ["文章参考译文：", "", "::: prose-zh", ex["passage_zh"].strip(), ":::", ""]
@@ -157,7 +187,7 @@ def key_markdown(data):
                 out.append(f"{i}. {ru('— ' + it['qword'] + ' э́то? — ' + it['answer'][0])}")
             elif t == "choice":
                 k = it["options"].index(it["answer"]) if it["answer"] in it["options"] else -1
-                letter = f"{'ABCD'[k]}. " if re.search(r"T[012]$", str(data.get("lesson", ""))) and 0 <= k < 4 else ""
+                letter = f"{'ABCD'[k]}. " if is_test(data) and 0 <= k < 4 else ""
                 out.append(f"{i}. {letter}{ru(it['answer'])}")
             elif t in ("rewrite", "fill"):
                 out.append(f"{i}. {ru(it['accept'][0])}")

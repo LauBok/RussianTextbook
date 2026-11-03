@@ -35,3 +35,13 @@
 ## 答题空间
 
 开放题按 `length` 上限留横线（手写俄语约每行 8 词，至少 6 行）；翻译题题目超过 25 字留两行，否则一行（普通课的翻译题留 1 行）。需要别的行数时，在小题里写 `lines: N`（如俄译汉按汉字算，可直接指定）。
+
+## 试卷册（exams/K*.yaml）
+
+《第一册试卷》每套一个文件，`lesson` 写卷号（`K03`），卷级字段另有 `range`（考试范围，如 `L01-L29`）、`total`（满分）、`minutes`（时限）。题型同上：
+
+- 单项选择、完形填空、阅读理解用 `choice`；完形填空和阅读的文章写在 `passage`，参考译文写在 `passage_zh`。阅读的几篇各占一个题组，`task` 写成“阅读理解（一）：……”“阅读理解（二）：……”，排版时合为一道大题。
+- 语法填空用 `fill` 加 `passage`：空和括号里的提示词都写在文章里（`(1) []{.blank} (жить)`），小题只写 `accept`。
+- 汉译俄用 `translate`，补全对话、便条、续写用 `open`。
+
+写完运行 `python3 tools/check.py exams/K03.yaml`（只许用 range 末课及以前学过的词）、`python3 tools/exam.py --balance K03`（正确答案均匀分到 A B C D）、`python3 tools/exam.py --check`（查重复题干），排版 `python3 tools/exam.py` → `dist/第一册试卷.pdf`。

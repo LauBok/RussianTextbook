@@ -452,6 +452,9 @@ def ru_strings(v):
             yield from ru_strings(x)
 
 
+EXAM_KEYS = {"range", "total", "minutes"}   # 试卷册 exams/K*.yaml 的卷级字段
+
+
 def check_exercise_yaml(stem, path):
     """返回 (问题列表, [(位置, 俄语字符串)], [(位置, 中文字符串)])。"""
     probs, ru, zh = [], [], []
@@ -466,7 +469,7 @@ def check_exercise_yaml(stem, path):
     exs = data.get("exercises")
     if not isinstance(exs, list) or not exs:
         return probs + [("练习", "缺少 exercises 列表")], ru, zh
-    for k in set(data) - {"lesson", "exercises", "grammar", "heading", "intro"}:
+    for k in set(data) - {"lesson", "exercises", "grammar", "heading", "intro"} - (EXAM_KEYS if path.parent.name == "exams" else set()):
         probs.append(("练习", f"顶层多出字段 {k}"))
     for k in ("grammar", "heading", "intro"):
         if isinstance(data.get(k), str):
@@ -526,8 +529,8 @@ def check_exercise_yaml(stem, path):
                 probs.append(("练习", f"{iw}：小题应为映射"))
                 continue
             for k in spec["req"]:
-                if t == "choice" and k == "stem" and ex.get("passage"):
-                    continue            # 完形填空：空在文章里，小题只有选项
+                if t in ("choice", "fill") and k == "stem" and ex.get("passage"):
+                    continue            # 完形填空、语法填空：空在文章里，小题只有选项或答案
                 if it.get(k) in (None, "", []):
                     probs.append(("练习", f"{iw}：缺少 {k}"))
             for k in set(it) - set(spec["req"]) - set(spec.get("opt", [])):
@@ -536,7 +539,7 @@ def check_exercise_yaml(stem, path):
                 if k in it and k in spec["req"] and not (t == "choice" and k == "answer"):
                     if not isinstance(it[k], list):
                         probs.append(("练习", f"{iw}：{k} 应为列表"))
-            if t in ("choice", "fill") and "___" not in str(it.get("stem", "")) and not (t == "choice" and ex.get("passage")):
+            if t in ("choice", "fill") and "___" not in str(it.get("stem", "")) and not ex.get("passage"):
                 probs.append(("练习", f"{iw}：stem 里没有空位 ___"))
             if t == "choice" and isinstance(it.get("options"), list) and it.get("answer") not in it["options"]:
                 probs.append(("练习", f"{iw}：answer 不在 options 里"))
@@ -888,7 +891,63 @@ def check_grammar(paths):
     return total
 
 
+def check_exams(paths):
+    """试卷册 exams/K*.yaml：书写、ё、{.ru} 标记、题目格式，以及只用 range 末课及以前学过的词。"""
+    lessons = [Lesson(b, lid, p) for (b, lid), p in lesson_files()]
+    checker = Checker(lessons)
+    total = 0
+    for path in paths:
+        stem = path.stem
+        data = load_yaml(path.read_text(encoding="utf-8")) or {}
+        last = str(data.get("range", "")).split("-")[-1]
+        idx = next((k for k, les in enumerate(lessons) if les.book == 1 and les.id == last), None)
+        out = []
+        if idx is None:
+            out.append((None, "练习", f"range 应写成 L01-L29 这样，实为 {data.get('range')!r}"))
+            idx = len(lessons) - 1
+        known = Lexicon()
+        for lx in checker.own[:idx + 1]:
+            known.update(lx)
+        probs, ru, zh = check_exercise_yaml(stem, path)
+        out += [(None, c, m) for c, m in probs]
+        agg, used = {}, set()
+        for where, s in ru:
+            for w, morpheme in tokens(drop_titles(s)):
+                for cat, msg in check_word(w, morpheme, True):
+                    out.append((where, cat, msg))
+                if morpheme:
+                    continue
+                y = yo_problem(w, checker.everything)
+                if y:
+                    out.append((where, "ё", f"{w}：应写作 {y}"))
+                checker.check_vocab_use(w, where, idx, known, agg, used)
+        for where, s in zh:
+            segs, rest = ru_segments(s)
+            if CYR.search(rest):
+                out.append((where, "标记", f"俄语没有放在 {{.ru}} 里：{'、'.join(sorted(set(WORD.findall(nfc(rest)))))}"))
+            for seg in segs:
+                for w, morpheme in tokens(seg):
+                    for cat, msg in check_word(w, morpheme, True):
+                        out.append((where, cat, msg))
+        for w, later, places in agg.values():
+            out.append((None, "提前使用" if later else "漏列",
+                        f"{w}：" + (f"到 {later} 才列为新词" if later else "没有列入任何一课的词表") + f"（{'、'.join(places)}）"))
+        print(f"== {path.name}（范围 {data.get('range')}，{len(out)} 个问题）")
+        for where, cat, msg in out:
+            print(f"  {where + '：' if where else ''}[{cat}] {msg}")
+        print()
+        total += len(out)
+    print(f"共 {total} 个问题")
+    return total
+
+
 def main(argv):
+    if argv and all(a.rstrip("/").startswith("exams") for a in argv):
+        paths = []
+        for a in argv:
+            p = ROOT / a
+            paths += sorted(p.glob("K*.yaml")) if p.is_dir() else [p]
+        return check_exams(paths)
     if argv and all(a.rstrip("/").startswith("grammar") for a in argv):
         paths = []
         for a in argv:
