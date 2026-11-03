@@ -149,9 +149,10 @@ def pdf_exercises(data, img_dir):
                 n_lines = it.get("lines") or (2 if len(it["zh"]) > 25 and is_test(data) else 1)
                 out += [f"{i}. {it['zh']}"] + ["   []{.line}"] * n_lines
         elif t == "open":
-            for it in ex["items"]:
+            many = len(ex["items"]) > 1
+            for i, it in enumerate(ex["items"], 1):
                 n_lines = answer_lines(it)
-                out += [it["prompt"], ""] + ["[]{.line}"] * n_lines + [""]
+                out += [(f"（{i}）" if many else "") + it["prompt"], ""] + ["[]{.line}"] * n_lines + [""]
         out += [":::", ""]
     return "\n".join(out)
 
@@ -192,13 +193,17 @@ def key_markdown(data):
             elif t in ("rewrite", "fill"):
                 out.append(f"{i}. {ru(it['accept'][0])}")
             elif t == "open":
-                out += ["参考范文：", "", "::: {.prose lang=\"ru\"}", it["model"].strip(), ":::", "",
+                out += [(f"（{i}）" if len(ex["items"]) > 1 else "") + "参考范文：", "", "::: {.prose lang=\"ru\"}", it["model"].strip(), ":::", "",
                         f"[要点：{it['notes']}]{{.why}}", ""]
+                if is_test(data) and it.get("rubric"):        # 测试卷自己批改：列出评分标准
+                    out += ["[评分标准]{.why-head}", ""] + [f"- [{r}]{{.why}}" for r in it["rubric"]] + [""]
             elif t == "translate":
                 alt = it["accept"][1:]
                 line = f"{i}. {ru(it['accept'][0])}"
                 if alt:
                     line += "　也可：" + "；".join(ru(a) for a in alt)
+                if is_test(data) and it.get("rubric"):
+                    line += "　[" + "；".join(str(r) for r in it["rubric"]) + "]{.why}"
                 out.append(line)
         if short:
             out += ["", ":::", ""]

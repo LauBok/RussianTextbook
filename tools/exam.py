@@ -188,7 +188,7 @@ def flow(xs):
     out = []
     for x in xs:
         x = str(x)
-        if re.search(r"[,:#\[\]{}]|^['\"&*!|>%@`-]", x):
+        if re.search(r"[,:#\[\]{}]|^['\"&*!|>%@`-]", x) or not isinstance(yaml.safe_load(x), str):   # 13.30、да 之类会被读成数字或布尔
             x = "'" + x.replace("'", "''") + "'"
         out.append(x)
     return "[" + ", ".join(out) + "]"
