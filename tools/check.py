@@ -900,7 +900,7 @@ def check_exams(paths):
         stem = path.stem
         data = load_yaml(path.read_text(encoding="utf-8")) or {}
         last = str(data.get("range", "")).split("-")[-1]
-        idx = next((k for k, les in enumerate(lessons) if les.book == 1 and les.id == last), None)
+        idx = next((k for k, les in enumerate(lessons) if les.book == 1 and re.fullmatch(r"L\d+", les.id) and re.fullmatch(r"L\d+", last) and int(les.id[1:]) == int(last[1:])), None)
         out = []
         if idx is None:
             out.append((None, "练习", f"range 应写成 L01-L29 这样，实为 {data.get('range')!r}"))
