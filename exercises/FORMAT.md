@@ -48,4 +48,4 @@
 - 语法填空用 `fill` 加 `passage`：空和括号里的提示词都写在文章里（`(1) []{.blank} (жить)`），小题只写 `accept`。
 - 汉译俄用 `translate`，补全对话、便条、续写用 `open`。
 
-写完运行 `python3 tools/check.py exams/K03.yaml`（只许用 range 末课及以前学过的词）、`python3 tools/exam.py --balance K03`（正确答案均匀分到 A B C D）、`python3 tools/exam.py --check`（查重复题干），排版 `python3 tools/exam.py` → `dist/第一册试卷.pdf`。
+写完按 `docs/试卷审题标准.md` 逐题、逐套审一遍（这是判断卷子好坏的依据）；程序检查只作参考：运行 `python3 tools/check.py exams/K03.yaml`（只许用 range 末课及以前学过的词）、`python3 tools/exam.py --balance K03`（正确答案均匀分到 A B C D）、`python3 tools/exam.py --check`（查重复题干），排版 `python3 tools/exam.py` → `dist/第一册试卷.pdf`。
