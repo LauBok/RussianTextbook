@@ -452,7 +452,7 @@ def ru_strings(v):
             yield from ru_strings(x)
 
 
-EXAM_KEYS = {"range", "total", "minutes"}   # 试卷册 exams/K*.yaml 的卷级字段
+EXAM_KEYS = {"range", "total", "minutes", "names"}   # names：卷中新人名、地名，不算生词   # 试卷册 exams/K*.yaml 的卷级字段
 
 
 def check_exercise_yaml(stem, path):
@@ -915,6 +915,8 @@ def check_exams(paths):
             known.update(lx)
         probs, ru, zh = check_exercise_yaml(stem, path)
         out += [(None, c, m) for c, m in probs]
+        for n in data.get("names") or []:
+            known.add(str(n), proper=True)
         for ex in data.get("exercises") or []:      # 随文注出的生词算已知
             for g in ex.get("glossary") or []:
                 if isinstance(g, dict) and g.get("ru"):
