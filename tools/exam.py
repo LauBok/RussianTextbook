@@ -88,6 +88,7 @@ def short_task(task):
 def paper_html(code, data):
     md = exercises.pdf_exercises(data, f"img/{code}")
     md = md.split("\n", 2)[2] if md.startswith("## ") else md         # 卷名由卷头写
+    md = exercises.speaker_widths(md)                                # 对话的说话人栏按最长的名字定宽
     pts = sum_points(data)
     if data.get("total") and abs(sum(pts) - data["total"]) > 1e-6:
         print(f"  {code}：各题分值合计 {sum(pts):g}，与 total {data['total']} 不符")
@@ -114,7 +115,7 @@ def paper_html(code, data):
 def key_html(code, data):
     md = f"<h2 class='key-paper'>{html.escape(data['heading'])}</h2>\n\n" + exercises.key_markdown(data)
     md = re.sub(r"^## ", "### ", md, flags=re.M)
-    return book.pandoc(md, code + "k")
+    return book.pandoc(exercises.speaker_widths(md), code + "k")
 
 
 def build(only=None):
