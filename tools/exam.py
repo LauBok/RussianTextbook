@@ -40,6 +40,8 @@ table.score .sub { display: block; font-weight: 400; color: var(--muted); font-s
 h2.key-paper { font: 700 14pt "PT Sans", "CJK Sans"; margin: 18pt 0 4pt; border-bottom: .8pt solid var(--accent); padding-bottom: 2pt; break-after: avoid; }
 section.answers h2:not(.key-paper) { font-size: 11pt; }
 section.howto { break-before: page; }
+.glossary { font-size: 9pt; color: var(--muted); margin: -2pt 0 6pt 8pt; }
+.glossary p { margin: 0; }
 """
 
 HOWTO = """

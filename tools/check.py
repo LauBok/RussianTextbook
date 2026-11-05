@@ -497,7 +497,7 @@ def check_exercise_yaml(stem, path):
             probs.append(("练习", f"{where}：缺少 task"))
         if t in WHY_REQUIRED and not ex.get("why"):
             probs.append(("练习", f"{where}：封闭题缺少解析 why"))
-        allowed = {"id", "type", "task", "why", "items", "example", "placeholder", "points", "passage", "passage_zh"}
+        allowed = {"id", "type", "task", "why", "items", "example", "placeholder", "points", "passage", "passage_zh", "glossary"}
         if "points" in ex and not (isinstance(ex["points"], (int, float)) and ex["points"] > 0):
             probs.append(("练习", f"{where}：points 应为正数（每小题分值）"))
         for k in set(ex) - allowed:
@@ -505,6 +505,11 @@ def check_exercise_yaml(stem, path):
         for k in ("task", "why"):
             if isinstance(ex.get(k), str):
                 zh.append((f"{where}.{k}", ex[k]))
+        for g in ex.get("glossary") or []:          # 文中注出的生词：[{ru, zh, pos?}]
+            if not (isinstance(g, dict) and g.get("ru") and g.get("zh")):
+                probs.append(("练习", f"{where}：glossary 每项要有 ru 和 zh"))
+            else:
+                ru.append((f"{where}.glossary", g["ru"]))
         if isinstance(ex.get("passage"), str):     # 文章里的俄语按课文查生词和书写
             ru.append((f"{where}.passage", strip_markup(ex["passage"])))
         items = ex.get("items")
@@ -910,6 +915,10 @@ def check_exams(paths):
             known.update(lx)
         probs, ru, zh = check_exercise_yaml(stem, path)
         out += [(None, c, m) for c, m in probs]
+        for ex in data.get("exercises") or []:      # 随文注出的生词算已知
+            for g in ex.get("glossary") or []:
+                if isinstance(g, dict) and g.get("ru"):
+                    known.add(g["ru"])
         agg, used = {}, set()
         for where, s in ru:
             for w, morpheme in tokens(drop_titles(s)):

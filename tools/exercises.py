@@ -110,6 +110,9 @@ def pdf_exercises(data, img_dir):
         out += ["::: {.exercise .long}" if long else "::: exercise", head, ""]
         if ex.get("passage"):          # 阅读理解、完形填空的文章，放在本题要求之后
             out += ["::: passage", ex["passage"].strip(), ":::", ""]
+        if ex.get("glossary"):         # 文中没学过的词：随文注出汉语意思（必要时注词性）
+            out += ["::: glossary", "注：" + "；".join(
+                f"{ru(g['ru'])}" + (f" {g['pos']}" if g.get("pos") else "") + f" {g['zh']}" for g in ex["glossary"]), ":::", ""]
         t = ex["type"]
         if t == "picture_qa":
             k = ex.get("example")
