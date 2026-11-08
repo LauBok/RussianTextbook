@@ -91,6 +91,7 @@ def paper_html(code, data):
     md = exercises.pdf_exercises(data, f"img/{code}")
     md = md.split("\n", 2)[2] if md.startswith("## ") else md         # 卷名由卷头写
     md = re.sub(r"(?<!\n)\n(\[[^\]]+\]\{\.sp\})", r"\n\n\1", md)         # 对话每个说话人另起一段
+    md = re.sub(r"(?m)^(\s*)\((\d+)\)", r"\1\\(\2)", md)                  # 段首的空号 (6) 不当成列表编号
     md = exercises.speaker_widths(md)                                # 对话的说话人栏按最长的名字定宽
     pts = sum_points(data)
     if data.get("total") and abs(sum(pts) - data["total"]) > 1e-6:
