@@ -69,6 +69,15 @@ select, textarea { font:inherit; padding:8px; border-radius:10px; border:1px sol
 textarea { width:100%; height:90px; font-size:12px; }
 .done { text-align:center; padding:40px 0; } .done b { font-size:40px; display:block; }
 .hidden { display:none !important; }
+.fgrid { display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:4px 16px; margin:12px 0 4px; text-align:left; }
+.ft { color:var(--muted); font-size:13px; margin:6px 0 2px; }
+table.forms { border-collapse:collapse; width:100%; font-family:"PT Serif", Georgia, serif; font-size:16px; }
+table.forms th { color:var(--muted); font:400 12px -apple-system, "PT Sans", "PingFang SC", sans-serif; text-align:left; padding:3px 8px 3px 0; white-space:nowrap; }
+table.forms td { padding:3px 6px 3px 0; border-bottom:1px solid var(--rule); }
+table.forms thead th { border-bottom:1px solid var(--rule); }
+.fwide { overflow-x:auto; margin:12px 0 4px; }
+.fwide table.forms { font-size:14px; }
+.fwide td, .fwide thead th { text-align:center; }
 </style>
 </head>
 <body>
@@ -117,18 +126,23 @@ function counts() {
   return { due, fresh, learned, newLeft: Math.max(0, S.newPerDay - S.newToday) };
 }
 
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
 function buildSession() {
   const now = Date.now(), cs = cardsOf(selectedWords());
-  const due = cs.filter(c => S.cards[c] && S.cards[c].due <= now).sort((a, b) => S.cards[a].due - S.cards[b].due);
+  // 到期的词和新词都随机抽、随机排，不按课文顺序
+  const due = shuffle(cs.filter(c => S.cards[c] && S.cards[c].due <= now));
   const newLeft = Math.max(0, S.newPerDay - S.newToday);
-  const fresh = cs.filter(c => !S.cards[c] && c.endsWith(":r")).slice(0, newLeft);
-  // 新词穿插在复习里
-  const q = due.slice();
-  fresh.forEach((c, i) => q.splice(Math.min(q.length, i * 3 + 1), 0, c));
+  const fresh = shuffle(cs.filter(c => !S.cards[c] && c.endsWith(":r"))).slice(0, newLeft);
+  // 新词均匀穿插在复习里
+  const q = due.slice(), step = fresh.length ? Math.max(1, Math.floor(due.length / fresh.length)) : 1;
+  fresh.forEach((c, i) => q.splice(Math.min(q.length, i * (step + 1)), 0, c));
   return { queue: q, total: q.length, done: 0, shown: false };
 }
 function starSession() {
-  const q = Object.keys(S.star).filter(id => BY[id]).map(id => id + ":r");
+  const q = shuffle(Object.keys(S.star).filter(id => BY[id]).map(id => id + ":r"));
   return { queue: q, total: q.length, done: 0, shown: false, practice: true };
 }
 
@@ -149,6 +163,38 @@ function nextLabel(card, g) {
   const ivl = g === 1 ? (st.ivl < 1 ? 1 : Math.max(st.ivl + 1, st.ivl * 1.2)) : (st.ivl < 1 ? (st.reps ? 1 : 2) : st.ivl < 3 ? 4 : Math.round(st.ivl * st.ease));
   const d = Math.round(ivl);
   return d >= 30 ? Math.round(d / 30) + " 个月" : d + " 天";
+}
+
+// 变位、变格表
+const PERS = ["я", "ты", "он / она́", "мы", "вы", "они́"], CASE = ["第一格", "第二格", "第三格", "第四格", "第五格", "第六格"];
+function forms(f) {
+  if (!f) return "";
+  const col = (title, labels, arr) => `<div><div class="ft">${title}</div><table class="forms">${arr.map((x, i) =>
+    `<tr><th>${labels[i]}</th><td>${esc(x || "—")}</td></tr>`).join("")}</table></div>`;
+  if (f.t === "v") {
+    let h = "";
+    if (f.fut) h += col("将来时", PERS, f.fut);
+    if (f.pres) h += col(f.asp === "perf" ? "将来时（完成体）" : "现在时", PERS, f.pres);
+    if (f.past) h += col("过去时", ["阳性", "阴性", "中性", "复数"], f.past);
+    if (f.imp) h += col("命令式", ["ты", "вы"], f.imp);
+    return `<div class="fgrid">${h}</div>`;
+  }
+  const wide = (heads, cols) => `<div class="fwide"><table class="forms"><thead><tr><th></th>${heads.map(x => `<th>${x}</th>`).join("")}</tr></thead>` +
+    CASE.map((c, i) => `<tr><th>${c}</th>${cols.map(a => `<td>${esc(a[i] || "—")}</td>`).join("")}</tr>`).join("") + `</table></div>`;
+  if (f.t === "n") {
+    const heads = [], cols = [];
+    if (f.sg.length) { heads.push("单数"); cols.push(f.sg); }
+    if (f.pl.length) { heads.push("复数"); cols.push(f.pl); }
+    return wide(heads, cols);
+  }
+  if (f.t === "a") {
+    let h = wide(["阳性", "中性", "阴性", "复数"], [f.m, f.n, f.f, f.pl]);
+    const extra = [];
+    if (f.short) extra.push("短尾：" + f.short.filter(Boolean).join(", "));
+    if (f.comp) extra.push("比较级：" + f.comp);
+    return h + (extra.length ? `<div class="ft">${esc(extra.join("　"))}</div>` : "");
+  }
+  return "";
 }
 
 let audio = null;
@@ -234,7 +280,7 @@ function settings() {
     <div class="row"><button class="ghost" id="ex">导出</button><button class="ghost" id="im">导入</button><button class="ghost" id="cp">复制</button></div>
     <h2>添加到主屏幕</h2>
     <p class="muted">iPhone：用 Safari 打开本页，点底部的“分享”按钮，选“添加到主屏幕”。之后从桌面图标打开，像普通应用一样全屏使用，没有网络也能背（发音在联网时听过一次后也能离线播放）。</p>
-    <p class="muted">共 ${DATA.words.length} 个词，其中 ${DATA.words.filter(w => w.audio).length} 个有发音。</p>`;
+    <p class="muted">共 ${DATA.words.length} 个词，其中 ${DATA.words.filter(w => w.audio).length} 个有发音，${DATA.words.filter(w => w.f).length} 个有变位、变格表（据 OpenRussian 词形表，CC BY-SA 4.0）。</p>`;
   $("#np").onchange = e => { S.newPerDay = +e.target.value; save(); };
   $("#ex").onclick = () => { $("#io").value = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); };
   $("#cp").onclick = () => { $("#io").select(); try { navigator.clipboard.writeText($("#io").value); } catch (e) { document.execCommand("copy"); } };
@@ -260,8 +306,8 @@ function study() {
     ? `<div class="ru">${esc(w.word)}</div>${w.audio ? `<button class="play" id="pl">🔊 发音</button>` : ""}`
     : `<div class="zh">${esc(w.gloss)}</div><div class="muted">俄语怎么说？</div>`;
   const back = dir === "r"
-    ? `<div class="zh2">${esc(w.gloss)}</div><div class="pos">${esc(w.pos)}</div>${ex}`
-    : `<div class="ru2">${esc(w.word)}</div>${w.audio ? `<button class="play" id="pl2">🔊 发音</button>` : ""}<div class="pos">${esc(w.pos)}</div>${ex}`;
+    ? `<div class="zh2">${esc(w.gloss)}</div><div class="pos">${esc(w.pos)}</div>${forms(w.f)}${ex}`
+    : `<div class="ru2">${esc(w.word)}</div>${w.audio ? `<button class="play" id="pl2">🔊 发音</button>` : ""}<div class="pos">${esc(w.pos)}</div>${forms(w.f)}${ex}`;
   $("#app").innerHTML = `<div class="study-top"><button class="ghost" id="quit">✕</button>
       <div class="progress"><i style="width:${100 * s.done / Math.max(1, s.done + s.queue.length)}%"></i></div>
       <span class="muted">${s.queue.length}</span>

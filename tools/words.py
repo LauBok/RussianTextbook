@@ -5,6 +5,7 @@
 
 每个词条 id 为“课号-序号”（序号是生词表里的行号，从 1 起），重新生成时不变，读者的复习进度不会错位。
 例句取本课课文里第一个含这个词的句子，汉译取参考译文里同一位置的句子（对不上就不放汉译）。
+变位、变格表来自 tools/data/paradigms.json（由 tools/paradigms.py 生成）。
 发音文件 audio/words/<id>.mp3 由 `python tools/tts.py --words` 生成，存在才写进词条。
 """
 import json
@@ -75,6 +76,8 @@ def lessons():
 
 def main():
     out, units = [], []
+    para_file = ROOT / "tools" / "data" / "paradigms.json"
+    paras = json.loads(para_file.read_text(encoding="utf-8")) if para_file.exists() else {}
     for code in lessons():
         md = (ROOT / "lessons" / f"{code}.md").read_text(encoding="utf-8")
         rows = exercises.lesson_vocab(code)
@@ -95,6 +98,8 @@ def main():
                 item["ex"] = ex_ru
                 if ex_zh:
                     item["exZh"] = ex_zh
+            if item["id"] in paras:
+                item["f"] = paras[item["id"]]
             if (ROOT / "audio" / "words" / f"{item['id']}.mp3").exists():
                 item["audio"] = f"audio/words/{item['id']}.mp3"
             out.append(item)

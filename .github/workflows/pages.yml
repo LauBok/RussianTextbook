@@ -2,7 +2,7 @@ name: Pages
 on:
   push:
     branches: [main]
-    paths: ["audio/**", "dist/**", "lessons/**", "tools/site.py", "tools/words.py", "words/**", ".github/workflows/pages.yml"]
+    paths: ["audio/**", "dist/**", "lessons/**", "tools/site.py", "tools/words.py", "tools/data/paradigms.json", "words/**", ".github/workflows/pages.yml"]
   workflow_dispatch:
 permissions:
   contents: read
